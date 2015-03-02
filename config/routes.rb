@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   get 'users/:user_id/notifications/:id' => 'notifications#show', as: 'user_notification'
 
+  get 'users/indentation_error_message' => 'users#indentation_error_message'
+
   resources :users
 
   resources :forums do
