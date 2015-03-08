@@ -1,0 +1,21 @@
+<html>
+<head>
+
+</head>
+
+<body>
+<% @users.each do |user| %>
+<table border='1'>
+<tr>
+  <td>Email <%= user.email %></td>
+  <td>Password <%= user.password %></td>
+  <td>Gender <%= user.gender %></td>
+  <td>Username <%= user.username %></td>
+  <td>Full Name <%= user.full_name %></td>
+  <td>Password Question<%= user.password_question %></td>
+  <td>Answer For Password Question<%= user.answer_for_password_question %></td>
+</tr>
+<% end %>
+</table>
+</body>
+</html>
