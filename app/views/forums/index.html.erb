@@ -1,0 +1,22 @@
+<h1>Listing forums</h1>
+ 
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Privacy</th>
+
+  </tr>
+ 
+  <% @forums.each do |forum| %>
+    <tr>
+      <td><%= link_to "#{forum.title}", forum_path(forum) %></td>
+      <td><%= forum.description %></td>
+      <% if forum.privacy == "1" %>
+      <td>Public</td>
+      <% elsif forum.privacy == "2" %>
+      <td>Private</td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

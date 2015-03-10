@@ -1,0 +1,18 @@
+<p>
+  <strong>Title:</strong>
+  <%= @forum.title %>
+</p>
+ 
+<p>
+  <strong>Text:</strong>
+  <%= @forum.description %>
+</p>
+
+<p>
+  <strong>Privacy:</strong>
+  <% if @forum.privacy == "1" %>
+  Public
+  <% elsif @forum.privacy == "2" %>
+  Private
+  <% end %>
+ </p>

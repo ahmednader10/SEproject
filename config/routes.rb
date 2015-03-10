@@ -9,7 +9,11 @@ Rails.application.routes.draw do
 
   get 'users/show'
 
+  get 'forums/created/:id' => 'forums#created', as: 'created'
+
   resources :users
+
+  resources :forums
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
