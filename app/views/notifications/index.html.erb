@@ -1,0 +1,11 @@
+<html>
+		<h1>Your Notifications:</h1>
+			<ul>
+				<%if @notifications.present?%>
+				<%@notifications.each do |notification|%>
+				<li>any</li>
+				<%end%>
+				<li> No Notifications </li>
+				<%end%>
+			</ul>
+</html>

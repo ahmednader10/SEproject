@@ -11,7 +11,13 @@ Rails.application.routes.draw do
 
   get 'forums/created/:id' => 'forums#created', as: 'created'
 
-  resources :users
+  get 'user/:id/notifications' => 'notifcations#index'
+
+  get 'user/:id/notifications/:id' => 'notifications#show'
+
+  resources :users do
+    resources :notifications
+  end
 
   resources :forums
 
