@@ -11,9 +11,9 @@ Rails.application.routes.draw do
 
   get 'forums/created/:id' => 'forums#created', as: 'created'
 
-  get 'user/:user_id/notifications' => 'notifcations#index'
+  get 'user/:user_id/notifications' => 'notifcations#index', as: 'user_notifications'
 
-  get 'user/:user_id/notifications/:id' => 'notifications#show'
+  get 'user/:user_id/notifications/:id' => 'notifications#show', as: 'user_notification'
 
   resources :users
 
