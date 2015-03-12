@@ -18,4 +18,10 @@ class NotificationsController < ApplicationController
 	def destroy
 		@notification.destroy
 	end
+
+protected
+
+	def notification_params
+		params.require(:info).permit(:seen)
+	end
 end

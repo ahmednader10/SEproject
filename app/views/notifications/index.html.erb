@@ -1,3 +1,10 @@
 <html>
 		<h1>Your Notifications:</h1>
+		<ul>
+			<% @notifications.each do |notification| %>
+			<li>
+				<%= notifcation.info %>
+			</li>
+			<%end%>
+		</ul>
 </html>
