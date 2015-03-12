@@ -11,15 +11,9 @@ class NotificationsController < ApplicationController
 	end
 
 	def create
-		@notification = Notification.create(notification_params)
+		@notification = Notification.new(notification_params)
+		@notification.save
 	end
-
-#	def edit
-#	end
-#
-#	def update
-#		@notification.update(notification_params)
-#	end
 
 	def destroy
 		@notification.destroy
