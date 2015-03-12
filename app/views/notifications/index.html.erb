@@ -1,9 +1,9 @@
 <html>
-		<h1>Your Notifications:</h1>
+		<h1><%=User.find(params[:user_id]).username%>'s Notifications:</h1>
 		<ul>
 			<% @notifications.each do |notification| %>
 			<li>
-				<%= notifcation.info %>
+				<%= notification.info %>
 			</li>
 			<%end%>
 		</ul>

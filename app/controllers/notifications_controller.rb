@@ -1,10 +1,6 @@
 class NotificationsController < ApplicationController
 	def index
-		@notifications = Notification.where(user_id: session[:user_id])
-	end
-
-	def show
-		@notification = Notification.find(params[:id])
+		@notifications = Notification.where(user_id: params[:user_id])
 	end
 
 	def new
@@ -22,6 +18,6 @@ class NotificationsController < ApplicationController
 protected
 
 	def notification_params
-		params.require(:info).permit(:seen)
+		params.require(:notification).permit(:info, :seen, :user_id)
 	end
 end
