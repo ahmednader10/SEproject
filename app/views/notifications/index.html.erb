@@ -1,0 +1,10 @@
+<html>
+		<h1><%=User.find(params[:user_id]).username%>'s Notifications:</h1>
+		<ul>
+			<% @notifications.each do |notification| %>
+			<li>
+				<%= notification.info %>
+			</li>
+			<%end%>
+		</ul>
+</html>

@@ -13,6 +13,10 @@ Rails.application.routes.draw do
 
   post 'forums/:id/join' => 'forums#join_forum', as:'join_forum'
 
+  get 'users/:user_id/notifications' => 'notifications#index', as: 'user_notifications'
+
+  get 'users/:user_id/notifications/:id' => 'notifications#show', as: 'user_notification'
+
   resources :users
 
   resources :forums

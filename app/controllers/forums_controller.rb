@@ -8,7 +8,7 @@ class ForumsController < ApplicationController
 
 		#check if memeber then enable editing 
 
-		sleep 3
+		sleep 1
 		@forum = Forum.find(params[:id])
 	end
 
@@ -31,16 +31,8 @@ class ForumsController < ApplicationController
 	end
 
 	def join_forum
-	#	@user = User.find(session[:user_id])
-	#	@user = User.find(1)
-	#			params[:user][:forum_ids] ||= []
-  	#		if @user.update_attributes(params[:user])
-     # 			flash[:notice]='Joined Forum Successfully!'
-  	#			redirect_to :action => "show"
-    # 		end  
+	
 
-     	#	@forum = Forum.find(params[:id])
-		#	Membership.join!(@forum)
 
 		@user = User.find(1)
 		@forum = Forum.find(params[:id])
@@ -51,17 +43,27 @@ class ForumsController < ApplicationController
 		membership = @forum.memberships.build(user: @user)
 		membership.accept = true if @forum.privacy == '1'
 
-		if membership.save
-   		 flash[:notice] = 'Joined forum Successfully'
+		if  membership.save and membership.accept != nil 
+		  flash[:notice] = 'Successfully joined forum '
    		 redirect_to :action => "show"
 
-   		 #send notification joined successfully
-  		end
+   		
+   		elsif !membership.save  
+   				flash[:notice] = 'already member of this forum'
+   				redirect_to :action => "show"
 
+   		elsif membership.accept == nil
+   				flash[:notice] = 'Pending request'
+   				redirect_to :action => "show"
+
+
+		end
+  		
+  		#send notification joined successfully
 	end
  
-private
-  def forum_params
-    params.require(:forum).permit(:title, :description, :privacy)
-  end
+	private
+	  def forum_params
+	    params.require(:forum).permit(:title, :description, :privacy)
+	  end
 end

@@ -2,8 +2,7 @@ class Membership < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :forum
 
-	def self.join!(forum)
-    membership = Membership.find(:first, :conditions => { :forum_id => forum.id } )
-    mem.update_attribute(:accept, true)
-  end
+	validates_uniqueness_of :user_id , scope: :forum_id
+
+
 end

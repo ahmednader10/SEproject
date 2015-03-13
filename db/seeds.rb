@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+User.create(email: 'dovahkiin@gmail.com', password: '12345678', password_confirmation: '12345678', username: 'Dovahkiin', gender: 'male', full_name: 'Dovahkiin Dovah Dov', password_question: 'what?', answer_for_password_question: 'yes')
+Notification.create(info: 'NEW NOTIFICATION BITCH', seen: false, user_id: 1)

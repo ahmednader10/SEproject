@@ -11,18 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312011546) do
-
-  create_table "forum_users", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "forum_id"
-    t.boolean  "accept"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "forum_users", ["forum_id"], name: "index_forum_users_on_forum_id"
-  add_index "forum_users", ["user_id"], name: "index_forum_users_on_user_id"
+ActiveRecord::Schema.define(version: 20150313113335) do
 
   create_table "forums", force: true do |t|
     t.string   "title"
@@ -42,6 +31,14 @@ ActiveRecord::Schema.define(version: 20150312011546) do
 
   add_index "memberships", ["forum_id"], name: "index_memberships_on_forum_id"
   add_index "memberships", ["user_id"], name: "index_memberships_on_user_id"
+
+  create_table "notifications", force: true do |t|
+    t.string   "info"
+    t.boolean  "seen"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email"

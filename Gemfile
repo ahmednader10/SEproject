@@ -39,3 +39,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'coffee-script-source', '1.8.0'
+
+group :development do 
+	gem 'better_errors', '2.1.1'
+end
