@@ -15,4 +15,19 @@
   <% elsif @forum.privacy == "2" %>
   Private
   <% end %>
- </p>
+
+  <!-- check if already joined or pending request -->
+
+  <%= button_to('Join Forum', join_forum_path,
+            method: "post",  data: { disable_with: 'Joining...' }) %>
+
+</p>
+
+ 
+   
+
+
+
+  
+
+ 

@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get 'forums/created/:id' => 'forums#created', as: 'created'
 
+  post 'forums/:id/join' => 'forums#join_forum', as:'join_forum'
+
   resources :users
 
   resources :forums

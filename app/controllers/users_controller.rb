@@ -10,8 +10,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     indentation_check = @user.username.match(/\s/) ? true : false
-      if indentation_check == false and @user.save
+      if indentation_check == false and @user.save 
+      #  session[:user_id] = @user.id
         redirect_to(:action => 'index')
+      
       else
         render 'new'
       end
