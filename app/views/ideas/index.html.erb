@@ -1,0 +1,10 @@
+<html>
+		<h1><%=Forum.find(params[:forum_id]).title%>'s Ideas:</h1>
+		<ul>
+			<% @ideas.each do |idea| %>
+			<li>
+				<%= idea.text %>
+			</li>
+			<%end%>
+		</ul>
+</html>
