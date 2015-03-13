@@ -15,14 +15,20 @@ class UsersController < ApplicationController
   # create action checks if the username has no spaces then it checks the validations specified
   # in the model file (user.rb) and if all of these checks are true, a user is then registered and
   # saved in the database and a re-direction to index.html.erb occurs, otherwise the view new.html.erb 
-  # is rendered again.
+  # is rendered again. Also, the email is downcased to make the search in the future easier.
   def create
     @user = User.new(user_params)
+    @user.email.downcase!
     indentation_check = @user.username.match(/\s/) ? true : false
-      if indentation_check == false and @user.save
-        redirect_to(:action => 'index')
-      else
-        render 'new'
+      if indentation_check == true
+        flash[:notice] = "Username can't have spaces in it."
+        redirect_to(:action => 'indentation_error_message')
+      else 
+        if @user.save
+          redirect_to(:action => 'index')
+        else
+          render 'new' 
+        end
       end
   end
 
