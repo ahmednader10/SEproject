@@ -36,24 +36,32 @@ class ForumsController < ApplicationController
 
 	def join_forum
 	
+		#reset_session
 
-
-		@user = User.find(1)
+		@user = current_user
 		@forum = Forum.find(params[:id])
 
 
-		#check if already joined
-
+		
+		if @user == nil
+			 flash[:notice] = 'You should login first'
+   		 redirect_to root_url
+   		else
 		membership = @forum.memberships.build(user: @user)
 		membership.accept = true if @forum.privacy == '1'
+		
 
 		if  membership.save and membership.accept != nil 
 		  flash[:notice] = 'Successfully joined forum '
    		 redirect_to :action => "show"
 
    		
-   		elsif !membership.save  
+   		elsif !membership.save and membership.accept != nil  
    				flash[:notice] = 'already member of this forum'
+   				redirect_to :action => "show"
+
+   		elsif !membership.save and membership.accept == nil  
+   				flash[:notice] = 'already sent request to join this forum'
    				redirect_to :action => "show"
 
    		elsif membership.accept == nil
@@ -61,6 +69,7 @@ class ForumsController < ApplicationController
    				redirect_to :action => "show"
 
 
+		end
 		end
   		
   		#send notification joined successfully
