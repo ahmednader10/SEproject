@@ -1,4 +1,19 @@
 Rails.application.routes.draw do
+
+  #Session Routes
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
+  get 'help' => 'sessions#help'
+  get 'tempguest' => 'sessions#tempguest'
+  get 'about' => 'sessions#about'
+  get 'contactus' => 'sessions#contactus'
+  get 'jobs' => 'sessions#jobs'
+  get 'forgot' => 'sessions#forgot'
+  #When logged in redirects to this page
+  #Change later
+  get     'logged_in' => 'sessions#logged_in'
+
   get 'users/index'
 
   get 'users/new'
@@ -31,7 +46,8 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  #Login as the Homepage
+   root 'sessions#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
