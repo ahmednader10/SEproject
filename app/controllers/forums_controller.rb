@@ -30,6 +30,10 @@ class ForumsController < ApplicationController
 		@forum = Forum.find(params[:id])
 	end
 
+	# join action enables logged in user to join public forums through clicking on the button 
+	# "join Forum" and also enables logged in user to send request to join private forums and it checks 
+	# if the user has already joined the forum before 
+
 	def join_forum
 	
 

@@ -17,9 +17,15 @@ Rails.application.routes.draw do
 
   get 'users/:user_id/notifications/:id' => 'notifications#show', as: 'user_notification'
 
+  get 'users/indentation_error_message' => 'users#indentation_error_message'
+
   resources :users
 
-  resources :forums
+  resources :forums do
+    resources :ideas do
+      resources :comments
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
