@@ -1,0 +1,37 @@
+
+<h4><%= link_to "Login as a Guest", tempguest_path %>
+	<span style="float:right;">
+		<%= link_to "Need Help?", help_path %>
+	</h4>
+<div align= "center">
+
+<h1> ***WEBSITE NAME****</h1>
+    
+</div>
+<h1>Login</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(:session, url: login_path) do |f| %>
+
+      <%= f.label :email, "Email:" %>
+      <%= f.email_field :email, class: 'form-control' %><br>
+
+      <%= f.label :password, "Password:" %>
+      <%= f.password_field :password, class: 'form-control' %><br>
+
+      <h5><%= link_to "Forgot password?", forgot_path %></h5><br>
+
+      <%= f.submit "Log in", class: "btn btn-primary" %>
+    <% end %>
+
+    <div align= "center">
+    <p>New user? <%= link_to "Sign up now!", users_new_path %></p>
+	</div>
+  </div>
+<%= link_to "About", about_path %> &nbsp &nbsp &nbsp
+<%= link_to "Contact us", contactus_path %> &nbsp &nbsp &nbsp
+<%= link_to "Jobs", jobs_path %> &nbsp &nbsp &nbsp
+
+
+</div>
+
