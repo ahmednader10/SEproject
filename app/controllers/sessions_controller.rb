@@ -48,4 +48,7 @@ class SessionsController < ApplicationController
   def jobs
   end
 
+  def forgot
+  end
+
 end

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'about' => 'sessions#about'
   get 'contactus' => 'sessions#contactus'
   get 'jobs' => 'sessions#jobs'
+  get 'forgot' => 'sessions#forgot'
   #When logged in redirects to this page
   #Change later
   get     'logged_in' => 'sessions#logged_in'
