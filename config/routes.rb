@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'forgot' => 'sessions#forgot'
   #When logged in redirects to this page
   #Change later
-  get     'logged_in' => 'sessions#logged_in'
+  get 'logged_in' => 'sessions#logged_in'
 
   get 'users/index'
 

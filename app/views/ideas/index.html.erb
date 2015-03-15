@@ -3,8 +3,13 @@
 		<ul>
 			<% @ideas.each do |idea| %>
 			<li>
-				<%= idea.text %>
+				<%= link_to "#{idea.title}",forum_idea_path(idea)%>
 			</li>
+			
 			<%end%>
+
 		</ul>
+<p>
+				<a href='/forums/:forum_id/ideas/new'>Post an idea<a>
+			</p>
 </html>
