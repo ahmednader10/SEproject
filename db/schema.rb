@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150313113335) do
+ActiveRecord::Schema.define(version: 20150315000533) do
+
+  create_table "admins", force: true do |t|
+    t.integer  "forum_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "admins", ["forum_id"], name: "index_admins_on_forum_id"
+  add_index "admins", ["user_id"], name: "index_admins_on_user_id"
 
   create_table "forums", force: true do |t|
     t.string   "title"
