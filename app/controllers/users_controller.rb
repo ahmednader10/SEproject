@@ -40,10 +40,29 @@ class UsersController < ApplicationController
 
   def delete
   end
+  
+  #user show is the action taken when you try and view someone's profile, it checks whether or not this profile belongs to the
+  #current user and if it does redirects to the profile action which renders the profile view
 
+<<<<<<< HEAD
+   def show
+      @user = User.find(params[:id])
+      if @user == current_user
+        redirect_to(:action => 'profile')
+      end
+    end
+=======
   def show
-  end
 
+
+
+  end
+>>>>>>> 348f84920aed7a9411270b36a7dba99a0bf5507b
+
+  #opens the profile view of the user
+    def profile
+      @current_user = current_user
+    end
   # user_params action requires the model user and whenever we want to retrieve the user's parameteres
   # we can do so using this action. Also it prevents a user from hacking into the app and changing the
   # model.

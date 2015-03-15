@@ -22,22 +22,36 @@ class ForumsController < ApplicationController
 
 	def create
   		@forum = Forum.new(forum_params)
- 
-  		if @forum.save
-  			redirect_to(created_path(@forum))
-  		else
-  			render 'new'
-  		end
+  		@user = current_user
+
+  		if @user == nil
+			flash[:notice] = 'You should login first'
+   			redirect_to root_url
+   		else
+   			admin = @forum.admins.build(user: @user)
+   			if @forum.save && admin.save
+  				redirect_to(created_path(@forum))
+  			else
+  				render 'new'
+  			end
+   		end
 	end
 
 	def update
 		@forum = Forum.find(params[:id])
+		@user = current_user
 
-		if @forum.update(forum_params)
-			redirect_to(forums_path)
-		else
-			render 'edit'
-		end
+		if @user == nil
+			flash[:notice] = 'You should login first'
+   			redirect_to root_url
+   		else
+   			admin = Admin.where({ forum_id: @forum.id, user_id: @user.id })
+   			if !admin.empty? && @forum.update(forum_params)
+				redirect_to(forums_path)
+			else
+				render 'edit'
+			end
+   		end
 	end
 
 	def created
