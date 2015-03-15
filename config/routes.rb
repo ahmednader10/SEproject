@@ -2,16 +2,25 @@ Rails.application.routes.draw do
 
   #Session Routes
   get    'login'   => 'sessions#new'
+
   post   'login'   => 'sessions#create'
+  
   delete 'logout'  => 'sessions#destroy'
+  
   get 'help' => 'sessions#help'
+  
   get 'tempguest' => 'sessions#tempguest'
+  
   get 'about' => 'sessions#about'
+  
   get 'contactus' => 'sessions#contactus'
+  
   get 'jobs' => 'sessions#jobs'
+  
   get 'forgot' => 'sessions#forgot'
   #When logged in redirects to this page
   #Change later
+  
   get     'logged_in' => 'sessions#logged_in'
 
   get 'users/index'
@@ -24,7 +33,7 @@ Rails.application.routes.draw do
 
   get '/users/:id' => 'users#show'
 
-get '/users/profile/:id' => 'users#profile'
+  get '/users/profile/:id' => 'users#profile'
 
   get 'forums/created/:id' => 'forums#created', as: 'created'
 
