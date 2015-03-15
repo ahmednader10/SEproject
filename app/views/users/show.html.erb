@@ -4,8 +4,8 @@
 <ul id="menu">
 <li> Logo</li>
  <li> <img src="http://www.iconmay.com/thumbnails/detail/7/home%20home%20directory%20home%20page%20house%20residence%20building%20blueprint%20architecture%20home%20icon.png" width="41" height="40" style=" left: 65px; width: 35px; height: 32px;"/> </li>
- <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
- <li> my profile </li>
+ <li> <img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
+ <li> <%= link_to "My Profile" , :action => :profile %> </li>
  <li>friend requests</li>
  
 </ul>  
@@ -34,7 +34,7 @@
 <div class="foroums">
 <table width="371" height="51">
 <tr>
-	<th width="110"> Forum </th>
+	<th width="110"  id="forumcolum"> Forum </th>
 </tr>
 <%  x = Forum.where(user_id: @user.id).order(:title) %>
 <% x.each do |forum| %>

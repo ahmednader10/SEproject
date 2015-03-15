@@ -10,7 +10,7 @@
   <td>Email <%= user.email %></td>
   <td>Password <%= user.password %></td>
   <td>Gender <%= user.gender %></td>
-  <td>Username <%= user.username %></td>
+  <td>Username <%= link_to user.username ,user %></td>
   <td>Full Name <%= user.full_name %></td>
   <td>Password Question<%= user.password_question %></td>
   <td>Answer For Password Question<%= user.answer_for_password_question %></td>
