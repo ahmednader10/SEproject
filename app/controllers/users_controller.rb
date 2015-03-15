@@ -39,6 +39,9 @@ class UsersController < ApplicationController
   end
 
   def show
+
+
+
   end
 
   # user_params action requires the model user and whenever we want to retrieve the user's parameteres
