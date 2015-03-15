@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312140625) do
+ActiveRecord::Schema.define(version: 20150314214130) do
 
   create_table "forums", force: true do |t|
     t.string   "title"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20150312140625) do
     t.string   "privacy"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "ideas", force: true do |t|
@@ -47,6 +48,9 @@ ActiveRecord::Schema.define(version: 20150312140625) do
     t.string   "answer_for_password_question"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "Bio"
+    t.integer  "age"
+    t.boolean  "isPublic"
   end
 
 end

@@ -22,7 +22,9 @@ Rails.application.routes.draw do
 
   get 'users/delete'
 
-  get 'users/show'
+  get '/users/:id' => 'users#show'
+
+get '/users/profile/:id' => 'users#profile'
 
   get 'forums/created/:id' => 'forums#created', as: 'created'
 
