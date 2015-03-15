@@ -1,4 +1,5 @@
 
+
 <body>
 	<div class="headerlist">
 <ul id="menu">
@@ -12,12 +13,6 @@
 </div>
 <div class=" profilepic" >
 <h1> <%= @user.username %> </h1>
- <!-- <% if @user.friendships.where( friend: current_user) ==  nil %>
-
-<%= link_to "Add Friend", friendships_path(:friend_id => current_user), :method => :post %>
-<% else %>
-<p> frienship pending </p>
-<%end%> -->
   <img src="http://image.shutterstock.com/display_pic_with_logo/308572/135288281/stock-vector-creative-idea-light-bulb-with-concept-of-word-cloud-vector-illustration-modern-template-design-135288281.jpg" width="337";height="270" style="outline:double;outline-color:#303;"/>
   </div>
 
@@ -63,7 +58,7 @@
 <%  x = Idea.where(user: @user).order(:text) %>
 <% x.each do |idea| %>
 <tr>
-<td id="ideacolumn"><%= link_to idea.text , idea%></td>
+<td id="ideacolumn"><%= idea.text%></td>
 <td id="forumcolum"> <%= link_to idea.forum.title , idea.forum %>  </td>
 </tr>
 <% end %>
@@ -81,3 +76,4 @@
 </div>
 
 </body>
+<p>Username: <%=h current_user.username %></p>
