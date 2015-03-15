@@ -1,6 +1,6 @@
-<h1>Create New Forum</h1>
+<h1>Editing Forum</h1>
 
-<%= form_for :forum, url: forums_path do |f| %>
+<%= form_for :forum, url: forum_path(@forum), method: :patch do |f| %>
 
   <% if @forum.errors.any? %>
     <div id="error_explanation">
@@ -34,12 +34,6 @@
   </p>
  
   <p>
-    <%= f.submit "Create Forum" %>
-  </p>
-
-  <p>
-    <% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
-    <% end %>
+    <%= f.submit "Edit Forum" %>
   </p>
 <% end %>

@@ -20,6 +20,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.email.downcase!
     indentation_check = @user.username.match(/\s/) ? true : false
+
+    
       if indentation_check == true
         flash[:notice] = "Username can't have spaces in it."
         redirect_to(:action => 'indentation_error_message')
@@ -29,6 +31,7 @@ class UsersController < ApplicationController
         else
           render 'new' 
         end
+
       end
   end
 

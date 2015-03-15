@@ -1,0 +1,8 @@
+<h1><%=User.find(current_user.id).username%>'s Notifications:</h1>
+		<ul>
+			<% @notifications.each do |notification| %>
+			<li>
+				<%= notification.info %>
+			</li>
+			<%end%>
+		</ul	
