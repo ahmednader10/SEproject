@@ -44,29 +44,29 @@ class ForumsController < ApplicationController
 
 		
 		if @user == nil
-			 flash[:notice] = 'You should login first'
+			 flash[:notice] = 'You should login first to be able to join forum'
    		 redirect_to root_url
    		else
 		membership = @forum.memberships.build(user: @user)
 		membership.accept = true if @forum.privacy == '1'
 		
 
-		if  membership.save and membership.accept != nil 
+		if  membership.save and membership.accept == true 
 		  flash[:notice] = 'Successfully joined forum '
-   		 redirect_to :action => "show"
+   		 render :action => "show"
 
    		
-   		elsif !membership.save and membership.accept != nil  
+   		elsif !membership.save and membership.accept == true  
    				flash[:notice] = 'already member of this forum'
-   				redirect_to :action => "show"
+   				render :action => "show"
 
    		elsif !membership.save and membership.accept == nil  
    				flash[:notice] = 'already sent request to join this forum'
-   				redirect_to :action => "show"
+   				render :action => "show"
 
    		elsif membership.accept == nil
    				flash[:notice] = 'Pending request'
-   				redirect_to :action => "show"
+   				render :action => "show"
 
 
 		end
