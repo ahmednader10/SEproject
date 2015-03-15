@@ -34,13 +34,21 @@ get '/users/profile/:id' => 'users#profile'
 
   get 'users/indentation_error_message' => 'users#indentation_error_message'
 
-  resources :users
+
+
+  resources :users 
+  
 
   resources :forums do
     resources :ideas do
       resources :comments
     end
+
+
   end
+  resources :friendships
+
+   
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

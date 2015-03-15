@@ -12,7 +12,11 @@
 # It's strongly recommended that you check this file into your version control system.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150314214130) do
+=======
+ActiveRecord::Schema.define(version: 20150315033944) do
+>>>>>>> 348f84920aed7a9411270b36a7dba99a0bf5507b
 =======
 ActiveRecord::Schema.define(version: 20150315000533) do
 
@@ -35,6 +39,16 @@ ActiveRecord::Schema.define(version: 20150312140625) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+  end
+
+  create_table "friendships", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.boolean  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "user_name"
+    t.string   "friend_name"
   end
 
   create_table "ideas", force: true do |t|
