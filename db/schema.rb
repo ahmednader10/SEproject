@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20150315000533) do
 
   add_index "admins", ["forum_id"], name: "index_admins_on_forum_id"
   add_index "admins", ["user_id"], name: "index_admins_on_user_id"
+ActiveRecord::Schema.define(version: 20150312140625) do
 
   create_table "forums", force: true do |t|
     t.string   "title"

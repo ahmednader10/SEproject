@@ -4,7 +4,9 @@ class NotificationsController < ApplicationController
 	#until now it lists notifications for the user corresponding to the user_id from the url, because sessions haven't been handled yet
 	#it should later only allow listing for notifications of the user of the current session
 	def index
-		@notifications = Notification.where(user_id: params[:user_id])
+		if current_user != nil
+			@notifications = Notification.where(user_id: current_user.id)
+		end
 	end
 
 	def new
