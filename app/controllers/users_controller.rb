@@ -40,24 +40,31 @@ class UsersController < ApplicationController
 
   def delete
   end
+
+  def admin_join_forums_requests
+    @user = current_user
+    # check if user is admin
+   # @forum = Forum.find(19)
+    if Membership.where(forum_id: 19 , accept: nil).take.nil?
+      redirect_to(root_path)
+
+    else
+      @requests = Membership.where(forum_id: 19 , accept: nil).take
+    end
+
+  end
   
   #user show is the action taken when you try and view someone's profile, it checks whether or not this profile belongs to the
   #current user and if it does redirects to the profile action which renders the profile view
 
-<<<<<<< HEAD
+
    def show
       @user = User.find(params[:id])
       if @user == current_user
         redirect_to(:action => 'profile')
       end
     end
-=======
-  def show
 
-
-
-  end
->>>>>>> 348f84920aed7a9411270b36a7dba99a0bf5507b
 
   #opens the profile view of the user
     def profile

@@ -1,3 +1,4 @@
+
 Rails.application.routes.draw do
 
   #Session Routes
@@ -22,9 +23,11 @@ Rails.application.routes.draw do
 
   get 'users/delete'
 
+  get '/users/join_requests' => 'users#admin_join_forums_requests'
+
   get '/users/:id' => 'users#show'
 
-get '/users/profile/:id' => 'users#profile'
+  get '/users/profile/:id' => 'users#profile'
 
   get 'forums/created/:id' => 'forums#created', as: 'created'
 

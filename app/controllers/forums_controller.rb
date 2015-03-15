@@ -30,6 +30,7 @@ class ForumsController < ApplicationController
    		else
    			admin = @forum.admins.build(user: @user)
    			if @forum.save && admin.save
+
   				redirect_to(created_path(@forum))
   			else
   				render 'new'
