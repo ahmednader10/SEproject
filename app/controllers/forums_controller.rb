@@ -16,6 +16,10 @@ class ForumsController < ApplicationController
 		@forum = Forum.new
 	end
 
+	def edit
+		@forum = Forum.find(params[:id])
+	end
+
 	def create
   		@forum = Forum.new(forum_params)
  
@@ -24,6 +28,16 @@ class ForumsController < ApplicationController
   		else
   			render 'new'
   		end
+	end
+
+	def update
+		@forum = Forum.find(params[:id])
+
+		if @forum.update(forum_params)
+			redirect_to(forums_path)
+		else
+			render 'edit'
+		end
 	end
 
 	def created
