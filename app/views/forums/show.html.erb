@@ -15,4 +15,28 @@
   <% elsif @forum.privacy == "2" %>
   Private
   <% end %>
- </p>
+
+  <!-- check if already joined or pending request -->
+
+  <% if @forum.privacy == "1" %>
+  <%= button_to('Join Forum', join_forum_path,
+            method: "post",  data: { disable_with: 'Joining...' }) %>
+  <% elsif @forum.privacy == "2" %>
+  <%= button_to('Request joining forum', join_forum_path,
+            method: "post",  data: { disable_with: 'Pending...' }) %>
+  <% end %>
+  
+  <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+
+</p>
+
+ 
+   
+
+
+
+  
+
+ 

@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+	has_many :memberships
+	has_many :forums, through: :memberships
+
+	has_many :admins
+	has_many :forums, through: :admins
 
 	validates :email, :username, :presence => true
 	validates :password, :presence => true

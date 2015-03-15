@@ -26,9 +26,9 @@ Rails.application.routes.draw do
 
   get 'forums/created/:id' => 'forums#created', as: 'created'
 
-  get 'users/:user_id/notifications' => 'notifications#index', as: 'user_notifications'
+  post 'forums/:id/join' => 'forums#join_forum', as:'join_forum'
 
-  get 'users/:user_id/notifications/:id' => 'notifications#show', as: 'user_notification'
+  get '/notifications' => 'notifications#index', as: 'user_notifications'
 
   get 'users/indentation_error_message' => 'users#indentation_error_message'
 
