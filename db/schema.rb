@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150314235418) do
+ActiveRecord::Schema.define(version: 20150315033944) do
+
+  create_table "admins", force: true do |t|
+    t.integer  "forum_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "admins", ["forum_id"], name: "index_admins_on_forum_id"
+  add_index "admins", ["user_id"], name: "index_admins_on_user_id"
 
   create_table "comments", force: true do |t|
     t.integer  "forumid"
@@ -21,13 +31,24 @@ ActiveRecord::Schema.define(version: 20150314235418) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
+  
   create_table "forums", force: true do |t|
     t.string   "title"
     t.string   "description"
     t.string   "privacy"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  create_table "friendships", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.boolean  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "user_name"
+    t.string   "friend_name"
   end
 
   create_table "ideas", force: true do |t|
@@ -36,7 +57,6 @@ ActiveRecord::Schema.define(version: 20150314235418) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title"
   end
 
   create_table "memberships", force: true do |t|

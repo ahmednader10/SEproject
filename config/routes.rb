@@ -2,16 +2,25 @@ Rails.application.routes.draw do
 
   #Session Routes
   get    'login'   => 'sessions#new'
+
   post   'login'   => 'sessions#create'
+  
   delete 'logout'  => 'sessions#destroy'
+  
   get 'help' => 'sessions#help'
+  
   get 'tempguest' => 'sessions#tempguest'
+  
   get 'about' => 'sessions#about'
+  
   get 'contactus' => 'sessions#contactus'
+  
   get 'jobs' => 'sessions#jobs'
+  
   get 'forgot' => 'sessions#forgot'
   #When logged in redirects to this page
   #Change later
+
   get 'logged_in' => 'sessions#logged_in'
 
   get 'users/index'
@@ -22,25 +31,33 @@ Rails.application.routes.draw do
 
   get 'users/delete'
 
-  get 'users/show'
+  get '/users/:id' => 'users#show'
+
+  get '/users/profile/:id' => 'users#profile'
 
   get 'forums/created/:id' => 'forums#created', as: 'created'
 
   post 'forums/:id/join' => 'forums#join_forum', as:'join_forum'
 
-  get 'users/:user_id/notifications' => 'notifications#index', as: 'user_notifications'
-
-  get 'users/:user_id/notifications/:id' => 'notifications#show', as: 'user_notification'
+  get 'notifications' => 'notifications#index', as: 'user_notifications'
 
   get 'users/indentation_error_message' => 'users#indentation_error_message'
 
-  resources :users
+
+
+  resources :users 
+  
 
   resources :forums do
     resources :ideas do
       resources :comments
     end
+
+
   end
+  resources :friendships
+
+   
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
