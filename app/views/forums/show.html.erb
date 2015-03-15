@@ -30,6 +30,18 @@
     <div class="notice"><%= flash[:notice] %></div>
   <% end %>
 
+    <ul>
+<% @ideas = @forum.ideas %>
+      <% @ideas.each do |idea| %>
+      <li>
+          <%= link_to "#{idea.title}" , ':forum_id/ideas/:idea_id' %>
+
+      </li>
+      <%end%>
+
+    </ul>
+</tr></table>
+<a href='/forums/:forum_id/ideas/new'>Post an idea<a>
 </p>
 
  

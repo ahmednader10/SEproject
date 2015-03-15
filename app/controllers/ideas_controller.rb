@@ -6,7 +6,7 @@ class IdeasController < ApplicationController
 	
 	#show method showes the title and text of a chosen idea.
 	def show
-		@idea = Idea.find(params[:id])
+		 @idea = Idea.where(id: params[:idea_id])
 	end
 
    # retrieves the new.html.rb that contains a layout 
@@ -16,7 +16,9 @@ class IdeasController < ApplicationController
 	end
 
 	def create
-		@idea = Idea.new(idea_params)
+		@forum = Forum.find(params[:forum_id])
+		@user = current_user
+		@idea = @forum.ideas.build(user: @user)
 		@idea.save
 		redirect_to @idea
 	end

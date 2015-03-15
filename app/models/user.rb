@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_many :friends, :through => :friendships
 
 	has_many :ideas
-	has_many :forums
+	has_many :forums, through: :ideas
 
 
 	#Authenticate method used in Session controller

@@ -45,7 +45,7 @@
 <%  x = Forum.where(user_id: @user.id).order(:title) %>
 <% x.each do |forum| %>
 <tr>
-<td id="forumcolumn"><%=  link_to forum.title , forum %></td>
+<td id="forumcolumn"><%=  link_to forum.title , forum_path %></td>
 </tr>
 <% end %>
 </table>

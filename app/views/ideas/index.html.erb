@@ -1,11 +1,12 @@
 <html>
 		<h1><%=Forum.find(params[:forum_id]).title%>'s Ideas:</h1>
 		<ul>
+
 			<% @ideas.each do |idea| %>
 			<li>
-				<%= link_to "#{idea.title}",forum_idea_path(idea)%>
+          <%= link_to "#{idea.title}" , forum_idea %>
+
 			</li>
-			
 			<%end%>
 
 		</ul>

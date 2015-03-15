@@ -1,7 +1,7 @@
 <html>
 <h1>Post An Idea</h1>
 
-<%= form_for :idea, url: forums/:forum_id/ideas_path do |i| %>
+<%= form_for :idea, url: ideas_path do |i| %>
 
   <% if @idea.errors.any? %>
     <div id="error_explanation">
