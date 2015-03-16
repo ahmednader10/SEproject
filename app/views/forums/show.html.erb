@@ -31,17 +31,15 @@
   <% end %>
 
     <ul>
-<% @ideas = @forum.ideas %>
-      <% @ideas.each do |idea| %>
+      <% Idea.where(forum_id: params[:id]).each do |idea| %>
       <li>
-          <%= link_to "#{idea.title}" , ':forum_id/ideas/:idea_id' %>
-
+          <%= link_to idea.title , forum_idea_path(@forum.id, idea.id) %>
       </li>
       <%end%>
 
     </ul>
 </tr></table>
-<a href='/forums/:forum_id/ideas/new'>Post an idea<a>
+<%= link_to 'Post an idea', new_idea_path %>
 </p>
 
  
