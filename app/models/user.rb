@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 class User < ActiveRecord::Base
 	has_many :memberships
 	has_many :forums, through: :memberships
@@ -11,7 +12,7 @@ class User < ActiveRecord::Base
 	validates :email, :username, :uniqueness => true
 	validates :password, :length => { :minimum => 8 }
 	has_many :friendships
-  has_many :friends, :through => :friendships
+  	has_many :friends, :through => :friendships
 
 	has_many :ideas
 	has_many :forums, through: :ideas

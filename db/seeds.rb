@@ -11,4 +11,3 @@
 #Notification.create(info: 'NEW NOTIFICATION BITCH', seen: false, user_id: 1)
 #Forum.create(title: 'araf', description:'araf aktar', privacy: '1')
 #Idea.create(text: 'araf begad', forum_id: 1, user_id: 1)
-Comment.create(forumid: 1, userid: 1, ideaid: 1, text: "uffffff")
