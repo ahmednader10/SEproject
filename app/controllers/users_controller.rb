@@ -1,3 +1,7 @@
+
+
+  
+    
 class UsersController < ApplicationController
   
   # index action gets all the registered users in the database and calls the 
@@ -41,18 +45,34 @@ class UsersController < ApplicationController
   def delete
   end
 
+  def accept_join_request
+    user = params[:user]
+    forum = params[:forum]
+    membership = Membership.where(:user_id => user , :forum_id => forum)
+    id1 = membership.id
+    membership.update(id1,:accept => true)
+    render :action => "admin_join_forums_requests"
+  end
+
+  def reject_join_request
+
+  end
+
+
+
   def admin_join_forums_requests
     @user = current_user
     # check if user is admin
    # @forum = Forum.find(19)
-    if Membership.where(forum_id: 19 , accept: nil).take.nil?
+    if Membership.where(forum_id: 19 , accept: nil).nil?
       redirect_to(root_path)
 
     else
-      @requests = Membership.where(forum_id: 19 , accept: nil).take
+      @requests = Membership.where(forum_id: 19 , accept: nil)
     end
 
   end
+  
   
   #user show is the action taken when you try and view someone's profile, it checks whether or not this profile belongs to the
   #current user and if it does redirects to the profile action which renders the profile view
@@ -64,6 +84,7 @@ class UsersController < ApplicationController
         redirect_to(:action => 'profile')
       end
     end
+
 
 
   #opens the profile view of the user
@@ -79,3 +100,4 @@ class UsersController < ApplicationController
     params.require(:user).permit(:email, :password, :password_confirmation, :username, :gender, :full_name, :password_question, :answer_for_password_question)
   end
 end
+

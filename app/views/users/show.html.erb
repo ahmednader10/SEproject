@@ -1,5 +1,7 @@
 
 
+  
+
 <body>
 	<div class="headerlist">
 <ul id="menu">
@@ -8,7 +10,6 @@
  <li> <img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
  <li> <%= link_to "My Profile" , :action => :profile %> </li>
  <li>friend requests</li>
- 
  
 </ul>  
 </div>
@@ -59,7 +60,7 @@
 <%  x = Idea.where(user: @user).order(:text) %>
 <% x.each do |idea| %>
 <tr>
-<td id="ideacolumn"><%= link_to idea.text , idea%></td>
+<td id="ideacolumn"><%= idea.text %></td>
 <td id="forumcolum"> <%= link_to idea.forum.title , idea.forum %>  </td>
 </tr>
 <% end %>
@@ -77,4 +78,3 @@
 </div>
 
 </body>
-

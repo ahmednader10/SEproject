@@ -1,3 +1,5 @@
+
+
 class ForumsController < ApplicationController
 	
 	def index
@@ -30,7 +32,6 @@ class ForumsController < ApplicationController
    		else
    			admin = @forum.admins.build(user: @user)
    			if @forum.save && admin.save
-
   				redirect_to(created_path(@forum))
   			else
   				render 'new'
@@ -109,3 +110,4 @@ class ForumsController < ApplicationController
 	    params.require(:forum).permit(:title, :description, :privacy)
 	  end
 end
+

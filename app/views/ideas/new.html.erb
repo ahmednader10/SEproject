@@ -1,0 +1,34 @@
+<html>
+<h1>Post An Idea</h1>
+
+<%= form_for :idea, url: ideas_path do |i| %>
+
+  <% if @idea.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@idea.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @idea.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= i.label :title %><br>
+    <%= i.text_field :title %><br>
+  </p>
+ 
+  <p>
+    <%= i.label :text%><br>
+    <%= i.text_area :text %><br>
+  </p>
+ 
+  <p>
+    <%= f.submit "Post Idea" %>
+  </p>
+<% end %>
+</html>

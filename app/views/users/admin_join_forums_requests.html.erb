@@ -3,7 +3,8 @@
   <tr>
     <th>Forum</th>
     <th>User</th>
-    <th>Request</th>
+    <th></th>
+    <th></th>
 
   </tr>
  
@@ -11,8 +12,22 @@
     <tr>
       <td>
       		<%= request.forum_id %>
+      </td>
+      <td>
       		<%= request.user_id  %>
+      </td>
       		<%= request.accept %>
+      </td>
+      <td>
+      		
+
+         
+            <%= link_to "[Accept]", "/users/accept_join_request?forum=#{request.forum_id}&user=#{request.user_id}" %> |
+
+      </td>
+      <td>
+      		
+            <%= link_to "[Reject]", "/users/reject_join_request?forum=#{request.forum_id}&user=#{request.user_id}" %>
       </td>
     </tr>
   <% end %>

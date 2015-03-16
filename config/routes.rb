@@ -3,17 +3,26 @@ Rails.application.routes.draw do
 
   #Session Routes
   get    'login'   => 'sessions#new'
+
   post   'login'   => 'sessions#create'
+  
   delete 'logout'  => 'sessions#destroy'
+  
   get 'help' => 'sessions#help'
+  
   get 'tempguest' => 'sessions#tempguest'
+  
   get 'about' => 'sessions#about'
+  
   get 'contactus' => 'sessions#contactus'
+  
   get 'jobs' => 'sessions#jobs'
+  
   get 'forgot' => 'sessions#forgot'
   #When logged in redirects to this page
   #Change later
-  get     'logged_in' => 'sessions#logged_in'
+
+  get 'logged_in' => 'sessions#logged_in'
 
   get 'users/index'
 
@@ -25,6 +34,10 @@ Rails.application.routes.draw do
 
   get '/users/join_requests' => 'users#admin_join_forums_requests'
 
+  get '/users/accept_join_request' => 'users#accept_join_request'
+
+  get '/users/reject_join_request' => 'users#reject_join_request'
+
   get '/users/:id' => 'users#show'
 
   get '/users/profile/:id' => 'users#profile'
@@ -33,7 +46,7 @@ Rails.application.routes.draw do
 
   post 'forums/:id/join' => 'forums#join_forum', as:'join_forum'
 
-  get '/notifications' => 'notifications#index', as: 'user_notifications'
+  get 'notifications' => 'notifications#index', as: 'user_notifications'
 
   get 'users/indentation_error_message' => 'users#indentation_error_message'
 
