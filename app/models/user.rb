@@ -1,9 +1,5 @@
-class User < ActiveRecord::Base
-	has_many :memberships
-	has_many :forums, through: :memberships
 
-	has_many :admins
-	has_many :forums, through: :admins
+class User < ActiveRecord::Base
 
 	validates :email, :username, :presence => true
 	validates :password, :presence => true
@@ -21,4 +17,21 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	#Used in Session controller 
+	#Facebook API
+	def self.omniauth(auth)
+    	where(auth.slice(:provider, :uid).permit!).first_or_create.tap do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.name = auth.info.name
+      #user.image = auth.info.image
+      #user.token = auth.credentials.token
+      #user.expires_at = Time.at(auth.credentials.expires_at)
+      user.save!
+    	end
+	end
+
+	
+
 end
+

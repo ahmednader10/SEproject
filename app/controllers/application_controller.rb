@@ -5,4 +5,9 @@ class ApplicationController < ActionController::Base
 
   #Require help from the session helper located in app/controllers/helpers
   include SessionsHelper
+	def current_user
+   	 @current_user ||= User.find(session[:user_id]) if session[:user_id]
+ 	 end
+
+  helper_method :current_user
 end

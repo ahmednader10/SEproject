@@ -31,9 +31,9 @@ class ForumsController < ApplicationController
    			admin = @forum.admins.build(user: @user)
    			# membership = @forum.memberships.build(user: @user)
    			if @forum.save && admin.save
-  				redirect_to created_path(@forum)
   				# membership.accept = true
   				# membership.save
+  				redirect_to(created_path(@forum))
   			else
   				render 'new'
   			end
@@ -50,7 +50,7 @@ class ForumsController < ApplicationController
    		else
    			admin = Admin.where({ forum_id: @forum.id, user_id: @user.id })
    			if !admin.empty? && @forum.update(forum_params)
-				redirect_to forums_path
+				redirect_to(forums_path)
 			else
 				render 'edit'
 			end
