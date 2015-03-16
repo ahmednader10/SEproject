@@ -1,13 +1,47 @@
 
-<h4><%= link_to "Login as a Guest", tempguest_path %>
-	<span style="float:right;">
-		<%= link_to "Need Help?", help_path %>
-	</h4>
-<div align= "center">
+<!--##### ERROR MESSAGE #####-->
+  <!--##### STYLING #####-->
+<style type="text/css"> 
+@import url('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
+.isa_error {
+margin: 10px 0px;
+padding:2px;
+border-radius:.5em;
+border: 3px solid #ffaca6;
+}
+.isa_error {
+    color: #D8000C;
+    background-color: #FFBABA;
+}
+.isa_error i {
+    margin:2px 22px;
+    font-size:2em;
+    vertical-align:middle;
+}
+</style>
+  <!--#### END OF STYLING ####-->
 
-<h1> ***WEBSITE NAME****</h1>
-    
+<font color = "#FF0000">
+<% if flash[:danger] %>
+     <div class=" isa_error"><i class="fa fa-times-circle"></i><%= flash[:danger] %> </div>
+        
+      </div>
+<%end%> 
+</font>
+<!--###################### END OF ERROR MESSAGE #####################-->
+
+
+<h4>
+  <%= link_to "Login as a Guest", tempguest_path %>
+	<span style="float:right;">
+	<%= link_to "Need Help?", help_path %>
+</h4>
+<!--###### WEBSITE NAME #####-->
+<div align= "center">
+  <h1> ***WEBSITE NAME****</h1>
 </div>
+
+<!--############################# NORMAL LOGIN ###############################-->
 <h1>Login</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
@@ -21,17 +55,50 @@
 
       <h5><%= link_to "Forgot password?", forgot_path %></h5><br>
 
-      <%= f.submit "Log in", class: "btn btn-primary" %>
+      <%= f.submit "Log in", class: "btn btn-primary" %><br>
+  <!-- End of normal Login -->
+
+  <!--########################### FACEBOOK LOGIN ############################-->
+
+      <div id="user_nav">
+        <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+      </div>
+      
+      <!--
+      <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false" > 
+       
+      -->
+
+      </div>
+  <!-- End of Facebook Login-->
+
+  <!--######################## TWITTER LOGIN ############################-->
+
+  <%= link_to "Sign in with Twitter", "/auth/TWITTER", id: "sign_in" %>
     <% end %>
- 
+
+
+<!--############################# EXTRAS ############################-->
     <div align= "center">
-    <p>New user? <%= link_to "Sign up now!", users_new_path %></p>
-	</div>
-  </div>
-<%= link_to "About", about_path %> &nbsp &nbsp &nbsp
-<%= link_to "Contact us", contactus_path %> &nbsp &nbsp &nbsp
-<%= link_to "Jobs", jobs_path %> &nbsp &nbsp &nbsp
+      <p>New user? <%= link_to "Sign up now!", users_new_path %></p>
+	  </div>
+  
+    <%= link_to "About", about_path %> &nbsp &nbsp &nbsp
+    <%= link_to "Contact us", contactus_path %> &nbsp &nbsp &nbsp
+    <%= link_to "Jobs", jobs_path %> &nbsp &nbsp &nbsp
 
 
-</div>
+    </div>
 
+<!--################## FACEBOOK PLUGIN #########################-->
+
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=1392586531057897&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>

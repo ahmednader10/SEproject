@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150315033944) do
+ActiveRecord::Schema.define(version: 20150315210822) do
 
   create_table "admins", force: true do |t|
     t.integer  "forum_id"
@@ -89,6 +89,11 @@ ActiveRecord::Schema.define(version: 20150315033944) do
     t.string   "answer_for_password_question"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
   end
 
 end
