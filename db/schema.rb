@@ -1,4 +1,3 @@
-
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -90,6 +89,9 @@ ActiveRecord::Schema.define(version: 20150315210822) do
     t.string   "answer_for_password_question"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "Bio"
+    t.integer  "age"
+    t.boolean  "isPublic"
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
@@ -98,4 +100,3 @@ ActiveRecord::Schema.define(version: 20150315210822) do
   end
 
 end
->>>>>>> c56e15bcff467d0daa8a0d97f720a27d4ff74477

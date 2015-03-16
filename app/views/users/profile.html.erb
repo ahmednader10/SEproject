@@ -35,14 +35,14 @@
 <tr>
 	<th width="110"  id="forumcolum"> Forum</th>
 </tr>
-<% if Admin.where(user: @current_user) %>
-<%  x = Forum.where(user: @current_user).order(:title) %>
+
+<%  x = Forum.where(user_id: @current_user.id).order(:title) %>
 <% x.each do |forum| %>
 <tr>
 <td id="forumcolumn"><%=  link_to forum.title , forum %></td>
 </tr>
 <% end %>
-<% end %>
+
 </table>
 <% if x.size == 0 %>
 <em> forumless </em>
@@ -51,12 +51,14 @@
 <div class= " ideaslist">
   <table width="371" height="51">
 <tr>
+    <th width="57" id="ideatitlecolumn"> Title</th>
 	<th width="160" id="ideacolumn"> Idea</th>
 	<th width="110" id="forumcolum"> Forum</th>
 </tr>
 <%  x = Idea.where(user: @current_user).order(:text) %>
 <% x.each do |idea| %>
 <tr>
+<td id="ideatitlecolumn"><%= idea.Title %></td>
 <td id="ideacolumn"><%=  idea.text %></td>
 <td id="forumcolum"> <%= link_to idea.forum.title , idea.forum %>  </td>
 </tr>
