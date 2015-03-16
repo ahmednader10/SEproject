@@ -1,3 +1,4 @@
+
 Rails.application.routes.draw do
 
 
@@ -43,6 +44,12 @@ Rails.application.routes.draw do
   get 'users/edit'
 
   get 'users/delete'
+
+  get '/users/join_requests' => 'users#admin_join_forums_requests'
+
+  get '/users/accept_join_request' => 'users#accept_join_request'
+
+  get '/users/reject_join_request' => 'users#reject_join_request'
 
   get '/users/:id' => 'users#show'
 

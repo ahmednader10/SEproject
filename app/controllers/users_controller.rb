@@ -1,3 +1,7 @@
+
+
+  
+    
 class UsersController < ApplicationController
   
   # index action gets all the registered users in the database and calls the 
@@ -40,6 +44,60 @@ class UsersController < ApplicationController
 
   def delete
   end
+
+  # accept_join_request method gets parameters of the user and the forum from the url and 
+  # updates the record in the membership table for the user to be a member in this forum
+
+  def accept_join_request
+    user = params[:user]
+    forum = params[:forum]
+    @membership1 = Membership.where(user_id: user , forum_id: forum)
+   
+    @membership1.first.accept = true
+    @membership1.first.save
+    redirect_to(:action => "admin_join_forums_requests")
+  end
+
+  # reject_join_request method gets parameters of the user and the forum from the url and 
+  # updates the record in the membership table by removing it 
+
+
+  def reject_join_request
+     user = params[:user]
+    forum = params[:forum]
+    @membership1 = Membership.where(user_id: user , forum_id: forum)
+   
+    @membership1.first.destroy
+    redirect_to(:action => "admin_join_forums_requests")
+
+  end
+
+  # admin_join_forums_requests shows all the requests from users to join the forums 
+  # of the logged in admin
+
+  def admin_join_forums_requests
+    @user = current_user
+    @requests = []
+    # check if user is admin
+    @joined_forums = Admin.where(user_id: @user.id)
+    if @joined_forums != nil
+    @joined_forums.each do |joined_forum|
+      if !Membership.where(forum_id: joined_forum.id , accept: nil).empty?
+         @requests.concat(Membership.where(forum_id: joined_forum.id , accept: nil))
+       #Forum.@forums.each do |forum|
+       # if forum.id == joined_forum.id
+       #   @requests << forum.title
+       # end
+     # end
+
+    end
+    end
+   # @forum = Forum.find(19)
+    
+  end
+
+  end
+  
   
   #user show is the action taken when you try and view someone's profile, it checks whether or not this profile belongs to the
   #current user and if it does redirects to the profile action which renders the profile view
@@ -67,3 +125,4 @@ class UsersController < ApplicationController
     params.require(:user).permit(:email, :password, :password_confirmation, :username, :gender, :full_name, :password_question, :answer_for_password_question)
   end
 end
+
