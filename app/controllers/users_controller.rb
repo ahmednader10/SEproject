@@ -78,13 +78,15 @@ class UsersController < ApplicationController
     @user = current_user
     # check if user is admin
     @forums = Admin.where(user_id: @user.user_id)
-   # @forum = Forum.find(19)
-    if Membership.where(forum_id: 19 , accept: nil).nil?
-      redirect_to(root_path)
+    if @forums != nil
+    @forums.each do |forum|
 
-    else
-      @requests = Membership.where(forum_id: 19 , accept: nil)
     end
+   # @forum = Forum.find(19)
+    if !Membership.where(forum_id: 19 , accept: nil).empty?
+        @requests = Membership.where(forum_id: 19 , accept: nil)
+    end
+  end
 
   end
   

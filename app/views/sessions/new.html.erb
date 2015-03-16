@@ -77,6 +77,10 @@ border: 3px solid #ffaca6;
   <%= link_to "Sign in with Twitter", "/auth/TWITTER", id: "sign_in" %>
     <% end %>
 
+  <% if flash[:danger] %>
+    <div class="notice"><%= flash[:danger] %></div>
+  <% end %>
+
 
 <!--############################# EXTRAS ############################-->
     <div align= "center">

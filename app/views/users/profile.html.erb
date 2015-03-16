@@ -1,7 +1,4 @@
 
-
- 
-
 <body>
 	<div class="headerlist">
 <ul id="menu">
@@ -9,8 +6,10 @@
  <li><img src="http://www.iconmay.com/thumbnails/detail/7/home%20home%20directory%20home%20page%20house%20residence%20building%20blueprint%20architecture%20home%20icon.png" width="41" height="40" style=" left: 65px; width: 35px; height: 32px;"/> </li>
  <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
  <li>friend requests</li>
- <% if Admin.exists(:user_id => session[:user_id]) %>
+ <li><%= link_to "Log out", logout_path, method: :delete %></li>
+ <% if !Admin.where(user_id: current_user.user_id).empty? %>
  <li><%= link_to "requests to join my forums", :action => :admin_join_forums_requests %> </li>
+ <% end %>
 
 </ul>  
 </div>
@@ -40,12 +39,14 @@
 <tr>
 	<th width="110"  id="forumcolum"> Forum</th>
 </tr>
-<%  x = Forum.where(user: @current_user).order(:title) %>
+
+<%  x = Forum.where(user_id: @current_user.id).order(:title) %>
 <% x.each do |forum| %>
 <tr>
 <td id="forumcolumn"><%=  link_to forum.title , forum %></td>
 </tr>
 <% end %>
+
 </table>
 <% if x.size == 0 %>
 <em> forumless </em>
@@ -54,12 +55,14 @@
 <div class= " ideaslist">
   <table width="371" height="51">
 <tr>
+    <th width="57" id="ideatitlecolumn"> Title</th>
 	<th width="160" id="ideacolumn"> Idea</th>
 	<th width="110" id="forumcolum"> Forum</th>
 </tr>
 <%  x = Idea.where(user: @current_user).order(:text) %>
 <% x.each do |idea| %>
 <tr>
+<td id="ideatitlecolumn"><%= idea.Title %></td>
 <td id="ideacolumn"><%=  idea.text %></td>
 <td id="forumcolum"> <%= link_to idea.forum.title , idea.forum %>  </td>
 </tr>
