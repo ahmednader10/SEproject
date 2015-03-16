@@ -25,11 +25,14 @@ class ForumsController < ApplicationController
   		@user = current_user
 
   		if @user == nil
-			flash[:notice] = 'You should login first'
+			# flash[:notice] = 'You should login first'
    			redirect_to root_url
    		else
    			admin = @forum.admins.build(user: @user)
+   			membership = @forum.memberships.build(user: @user)
    			if @forum.save && admin.save
+  				membership.accept = true
+  				membership.save
   				redirect_to(created_path(@forum))
   			else
   				render 'new'
@@ -42,7 +45,7 @@ class ForumsController < ApplicationController
 		@user = current_user
 
 		if @user == nil
-			flash[:notice] = 'You should login first'
+			# flash[:notice] = 'You should login first'
    			redirect_to root_url
    		else
    			admin = Admin.where({ forum_id: @forum.id, user_id: @user.id })
@@ -52,6 +55,25 @@ class ForumsController < ApplicationController
 				render 'edit'
 			end
    		end
+	end
+
+	def destroy
+		@forum = Forum.find(params[:id])
+		@user = current_user
+
+		if @user == nil
+			redirect_to root_url
+		else
+			admin = Admin.where({ forum_id: @forum.id, user_id: @user.id })
+			if !admin.empty?
+				# confirm then delete
+				@forum.destroy
+				redirect_to forums_path
+			else
+				# refuse and redirect
+				redirect_to forums_path
+			end
+		end
 	end
 
 	def created

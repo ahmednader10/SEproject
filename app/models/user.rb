@@ -7,6 +7,22 @@ class User < ActiveRecord::Base
 	validates :email, :username, :uniqueness => true
 	validates :password, :length => { :minimum => 8 }
 
+	attr_accessible :email, :password, :password_confirmation, :username, :gender, :full_name, :password_question, :answer_for_password_question
+
+	has_many :memberships
+	has_many :forums, through: :memberships
+
+	has_many :admins
+	has_many :forums, through: :admins
+
+	has_many :friendships
+	has_many :friends, through: :friendships
+
+	has_many :ideas
+	has_many :forums, through: :ideas
+
+	has_many :comments
+	has_many :ideas, through: :comments
 
 	#Authenticate method used in Session controller
 	def authenticate (password)
@@ -18,7 +34,7 @@ class User < ActiveRecord::Base
 	end
 
 	#Used in Session controller 
-	#Facebook API
+	#Facebook and Twitter API
 	def self.omniauth(auth)
     	where(auth.slice(:provider, :uid).permit!).first_or_create.tap do |user|
       user.provider = auth.provider
@@ -30,8 +46,6 @@ class User < ActiveRecord::Base
       user.save!
     	end
 	end
-
-	
 
 end
 
