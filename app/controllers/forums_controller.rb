@@ -48,6 +48,7 @@ class ForumsController < ApplicationController
   			end
    		end
 	end
+end
 
 	def update
 		@forum = Forum.find(params[:id])
@@ -100,7 +101,7 @@ class ForumsController < ApplicationController
 
 	def join_forum
 	
-		#reset_session
+		
 
 		@user = current_user
 		@forum = Forum.find(params[:id])
@@ -141,10 +142,10 @@ class ForumsController < ApplicationController
   		#send notification joined successfully
 	end
  
-	private
+	  private
 	  def forum_params
 	    params.require(:forum).permit(:title, :description, :privacy)
 	  end
-	end
+
 end
 

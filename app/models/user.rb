@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 	validates :email, :username, :uniqueness => true
 	validates :password, :length => { :minimum => 8 }
 
+	attr_accessible :email, :username, :full_name, :password, :password_confirmation, :gender, :password_question,:answer_for_password_question
+
 
 	#Authenticate method used in Session controller
 	def authenticate (password)
