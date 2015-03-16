@@ -1,2 +1,8 @@
 <div align "center"><h1>Successfully Logged in! </h1></div>
-<%= link_to "Log out", logout_path, method: :delete %>
+<!--
+Signed in as <strong><%= current_user.full_name %></strong>!<br>
+Signed in as <strong><%= current_user.name %></strong>!<br>
+-->
+
+
+    <%= link_to "Sign out", signout_path, id: "sign_out" %>

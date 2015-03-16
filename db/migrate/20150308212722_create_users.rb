@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :full_name
       t.string :password_question
       t.string :answer_for_password_question
+      
       t.timestamps
     end
   end
