@@ -6,7 +6,7 @@ class IdeasController < ApplicationController
 	
 	#show method showes the title and text of a chosen idea.
 	def show
-		 @idea = Idea.where(id: params[:idea_id])
+		 @idea = Idea.where(id: params[:id])
 	end
 
    # retrieves the new.html.rb that contains a layout 
@@ -15,20 +15,20 @@ class IdeasController < ApplicationController
 	end
 
 	def create
-		@forum = Forum.find(params[:forum_id])
+		@forum = Forum.find(params[:id])
 		@user = current_user
 		if current_user == nil
 
 		else
 			@idea = Idea.new(idea_params)
 			@idea.save
-			redirect_to (@idea)
+			redirect_to(@forum)
 		end
 	end
 
 # used to allow the user to enter the information needed from him and nothing more inorder not to be able to change the model
 protected
 	def idea_params
-		params.require(:idea).permit(:title, :text, :user_id, :forum_i)
+		params.require(:idea).permit([:title, :text, :user_id, :id, :user_id])
 	end
 end

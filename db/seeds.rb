@@ -7,3 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # IF YOU DO NOT REMOVE THE SEED CREATIONS/DELETIONS/... THEY WILL BE EXECUTED EVERY TIME YOU INVOKE RAKE DB:SEED
+
+Idea.create(title: 'testIdea', text: 'das text', user_id: 1, forum_id: 1)
