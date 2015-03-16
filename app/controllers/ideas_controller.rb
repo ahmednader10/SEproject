@@ -6,7 +6,7 @@ class IdeasController < ApplicationController
 	
 	#show method showes the title and text of a chosen idea.
 	def show
-		 @idea = Idea.where(id: params[:idea_id])
+		 @idea = Idea.where(id: params[:id])
 	end
 
    # retrieves the new.html.rb that contains a layout 
@@ -29,6 +29,6 @@ class IdeasController < ApplicationController
 # used to allow the user to enter the information needed from him and nothing more inorder not to be able to change the model
 protected
 	def idea_params
-		params.require(:idea).permit(:title, :text, :user_id, :forum_id)
+		params.require(:idea).permit([:title, :text, :user_id, :id, :user_id])
 	end
 end
