@@ -9,6 +9,20 @@ class User < ActiveRecord::Base
 
 	attr_accessible :email, :password, :password_confirmation, :username, :gender, :full_name, :password_question, :answer_for_password_question
 
+	has_many :memberships
+	has_many :forums, through: :memberships
+
+	has_many :admins
+	has_many :forums, through: :admins
+
+	has_many :friendships
+	has_many :friends, through: :friendships
+
+	has_many :ideas
+	has_many :forums, through: :ideas
+
+	has_many :comments
+	has_many :ideas, through: :comments
 
 	#Authenticate method used in Session controller
 	def authenticate (password)
@@ -32,8 +46,6 @@ class User < ActiveRecord::Base
       user.save!
     	end
 	end
-
-	
 
 end
 
