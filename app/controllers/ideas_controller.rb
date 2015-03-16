@@ -9,16 +9,16 @@ class IdeasController < ApplicationController
 		 @idea = Idea.where(id: params[:idea_id])
 	end
 
-   # retrieves the new.html.rb that contains a layout 
-   #that enables the user to create and idea by adding a title and text.
 	def new
 	end
 
+
+   #enables the user to create an idea by adding a title and text.
 	def create
 		@forum = Forum.find(params[:forum_id])
 		@user = current_user
 		if current_user == nil
-
+			redirect_to (@forum)
 		else
 			@idea = Idea.new(idea_params)
 			@idea.save
@@ -29,6 +29,6 @@ class IdeasController < ApplicationController
 # used to allow the user to enter the information needed from him and nothing more inorder not to be able to change the model
 protected
 	def idea_params
-		params.require(:idea).permit(:title, :text, :user_id, :forum_i)
+		params.require(:idea).permit(:title, :text, :user_id, :forum_id)
 	end
 end

@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
 	has_many :ideas
 	has_many :forums, through: :ideas
 
+	has_many :comments
+	has_many :ideas, through: :comments
+
 
 	#Authenticate method used in Session controller
 	def authenticate (password)
