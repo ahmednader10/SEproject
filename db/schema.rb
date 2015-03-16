@@ -1,3 +1,4 @@
+
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -11,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150315033944) do
+ActiveRecord::Schema.define(version: 20150315210822) do
 
   create_table "admins", force: true do |t|
     t.integer  "forum_id"
@@ -89,9 +90,12 @@ ActiveRecord::Schema.define(version: 20150315033944) do
     t.string   "answer_for_password_question"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "Bio"
-    t.integer  "age"
-    t.boolean  "isPublic"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
   end
 
 end
+>>>>>>> c56e15bcff467d0daa8a0d97f720a27d4ff74477
