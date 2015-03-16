@@ -89,6 +89,9 @@ ActiveRecord::Schema.define(version: 20150315033944) do
     t.string   "answer_for_password_question"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "Bio"
+    t.integer  "age"
+    t.boolean  "isPublic"
   end
 
 end
