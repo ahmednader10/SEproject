@@ -1,27 +1,38 @@
 class SessionsController < ApplicationController
   def new
-
+    if current_user
+      redirect_to logged_in_path
+    end
   end
 
 
   def create 
    	
-   	user = User.find_by(email: params[:session][:email].downcase)
-  
+   	 user = User.find_by(email: params[:session][:email].downcase)
   	
     if user && user.authenticate(params[:session][:password]) 
 
     #log_in method located in session_helper
     	log_in user
+
     #Redirects to an empty page
     #To be changed later
     	redirect_to logged_in_path
     else
 
-    	flash.now[:danger] = 'Invalid email/password combination'
+    	flash.now[:danger] = 'Invalid email/password combination!'
 
   	render 'new'
     end
+  end
+
+  #Method for Facebook 
+  def createF
+        user = User.omniauth(env['omniauth.auth'])
+        session[:user_id] = user.id
+        redirect_to logged_in_path
+
+
   end
 
   def logged_in

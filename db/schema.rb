@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312140625) do
+ActiveRecord::Schema.define(version: 20150315210822) do
 
   create_table "forums", force: true do |t|
     t.string   "title"
@@ -47,6 +47,11 @@ ActiveRecord::Schema.define(version: 20150312140625) do
     t.string   "answer_for_password_question"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
   end
 
 end
