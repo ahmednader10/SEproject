@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+
+  #################### Login #################################
+  
   #Session Routes
   get    'login'   => 'sessions#new'
 
@@ -18,10 +21,20 @@ Rails.application.routes.draw do
   get 'jobs' => 'sessions#jobs'
   
   get 'forgot' => 'sessions#forgot'
-  #When logged in redirects to this page
-  #Change later
   
+  ######################Facebook and Twitter Login###############################
+  match 'auth/:provider/callback', to: 'sessions#createF', :via => [:get, :post]
+  match 'auth/failure', to: redirect('/'), :via => [:get, :post]
+  match 'signout', to: 'sessions#destroy', as: 'signout', :via => [:get, :post]
+  ##############################################################################
+  
+  #When logged in normally or facebook redirects to this page
+  #Change later
+
   get     'logged_in' => 'sessions#logged_in'
+  ###########################################################
+
+
 
   get 'users/index'
 
@@ -44,6 +57,10 @@ Rails.application.routes.draw do
   get 'users/indentation_error_message' => 'users#indentation_error_message'
 
   get 'search' => 'search#abdelghany'
+
+  get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
+
+  post 'forums/:id/ideas/new' => 'ideas#create'
 
   resources :users 
   

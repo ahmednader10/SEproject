@@ -7,6 +7,9 @@ class Forum < ActiveRecord::Base
 	has_many :users, through: :admins
 
 	validates :privacy, inclusion: { in: ["1", "2"] }
-	belongs_to :user
+	
 	has_many :ideas
+	has_many :users, through: :ideas
+
+	attr_accessible :title, :description, :privacy
 end
