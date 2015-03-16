@@ -29,6 +29,6 @@ class IdeasController < ApplicationController
 # used to allow the user to enter the information needed from him and nothing more inorder not to be able to change the model
 protected
 	def idea_params
-		params.require(:idea).permit([:title, :text, :user_id, :id, :user_id])
+		params.require(:idea).permit([:title, :text, :id, :user_id])
 	end
 end
