@@ -29,10 +29,10 @@ class ForumsController < ApplicationController
    			redirect_to root_url
    		else
    			admin = @forum.admins.build(user: @user)
-   			# membership = @forum.memberships.build(user: @user)
+   			membership = @forum.memberships.build(user: @user)
    			if @forum.save && admin.save
-  				# membership.accept = true
-  				# membership.save
+  				membership.accept = true
+  				membership.save
   				redirect_to(created_path(@forum))
   			else
   				render 'new'
