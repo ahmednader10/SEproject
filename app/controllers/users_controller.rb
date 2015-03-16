@@ -53,8 +53,9 @@ class UsersController < ApplicationController
     forum = params[:forum]
     @membership1 = Membership.where(user_id: user , forum_id: forum)
    
-    @membership1.first.update(accept: true)
-    render :action => "admin_join_forums_requests"
+    @membership1.first.accept = true
+    @membership1.first.save
+    redirect_to(:action => "admin_join_forums_requests")
   end
 
   # reject_join_request method gets parameters of the user and the forum from the url and 
@@ -66,8 +67,8 @@ class UsersController < ApplicationController
     forum = params[:forum]
     @membership1 = Membership.where(user_id: user , forum_id: forum)
    
-    @membership1.first.update(accept: false)
-    render :action => "admin_join_forums_requests"
+    @membership1.first.destroy
+    redirect_to(:action => "admin_join_forums_requests")
 
   end
 
@@ -82,7 +83,7 @@ class UsersController < ApplicationController
     if @joined_forums != nil
     @joined_forums.each do |joined_forum|
       if !Membership.where(forum_id: joined_forum.id , accept: nil).empty?
-         @requests << Membership.where(forum_id: joined_forum.id , accept: nil)
+         @requests.concat(Membership.where(forum_id: joined_forum.id , accept: nil))
        #Forum.@forums.each do |forum|
        # if forum.id == joined_forum.id
        #   @requests << forum.title

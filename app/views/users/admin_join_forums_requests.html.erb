@@ -1,7 +1,7 @@
 <p>Requests to join my Forums: </p>
 <table>
   
-  <% if @requests == nil %>
+  <% if @requests.empty? %>
   <p> No new requests </p>
   <% else %>
   <tr>
@@ -14,22 +14,22 @@
   <% @requests.each do |request| %>
     <tr>
       <td>
-      		<%= request.first.forum_id %>
+      		<%= request.forum_id %>
       </td>
       <td>
-      		<%= request.first.user_id  %>
+      		<%= request.user_id  %>
         </td>
       
       <td>
       		
 
          
-            <%= link_to "[Accept]", "/users/accept_join_request?forum=#{request.first.forum_id}&user=#{request.first.user_id}" %> |
+            <%= link_to "[Accept]", "/users/accept_join_request?forum=#{request.forum_id}&user=#{request.user_id}" %> |
 
       </td>
       <td>
       		
-            <%= link_to "[Reject]", "/users/reject_join_request?forum=#{request.first.forum_id}&user=#{request.first.user_id}" %>
+            <%= link_to "[Reject]", "/users/reject_join_request?forum=#{request.forum_id}&user=#{request.user_id}" %>
       </td>
 
 
