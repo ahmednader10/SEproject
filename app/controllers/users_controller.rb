@@ -45,20 +45,34 @@ class UsersController < ApplicationController
   def delete
   end
 
+  # accept_join_request method gets parameters of the user and the forum from the url and 
+  # updates the record in the membership table for the user to be a member in this forum
+
   def accept_join_request
     user = params[:user]
     forum = params[:forum]
-    membership = Membership.where(:user_id => user , :forum_id => forum)
-    id1 = membership.id
-    membership.update(id1,:accept => true)
+    @membership1 = Membership.where(user_id: user , forum_id: forum)
+   
+    @membership1.first.update(accept: true)
     render :action => "admin_join_forums_requests"
   end
 
+  # reject_join_request method gets parameters of the user and the forum from the url and 
+  # updates the record in the membership table by removing it 
+
+
   def reject_join_request
+     user = params[:user]
+    forum = params[:forum]
+    @membership1 = Membership.where(user_id: user , forum_id: forum)
+   
+    @membership1.first.update(accept: false)
+    render :action => "admin_join_forums_requests"
 
   end
 
-
+  # admin_join_forums_requests shows all the requests from users to join the forums 
+  # of the logged in admin
 
   def admin_join_forums_requests
     @user = current_user
