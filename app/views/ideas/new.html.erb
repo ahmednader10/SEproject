@@ -1,21 +1,7 @@
 <html>
 <h1>Post An Idea</h1>
 
-<%= form_for :idea, url: ideas_path do |i| %>
-
-  <% if @idea.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@idea.errors.count, "error") %> prohibited
-        this article from being saved:
-      </h2>
-      <ul>
-        <% @idea.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for :idea, url: 'forums/:forum_id' do |i| %>
 
   <p>
     <%= i.label :title %><br>
@@ -28,7 +14,7 @@
   </p>
  
   <p>
-    <%= f.submit "Post Idea" %>
+    <%= i.submit "Post Idea" %>
   </p>
 <% end %>
 </html>
