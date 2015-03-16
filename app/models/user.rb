@@ -1,5 +1,7 @@
 
 class User < ActiveRecord::Base
+	has_many :memberships
+	has_many :forums, through: :memberships
 
 	validates :email, :username, :presence => true
 	validates :password, :presence => true
@@ -7,7 +9,9 @@ class User < ActiveRecord::Base
 	validates :email, :username, :uniqueness => true
 	validates :password, :length => { :minimum => 8 }
 
-	attr_accessible :email, :username, :full_name, :password, :password_confirmation, :gender, :password_question,:answer_for_password_question
+
+	attr_accessible :email, :password, :password_confirmation, :username, :gender, :full_name, :password_question, :answer_for_password_question
+
 
 
 	#Authenticate method used in Session controller

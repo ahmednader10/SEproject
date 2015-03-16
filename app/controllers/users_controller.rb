@@ -76,16 +76,23 @@ class UsersController < ApplicationController
 
   def admin_join_forums_requests
     @user = current_user
+    @requests = []
     # check if user is admin
-    @forums = Admin.where(user_id: @user.id)
-    if @forums != nil
-    @forums.each do |forum|
+    @joined_forums = Admin.where(user_id: @user.id)
+    if @joined_forums != nil
+    @joined_forums.each do |joined_forum|
+      if !Membership.where(forum_id: joined_forum.id , accept: nil).empty?
+         @requests << Membership.where(forum_id: joined_forum.id , accept: nil)
+       #Forum.@forums.each do |forum|
+       # if forum.id == joined_forum.id
+       #   @requests << forum.title
+       # end
+     # end
 
     end
-   # @forum = Forum.find(19)
-    if !Membership.where(forum_id: 19 , accept: nil).empty?
-          @requests = Membership.where(forum_id: 19 , accept: nil)
     end
+   # @forum = Forum.find(19)
+    
   end
 
   end

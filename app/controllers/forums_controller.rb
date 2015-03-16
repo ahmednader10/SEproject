@@ -27,20 +27,16 @@ class ForumsController < ApplicationController
 
   		if @user == nil
 
-			flash[:notice] = 'You should login first'
+			#flash[:notice] = 'You should login first'
    			redirect_to root_url
    		else
    			admin = @forum.admins.build(user: @user)
+
+   			membership = @forum.memberships.build(user: @user)
    			if @forum.save && admin.save
 
-			# flash[:notice] = 'You should login first'
-   			redirect_to root_url
-   		else
-   			admin = @forum.admins.build(user: @user)
-   			# membership = @forum.memberships.build(user: @user)
-   			if @forum.save && admin.save
-  				# membership.accept = true
-  				# membership.save
+  				membership.accept = true
+  				membership.save
 
   				redirect_to(created_path(@forum))
   			else
@@ -48,7 +44,7 @@ class ForumsController < ApplicationController
   			end
    		end
 	end
-end
+
 
 	def update
 		@forum = Forum.find(params[:id])
