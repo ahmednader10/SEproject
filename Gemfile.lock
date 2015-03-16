@@ -40,7 +40,7 @@ GEM
     coffee-script (2.3.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.9.1)
+    coffee-script-source (1.8.0)
     erubis (2.7.0)
     execjs (2.3.0)
     faraday (0.9.1)
@@ -149,6 +149,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors (= 2.1.1)
   coffee-rails (~> 4.0.0)
+  coffee-script-source (= 1.8.0)
   jbuilder (~> 2.0)
   jquery-rails
   omniauth-facebook

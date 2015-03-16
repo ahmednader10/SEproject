@@ -44,6 +44,8 @@ gem 'protected_attributes'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
+gem 'coffee-script-source', '1.8.0'
+
 group :development do 
 	gem 'better_errors', '2.1.1'
 end

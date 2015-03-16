@@ -13,12 +13,42 @@
 
 ActiveRecord::Schema.define(version: 20150315210822) do
 
+  create_table "admins", force: true do |t|
+    t.integer  "forum_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "admins", ["forum_id"], name: "index_admins_on_forum_id"
+  add_index "admins", ["user_id"], name: "index_admins_on_user_id"
+
+  create_table "comments", force: true do |t|
+    t.integer  "forumid"
+    t.integer  "userid"
+    t.integer  "ideaid"
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "forums", force: true do |t|
     t.string   "title"
     t.string   "description"
     t.string   "privacy"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  create_table "friendships", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.boolean  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "user_name"
+    t.string   "friend_name"
   end
 
   create_table "ideas", force: true do |t|
@@ -27,7 +57,19 @@ ActiveRecord::Schema.define(version: 20150315210822) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
   end
+
+  create_table "memberships", force: true do |t|
+    t.integer  "forum_id"
+    t.integer  "user_id"
+    t.boolean  "accept"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "memberships", ["forum_id"], name: "index_memberships_on_forum_id"
+  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id"
 
   create_table "notifications", force: true do |t|
     t.string   "info"

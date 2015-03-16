@@ -1,10 +1,11 @@
+
 <!--##### ERROR MESSAGE #####-->
   <!--##### STYLING #####-->
 <style type="text/css"> 
 @import url('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
 .isa_error {
 margin: 10px 0px;
-padding:12px;
+padding:2px;
 border-radius:.5em;
 border: 3px solid #ffaca6;
 }
@@ -13,7 +14,7 @@ border: 3px solid #ffaca6;
     background-color: #FFBABA;
 }
 .isa_error i {
-    margin:10px 22px;
+    margin:2px 22px;
     font-size:2em;
     vertical-align:middle;
 }
@@ -27,7 +28,7 @@ border: 3px solid #ffaca6;
       </div>
 <%end%> 
 </font>
-
+<!--###################### END OF ERROR MESSAGE #####################-->
 
 
 <h4>
@@ -54,21 +55,26 @@ border: 3px solid #ffaca6;
 
       <h5><%= link_to "Forgot password?", forgot_path %></h5><br>
 
-      <%= f.submit "Log in", class: "btn btn-primary" %>
+      <%= f.submit "Log in", class: "btn btn-primary" %><br>
   <!-- End of normal Login -->
 
   <!--########################### FACEBOOK LOGIN ############################-->
+
       <div id="user_nav">
         <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
       </div>
       
       <!--
-      <div class="fb-login-button" data-max-rows="1" data-size="small" data-show-faces="false" data-auto-logout-link="false" > 
-       -->
-
+      <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false" > 
+       
+      -->
 
       </div>
   <!-- End of Facebook Login-->
+
+  <!--######################## TWITTER LOGIN ############################-->
+
+  <%= link_to "Sign in with Twitter", "/auth/TWITTER", id: "sign_in" %>
     <% end %>
 
 
@@ -84,6 +90,7 @@ border: 3px solid #ffaca6;
 
     </div>
 
+<!--################## FACEBOOK PLUGIN #########################-->
 
 <div id="fb-root"></div>
 <script>

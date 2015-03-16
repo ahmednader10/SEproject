@@ -1,0 +1,20 @@
+<html>
+<h1>Post An Idea</h1>
+
+<%= form_for :idea, url: 'forums/:forum_id' do |i| %>
+
+  <p>
+    <%= i.label :title %><br>
+    <%= i.text_field :title %><br>
+  </p>
+ 
+  <p>
+    <%= i.label :text%><br>
+    <%= i.text_area :text %><br>
+  </p>
+ 
+  <p>
+    <%= i.submit "Post Idea" %>
+  </p>
+<% end %>
+</html>

@@ -1,4 +1,5 @@
 
+
 <body>
 	<div class="headerlist">
 <ul id="menu">
@@ -57,7 +58,7 @@
 <%  x = Idea.where(user: @user).order(:text) %>
 <% x.each do |idea| %>
 <tr>
-<td id="ideacolumn"><%= idea.text %></td>
+<td id="ideacolumn"><%= link_to idea.text , idea%></td>
 <td id="forumcolum"> <%= link_to idea.forum.title , idea.forum %>  </td>
 </tr>
 <% end %>
@@ -75,3 +76,6 @@
 </div>
 
 </body>
+=======
+<p>Username: <%=h current_user.username %></p>
+>>>>>>> 348f84920aed7a9411270b36a7dba99a0bf5507b

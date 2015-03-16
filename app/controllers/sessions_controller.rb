@@ -1,3 +1,4 @@
+
 class SessionsController < ApplicationController
   def new
     if current_user
@@ -35,13 +36,13 @@ class SessionsController < ApplicationController
 
   end
 
-  def logged_in
-
-  end
 
   def destroy
-  	log_out
+    log_out
     redirect_to root_url
+  end
+
+  def logged_in
   end
 
   def help
@@ -63,3 +64,4 @@ class SessionsController < ApplicationController
   end
 
 end
+
