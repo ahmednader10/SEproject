@@ -27,7 +27,7 @@ gem 'omniauth-facebook'
 # For the Twitter API
 gem 'omniauth-twitter'
 # No need to use strong parameters  
-# gem 'protected_attributes'
+
 
 # Form helper for model errors
 gem 'dynamic_form'

@@ -13,11 +13,15 @@
   </tr>
   <% for i in 0...@requests_forums.length %>
     <tr>
+      <% if  @requests_users[i] != nil %>
       <td>
+        
       		<%= link_to @requests_forums[i].title, forum_path(@requests_forums[i].id) %>
       </td>
       <td>
+        
           <%= link_to @requests_users[i].full_name,"#{@requests_users[i].id}" %>
+          
       </td>
       <td>
            <%= link_to "[Accept]", "/users/accept_join_request?forum=#{@requests_forums[i].id}&user=#{@requests_users[i].id}" %> |
@@ -25,7 +29,7 @@
       <td>
             <%= link_to "[Reject]", "/users/reject_join_request?forum=#{@requests_forums[i].id}&user=#{@requests_users[i].id}" %> 
       </td>
-
+            <% end %>
 
       </tr>
 

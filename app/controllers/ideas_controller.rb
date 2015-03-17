@@ -1,5 +1,6 @@
 class IdeasController < ApplicationController
 	before_action :authenticate_user, only: :create
+	before_action :check_forum_not_joined, only: :new
 
 	#index method list all the idea titles related to a forum.
 	def index
@@ -38,6 +39,9 @@ class IdeasController < ApplicationController
 		end
 	end
 
+	def not_joined_forum
+
+	end
 # used to allow the user to enter the information needed from him and nothing more inorder not to be able to change the model
 protected
 	def idea_params
@@ -50,7 +54,17 @@ protected
 
 		if current_user == nil
 			redirect_to @forum
+
+		Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: !true).empty?
+			render action: :not_joined_forum
 		end
 
+	end
+
+	def check_forum_not_joined
+		@forum = Forum.find(params[:forum_id])
+			if current_user != nil and Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?
+			render action: :not_joined_forum
+		end
 	end
 end
