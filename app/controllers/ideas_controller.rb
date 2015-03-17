@@ -8,7 +8,9 @@ class IdeasController < ApplicationController
 	
 	#show method showes the title and text of a chosen idea.
 	def show
-		 @idea = Idea.where(id: params[:id])
+		@forum = Forum.find(params[:forum_id])
+		 @idea = Idea.find(params[:id])
+		 @comment = Comment.new
 	end
 
 	def new

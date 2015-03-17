@@ -14,13 +14,38 @@
 </ul>  
 </div>
 <html>
-		<h2><%=Idea.find(params[:id]).title%></h2>
+		<h2><%=@idea.title%></h2>
 
 		<p>
 
-		<h4>Forum: <%=Forum.find(params[:forum_id]).title%></h4>
-		<forum>
+		<h4>Forum: <%=@forum.title%></h4>
+		<p>
 
-				<%= Idea.find(params[:id]).text %>
+				<%= @idea.text %>
 		</p>
+		<div>
+			<h5>Comments</h5>
+
+			<ul>
+      <% @idea.comments.each do |comment| %>
+      <li>
+          <%= comment.text %>
+      </li>
+      <%end%>
+    </ul>
+    	</div>
+
+		<h5>Post Comment</h5>
+
+		<%= form_for [@forum, @idea, @comment] do |f| %>
+  			<%= f.error_messages %>
+
+ 			 <p>
+    		<%= f.text_area :text %><br>
+  			</p>
+ 
+  			<p>
+   			 <%= f.submit "Comment" %>
+  			</p>
+			<%end%>
 </html>

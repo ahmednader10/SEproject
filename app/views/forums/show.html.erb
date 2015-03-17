@@ -35,10 +35,10 @@
   <!-- check if already joined or pending request -->
 
   <% if @forum.privacy == "1" %>
-  <%= button_to('Join Forum', join_forum_path,
+  <%= button_to('Join Forum', join_forum_path(@forum),
             method: "post",  data: { disable_with: 'Joining...' }) %>
   <% elsif @forum.privacy == "2" %>
-  <%= button_to('Request joining forum', join_forum_path,
+  <%= button_to('Request joining forum', join_forum_path(@forum),
             method: "post",  data: { disable_with: 'Pending...' }) %>
   <% end %>
   
