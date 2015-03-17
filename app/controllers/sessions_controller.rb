@@ -21,9 +21,10 @@ class SessionsController < ApplicationController
     # log_in method located in session_helper
     	log_in user
 
-    # Redirects to an empty page
-    # To be changed later
-    	redirect_to logged_in_path
+    #Redirects to an empty page
+    #To be changed later
+    	redirect_to user
+
     else
 
     	flash.now[:danger] = 'Invalid email/password combination!'
@@ -39,7 +40,7 @@ class SessionsController < ApplicationController
   def createF
         user = User.omniauth(env['omniauth.auth'])
         session[:user_id] = user.id
-        redirect_to logged_in_path
+        redirect_to user
 
 
   end
