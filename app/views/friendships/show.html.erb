@@ -9,7 +9,8 @@
  <% if !Admin.where(user_id: current_user.id).empty? %>
  <li><%= link_to "requests to join my forums", :action => :admin_join_forums_requests %> </li>
  <% end %>
-
+</ul>
+</div>
 
 Current Friends:
 <%= render :partial => 'friends' %>
@@ -17,3 +18,4 @@ Requested Friends:
 <%= render :partial => 'requested_friends' %>
 Pending Friends :
 <%= render :partial => 'pending_friends' %>
+
