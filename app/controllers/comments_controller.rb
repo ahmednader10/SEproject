@@ -32,5 +32,14 @@ protected
 	def comment_params
 		params.require(:comment).permit(:text)
 	end
+
+	def authenticate_user
+		@idea = Idea.find(params[:idea_id])
+
+		if current_user == nil
+			redirect_to @idea
+		end
+
+	end
 end
 
