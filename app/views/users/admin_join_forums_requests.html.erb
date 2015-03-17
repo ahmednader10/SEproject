@@ -1,7 +1,7 @@
 <p>Requests to join my Forums: </p>
 <table>
   
-  <% if @requests.empty? %>
+  <% if @requests_forums.empty? %>
   <p> No new requests </p>
   <% else %>
   <tr>
@@ -11,25 +11,19 @@
     <th></th>
 
   </tr>
-  <% @requests.each do |request| %>
+  <% for i in 0...@requests_forums.length %>
     <tr>
       <td>
-      		<%= request.forum_id %>
+      		<%= @requests_forums[i].title %>
       </td>
       <td>
-      		<%= request.user_id  %>
-        </td>
-      
-      <td>
-      		
-
-         
-            <%= link_to "[Accept]", "/users/accept_join_request?forum=#{request.forum_id}&user=#{request.user_id}" %> |
-
+          <%= @requests_users[i].full_name %>
       </td>
       <td>
-      		
-            <%= link_to "[Reject]", "/users/reject_join_request?forum=#{request.forum_id}&user=#{request.user_id}" %>
+           <%= link_to "[Accept]", "/users/accept_join_request?forum=#{@requests_forums[i].id}&user=#{@requests_users[i].id}" %> |
+      </td>
+      <td>
+            <%= link_to "[Reject]", "/users/reject_join_request?forum=#{@requests_forums[i].id}&user=#{@requests_users[i].id}" %> 
       </td>
 
 

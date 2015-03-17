@@ -1,7 +1,3 @@
-
-
-  
-    
 class UsersController < ApplicationController
   
   # index action gets all the registered users in the database and calls the 
@@ -77,13 +73,17 @@ class UsersController < ApplicationController
 
   def admin_join_forums_requests
     @user = current_user
-    @requests = []
+    @requests_forums = []
+    @requests_users = []
     # check if user is admin
-    @joined_forums = Admin.where(user_id: @user.id)
-    if @joined_forums != nil
-    @joined_forums.each do |joined_forum|
-      if !Membership.where(forum_id: joined_forum.id , accept: nil).empty?
-         @requests.concat(Membership.where(forum_id: joined_forum.id , accept: nil))
+    admin_forums = Admin.where(user_id: @user.id)
+    if admin_forums != nil
+      admin_forums.each do |admin_forum|
+        requests_ids = Membership.where(forum_id: admin_forum.forum_id , accept: nil)
+        if !requests_ids.empty?
+          requests_ids.each do |r|
+            @requests_forums.concat(Forum.where(id: r.forum_id))
+            @requests_users.concat(User.where(id: r.user_id))
        #Forum.@forums.each do |forum|
        # if forum.id == joined_forum.id
        #   @requests << forum.title
@@ -93,9 +93,8 @@ class UsersController < ApplicationController
     end
     end
    # @forum = Forum.find(19)
-    
-  end
-
+   end
+   end 
   end
   
   
