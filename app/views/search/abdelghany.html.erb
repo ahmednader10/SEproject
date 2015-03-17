@@ -1,3 +1,6 @@
+
+<html>
+
 	<div class="headerlist">
 <ul id="menu">
 <li> Logo</li>
@@ -11,5 +14,10 @@
 
 </ul>  
 </div>
-<h1> You have to sign in to have posting previllages </h1>
-<%= link_to 'Sign in', '/' %>
+	<h4> Enter your search query: </h4>
+	<%= form_tag("/search", method: "get") do %>
+		<%= label_tag(:q, "Search for:") %>
+		<%= text_field_tag(:q) %>
+		<%= submit_tag("Search") %>
+	<% end %>
+</html>

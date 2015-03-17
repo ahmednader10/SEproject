@@ -25,3 +25,4 @@ protected
 		params.require(:comment).permit(:userid, :forumid, :ideaid, :text)
 	end
 end
+

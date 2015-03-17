@@ -1,0 +1,6 @@
+<% for friendship in current_user.friendships %>
+<li>
+    <%= h friendship.requesting %>
+    (<%= link_to "cancel", friendship, :method => :delete %>)
+  </li>
+  <% end %>  

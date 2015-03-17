@@ -1,3 +1,4 @@
+
 Rails.application.routes.draw do
 
 
@@ -44,6 +45,12 @@ Rails.application.routes.draw do
 
   get 'users/delete'
 
+  get '/users/join_requests' => 'users#admin_join_forums_requests'
+
+  get '/users/accept_join_request' => 'users#accept_join_request'
+
+  get '/users/reject_join_request' => 'users#reject_join_request'
+
   get '/users/:id' => 'users#show'
 
   get '/users/profile/:id' => 'users#profile'
@@ -56,11 +63,10 @@ Rails.application.routes.draw do
 
   get 'users/indentation_error_message' => 'users#indentation_error_message'
 
-  # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
+  get 'search' => 'search#abdelghany'
 
+# get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
-
-
 
   resources :users 
   

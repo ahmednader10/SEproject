@@ -1,3 +1,4 @@
+
 class UsersController < ApplicationController
   
   # index action gets all the registered users in the database and calls the 
@@ -40,6 +41,63 @@ class UsersController < ApplicationController
 
   def delete
   end
+
+  # accept_join_request method gets parameters of the user and the forum from the url and 
+  # updates the record in the membership table for the user to be a member in this forum
+
+  def accept_join_request
+    user = params[:user]
+    forum = params[:forum]
+    @membership1 = Membership.where(user_id: user , forum_id: forum)
+   
+    @membership1.first.accept = true
+    @membership1.first.save
+    redirect_to(:action => "admin_join_forums_requests")
+  end
+
+  # reject_join_request method gets parameters of the user and the forum from the url and 
+  # updates the record in the membership table by removing it 
+
+
+  def reject_join_request
+     user = params[:user]
+    forum = params[:forum]
+    @membership1 = Membership.where(user_id: user , forum_id: forum)
+   
+    @membership1.first.destroy
+    redirect_to(:action => "admin_join_forums_requests")
+
+  end
+
+  # admin_join_forums_requests shows all the requests from users to join the forums 
+  # of the logged in admin
+
+  def admin_join_forums_requests
+    @user = current_user
+    @requests_forums = []
+    @requests_users = []
+    # check if user is admin
+    admin_forums = Admin.where(user_id: @user.id)
+    if admin_forums != nil
+      admin_forums.each do |admin_forum|
+        requests_ids = Membership.where(forum_id: admin_forum.forum_id , accept: nil)
+        if !requests_ids.empty?
+          requests_ids.each do |r|
+            @requests_forums.concat(Forum.where(id: r.forum_id))
+            @requests_users.concat(User.where(id: r.user_id))
+       #Forum.@forums.each do |forum|
+       # if forum.id == joined_forum.id
+       #   @requests << forum.title
+       # end
+     # end
+
+    end
+    end
+   # @forum = Forum.find(19)
+   end
+   end 
+  end
+  
   
   #user show is the action taken when you try and view someone's profile, it checks whether or not this profile belongs to the
   #current user and if it does redirects to the profile action which renders the profile view
@@ -51,7 +109,6 @@ class UsersController < ApplicationController
         redirect_to(:action => 'profile')
       end
     end
-
 
 
   #opens the profile view of the user
