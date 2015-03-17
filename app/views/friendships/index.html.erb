@@ -1,14 +1,9 @@
 
-<html>
 
-<h1> Show All Users </h1>
-
-
-<body>
-<% @users.each do |user| %>
+<div><% @users.each do |user| %>
 <% if user != current_user %>
 <%= user.username %> <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %>
 <% end %>
-<%end %>
-</body>
-<html>
+<%end %></div>
+
+
