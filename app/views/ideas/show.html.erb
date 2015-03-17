@@ -1,0 +1,8 @@
+<html>
+		<h2><%=Idea.find(params[:id]).title%></h2>
+		<h4>Forum: <%=Forum.find(params[:forum_id]).title%></h4>
+		<forum>
+				<%= Idea.find(params[:id]).text %>
+		</forum>		
+			
+</html>

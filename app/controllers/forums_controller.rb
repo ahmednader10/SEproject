@@ -1,3 +1,4 @@
+
 class ForumsController < ApplicationController
 	
 	def index
@@ -25,11 +26,18 @@ class ForumsController < ApplicationController
   		@user = current_user
 
   		if @user == nil
-			flash[:notice] = 'You should login first'
+
+			#flash[:notice] = 'You should login first'
    			redirect_to root_url
    		else
    			admin = @forum.admins.build(user: @user)
+
+   			membership = @forum.memberships.build(user: @user)
    			if @forum.save && admin.save
+
+  				membership.accept = true
+  				membership.save
+
   				redirect_to(created_path(@forum))
   			else
   				render 'new'
@@ -37,12 +45,16 @@ class ForumsController < ApplicationController
    		end
 	end
 
+
 	def update
 		@forum = Forum.find(params[:id])
 		@user = current_user
 
 		if @user == nil
+
 			flash[:notice] = 'You should login first'
+
+			# flash[:notice] = 'You should login first'
    			redirect_to root_url
    		else
    			admin = Admin.where({ forum_id: @forum.id, user_id: @user.id })
@@ -54,6 +66,27 @@ class ForumsController < ApplicationController
    		end
 	end
 
+
+	def destroy
+		@forum = Forum.find(params[:id])
+		@user = current_user
+
+		if @user == nil
+			redirect_to root_url
+		else
+			admin = Admin.where({ forum_id: @forum.id, user_id: @user.id })
+			if !admin.empty?
+				# confirm then delete
+				@forum.destroy
+				redirect_to forums_path
+			else
+				# refuse and redirect
+				redirect_to forums_path
+			end
+		end
+	end
+
+
 	def created
 		@forum = Forum.find(params[:id])
 	end
@@ -64,7 +97,7 @@ class ForumsController < ApplicationController
 
 	def join_forum
 	
-		#reset_session
+		
 
 		@user = current_user
 		@forum = Forum.find(params[:id])
@@ -72,30 +105,32 @@ class ForumsController < ApplicationController
 
 		
 		if @user == nil
-			 flash[:notice] = 'You should login first'
+
+			 flash[:notice] = 'You should login first to be able to join forum'
+
    		 redirect_to root_url
    		else
 		membership = @forum.memberships.build(user: @user)
 		membership.accept = true if @forum.privacy == '1'
 		
 
-		if  membership.save and membership.accept != nil 
+
+		if  membership.save and membership.accept == true 
 		  flash[:notice] = 'Successfully joined forum '
-   		 redirect_to :action => "show"
+   		 render :action => "show"
 
    		
-   		elsif !membership.save and membership.accept != nil  
+   		elsif !membership.save and membership.accept == true  
    				flash[:notice] = 'already member of this forum'
-   				redirect_to :action => "show"
+   				render :action => "show"
 
    		elsif !membership.save and membership.accept == nil  
    				flash[:notice] = 'already sent request to join this forum'
-   				redirect_to :action => "show"
+   				render :action => "show"
 
    		elsif membership.accept == nil
    				flash[:notice] = 'Pending request'
-   				redirect_to :action => "show"
-
+   				render :action => "show"
 
 		end
 		end
@@ -103,8 +138,10 @@ class ForumsController < ApplicationController
   		#send notification joined successfully
 	end
  
-	private
+	  private
 	  def forum_params
 	    params.require(:forum).permit(:title, :description, :privacy)
 	  end
+
 end
+

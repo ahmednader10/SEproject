@@ -1,6 +1,18 @@
+<<<<<<< HEAD
 Current Friends:
 <%= render :partial => 'friends' %>
 Requested Friends:
 <%= render :partial => 'requested_friends' %>
 Pending Friends :
 <%= render :partial => 'pending_friends' %>
+=======
+<h2>Your Friends</h2>
+<ul>
+  <% for friendship in current_user.friendships %>
+  <li>
+    <%= h friendship.friend.username %>
+    (<%= link_to "remove", friendship, :method => :delete %>)
+  </li>
+  <% end %>  
+</ul>
+>>>>>>> 4bd781fbe16a9f87e2099cdf7436c80c51d7c5a7

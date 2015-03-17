@@ -30,6 +30,16 @@
     <div class="notice"><%= flash[:notice] %></div>
   <% end %>
 
+    <ul>
+      <% Idea.where(forum_id: params[:id]).each do |idea| %>
+      <li>
+          <%= link_to idea.title , forum_idea_path(@forum.id, idea.id) %>
+      </li>
+      <%end%>
+
+    </ul>
+</tr></table>
+<%= link_to 'Post an idea', new_idea_path %>
 </p>
 
  

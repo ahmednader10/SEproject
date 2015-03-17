@@ -1,10 +1,12 @@
-<<<<<<< HEAD
+
+
+
 
 <body>
 	<div class="headerlist">
 <ul id="menu">
 <li> Logo</li>
- <li> <img src="http://www.iconmay.com/thumbnails/detail/7/home%20home%20directory%20home%20page%20house%20residence%20building%20blueprint%20architecture%20home%20icon.png" width="41" height="40" style=" left: 65px; width: 35px; height: 32px;"/> </li>
+ 
  <li> <img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
  <li> <%= link_to "My Profile" , :action => :profile %> </li>
  <li>friend requests</li>
@@ -15,6 +17,7 @@
 <h1> <%= @user.username %> </h1>
   <img src="http://image.shutterstock.com/display_pic_with_logo/308572/135288281/stock-vector-creative-idea-light-bulb-with-concept-of-word-cloud-vector-illustration-modern-template-design-135288281.jpg" width="337";height="270" style="outline:double;outline-color:#303;"/>
   </div>
+
 
 <div class="friendlist"> 
 <table width="158" height="360">
@@ -52,13 +55,15 @@
 <div class= " ideaslist">
   <table width="371" height="51">
 <tr>
+    <th width="57" id="ideatitlecolumn"> Title</th>
 	<th width="160" id="ideacolumn"> Idea</th>
 	<th width="110" id="forumcolum"> Forum</th>
 </tr>
 <%  x = Idea.where(user: @user).order(:text) %>
 <% x.each do |idea| %>
 <tr>
-<td id="ideacolumn"><%= link_to idea.text , idea%></td>
+<td id="ideatitlecolumn"><%= link_to idea.title , ':forum_id/ideas/:idea_id' %></td>
+<td id="ideacolumn"><%= idea.text %></td>
 <td id="forumcolum"> <%= link_to idea.forum.title , idea.forum %>  </td>
 </tr>
 <% end %>
@@ -76,6 +81,3 @@
 </div>
 
 </body>
-=======
-<p>Username: <%=h current_user.username %></p>
->>>>>>> 348f84920aed7a9411270b36a7dba99a0bf5507b
