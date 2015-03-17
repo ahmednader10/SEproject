@@ -62,7 +62,7 @@
 <%  x = Idea.where(user: @user).order(:text) %>
 <% x.each do |idea| %>
 <tr>
-<td id="ideatitlecolumn"><%= link_to idea.title , ':forum_id/ideas/:idea_id' %></td>
+<td id="ideatitlecolumn"><%= link_to idea.title , forum_idea_path(idea.forum.id, idea.id)%></td>
 <td id="ideacolumn"><%= idea.text %></td>
 <td id="forumcolum"> <%= link_to idea.forum.title , idea.forum %>  </td>
 </tr>
