@@ -1,3 +1,4 @@
+
 	<div class="headerlist">
 <ul id="menu">
 <li> Logo</li>
@@ -9,15 +10,10 @@
  <li><%= link_to "requests to join my forums", :action => :admin_join_forums_requests %> </li>
  <% end %>
 
-</ul>  
-</div>
 
-<h2>Your Friends</h2>
-<ul>
-  <% for friendship in current_user.friendships %>
-  <li>
-    <%= h friendship.friend.username %>
-    (<%= link_to "remove", friendship, :method => :delete %>)
-  </li>
-  <% end %>  
-</ul>
+Current Friends:
+<%= render :partial => 'friends' %>
+Requested Friends:
+<%= render :partial => 'requested_friends' %>
+Pending Friends :
+<%= render :partial => 'pending_friends' %>
