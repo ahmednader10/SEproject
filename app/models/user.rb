@@ -8,14 +8,10 @@ class User < ActiveRecord::Base
 	validates :password, :confirmation => true
 	validates :email, :username, :uniqueness => true
 	validates :password, :length => { :minimum => 8 }
-
-<<<<<<< HEAD
   has_many :friends, :through => :friendships 
 has_many :requested_friends, :through => :friendships, :source => :friend
 has_many :pending_friends, :through => :friendships, :source => :friend
 has_many :friendships, :dependent => :destroy
-
-=======
 
 	attr_accessible :email, :password, :password_confirmation, :username, :gender, :full_name, :password_question, :answer_for_password_question
 
@@ -24,10 +20,6 @@ has_many :friendships, :dependent => :destroy
 
 	has_many :admins
 	has_many :forums, through: :admins
-
-	has_many :friendships
-	has_many :friends, through: :friendships
->>>>>>> 4bd781fbe16a9f87e2099cdf7436c80c51d7c5a7
 
 	has_many :ideas
 	has_many :forums, through: :ideas
