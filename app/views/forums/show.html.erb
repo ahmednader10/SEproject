@@ -7,6 +7,13 @@
  <li> <%= link_to "My Profile" , user_path(current_user.id) %> </li>
  <li><%= link_to "Log out", logout_path, method: :delete %></li>
  <li><%= link_to "notifications" ,user_notifications_path %> </li> 
+ <% if current_user != nil %>
+ <li>friend requests</li>
+ <li><%= link_to "Log out", logout_path, method: :delete %></li>
+ <% if !Admin.where(user_id: current_user.id).empty? %>
+ <li><%= link_to "requests to join my forums",:controller => "users" ,:action => :admin_join_forums_requests %> </li>
+ <% end %>
+ <% end %>
 
 </div>
 
