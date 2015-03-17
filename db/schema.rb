@@ -23,14 +23,6 @@ ActiveRecord::Schema.define(version: 20150317003229) do
   add_index "admins", ["forum_id"], name: "index_admins_on_forum_id"
   add_index "admins", ["user_id"], name: "index_admins_on_user_id"
 
-  create_table "comments", force: true do |t|
-    t.integer  "idea_id"
-    t.integer  "user_id"
-    t.text     "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "forums", force: true do |t|
     t.string   "title"
     t.string   "description"

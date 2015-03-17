@@ -81,7 +81,9 @@ Rails.application.routes.draw do
 
   get 'admins/wrong_email' => 'admins#wrong_email'
 
-# get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
+  get 'admins/added_admin' => 'admins#added_admin'  
+
+  # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
 
   resources :users 
