@@ -1,23 +1,35 @@
-	<div class="headerlist">
+  <div class="headerlist">
 <ul id="menu">
 <li> Logo</li>
 
  <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
+<<<<<<< HEAD
+ <li><%= link_to "friend requests" , friendships_path %></li>
+ <li> <%= link_to "My Profile" , user_path(current_user.id) %> </li>
+=======
  <% if current_user != nil %>
  <li>friend requests</li>
+>>>>>>> d509a7e616d1b9c2c515ab0e531f2b006137dfcf
  <li><%= link_to "Log out", logout_path, method: :delete %></li>
+<<<<<<< HEAD
+
+=======
  <% if !Admin.where(user_id: current_user.id).empty? %>
  <li><%= link_to "requests to join my forums",:controller => "users" ,:action => :admin_join_forums_requests %> </li>
  <% end %>
+<<<<<<< HEAD
+>>>>>>> 1defcf6c5fa7cb7881ef8b9e23de2a9d9c2dfcb6
+=======
  <% end %>
+>>>>>>> d509a7e616d1b9c2c515ab0e531f2b006137dfcf
 
 </ul>  
 </div>
-<h1><%=User.find(current_user.id).username%>'s Notifications:</h1>
+<div style="position:absolute;top:50px;"><h1><%=User.find(current_user.id).username%>'s Notifications:</h1>
 		<ul>
 			<% @notifications.each do |notification| %>
 			<li>
 				<%= notification.info %>
 			</li>
 			<%end%>
-		</ul	
+		</ul></div>
