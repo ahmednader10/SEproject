@@ -63,7 +63,7 @@ Rails.application.routes.draw do
 
   get 'users/indentation_error_message' => 'users#indentation_error_message'
 
-  get 'search' => 'search#abdelghany'
+  get 'search' => 'search#search'
 
 # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
