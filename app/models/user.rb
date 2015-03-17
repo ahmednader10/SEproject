@@ -10,8 +10,12 @@ class User < ActiveRecord::Base
 	validates :password, :confirmation => true
 	validates :email, :username, :uniqueness => true
 	validates :password, :length => { :minimum => 8 }
-	has_many :friendships
-  has_many :friends, :through => :friendships
+
+  has_many :friends, :through => :friendships 
+has_many :requested_friends, :through => :friendships, :source => :friend
+has_many :pending_friends, :through => :friendships, :source => :friend
+has_many :friendships, :dependent => :destroy
+
 
 	has_many :ideas
 	has_many :forums
