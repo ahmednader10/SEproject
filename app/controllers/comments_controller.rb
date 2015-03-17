@@ -14,8 +14,8 @@ class CommentsController < ApplicationController
 
 		else
 			@comment = Comment.new(comment_params)
-			@idea.save
-			render "idea/show"
+			@comment.save
+			redirect_to "ideas/show"
 		end
 	end
 

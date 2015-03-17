@@ -1,18 +1,19 @@
 <h1>Post An Idea</h1>
 
-<%= form_for :idea, url: '' do |i| %>
+<%= form_for [@forum, @idea] do |f| %>
+  <%= f.error_messages %>
 
   <p>
-    <%= i.label :title %><br>
-    <%= i.text_field :title %><br>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %><br>
   </p>
  
   <p>
-    <%= i.label :text%><br>
-    <%= i.text_area :text %><br>
+    <%= f.label :text%><br>
+    <%= f.text_area :text %><br>
   </p>
  
   <p>
-    <%= i.submit "Post Idea" %>
+    <%= f.submit "Post Idea" %>
   </p>
 <% end %>
