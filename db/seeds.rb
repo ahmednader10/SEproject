@@ -6,7 +6,3 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
-# =================================================================================================================
-# STOP SEEDING!!! download the DB SQLite browser from here: https://github.com/sqlitebrowser/sqlitebrowser/releases
-# =================================================================================================================
