@@ -110,10 +110,6 @@ class UsersController < ApplicationController
     end
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 4bd781fbe16a9f87e2099cdf7436c80c51d7c5a7
   #opens the profile view of the user
     def profile
       @current_user = current_user
