@@ -2,7 +2,7 @@
 
 <div><% @users.each do |user| %>
 <% if user != current_user %>
-<%= user.username %> <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %>
+<%= user.username %> <%= link_to "Add Friend", friendships_path(:friend_id => user.id), :method => :post %>
 <% end %>
 <%end %></div>
 

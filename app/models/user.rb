@@ -13,7 +13,7 @@ has_many :requested_friends, :through => :friendships, :source => :friend
 has_many :pending_friends, :through => :friendships, :source => :friend
 has_many :friendships, :dependent => :destroy
 
-	attr_accessible :email, :password, :password_confirmation, :username, :gender, :full_name, :password_question, :answer_for_password_question
+	#attr_accessible :email, :password, :password_confirmation, :username, :gender, :full_name, :password_question, :answer_for_password_question
 
 	has_many :memberships
 	has_many :forums, through: :memberships

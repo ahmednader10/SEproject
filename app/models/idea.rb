@@ -3,5 +3,5 @@ class Idea < ActiveRecord::Base
 	belongs_to :forum
 	validates :title, :text, :presence => true
 
-	attr_accessible :title , :text 
+	#attr_accessible :title , :text 
 end
