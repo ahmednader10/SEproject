@@ -14,10 +14,10 @@
   <% for i in 0...@requests_forums.length %>
     <tr>
       <td>
-      		<%= @requests_forums[i].title %>
+      		<%= link_to @requests_forums[i].title, forum_path(@requests_forums[i].id) %>
       </td>
       <td>
-          <%= @requests_users[i].full_name %>
+          <%= link_to @requests_users[i].full_name,"#{@requests_users[i].id}" %>
       </td>
       <td>
            <%= link_to "[Accept]", "/users/accept_join_request?forum=#{@requests_forums[i].id}&user=#{@requests_users[i].id}" %> |
@@ -35,4 +35,5 @@
     
   <% end %>
 </table>
+<%= link_to "Back to my Profile" , "profile/#{current_user.id}" %>
 

@@ -1,3 +1,19 @@
+  <div class="headerlist">
+<ul id="menu">
+<li> Logo</li>
+
+ <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
+ <% if current_user != nil %>
+ <li>friend requests</li>
+ <li><%= link_to "Log out", logout_path, method: :delete %></li>
+ <% if !Admin.where(user_id: current_user.id).empty? %>
+ <li><%= link_to "requests to join my forums",:controller => "users" ,:action => :admin_join_forums_requests %> </li>
+ <% end %>
+ <% end %>
+
+</ul>  
+</div>
+
 <h1>Listing forums</h1>
  
 <table>

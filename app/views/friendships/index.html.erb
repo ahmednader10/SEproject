@@ -1,9 +1,9 @@
-<% for current_user in @users %>
-  <div class="user">
-    <p>
-      <strong><%=h current_user.username %></strong>
-      <%= link_to "Add Friend", friendships_path(:friend_id => current_user), :method => :post %>
-      <div class="clear"></div>
-    </p>
-  </div>
+
+
+<div><% @users.each do |user| %>
+<% if user != current_user %>
+<%= user.username %> <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %>
 <% end %>
+<%end %></div>
+
+
