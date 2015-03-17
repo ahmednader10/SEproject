@@ -27,7 +27,7 @@ gem 'omniauth-facebook'
 # For the Twitter API
 gem 'omniauth-twitter'
 # No need to use strong parameters  
-gem 'protected_attributes'
+# gem 'protected_attributes'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
