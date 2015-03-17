@@ -14,11 +14,9 @@
 <div style="position:absolute;top:100px;">
 <% @users.each do |user| %>
 <% if user != current_user %>
-<<<<<<< HEAD
-<%= user.username %> <%= link_to "Add Friend", friendships_path(:friend_id => user.id), :method => :post %>
-=======
+
 <p> <%= user.username %> <%= link_to "Add Friend", friendships_path(:friend_id => user.id), :method => :post %> </p>
->>>>>>> 2a2a7bd6ce768d0cd89cb20e7abbc41e9877a2c5
+
 <% end %>
 <%end %>
 </div>
