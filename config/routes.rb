@@ -2,6 +2,16 @@
 Rails.application.routes.draw do
 
 
+  get 'admins/index'
+
+  get 'admins/show'
+
+  get 'admins/new'
+
+  get 'admins/edit'
+
+  get 'admins/delete'
+
   #################### Login #################################
   
   #Session Routes
@@ -65,11 +75,20 @@ Rails.application.routes.draw do
 
   get 'search' => 'search#search'
 
+  post 'forums/:id/admins/new' => 'admins#new', as: 'admin_to_be'
+
+  get 'admins/unauthorized_action' => 'admins#unauthorized_action'
+
+  get 'admins/wrong_email' => 'admins#wrong_email'
+
 # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
 
   resources :users 
   
+  resources :forums do
+    resources :admins
+  end
 
   resources :forums do
     resources :ideas do
