@@ -5,5 +5,6 @@ class Idea < ActiveRecord::Base
 	belongs_to :forum
 	has_many :comments
 	validates :title, :text, :presence => true
+
 end
 

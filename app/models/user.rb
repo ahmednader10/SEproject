@@ -1,3 +1,4 @@
+
 class User < ActiveRecord::Base
 
 	validates :email, :username, :presence => true
@@ -52,6 +53,7 @@ class User < ActiveRecord::Base
 	end
 
 end
+
 
 
 

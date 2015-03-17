@@ -32,6 +32,7 @@ gem 'omniauth-twitter'
 # Form helper for model errors
 gem 'dynamic_form'
 
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
