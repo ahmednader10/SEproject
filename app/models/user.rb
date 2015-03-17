@@ -1,17 +1,18 @@
-
 class User < ActiveRecord::Base
-	has_many :memberships
-	has_many :forums, through: :memberships
 
 	validates :email, :username, :presence => true
 	validates :password, :presence => true
 	validates :password, :confirmation => true
 	validates :email, :username, :uniqueness => true
 	validates :password, :length => { :minimum => 8 }
-  has_many :friends, :through => :friendships 
-has_many :requested_friends, :through => :friendships, :source => :friend
-has_many :pending_friends, :through => :friendships, :source => :friend
-has_many :friendships, :dependent => :destroy
+
+	has_many :memberships
+	has_many :forums, through: :memberships
+
+  	has_many :friends, :through => :friendships 
+	has_many :requested_friends, :through => :friendships, :source => :friend
+	has_many :pending_friends, :through => :friendships, :source => :friend
+	has_many :friendships, :dependent => :destroy
 
 	attr_accessible :email, :password, :password_confirmation, :username, :gender, :full_name, :password_question, :answer_for_password_question
 
@@ -52,4 +53,5 @@ has_many :friendships, :dependent => :destroy
 	end
 
 end
+
 

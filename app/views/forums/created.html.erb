@@ -6,9 +6,8 @@
  <li><%= link_to "friend requests" , friendships_path %></li>
  <li> <%= link_to "My Profile" , user_path(current_user.id) %> </li>
  <li><%= link_to "Log out", logout_path, method: :delete %></li>
+ <li><%= link_to "notifications" ,user_notifications_path %> </li> 
 
-
-</ul>  
 </div>
 <!-- <h1>Your forum has been created!</h1> -->
 <h1><%= @forum.title %> has been created!</h1>

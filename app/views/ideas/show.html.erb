@@ -6,15 +6,15 @@
  <li><%= link_to "friend requests" , friendships_path %></li>
  <li> <%= link_to "My Profile" , user_path(current_user.id) %> </li>
  <li><%= link_to "Log out", logout_path, method: :delete %></li>
-
-
-</ul>  
 </div>
 <html>
 		<h2><%=Idea.find(params[:id]).title%></h2>
+
+		<p>
+
 		<h4>Forum: <%=Forum.find(params[:forum_id]).title%></h4>
 		<forum>
+
 				<%= Idea.find(params[:id]).text %>
-		</forum>		
-			
+		</p>
 </html>

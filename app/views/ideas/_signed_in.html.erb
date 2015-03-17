@@ -5,24 +5,25 @@
  <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
  <li>friend requests</li>
  <li><%= link_to "Log out", logout_path, method: :delete %></li>
-
-</ul>  
+ <li><%= link_to "friend requests" , friendships_path %></li>
+ <li> <%= link_to "My Profile" , user_path(current_user.id) %> </li>
 </div>
 <div><h1>Post An Idea</h1>
 
-<%= form_for :idea, url: '' do |i| %>
+<%= form_for [@forum, @idea] do |f| %>
+  <%= f.error_messages %>
 
   <p>
-    <%= i.label :title %><br>
-    <%= i.text_field :title %><br>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %><br>
   </p>
  
   <p>
-    <%= i.label :text%><br>
-    <%= i.text_area :text %><br>
+    <%= f.label :text%><br>
+    <%= f.text_area :text %><br>
   </p>
  
   <p>
-    <%= i.submit "Post Idea" %>
+    <%= f.submit "Post Idea" %>
   </p>
 <% end %></div>

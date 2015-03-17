@@ -6,5 +6,3 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# IF YOU DO NOT REMOVE THE SEED CREATIONS/DELETIONS/... THEY WILL BE EXECUTED EVERY TIME YOU INVOKE RAKE DB:SEED
-#Idea.create(text: 'garrab', forum_id: 1, user_id: 1, title: 'garrab argook')

@@ -65,9 +65,8 @@ Rails.application.routes.draw do
 
   get 'search' => 'search#abdelghany'
 
-  get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
-
-  post 'forums/:id/ideas/new' => 'ideas#create'
+# get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
+  # post 'forums/:id/ideas/new' => 'ideas#create'
 
   resources :users 
   

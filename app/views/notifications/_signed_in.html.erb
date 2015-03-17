@@ -6,7 +6,13 @@
  <li><%= link_to "friend requests" , friendships_path %></li>
  <li> <%= link_to "My Profile" , user_path(current_user.id) %> </li>
  <li><%= link_to "Log out", logout_path, method: :delete %></li>
+<<<<<<< HEAD
 
+=======
+ <% if !Admin.where(user_id: current_user.id).empty? %>
+ <li><%= link_to "requests to join my forums",:controller => "users" ,:action => :admin_join_forums_requests %> </li>
+ <% end %>
+>>>>>>> 1defcf6c5fa7cb7881ef8b9e23de2a9d9c2dfcb6
 
 </ul>  
 </div>

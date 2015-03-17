@@ -1,4 +1,6 @@
 class IdeasController < ApplicationController
+	before_action :authenticate_user, only: :create
+
 	#index method list all the idea titles related to a forum.
 	def index
 		@ideas = Idea.where(forum_id: params[:forum_id])
@@ -9,23 +11,28 @@ class IdeasController < ApplicationController
 		 @idea = Idea.where(id: params[:id])
 	end
 
-   # retrieves the new.html.rb that contains a layout 
-   #that enables the user to create and idea by adding a title and text.
 	def new
-		@idea = Idea.new(user_id: current_user.id, forum_id: params[:id])
+
+		@forum = Forum.find(params[:forum_id])
+		@idea = Idea.new
+
 	end
 
-	def create
-		@idea = Idea.new(idea_params)
-		@forum = Forum.find(params[:id])
-		@user = current_user
-		if current_user == nil
 
+   #enables the user to create an idea by adding a title and text.
+	def create
+
+		# @idea = Idea.new(idea_params)
+		# @idea.forum = @forum
+		@idea = @forum.ideas.build(idea_params)
+		@idea.user = current_user
+
+		if @idea.save
+			redirect_to @forum
 		else
-		@user = current_user
-		@idea = @forum.ideas.build(user: @user)
-		@idea.save
-		redirect_to @forum
+
+			render action: :new
+
 		end
 	end
 
@@ -33,5 +40,15 @@ class IdeasController < ApplicationController
 protected
 	def idea_params
 		params.require(:idea).permit(:title, :text)
+
+	end
+
+	def authenticate_user
+		@forum = Forum.find(params[:forum_id])
+
+		if current_user == nil
+			redirect_to @forum
+		end
+
 	end
 end
