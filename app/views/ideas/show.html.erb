@@ -29,8 +29,9 @@
 			<h5>Comments</h5>
 
 			<ul>
-      <% @idea.comments.each do |comment| %>
+      <% @idea.comments.includes(:user).each do |comment| %>
       <li>
+          <strong><%= comment.user.username %>:</strong>
           <%= comment.text %>
       </li>
       <%end%>
