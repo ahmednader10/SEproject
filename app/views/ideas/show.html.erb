@@ -1,21 +1,54 @@
-	<div class="headerlist">
+  <div class="headerlist">
 <ul id="menu">
 <li> Logo</li>
 
  <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
- <li>friend requests</li>
+<% if current_user != nil %>
+ <li><%= link_to "friend requests" , friendships_path %></li>
+ <li> <%= link_to "My Profile" , user_path(current_user.id) %> </li>
+ 
+ 
  <li><%= link_to "Log out", logout_path, method: :delete %></li>
  <% if !Admin.where(user_id: current_user.id).empty? %>
- <li><%= link_to "requests to join my forums", :action => :admin_join_forums_requests %> </li>
+ <li><%= link_to "requests to join my forums",:controller => "users" ,:action => :admin_join_forums_requests %> </li>
  <% end %>
-
+ <% end %>
 </ul>  
 </div>
 <html>
-		<h2><%=Idea.find(params[:id]).title%></h2>
-		<h4>Forum: <%=Forum.find(params[:forum_id]).title%></h4>
-		<forum>
-				<%= Idea.find(params[:id]).text %>
-		</forum>		
-			
+		<h2><%=@idea.title%></h2>
+
+		<p>
+
+		<h4>Forum: <%=@forum.title%></h4>
+		<p>
+
+				<%= @idea.text %>
+		</p>
+		<div>
+			<h5>Comments</h5>
+
+			<ul>
+      <% @idea.comments.includes(:user).each do |comment| %>
+      <li>
+          <strong><%= comment.user.username %>:</strong>
+          <%= comment.text %>
+      </li>
+      <%end%>
+    </ul>
+    	</div>
+
+		<h5>Post Comment</h5>
+
+		<%= form_for [@forum, @idea, @comment] do |f| %>
+  			<%= f.error_messages %>
+
+ 			 <p>
+    		<%= f.text_area :text %><br>
+  			</p>
+ 
+  			<p>
+   			 <%= f.submit "Comment" %>
+  			</p>
+			<%end%>
 </html>

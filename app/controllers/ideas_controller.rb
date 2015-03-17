@@ -1,4 +1,7 @@
 class IdeasController < ApplicationController
+	before_action :authenticate_user, only: :create
+	before_action :check_forum_not_joined, only: :new
+
 	#index method list all the idea titles related to a forum.
 	def index
 		@ideas = Idea.where(forum_id: params[:forum_id])
@@ -6,32 +9,62 @@ class IdeasController < ApplicationController
 	
 	#show method showes the title and text of a chosen idea.
 	def show
-		 @idea = Idea.where(id: params[:id])
+		@forum = Forum.find(params[:forum_id])
+		 @idea = Idea.find(params[:id])
+		 @comment = Comment.new
 	end
 
-   # retrieves the new.html.rb that contains a layout 
-   #that enables the user to create and idea by adding a title and text.
 	def new
-		@idea = Idea.new(user_id: current_user.id, forum_id: params[:id])
+
+		@forum = Forum.find(params[:forum_id])
+		@idea = Idea.new
+
 	end
 
-	def create
-		@idea = Idea.new(idea_params)
-		@forum = Forum.find(params[:id])
-		@user = current_user
-		if current_user == nil
 
+   #enables the user to create an idea by adding a title and text.
+	def create
+
+		# @idea = Idea.new(idea_params)
+		# @idea.forum = @forum
+		@idea = @forum.ideas.build(idea_params)
+		@idea.user = current_user
+
+		if @idea.save
+			redirect_to @forum
 		else
-		@user = current_user
-		@idea = @forum.ideas.build(user: @user)
-		@idea.save
-		redirect_to @forum
+
+			render action: :new
+
 		end
 	end
 
+	def not_joined_forum
+
+	end
 # used to allow the user to enter the information needed from him and nothing more inorder not to be able to change the model
 protected
 	def idea_params
 		params.require(:idea).permit(:title, :text)
+
+	end
+
+	def authenticate_user
+		@forum = Forum.find(params[:forum_id])
+
+		if current_user == nil
+			redirect_to @forum
+
+		Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: !true).empty?
+			render action: :not_joined_forum
+		end
+
+	end
+
+	def check_forum_not_joined
+		@forum = Forum.find(params[:forum_id])
+			if current_user != nil and Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?
+			render action: :not_joined_forum
+		end
 	end
 end

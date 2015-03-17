@@ -41,6 +41,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    dynamic_form (1.1.4)
     erubis (2.7.0)
     execjs (2.3.0)
     faraday (0.9.1)
@@ -148,6 +149,7 @@ DEPENDENCIES
   better_errors (= 2.1.1)
   coffee-rails (~> 4.0.0)
   coffee-script-source (= 1.8.0)
+  dynamic_form
   jbuilder (~> 2.0)
   jquery-rails
   omniauth-facebook
