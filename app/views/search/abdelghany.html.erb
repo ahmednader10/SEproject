@@ -31,9 +31,12 @@
 			<ul>
 			<% @results.each do |result| %>
 				<% if User.all.include? result %>
-					<li><%= link_to result.username, result %></li>
+					<li>user: <%= link_to result.username, result %></li>
+				<% elsif Forum.all.include? result %>
+					<li>forum: <%= link_to result.title, result %></li>
 				<% else %>
-					<li><%= result.title %></li>
+					<% forum = Forum.find(result.forum_id) %>
+					<li>idea: <%= link_to result.title, forum_idea_path(forum.id, result.id) %></li>
 				<% end %>
 			<% end %>
 			</ul>
