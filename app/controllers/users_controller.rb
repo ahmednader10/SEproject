@@ -75,7 +75,7 @@ class UsersController < ApplicationController
     @user = current_user
     @requests_forums = []
     @requests_users = []
-    # check if user is admin
+    
     admin_forums = Admin.where(user_id: @user.id)
     if admin_forums != nil
       admin_forums.each do |admin_forum|
@@ -84,15 +84,11 @@ class UsersController < ApplicationController
           requests_ids.each do |r|
             @requests_forums.concat(Forum.where(id: r.forum_id))
             @requests_users.concat(User.where(id: r.user_id))
-       #Forum.@forums.each do |forum|
-       # if forum.id == joined_forum.id
-       #   @requests << forum.title
-       # end
-     # end
+       
 
     end
     end
-   # @forum = Forum.find(19)
+   
    end
    end 
   end
