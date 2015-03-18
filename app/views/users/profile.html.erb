@@ -60,24 +60,52 @@
 </tr>
 </table>  
 </div>
+
+
 <div class="foroums">
 <table width="371" height="51">
 <tr>
 	<th width="110"  id="forumcolum"> Forum</th>
+  <th id="ideatitlecolumn"> Description </th>
 </tr>
 
-<%  x = Forum.where(user_id: @current_user.id).order(:title) %>
-<% x.each do |forum| %>
+<%  x = Admin.where(user_id: @current_user.id) %>
+<% x.each do |admin| %>
+<% y = Forum.find(admin.forum_id) %>
 <tr>
-<td id="forumcolumn"><%=  link_to forum.title , forum %></td>
+<td id="forumcolum"><%=  link_to y.title , forum_path %></td>
+<td id="ideatitlecolumn"> <%= y.description %> </td>
 </tr>
 <% end %>
-
 </table>
 <% if x.size == 0 %>
 <em> forumless </em>
 <% end %>
 </div>
+
+<div class="memberships">
+<table width="371" height="51">
+<tr>
+  <th  id="forumcolum"> Joined Forum</th>
+  <th id="ideatitlecolumn"> Description </th>
+</tr>
+
+<%  x =Membership.where(user_id: @current_user.id) %>
+<% x.each do |membership| %>
+<% y = Forum.find(membership.forum_id) %>
+<tr>
+<td id="forumcolum"><%=  link_to y.title , forum_path %></td>
+<td id="ideatitlecolumn"> <%= y.description %> </td>
+</tr>
+<% end %>
+</table>
+<% if x.size == 0 %>
+<em> you are not a member in any forums </em>
+<% end %>
+</div>
+
+
+
 <div class= " ideaslist">
   <table width="371" height="51">
 <tr>
@@ -97,9 +125,8 @@
 <% if x.size == 0 %>
 <em> still Idealess </em>
 <% end %>
-
-
 </div>
+
 <div class="information">
 <button style="position: absolute; left: 196px; top: 8px;"> edit </button>
 <h2> Information </h2>
