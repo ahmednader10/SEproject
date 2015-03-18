@@ -18,6 +18,8 @@ class CommentsController < ApplicationController
 		@comment = @idea.comments.build(comment_params)
 		@comment.user = current_user
 
+		Notification.create(info: (current_user.username + ' has commented on your idea (' + @idea.title + ').'), seen: false, user_id: @idea.user_id)
+
 		if @comment.save
 			redirect_to [@forum, @idea] 
 		else
