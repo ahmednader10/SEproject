@@ -24,8 +24,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 # For the Facebook API
 gem 'omniauth-facebook'
+
 # For the Twitter API
 gem 'omniauth-twitter'
+
 # No need to use strong parameters  
 #gem 'protected_attributes'
 
