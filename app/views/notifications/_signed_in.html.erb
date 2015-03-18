@@ -25,7 +25,7 @@
 		<% @notifications.each do |notification| %>
 			<% if !notification.seen %>
 				<li>
-					<%= notification.info %>
+					<%= notification.info %> <%= link_to 'delete', ('notifications/' + notification.id.to_s), method: :delete %>
 				</li>
 				<% notification.update(seen: true) %>
 				<% seenNotifications += [notification] %>
@@ -35,7 +35,7 @@
 		<% @notifications.each do |notification| %>
 			<% if notification.seen and !seenNotifications.include? notification %>
 				<li>
-					<%= notification.info %>
+					<%= notification.info %> <%= link_to 'delete', ('notifications/' + notification.id.to_s), method: :delete %>
 				</li>
 			<%end%>
 		<%end%>

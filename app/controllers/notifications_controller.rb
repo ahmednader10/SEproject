@@ -23,7 +23,8 @@ class NotificationsController < ApplicationController
 
 	#'destroy' is for deleting notifications from the database, after they have been rendered not anymore usable.
 	def destroy
-		@notification.destroy
+		Notification.destroy(params[:id])
+		redirect_to('/notifications')
 	end
 
 protected

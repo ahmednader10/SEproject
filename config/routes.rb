@@ -71,6 +71,8 @@ Rails.application.routes.draw do
 
   get 'notifications' => 'notifications#index', as: 'user_notifications'
 
+  delete 'notifications/:id' => 'notifications#destroy'
+
   get 'users/indentation_error_message' => 'users#indentation_error_message'
 
   get 'search' => 'search#search'
@@ -100,8 +102,6 @@ Rails.application.routes.draw do
 
   end
   resources :friendships
-
-   
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
