@@ -20,9 +20,23 @@
 </div>
 <div style="position:absolute;top:50px;"><h1><%=User.find(current_user.id).username%>'s Notifications:</h1>
 		<ul>
-			<% @notifications.each do |notification| %>
-			<li>
-				<%= notification.info %>
-			</li>
+		<h4> New Notifications:</h4>
+		<% seenNotifications = [] %>
+		<% @notifications.each do |notification| %>
+			<% if !notification.seen %>
+				<li>
+					<%= notification.info %>
+				</li>
+				<% notification.update(seen: true) %>
+				<% seenNotifications += [notification] %>
 			<%end%>
+		<%end%>
+		<h4> Seen Notifications:</h4>
+		<% @notifications.each do |notification| %>
+			<% if notification.seen and !seenNotifications.include? notification %>
+				<li>
+					<%= notification.info %>
+				</li>
+			<%end%>
+		<%end%>
 		</ul></div>

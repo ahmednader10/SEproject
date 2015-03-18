@@ -50,6 +50,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'coffee-script-source', '1.8.0'
 
+# Makes errors more clear
 group :development do 
 	gem 'better_errors', '2.1.1'
 end
