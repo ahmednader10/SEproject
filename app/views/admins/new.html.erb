@@ -1,0 +1,10 @@
+<%= form_for [@forum, @admin] do |f| %>
+	<div class="field">
+	  	<%= f.label :user, "Add an admin by entering his email: " %><br>
+	   	<%= f.text_field :user %><br>
+	</div>
+
+	<div class='actions'>
+	   	<%= f.submit "Add admin" %>
+	</div>
+<% end %>

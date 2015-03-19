@@ -1,19 +1,32 @@
 
+
+
+
 <body>
-	<div class="headerlist">
+		<div class="headerlist">
 <ul id="menu">
-<li> Logo</li>
- 
- <li> <img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
- <li> <%= link_to "My Profile" , :action => :profile %> </li>
- <li>friend requests</li>
- 
+<li > Logo</li>
+
+ <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
+ <% if current_user != nil %>
+ <li><%= link_to "friend requests" , friendships_path %></li>
+ <li><%= link_to "Log out", logout_path, method: :delete %></li>
+  <li> <%= link_to "My Profile" , :action => :profile %> </li>
+ <% if !Admin.where(user_id: current_user.id).empty? %>
+ <li><%= link_to "requests to join my forums", :action => :admin_join_forums_requests %> </li>
+ <% end %>
+ <% end %>
+
 </ul>  
 </div>
 <div class=" profilepic" >
 <h1> <%= @user.username %> </h1>
   <img src="http://image.shutterstock.com/display_pic_with_logo/308572/135288281/stock-vector-creative-idea-light-bulb-with-concept-of-word-cloud-vector-illustration-modern-template-design-135288281.jpg" width="337";height="270" style="outline:double;outline-color:#303;"/>
   </div>
+  <div><% form_for(:friendship, :url => friendship_path(:user_id => current_user.id, :friend_id => @user.id)) do |f| %>
+<%= submit_tag "Add to My Friends" %>
+<% end %></div>
+  
 
 
 <div class="friendlist"> 
@@ -36,11 +49,13 @@
 <table width="371" height="51">
 <tr>
 	<th width="110"  id="forumcolum"> Forum </th>
+  <th id="ideatitlecolumn"> Description </th>
 </tr>
 <%  x = Forum.where(user_id: @user.id).order(:title) %>
 <% x.each do |forum| %>
 <tr>
-<td id="forumcolumn"><%=  link_to forum.title , forum %></td>
+<td id="forumcolum"><%=  link_to forum.title , forum %></td>
+<td id="ideatitlecolumn"> <%= y.description %> </td>
 </tr>
 <% end %>
 </table>
@@ -48,6 +63,27 @@
 <em> forumless </em>
 <% end %>
 
+</div>
+<div class="memberships">
+<table width="371" height="51">
+<tr>
+  <th  id="forumcolum"> Joined Forum</th>
+  <th id="ideatitlecolumn"> Description </th>
+</tr>
+
+<%  x =Membership.where(user_id: @user.id) %>
+<% x.each do |membership| %>
+<% y = Forum.find(membership.forum_id) %>
+<tr>
+<td id="forumcolum"><%=  link_to y.title , forum_path %></td>
+<td id="ideatitlecolumn"> <%= y.description %> </td>
+</tr>
+
+<% end %>
+</table>
+<% if x.size == 0 %>
+<em> not a member in any forums </em>
+<% end %>
 </div>
 <div class= " ideaslist">
   <table width="371" height="51">
@@ -59,7 +95,7 @@
 <%  x = Idea.where(user: @user).order(:text) %>
 <% x.each do |idea| %>
 <tr>
-<td id="ideatitlecolumn"><%= link_to idea.title , ':forum_id/ideas/:idea_id' %></td>
+<td id="ideatitlecolumn"><%= link_to idea.title , forum_idea_path(idea.forum.id, idea.id)%></td>
 <td id="ideacolumn"><%= idea.text %></td>
 <td id="forumcolum"> <%= link_to idea.forum.title , idea.forum %>  </td>
 </tr>

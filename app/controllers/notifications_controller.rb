@@ -16,9 +16,15 @@ class NotificationsController < ApplicationController
 		@notification.save
 	end
 
-	#'destroy' is for deleting notifications from the database, after they have been rendered not anymore usable.
+	# 'update' is used for updating the seen field to true when it is loaded into the notifications page
+	def update
+		@notification.update(notification_params)
+	end
+
+	#'destroy' is for deleting notifications from the database
 	def destroy
-		@notification.destroy
+		Notification.destroy(params[:id])
+		redirect_to('/notifications')
 	end
 
 protected

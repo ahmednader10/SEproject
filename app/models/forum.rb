@@ -11,5 +11,5 @@ class Forum < ActiveRecord::Base
 	has_many :ideas
 	has_many :users, through: :ideas
 
-	#attr_accessible :title, :description, :privacy
+
 end

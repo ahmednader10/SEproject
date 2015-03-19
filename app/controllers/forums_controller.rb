@@ -1,9 +1,12 @@
+
 class ForumsController < ApplicationController
 	
+	# Views all forums showing their title and description.
 	def index
 		@forums = Forum.all
 	end
 
+	# Views a specific forum. Users can post ideas here.
 	def show
 
 		#check if memeber then enable editing 
@@ -12,27 +15,34 @@ class ForumsController < ApplicationController
 		@forum = Forum.find(params[:id])
 	end
 
+	# Renders the page for creating a forum.
 	def new
 		@forum = Forum.new
 	end
 
+	# Renders the page for editing a forum.
 	def edit
 		@forum = Forum.find(params[:id])
 	end
 
+	# Creates a forum and saves it in the database. Also here is where making a user an admin is handled.
 	def create
   		@forum = Forum.new(forum_params)
   		@user = current_user
 
   		if @user == nil
-			# flash[:notice] = 'You should login first'
+
+			#flash[:notice] = 'You should login first'
    			redirect_to root_url
    		else
    			admin = @forum.admins.build(user: @user)
+
    			membership = @forum.memberships.build(user: @user)
    			if @forum.save && admin.save
+
   				membership.accept = true
   				membership.save
+
   				redirect_to(created_path(@forum))
   			else
   				render 'new'
@@ -40,11 +50,16 @@ class ForumsController < ApplicationController
    		end
 	end
 
+	# Updates the record of the forum in the database with the new data, and makes sure this is only done by the admin
+	# of the forum.
 	def update
 		@forum = Forum.find(params[:id])
 		@user = current_user
 
 		if @user == nil
+
+			flash[:notice] = 'You should login first'
+
 			# flash[:notice] = 'You should login first'
    			redirect_to root_url
    		else
@@ -57,6 +72,7 @@ class ForumsController < ApplicationController
    		end
 	end
 
+	# Deletes a forum, and makes sure that a forum is only deleted by its admin.
 	def destroy
 		@forum = Forum.find(params[:id])
 		@user = current_user
@@ -76,6 +92,7 @@ class ForumsController < ApplicationController
 		end
 	end
 
+	# A temporary page that shows up after creating a forum. Only notifies the user that the forum has been created.
 	def created
 		@forum = Forum.find(params[:id])
 	end
@@ -86,7 +103,7 @@ class ForumsController < ApplicationController
 
 	def join_forum
 	
-		#reset_session
+		
 
 		@user = current_user
 		@forum = Forum.find(params[:id])
@@ -94,30 +111,32 @@ class ForumsController < ApplicationController
 
 		
 		if @user == nil
-			 flash[:notice] = 'You should login first'
+
+			 flash[:notice] = 'You should login first to be able to join forum'
+
    		 redirect_to root_url
    		else
 		membership = @forum.memberships.build(user: @user)
 		membership.accept = true if @forum.privacy == '1'
 		
 
-		if  membership.save and membership.accept != nil 
+
+		if  membership.save and membership.accept == true 
 		  flash[:notice] = 'Successfully joined forum '
-   		 redirect_to :action => "show"
+   		 render :action => "show"
 
    		
-   		elsif !membership.save and membership.accept != nil  
+   		elsif !membership.save and membership.accept == true  
    				flash[:notice] = 'already member of this forum'
-   				redirect_to :action => "show"
+   				render :action => "show"
 
    		elsif !membership.save and membership.accept == nil  
    				flash[:notice] = 'already sent request to join this forum'
-   				redirect_to :action => "show"
+   				render :action => "show"
 
    		elsif membership.accept == nil
    				flash[:notice] = 'Pending request'
-   				redirect_to :action => "show"
-
+   				render :action => "show"
 
 		end
 		end
@@ -125,8 +144,11 @@ class ForumsController < ApplicationController
   		#send notification joined successfully
 	end
  
-	private
+ 	# Strong parameters
+	  private
 	  def forum_params
 	    params.require(:forum).permit(:title, :description, :privacy)
 	  end
+
 end
+

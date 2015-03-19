@@ -7,23 +7,29 @@ class User < ActiveRecord::Base
 	validates :email, :username, :uniqueness => true
 	validates :password, :length => { :minimum => 8 }
 
-	# Protected attributes gem
-	#attr_accessible :email, :password, :password_confirmation, :username, :gender, :full_name, :password_question, :answer_for_password_question
 
+	has_many :memberships
+	has_many :forums, through: :memberships
+
+
+  	has_many :friends, :through => :friendships 
+	has_many :requested_friends, :through => :friendships, :source => :friend
+	has_many :pending_friends, :through => :friendships, :source => :friend
+	has_many :friendships, :dependent => :destroy
+
+	
 	has_many :memberships
 	has_many :forums, through: :memberships
 
 	has_many :admins
 	has_many :forums, through: :admins
 
-	has_many :friendships
-	has_many :friends, through: :friendships
-
 	has_many :ideas
 	has_many :forums, through: :ideas
 
 	has_many :comments
 	has_many :ideas, through: :comments
+
 
 	#Authenticate method used in Session controller
 	def authenticate (password)
@@ -49,4 +55,7 @@ class User < ActiveRecord::Base
 	end
 
 end
+
+
+
 

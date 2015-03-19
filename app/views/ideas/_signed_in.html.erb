@@ -1,18 +1,35 @@
-<h1>Post An Idea</h1>
+  <div class="headerlist">
+<ul id="menu">
+<li> Logo</li>
 
-<%= form_for :idea, url: '' do |i| %>
+ <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
+ <% if current_user != nil %>
+ <li><%= link_to "friend requests" , friendships_path %></li>
+ <li> <%= link_to "My Profile" , user_path(current_user.id) %> </li>
+ <li><%= link_to "Log out", logout_path, method: :delete %></li>
+ <li><%= link_to "notifications" ,user_notifications_path %> </li> 
+ <% if !Admin.where(user_id: current_user.id).empty? %>
+ <li><%= link_to "requests to join my forums",:controller => "users" ,:action => :admin_join_forums_requests %> </li>
+ <% end %>
+ <% end %>
+</ul>
+</div>
+<div><h1>Post An Idea</h1>
+
+<%= form_for [@forum, @idea] do |f| %>
+  <%= f.error_messages %>
 
   <p>
-    <%= i.label :title %><br>
-    <%= i.text_field :title %><br>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %><br>
   </p>
  
   <p>
-    <%= i.label :text%><br>
-    <%= i.text_area :text %><br>
+    <%= f.label :text%><br>
+    <%= f.text_area :text %><br>
   </p>
  
   <p>
-    <%= i.submit "Post Idea" %>
+    <%= f.submit "Post Idea" %>
   </p>
-<% end %>
+<% end %></div>

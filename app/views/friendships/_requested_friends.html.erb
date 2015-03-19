@@ -1,0 +1,11 @@
+<ul><% if current_user.friendships.size !=0 %>
+<% for friendship in current_user.friendships %>
+<li>
+    <%= h friendship.requesting %>
+    (<%= link_to "cancel", friendship, :method => :delete %>)
+  </li>
+  <% end %>  
+  <%else%>
+  <em> no requested friends </em>
+  <% end %>
+  </ul>

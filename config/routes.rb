@@ -1,5 +1,16 @@
+
 Rails.application.routes.draw do
 
+
+  get 'admins/index'
+
+  get 'admins/show'
+
+  get 'admins/new'
+
+  get 'admins/edit'
+
+  get 'admins/delete'
 
   #################### Login #################################
   
@@ -44,6 +55,12 @@ Rails.application.routes.draw do
 
   get 'users/delete'
 
+  get '/users/join_requests' => 'users#admin_join_forums_requests'
+
+  get '/users/accept_join_request' => 'users#accept_join_request'
+
+  get '/users/reject_join_request' => 'users#reject_join_request'
+
   get '/users/:id' => 'users#show'
 
   get '/users/profile/:id' => 'users#profile'
@@ -54,16 +71,28 @@ Rails.application.routes.draw do
 
   get 'notifications' => 'notifications#index', as: 'user_notifications'
 
+  delete 'notifications/:id' => 'notifications#destroy'
+
   get 'users/indentation_error_message' => 'users#indentation_error_message'
 
-  get 'search' => 'search#abdelghany'
+  get 'search' => 'search#search'
 
-  get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
+  post 'forums/:id/admins/new' => 'admins#new', as: 'admin_to_be'
 
-  post 'forums/:id/ideas/new' => 'ideas#create'
+  get 'admins/unauthorized_action' => 'admins#unauthorized_action'
+
+  get 'admins/wrong_email' => 'admins#wrong_email'
+
+  get 'admins/added_admin' => 'admins#added_admin'  
+
+  # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
+  # post 'forums/:id/ideas/new' => 'ideas#create'
 
   resources :users 
   
+  resources :forums do
+    resources :admins
+  end
 
   resources :forums do
     resources :ideas do
@@ -73,8 +102,6 @@ Rails.application.routes.draw do
 
   end
   resources :friendships
-
-   
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

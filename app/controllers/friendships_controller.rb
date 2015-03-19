@@ -1,31 +1,60 @@
 class FriendshipsController < ApplicationController
 
-def index
-	@users=User.all 
+
+def show
+ 
+  @friend = User.find(params[:id])
+
 end 
-	
+def index
+  @users= User.all
+
+end 
+
+
 def create
-  @friendship = Friendship.new(:user_id => current_user.id , :friend_id => params[:friend_id] , :user_name => current_user.username , :friend_name => User.find_by(id: params[:friend_id]).username)
-  if @friendship.save
-    flash[:notice] = "Added friend."
+
+
+@user = current_user
+@friend = User.find( params[:friend_id])
+@friendship1 = Friendship.new(:user_id => @user.id , :friend_id => @friend.id,  :requesting => @friend.username)
+  @friendship2 = Friendship.new(:friend_id => @user.id , :user_id => @friend.id ,  :pending => @user.username)
+
+
+
+  if @friendship1.save && @friendship2.save
+    flash[:success] = "Added friend."
     redirect_to users_path
   else
-    flash[:notice] = "Unable to add friend."
-    redirect_to root_url
+    flash[:error] = "Unable to add friend."
+    redirect_to friendships_path
   end
+
+
+  end
+def update
+@user = current_user
+@userid= @user.id
+@user2= Friendship.find(params[:id])
+@friendid = @user2.friend_id
+
+@friendship1 = Friendship.find_by( user_id: @userid,friend_id: @friendid)
+@friendship2 = Friendship.find_by( user_id: @friendid, friend_id: @userid)
+
+if @friendship1.update_attributes(:user_id => @userid, :friend_id => @friendid, :status => 1) && @friendship2.update_attributes(:user_id => @friendid, :friend_id => @userid, :status =>1 )
+flash[:notice] = 'Friend sucessfully accepted!'
+redirect_to friendships_path
+else
+redirect_to new_friendships_path
 end
-
-def show 
-	@users=User.all 
-	@friendships=Friendship.all
 end 
-
 def destroy
-  @friendship = current_user.friendships.find(params[:id])
-  @friendship.destroy
-  flash[:notice] = "Removed friendship."
-  redirect_to users_path
+
+@friendship = current_user.friendships.find(params[:id]).destroy
+
+redirect_to users_path
+end
 end
 
 
-end 
+
