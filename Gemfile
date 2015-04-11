@@ -27,10 +27,11 @@ gem 'omniauth-facebook'
 # For the Twitter API
 gem 'omniauth-twitter'
 # No need to use strong parameters  
-# gem 'protected_attributes'
+
 
 # Form helper for model errors
 gem 'dynamic_form'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -49,6 +50,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'coffee-script-source', '1.8.0'
 
+# Makes errors more clear
 group :development do 
 	gem 'better_errors', '2.1.1'
 end

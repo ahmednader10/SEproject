@@ -69,6 +69,9 @@ ul#menu li {
     text-decoration: none;
     border-radius: 4px 4px 0 0;
 }
+table{
+  text-align: center;
+}
 
 .headerlist{
 
@@ -89,6 +92,12 @@ position:fixed;
 	top: 542px;
 	width: 256px;
 	height: 201px;
+}
+.memberships{
+  position:absolute;
+  left: 686px;
+  top: 700;
+
 }
 #ideatitlecolumn{
 	 border: 2px solid;

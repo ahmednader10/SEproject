@@ -8,12 +8,17 @@ def show
 end 
 def index
   @users= User.all
+
 end 
 
 
-def create 
-@friendship1 = Friendship.new(:user_id => current_user.id , :friend_id => params[:friend_id] , :user_name => current_user.username , :friend_name => User.find_by(id: params[:friend_id]).username, :requesting => User.find_by(id: params[:friend_id]).username)
-  @friendship2 = Friendship.new(:friend_id => current_user.id , :user_id => params[:friend_id] , :friend_name => current_user.username , :user_name => User.find_by(id: params[:friend_id]).username, :pending => current_user.username)
+def create
+
+
+@user = current_user
+@friend = User.find( params[:friend_id])
+@friendship1 = Friendship.new(:user_id => @user.id , :friend_id => @friend.id,  :requesting => @friend.username)
+  @friendship2 = Friendship.new(:friend_id => @user.id , :user_id => @friend.id ,  :pending => @user.username)
 
 
 
@@ -22,7 +27,7 @@ def create
     redirect_to users_path
   else
     flash[:error] = "Unable to add friend."
-    redirect_to root_url
+    redirect_to friendships_path
   end
 
 

@@ -1,0 +1,13 @@
+<% @admins.each do |admin| %>
+<table border='1'>
+<tr>
+<% if admin.user != nil and admin.forum != nil %>
+  <td>Forum <%= admin.forum.id %></td>
+  <td>User <%= admin.user.id %></td> 
+<% end %>
+</tr>
+<% end %>
+</table>
+
+
+
