@@ -1,6 +1,19 @@
 
 Rails.application.routes.draw do
 
+  ####################### SysAdmin ###########################
+
+  get 'system_admin/new'
+
+  get 'system_admin/show'
+
+  get 'system_admin/index'
+
+  get 'system_admin/edit'
+
+  get 'system_admin/delete'
+
+  ############### Admin ######################################
 
   get 'admins/index'
 
@@ -45,8 +58,6 @@ Rails.application.routes.draw do
   get     'logged_in' => 'sessions#logged_in'
   ###########################################################
 
-
-
   get 'users/index'
 
   get 'users/new'
@@ -84,6 +95,10 @@ Rails.application.routes.draw do
   get 'admins/wrong_email' => 'admins#wrong_email'
 
   get 'admins/added_admin' => 'admins#added_admin'  
+
+  ###########################################################
+
+  #get 'sysAdmin' 
 
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
