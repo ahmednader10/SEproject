@@ -21,6 +21,13 @@ class IdeasController < ApplicationController
 
 	end
 
+	def destroy
+		@idea = Idea.find(params[:id])
+		@forum = Forum.find(params[:forum_id])
+		@idea.destroy
+		redirect_to forum_path(@forum)
+	end
+
 
    #enables the user to create an idea by adding a title and text.
 	def create
@@ -35,9 +42,9 @@ class IdeasController < ApplicationController
 			# This block of code sends a notification to the admins of the forum being posted on
 			# =================================================================
 			admins = Admin.where(forum_id: @forum)	
-			admins.each do |admin|
-				Notification.create(info: (current_user.username + ' has posted on a forum that you administrate (' + @forum.title + ').'), seen: false, user_id: admin.user_id)
-			end
+		#	admins.each do |admin|
+		#		Notification.create(info: (current_user.username + " has posted on a forum that you administrate (" + @forum.title + ")."), seen: false, user_id: admin.user_id)
+		#	end
 			# =================================================================
 
 			redirect_to @forum

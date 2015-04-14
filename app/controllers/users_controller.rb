@@ -36,9 +36,28 @@ class UsersController < ApplicationController
   end
 
   def edit
+    user = User.find(params[:id])
   end
 
   def delete
+  end
+
+
+  def update 
+    @user = current_user
+    if @user == nil
+
+      flash[:notice] = 'You should login first'
+
+      # flash[:notice] = 'You should login first'
+        redirect_to root_url
+      else 
+        if @user.update_attributes(user_params)
+          redirect_to(user_path)
+      else
+        render 'edit'
+      end
+    end
   end
 
   # accept_join_request method gets parameters of the user and the forum from the url and 
@@ -120,7 +139,8 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :username, :gender, :full_name, :password_question, :answer_for_password_question)
+    params.require(:user).permit(:email, :password, :password_confirmation, :username, :gender, :full_name, :password_question, :answer_for_password_question ,:privacy)
+
   end
 
 

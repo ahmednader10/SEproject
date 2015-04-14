@@ -42,6 +42,11 @@
        <p>
          <%= button_to "Like Idea", :action => "like"%>
          <%= button_to "Report Idea", :action => "report"%>
+         <% if !Admin.where(user_id: current_user.id).empty? %>
+          <%= button_to "delete idea", :action => :destroy %> 
+          <!-- Facebook and Twitter share button-->
+         <%= social_share_button_tag("My Home Page", :url => "https://www.facebook.com/sharer/sharer.php?u=example.org") %>
+          <% end %>
         </p>
       
 

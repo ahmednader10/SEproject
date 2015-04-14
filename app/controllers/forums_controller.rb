@@ -10,7 +10,7 @@ class ForumsController < ApplicationController
 	def show
 
 		#check if memeber then enable editing 
-
+		
 		sleep 1
 		@forum = Forum.find(params[:id])
 	end
@@ -33,6 +33,7 @@ class ForumsController < ApplicationController
   		if @user == nil
 
 			#flash[:notice] = 'You should login first'
+
    			redirect_to root_url
    		else
    			admin = @forum.admins.build(user: @user)
@@ -55,9 +56,10 @@ class ForumsController < ApplicationController
 	def update
 		@forum = Forum.find(params[:id])
 		@user = current_user
-
+		if session[:sysadmin] && @forum.update(forum_params)
+			redirect_to(forums_sysadmins_path) and return
+		end
 		if @user == nil
-
 			flash[:notice] = 'You should login first'
 
 			# flash[:notice] = 'You should login first'
@@ -76,12 +78,15 @@ class ForumsController < ApplicationController
 	def destroy
 		@forum = Forum.find(params[:id])
 		@user = current_user
-
+		if session[:sysadmin]
+			@forum.destroy
+			redirect_to forums_sysadmins_path and return
+		end
 		if @user == nil
 			redirect_to root_url
 		else
 			admin = Admin.where({ forum_id: @forum.id, user_id: @user.id })
-			if !admin.empty?
+			if !admin.empty? 
 				# confirm then delete
 				@forum.destroy
 				# admin.destroy
@@ -96,6 +101,29 @@ class ForumsController < ApplicationController
 	# A temporary page that shows up after creating a forum. Only notifies the user that the forum has been created.
 	def created
 		@forum = Forum.find(params[:id])
+	end
+
+	def remove_member
+		 user = params[:user]
+    	forum = params[:forum]
+    	 @membership1 = Membership.where(user_id: user , forum_id: forum)
+    	 @membership1.first.destroy
+    	 render 'list_members'
+	end
+
+
+	def list_members
+		@users = []
+		@forum = Forum.find(params[:id])
+		 forums_ids = Membership.where(forum_id: @forum.id , accept: true)
+        if !forums_ids.empty?
+          forums_ids.each do |r|
+           if !User.where(id: r.user_id).empty?
+            @users.concat(User.where(id: r.user_id))
+        end
+      
+    end
+    end
 	end
 
 	# join action enables logged in user to join public forums through clicking on the button 

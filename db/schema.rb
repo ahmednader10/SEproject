@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -12,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412184615) do
+ActiveRecord::Schema.define(version: 20150416131913) do
 
   create_table "admins", force: true do |t|
     t.integer  "forum_id"
@@ -23,6 +22,12 @@ ActiveRecord::Schema.define(version: 20150412184615) do
 
   add_index "admins", ["forum_id"], name: "index_admins_on_forum_id"
   add_index "admins", ["user_id"], name: "index_admins_on_user_id"
+
+  create_table "blocks", force: true do |t|
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "comments", force: true do |t|
     t.integer  "idea_id"
@@ -104,6 +109,13 @@ ActiveRecord::Schema.define(version: 20150412184615) do
     t.datetime "updated_at"
   end
 
+  create_table "sysadmins", force: true do |t|
+    t.string   "username"
+    t.string   "password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email"
     t.string   "password"
@@ -119,6 +131,7 @@ ActiveRecord::Schema.define(version: 20150412184615) do
     t.string   "name"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
+    t.integer  "privacy",                      default: 1
   end
 
 end

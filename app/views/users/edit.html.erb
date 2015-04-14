@@ -1,2 +1,67 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+
+ 
+
+<div class="mainDiv" id="mainDiv">
+<%= form_for(current_user) do |f| %>
+    <h1>Edit form</h1>
+<% if current_user.errors.any? %>
+      <h3>Errors</h3>
+      <ul>
+        <% current_user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  
+      </ul>
+     <div class="field">
+      <%= f.label :full_name %><br>
+      <%= f.text_field :full_name %><br>
+     </div> 
+
+     <div class="field">
+      <%= f.label :username %><br>
+      <%= f.text_field :username %><br>
+     </div>
+
+     <div class="field">
+      <%= f.label :email %><br>
+      <%= f.email_field :email %><br>
+     </div>
+
+     <div class="field">
+      <%= f.label :password %><br>
+      <%= f.password_field :password %><br>
+     </div>
+
+     <div class="field">
+      <%= f.label :password_confirmation, 'Confirm password' %><br>
+      <%= f.password_field :password_confirmation %><br>
+     </div>
+   
+     <div class="field">
+      <%= f.label :gender %><br>
+      <%= f.select :gender, ['Male', 'Female'] %><br>
+     </div>   
+
+     <div class="field">
+      <%= f.label :password_question, "Choose a question (in case you forgot the password)" %><br>
+      <%= f.select :password_question, ['What is the name of your best friend?', 'What is the name of your pet?', 'Who was your first English teacher?'] %><br>
+     </div> 
+
+     <div class="field">
+      <%= f.label :Your_answer %><br>
+      <%= f.text_field :answer_for_password_question %><br><br>
+     </div>
+     <div>
+         <p>
+    <%= f.label :privacy, "Public" %>
+    <%= f.radio_button :privacy, 1 %><br>
+    <%= f.label :privacy, "Private" %>
+    <%= f.radio_button :privacy, 2 %><br>
+  </p>
+     </div>
+     <div class='actions'>
+      <%= f.submit "Update Information" %>
+     </div>
+<% end %>

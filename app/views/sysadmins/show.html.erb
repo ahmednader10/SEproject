@@ -1,0 +1,23 @@
+<%= link_to 'Sign out', root_path %>
+<h1>Welcome, System admin!</h1>
+
+<%= form_tag(edit_path, method: "get") do %>
+	<%= text_field_tag(:q) %>
+	<%= submit_tag(:delete) %>
+<% end %>
+
+<%= link_to 'control forums', forums_sysadmins_path %>
+
+<%= form_tag(blocked_path, method: "get") do %>
+	<%= text_field_tag(:block_user) %>
+	<%= submit_tag(:block) %>
+<% end %>
+
+<%= form_tag(unblocked_path, method: "get") do %>
+	<%= text_field_tag(:unblock_user) %>
+	<%= submit_tag(:unblock) %>
+<% end %>
+
+<%= link_to 'Merge forums', sysadmins_merge_path %>
+
+
