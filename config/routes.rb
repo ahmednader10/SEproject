@@ -1,7 +1,5 @@
-
 Rails.application.routes.draw do
-
-
+  
   get 'admins/index'
 
   get 'admins/show'
