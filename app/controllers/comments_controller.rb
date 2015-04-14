@@ -30,7 +30,20 @@ class CommentsController < ApplicationController
 	end
 
 	def reportcomment
-	
+	@forum = Forum.find(params[:forum_id])
+		@user = current_user
+		@idea = Idea.find(params[:idea_id])
+		@comment = Comment.find(params[:id])
+
+	 	@reportcomment = Reportcomment.new(:user_id => @user.id , :comment_id => @comment.id)
+
+		if @reportcomment.save
+	   		flash[:notice] = "Comment has been reported!"
+		else
+			flash[:notice] = "You've already reported this comment!"
+		end
+
+      	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
 	end
 
 # used to allow the user to enter the comment and nothing more inorder not to be able to change the comment's model
