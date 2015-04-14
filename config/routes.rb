@@ -1,5 +1,5 @@
-
 Rails.application.routes.draw do
+
 
   ####################### SysAdmin ###########################
 
@@ -15,8 +15,6 @@ Rails.application.routes.draw do
 
   ############### Admin ######################################
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
   get 'admins/index'
 
   get 'admins/show'
