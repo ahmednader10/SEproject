@@ -84,6 +84,7 @@ class ForumsController < ApplicationController
 			if !admin.empty?
 				# confirm then delete
 				@forum.destroy
+				# admin.destroy
 				redirect_to forums_path
 			else
 				# refuse and redirect
