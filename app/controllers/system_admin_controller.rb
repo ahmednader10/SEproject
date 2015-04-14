@@ -1,5 +1,6 @@
 class SystemAdminController < ApplicationController
   def new
+    @sys_admin = 
   end
 
   def show

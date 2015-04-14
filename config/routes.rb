@@ -1,17 +1,20 @@
 Rails.application.routes.draw do
 
-
   ####################### SysAdmin ###########################
 
-  get 'system_admin/new'
+  get 'sysadmins/new'
 
-  get 'system_admin/show'
+  get 'sysadmins/index'
 
-  get 'system_admin/index'
+  get 'sysadmins/show'
 
-  get 'system_admin/edit'
+  get 'sysadmins/edit'
 
-  get 'system_admin/delete'
+  get 'sysadmins/delete'
+
+  post 'sysadmins/new' => 'sysadmins#show'
+
+  #post 'sysadmins/show' => 'sysadmins#show'
 
   ############### Admin ######################################
 
