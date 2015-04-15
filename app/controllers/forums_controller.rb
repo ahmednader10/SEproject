@@ -33,8 +33,8 @@ class ForumsController < ApplicationController
   		if @user == nil
 
 			#flash[:notice] = 'You should login first'
-			
-   			#redirect_to root_url
+
+   			redirect_to root_url
    		else
    			admin = @forum.admins.build(user: @user)
 
