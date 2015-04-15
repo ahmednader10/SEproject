@@ -28,7 +28,7 @@
     </a>
   </li>
   <li>
-    <a class='list-item' href='/friendships/ <%= @current_user.id %>'>
+    <a class='list-item' href='/friendships'>
       Friends
     </a>
   </li>
@@ -38,7 +38,7 @@
 
 <div class=" profilepic" >
 
-<h1> <%= @current_user.name %> welcome to your profile</h1>
+<h1> <%= @current_user.username %> welcome to your profile</h1>
   <img src="http://image.shutterstock.com/display_pic_with_logo/308572/135288281/stock-vector-creative-idea-light-bulb-with-concept-of-word-cloud-vector-illustration-modern-template-design-135288281.jpg" width="337";height="270" style="outline:double;outline-color:#303;"/>
   
   </div>
@@ -128,7 +128,8 @@
 </div>
 
 <div class="information">
-<button style="position: absolute; left: 196px; top: 8px;"> edit </button>
+
+ <%= link_to "edit" , edit_user_path(current_user) %>
 <h2> Information </h2>
 <p>full name : <%= @current_user.full_name %> </p>
 <p>email: <%= @current_user.email %> </p>

@@ -61,6 +61,8 @@ Rails.application.routes.draw do
 
   get '/users/:id' => 'users#show'
 
+  get '/users/profile/:id/edit' => 'users#update'
+
   get '/users/profile/:id' => 'users#profile'
 
   get 'forums/created/:id' => 'forums#created', as: 'created'
@@ -82,6 +84,7 @@ Rails.application.routes.draw do
   get 'admins/wrong_email' => 'admins#wrong_email'
 
   get 'admins/added_admin' => 'admins#added_admin'  
+
 
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'

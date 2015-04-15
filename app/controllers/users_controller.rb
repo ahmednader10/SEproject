@@ -36,9 +36,29 @@ class UsersController < ApplicationController
   end
 
   def edit
+
   end
 
   def delete
+  end
+
+
+  def update 
+    @user = current_user
+    if @user == nil
+
+      flash[:notice] = 'You should login first'
+
+      # flash[:notice] = 'You should login first'
+        redirect_to root_url
+      else
+        if !admin.empty? && @forum.update(forum_params)
+        redirect_to(forums_path)
+      else
+        render 'edit'
+      end
+      end
+
   end
 
   # accept_join_request method gets parameters of the user and the forum from the url and 
