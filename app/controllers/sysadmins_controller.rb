@@ -7,6 +7,10 @@ class SysadminsController < ApplicationController
   end
 
   def show
+    if current_user
+      redirect_to logged_in_path and return
+    end
+
     if params[:sysadmin][:username] == 'admin' and params[:sysadmin][:password] == 'password'
       session[:sysadmin] = true
       render 'show'

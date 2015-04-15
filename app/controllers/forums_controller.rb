@@ -56,9 +56,10 @@ class ForumsController < ApplicationController
 	def update
 		@forum = Forum.find(params[:id])
 		@user = current_user
-
+		if session[:sysadmin] && @forum.update(forum_params)
+			redirect_to(forums_sysadmins_path) and return
+		end
 		if @user == nil
-
 			flash[:notice] = 'You should login first'
 
 			# flash[:notice] = 'You should login first'
