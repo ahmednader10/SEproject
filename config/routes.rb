@@ -1,7 +1,5 @@
-
 Rails.application.routes.draw do
-
-
+  
   get 'admins/index'
 
   get 'admins/show'
@@ -96,7 +94,14 @@ Rails.application.routes.draw do
 
   resources :forums do
     resources :ideas do
+      member do
+        post :like
+        post :report
+      end
       resources :comments
+      member do
+        post :reportcomment
+      end
     end
 
 

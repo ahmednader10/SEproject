@@ -3,30 +3,26 @@ class User < ActiveRecord::Base
 
 	validates :email, :username, :presence => true
 	validates :password, :presence => true
-	validates :password, :confirmation => true
+	#validates :password, :confirmation => true
 	validates :email, :username, :uniqueness => true
 	validates :password, :length => { :minimum => 8 }
 
-	has_many :memberships
-	has_many :forums, through: :memberships
+	has_many :memberships, :dependent => :delete_all
+	has_many :forums, through: :memberships, :dependent => :delete_all
 
-  	has_many :friends, :through => :friendships 
-	has_many :requested_friends, :through => :friendships, :source => :friend
-	has_many :pending_friends, :through => :friendships, :source => :friend
-	has_many :friendships, :dependent => :destroy
+  	has_many :friends, :through => :friendships, :dependent => :delete_all 
+	has_many :requested_friends, :through => :friendships, :source => :friend, :dependent => :delete_all
+	has_many :pending_friends, :through => :friendships, :source => :friend, :dependent => :delete_all
+	has_many :friendships, :dependent => :delete_all
 
-	
-	has_many :memberships
-	has_many :forums, through: :memberships
+	has_many :admins, :dependent => :delete_all
+	has_many :forums, through: :admins, :dependent => :delete_all
 
-	has_many :admins
-	has_many :forums, through: :admins
+	has_many :ideas, :dependent => :delete_all
+	has_many :forums, through: :ideas, :dependent => :delete_all
 
-	has_many :ideas
-	has_many :forums, through: :ideas
-
-	has_many :comments
-	has_many :ideas, through: :comments
+	has_many :comments, :dependent => :delete_all
+	has_many :ideas, through: :comments, :dependent => :delete_all
 
 
 	#Authenticate method used in Session controller
