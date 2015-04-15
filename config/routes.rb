@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   get 'sysadmins/show'
 
-  get 'sysadmins/edit'
+  get 'sysadmins/edit' => 'sysadmins#edit', as: 'edit'
 
   get 'sysadmins/delete'
 

@@ -1,5 +1,9 @@
-<h1>Sysadmins#show</h1>
-<p>Find me in app/views/sysadmins/show.html.erb</p>
-
 
 <h1>Welcome, System admin!</h1>
+
+<%= form_tag(edit_path, method: "get") do %>
+	<%= text_field_tag(:q) %>
+	<%= submit_tag(:delete) %>
+<% end %>
+
+<%= link_to 'control forums', forums_path %>
