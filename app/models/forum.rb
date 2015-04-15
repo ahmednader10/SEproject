@@ -10,7 +10,4 @@ class Forum < ActiveRecord::Base
 	
 	has_many :ideas, :dependent => :delete_all
 	has_many :users, through: :ideas, :dependent => :delete_all
-
-
-
 end
