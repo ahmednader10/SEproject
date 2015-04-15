@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   post 'sysadmins/new' => 'sysadmins#show'
 
+  get 'sysadmins/forums' => 'sysadmins#forums', as: 'forums_sysadmins'
+
   #post 'sysadmins/show' => 'sysadmins#show'
 
   ############### Admin ######################################
@@ -63,7 +65,7 @@ Rails.application.routes.draw do
 
   get 'users/index'
 
-  get 'users/new'
+  get 'users/new' 
 
   get 'users/edit'
 

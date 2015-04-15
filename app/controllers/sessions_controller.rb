@@ -1,6 +1,7 @@
 
 class SessionsController < ApplicationController
   def new
+    session.delete(:sysadmin)
     if current_user
       redirect_to logged_in_path
     end

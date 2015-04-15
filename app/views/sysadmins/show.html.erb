@@ -1,4 +1,4 @@
-
+<%= link_to 'Sign out', root_path %>
 <h1>Welcome, System admin!</h1>
 
 <%= form_tag(edit_path, method: "get") do %>
@@ -6,4 +6,6 @@
 	<%= submit_tag(:delete) %>
 <% end %>
 
-<%= link_to 'control forums', forums_path %>
+<%= link_to 'control forums', forums_sysadmins_path %>
+
+
