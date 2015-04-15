@@ -47,7 +47,7 @@ user_with_no_username:
  answer_for_password_question: Simone
 
 user_with_repeated_email:
- email: omar.ashraf@gmail.com
+ email: yasmine@gmail.com
  password: 888811118
  username: yasmine_90
  gender: Female
@@ -64,7 +64,21 @@ user_with_repeated_username:
  password_question: What is the name of your best friend?
  answer_for_password_question: Omar
 
+user_with_an_existing_ameil:
+ email: yasmine@gmail.com
+ password: 88881111
+ username: yasmine_muhammad
+ gender: Female
+ full_name: Yasmine Muhammad
+ password_question: What is the name of your best friend?
+ answer_for_password_question: Laila
 
-
-
+user_with_invalid_username:
+ email: mohsen@gmail.com
+ password: 88881111
+ username: m_ ohsen
+ gender: Male
+ full_name: Mohsen Emad
+ password_question: What is the name of your best friend?
+ answer_for_password_question: Shoukry
 

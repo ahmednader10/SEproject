@@ -1,5 +1,23 @@
 Rails.application.routes.draw do
-  
+
+  ####################### SysAdmin ###########################
+
+  get 'sysadmins/new'
+
+  get 'sysadmins/index'
+
+  get 'sysadmins/show'
+
+  get 'sysadmins/edit' => 'sysadmins#edit', as: 'edit'
+
+  get 'sysadmins/delete'
+
+  post 'sysadmins/new' => 'sysadmins#show'
+
+  #post 'sysadmins/show' => 'sysadmins#show'
+
+  ############### Admin ######################################
+
   get 'admins/index'
 
   get 'admins/show'
@@ -43,8 +61,6 @@ Rails.application.routes.draw do
   get     'logged_in' => 'sessions#logged_in'
   ###########################################################
 
-
-
   get 'users/index'
 
   get 'users/new'
@@ -83,6 +99,10 @@ Rails.application.routes.draw do
 
   get 'admins/added_admin' => 'admins#added_admin'  
 
+  ###########################################################
+
+  #get 'sysAdmin' 
+
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
 
@@ -94,7 +114,14 @@ Rails.application.routes.draw do
 
   resources :forums do
     resources :ideas do
+      member do
+        post :like
+        post :report
+      end
       resources :comments
+      member do
+        post :reportcomment
+      end
     end
 
 

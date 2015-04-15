@@ -32,10 +32,7 @@ class SessionsController < ApplicationController
         user = User.omniauth(env['omniauth.auth'])
         session[:user_id] = user.id
         redirect_to user
-
-
   end
-
 
   def destroy
     log_out

@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-	before_action :authenticate_user, only: :create
+	before_action :authenticate_user, only: [:create, :like, :report]
 	before_action :check_forum_not_joined, only: :new
 
 	#index method list all the idea titles related to a forum.
@@ -49,8 +49,41 @@ class IdeasController < ApplicationController
 	end
 
 	def not_joined_forum
-
 	end
+
+# used to enable the user of the current secession to like an idea
+	def like
+		@forum = Forum.find(params[:forum_id])
+		@user = current_user
+		@idea = Idea.find(params[:id])
+
+	 	@likeidea = Likeidea.new(:user_id => @user.id , :idea_id => @idea.id)
+
+		if @likeidea.save
+	   		flash[:notice] = "Idea Liked!"
+		else
+			flash[:notice] = "You've already liked this idea!"
+		end
+
+      	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
+	end
+# allows user to report an idea
+	def report
+		@forum = Forum.find(params[:forum_id])
+		@user = current_user
+		@idea = Idea.find(params[:id])
+
+	 	@reportidea = Reportidea.new(:user_id => @user.id , :idea_id => @idea.id)
+
+		if @reportidea.save
+	   		flash[:notice] = "Idea has been reported!"
+		else
+			flash[:notice] = "You've already reported this idea!"
+		end
+
+      	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
+	end
+
 # used to allow the user to enter the information needed from him and nothing more inorder not to be able to change the model
 protected
 	def idea_params

@@ -33,10 +33,17 @@
       <li>
           <strong><%= comment.user.username %>:</strong>
           <%= comment.text %>
+          <%= button_to "Report", :action => "reportcomment"%>
       </li>
       <%end%>
     </ul>
     	</div>
+  
+       <p>
+         <%= button_to "Like Idea", :action => "like"%>
+         <%= button_to "Report Idea", :action => "report"%>
+        </p>
+      
 
 		<h5>Post Comment</h5>
 
@@ -51,4 +58,9 @@
    			 <%= f.submit "Comment" %>
   			</p>
 			<%end%>
+      <p>
+        <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+      </p>
 </html>
