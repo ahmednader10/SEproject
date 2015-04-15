@@ -22,10 +22,7 @@
 <div class=" profilepic" >
 <h1> <%= @user.username %> </h1>
   <img src="http://image.shutterstock.com/display_pic_with_logo/308572/135288281/stock-vector-creative-idea-light-bulb-with-concept-of-word-cloud-vector-illustration-modern-template-design-135288281.jpg" width="337";height="270" style="outline:double;outline-color:#303;"/>
-  </div>
-  <div><% form_for(:friendship, :url => friendship_path(:user_id => current_user.id, :friend_id => @user.id)) do |f| %>
-<%= submit_tag "Add to My Friends" %>
-<% end %></div>
+    </div>
   
 
 
