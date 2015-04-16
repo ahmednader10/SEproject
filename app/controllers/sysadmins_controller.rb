@@ -42,13 +42,20 @@ class SysadminsController < ApplicationController
         render 'show'
       end
     end
-    #block = Block.new(email: @user_to_be_blocked.email)
-    #if @user_to_be_blocked and block.save and block.email != nil
-    #  redirect_to blocked_path
-    #else
-    #  redirect_to root_path
-    #end
+  end
 
+  def userUnblocked
+    @user_to_be_unblocked = User.find_by(email: params[:unblock_user])
+    if !@user_to_be_unblocked
+      render 'show'
+    else
+      unblock = Block.find_by(email: @user_to_be_unblocked.email)
+      if unblock.destroy
+        render unblocked_path
+      else
+        render 'show'
+      end
+    end
   end
 
   def forums

@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   get 'sysadmins/userBlocked' => 'sysadmins#userBlocked', as: 'blocked'
 
+  get 'sysadmins/userUnblocked' => 'sysadmins#userUnblocked', as: 'unblocked'
+
   #post 'sysadmins/show' => 'sysadmins#show'
 
   ############### Admin ######################################
