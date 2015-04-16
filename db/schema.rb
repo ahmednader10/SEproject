@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150416044159) do
-=======
-ActiveRecord::Schema.define(version: 20150415235834) do
->>>>>>> 4b9efd41ea604df8ab7e426aaef0c6f04e153348
 
   create_table "admins", force: true do |t|
     t.integer  "forum_id"
@@ -27,15 +23,12 @@ ActiveRecord::Schema.define(version: 20150415235834) do
   add_index "admins", ["forum_id"], name: "index_admins_on_forum_id"
   add_index "admins", ["user_id"], name: "index_admins_on_user_id"
 
-<<<<<<< HEAD
-=======
   create_table "blocks", force: true do |t|
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
->>>>>>> 4b9efd41ea604df8ab7e426aaef0c6f04e153348
   create_table "comments", force: true do |t|
     t.integer  "idea_id"
     t.integer  "user_id"
@@ -116,8 +109,6 @@ ActiveRecord::Schema.define(version: 20150415235834) do
     t.datetime "updated_at"
   end
 
-<<<<<<< HEAD
-=======
   create_table "sysadmins", force: true do |t|
     t.string   "username"
     t.string   "password"
@@ -125,7 +116,6 @@ ActiveRecord::Schema.define(version: 20150415235834) do
     t.datetime "updated_at"
   end
 
->>>>>>> 4b9efd41ea604df8ab7e426aaef0c6f04e153348
   create_table "users", force: true do |t|
     t.string   "email"
     t.string   "password"
@@ -141,10 +131,7 @@ ActiveRecord::Schema.define(version: 20150415235834) do
     t.string   "name"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
-<<<<<<< HEAD
     t.integer  "privacy"
-=======
->>>>>>> 4b9efd41ea604df8ab7e426aaef0c6f04e153348
   end
 
 end
