@@ -1,6 +1,7 @@
 
 class SessionsController < ApplicationController
   def new
+    session.delete(:sysadmin)
     if current_user
       redirect_to logged_in_path
     end
@@ -10,7 +11,12 @@ class SessionsController < ApplicationController
   def create 
    	
    	 user = User.find_by(email: params[:session][:email].downcase)
-  	
+  	blocked_user = Block.find_by(email: user.email)
+
+    if user and user.authenticate(params[:session][:password]) and blocked_user
+      render blocking_message_path and return
+    end
+
     if user && user.authenticate(params[:session][:password]) 
 
     #log_in method located in session_helper
@@ -32,10 +38,7 @@ class SessionsController < ApplicationController
         user = User.omniauth(env['omniauth.auth'])
         session[:user_id] = user.id
         redirect_to user
-
-
   end
-
 
   def destroy
     log_out

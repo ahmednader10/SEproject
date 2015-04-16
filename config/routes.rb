@@ -1,5 +1,33 @@
 Rails.application.routes.draw do
-  
+
+  ####################### SysAdmin ###########################
+
+  get 'sysadmins/new'
+
+  get 'sysadmins/index'
+
+  get 'sysadmins/show' => 'sysadmins#show', as: 'show'
+
+  get 'sysadmins/edit' => 'sysadmins#edit', as: 'edit'
+
+  get 'sysadmins/delete'
+
+  get 'sysadmins/merge' => 'sysadmins#merge'
+
+  post 'sysadmins/new' => 'sysadmins#show'
+
+  post 'sysadmins/merge' => 'sysadmins#createMerge'
+
+  get 'sysadmins/forums' => 'sysadmins#forums', as: 'forums_sysadmins'
+
+  get 'sysadmins/userBlocked' => 'sysadmins#userBlocked', as: 'blocked'
+
+  get 'sysadmins/userUnblocked' => 'sysadmins#userUnblocked', as: 'unblocked'
+
+  #post 'sysadmins/show' => 'sysadmins#show'
+
+  ############### Admin ######################################
+
   get 'admins/index'
 
   get 'admins/show'
@@ -43,11 +71,9 @@ Rails.application.routes.draw do
   get     'logged_in' => 'sessions#logged_in'
   ###########################################################
 
-
-
   get 'users/index'
 
-  get 'users/new'
+  get 'users/new' 
 
 
   get 'users/delete'
@@ -82,6 +108,14 @@ Rails.application.routes.draw do
 
   get 'admins/added_admin' => 'admins#added_admin'  
 
+<<<<<<< HEAD
+=======
+  get 'sessions/blockingMessage' => 'sessions#create', as: 'blocking_message'
+
+  ###########################################################
+
+  #get 'sysAdmin' 
+>>>>>>> 4b9efd41ea604df8ab7e426aaef0c6f04e153348
 
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
