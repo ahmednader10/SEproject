@@ -114,9 +114,7 @@ Rails.application.routes.draw do
 
   ###########################################################
 
-  #get 'sysAdmin' 
-
-
+  # get 'sysAdmin' 
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
 
