@@ -75,7 +75,6 @@ Rails.application.routes.draw do
 
   get 'users/new' 
 
-  get 'users/edit'
 
   get 'users/delete'
 
@@ -114,6 +113,7 @@ Rails.application.routes.draw do
   ###########################################################
 
   #get 'sysAdmin' 
+
 
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
