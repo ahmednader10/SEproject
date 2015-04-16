@@ -1,6 +1,7 @@
 
 class SessionsController < ApplicationController
   def new
+    session.delete(:sysadmin)
     if current_user
       redirect_to logged_in_path
     end
@@ -32,10 +33,7 @@ class SessionsController < ApplicationController
         user = User.omniauth(env['omniauth.auth'])
         session[:user_id] = user.id
         redirect_to user
-
-
   end
-
 
   def destroy
     log_out
