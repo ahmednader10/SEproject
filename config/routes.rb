@@ -12,7 +12,11 @@ Rails.application.routes.draw do
 
   get 'sysadmins/delete'
 
+  get 'sysadmins/merge' => 'sysadmins#merge'
+
   post 'sysadmins/new' => 'sysadmins#show'
+
+  post 'sysadmins/merge' => 'sysadmins#createMerge'
 
   #post 'sysadmins/show' => 'sysadmins#show'
 
