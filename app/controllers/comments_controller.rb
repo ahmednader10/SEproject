@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-	before_action :authenticate_user, only: :create
+	before_action :authenticate_user, only: [:create, :reportcomment]
 
 	#index method list all the comments related to an idea.
 	def index
@@ -27,6 +27,10 @@ class CommentsController < ApplicationController
 		else
 			render template: 'ideas/show'
 		end
+	end
+
+	def reportcomment
+	
 	end
 
 # used to allow the user to enter the comment and nothing more inorder not to be able to change the comment's model

@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 	validates :email, :username, :uniqueness => true
 	validates :password, :length => { :minimum => 8 }
 
+<<<<<<< HEAD
 
 	has_many :memberships
 	has_many :forums, through: :memberships
@@ -16,19 +17,27 @@ class User < ActiveRecord::Base
 	has_many :requested_friends, :through => :friendships, :source => :friend
 	has_many :pending_friends, :through => :friendships, :source => :friend
 	has_many :friendships, :dependent => :destroy
-
+=======
+	validates :privacy, inclusion: { in: [1,2] }
 	
-	has_many :memberships
-	has_many :forums, through: :memberships
+	has_many :memberships, :dependent => :delete_all
+	has_many :membershipForums, class_name: 'Forum', through: :memberships, :dependent => :delete_all
 
-	has_many :admins
-	has_many :forums, through: :admins
+  	has_many :friends, :through => :friendships, :dependent => :delete_all 
+	has_many :requested_friends, :through => :friendships, :source => :friend, :dependent => :delete_all
+	has_many :pending_friends, :through => :friendships, :source => :friend, :dependent => :delete_all
+	has_many :friendships, :dependent => :delete_all
+>>>>>>> 637c03e3ebd9e2a567686a37062c9b6279fa4dad
 
-	has_many :ideas
-	has_many :forums, through: :ideas
+	has_many :admins, :dependent => :delete_all
+	has_many :adminForums, class_name: 'Forum', through: :admins, :dependent => :delete_all
 
-	has_many :comments
-	has_many :ideas, through: :comments
+	has_many :ideas, :dependent => :delete_all
+	has_many :ideaForums, class_name: 'Forum', through: :ideas, :dependent => :delete_all
+
+	has_many :comments, :dependent => :delete_all
+	has_many :ideas, through: :comments, :dependent => :delete_all
+
 
 
 	#Authenticate method used in Session controller

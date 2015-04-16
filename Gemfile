@@ -56,6 +56,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'coffee-script-source', '1.8.0'
 
+# gem 'activeadmin', '~> 1.0.0.pre1'
+
+# gem 'devise'
+
 # Makes errors more clear
 group :development do 
 	gem 'better_errors', '2.1.1'
