@@ -8,4 +8,14 @@
 
 <%= link_to 'control forums', forums_sysadmins_path %>
 
+<%= form_tag(blocked_path, method: "get") do %>
+	<%= text_field_tag(:block_user) %>
+	<%= submit_tag(:block) %>
+<% end %>
+
+<%= form_tag(unblocked_path, method: "get") do %>
+	<%= text_field_tag(:unblock_user) %>
+	<%= submit_tag(:unblock) %>
+<% end %>
+
 

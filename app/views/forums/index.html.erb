@@ -40,6 +40,6 @@
   <% end %>
 </table>
 
-<% if @user != nil %>
+<% if session[:sysadmin] != true %>
 <%= link_to "Create new forum", 'forums/new' %>
 <% end %>
