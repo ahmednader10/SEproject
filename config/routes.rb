@@ -112,8 +112,7 @@ Rails.application.routes.draw do
 
   ###########################################################
 
-  #get 'sysAdmin' 
-
+  # get 'sysAdmin' 
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
 
@@ -128,6 +127,7 @@ Rails.application.routes.draw do
       member do
         post :like
         post :report
+        post :destroy
       end
       resources :comments
       member do

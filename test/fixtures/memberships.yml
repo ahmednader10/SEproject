@@ -1,11 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user_id: 1
-  forum_id: 1
-  accept: false
+ user_id: 1
+ forum_id: 1
+ accept: false
 
 two:
-  user_id: 1
-  forum_id: 1
-  accept: false
+ user_id: 1
+ forum_id: 1
+ accept: false
+
+three:
+ user_id: 2
+ forum_id: 1
+ accept: false

@@ -10,7 +10,7 @@ class ForumsController < ApplicationController
 	def show
 
 		#check if memeber then enable editing 
-
+		
 		sleep 1
 		@forum = Forum.find(params[:id])
 	end

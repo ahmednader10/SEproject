@@ -20,13 +20,18 @@ class SysadminsController < ApplicationController
   end
 
   def edit
-    @user_tmp = User.find_by(email: params[:q])
+    user_tmp = User.find_by(email: params[:q])
     @users = User.all
-    if @user_tmp
+    if !user_tmp
       #@user_tmp.destroy                #has to be solved
-      render 'edit'
-    else
       render 'index'
+    else
+      #render 'edit'
+      if user_tmp.destroy
+        render 'edit'
+      else
+        render root_path
+      end
     end
   end
 
@@ -69,7 +74,10 @@ class SysadminsController < ApplicationController
   end
 
   def createMerge
-    if params[:forum][:forum1_id] == params[:forum][:forum2_id]
+    if session[:sysadmin]  != true
+      render 'merge'
+    else
+      if params[:forum][:forum1_id] == params[:forum][:forum2_id]
       flash[:notice] = "Must merge two different forums!"
       render 'merge'
     else
@@ -107,6 +115,7 @@ class SysadminsController < ApplicationController
 
       # For now
       redirect_to('/sysadmins/index')
+    end
     end
   end
 
