@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 	validates :email, :username, :uniqueness => true
 	validates :password, :length => { :minimum => 8 }
 
+	validates :privacy, inclusion: { in: [1,2] }
+	
 	has_many :memberships, :dependent => :delete_all
 	has_many :forums, through: :memberships, :dependent => :delete_all
 
@@ -23,6 +25,7 @@ class User < ActiveRecord::Base
 
 	has_many :comments, :dependent => :delete_all
 	has_many :ideas, through: :comments, :dependent => :delete_all
+
 
 
 	#Authenticate method used in Session controller
