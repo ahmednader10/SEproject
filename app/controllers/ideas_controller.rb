@@ -21,6 +21,13 @@ class IdeasController < ApplicationController
 
 	end
 
+	def destroy
+		@idea = Idea.find(params[:id])
+		@forum = Forum.find(params[:forum_id])
+		@idea.destroy
+		redirect_to forum_path(@forum)
+	end
+
 
    #enables the user to create an idea by adding a title and text.
 	def create

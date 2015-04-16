@@ -108,14 +108,21 @@ Rails.application.routes.draw do
 
   get 'admins/added_admin' => 'admins#added_admin'  
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 948bc1d3dd435c38d0c2de8b6acb51ad8613a4a6
   get 'sessions/blockingMessage' => 'sessions#create', as: 'blocking_message'
 
   ###########################################################
 
+<<<<<<< HEAD
   #get 'sysAdmin' 
 
 
+=======
+  # get 'sysAdmin' 
+>>>>>>> 948bc1d3dd435c38d0c2de8b6acb51ad8613a4a6
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
 
@@ -130,6 +137,7 @@ Rails.application.routes.draw do
       member do
         post :like
         post :report
+        post :destroy
       end
       resources :comments
       member do

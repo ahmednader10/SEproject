@@ -99,7 +99,7 @@
 <% x.each do |membership| %>
 <% y = Forum.find(membership.forum_id) %>
 <tr>
-<td id="forumcolum"><%=  link_to y.title , forum_path %></td>
+<td id="forumcolum"><%=  link_to y.title , forum_path(y) %></td>
 <td id="ideatitlecolumn"> <%= y.description %> </td>
 </tr>
 <% end %>

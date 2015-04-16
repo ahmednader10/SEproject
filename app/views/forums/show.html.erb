@@ -1,4 +1,9 @@
-  <div class="headerlist">
+<% if session[:sysadmin] %>  
+<%= link_to 'Sing out', root_path %>
+<%= link_to 'back', forums_sysadmins_path %>
+<% end %>
+
+<div class="headerlist">
 <ul id="menu">
 <li> Logo</li>
 
@@ -51,7 +56,7 @@
   <% end %>
 
     <ul>
-      <% if @forum.privacy == "1" and Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
+      <% if @forum.privacy == "1" and (session[:sysadmin] or Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?) %>
               <% Idea.where(forum_id: params[:id]).each do |idea| %>
       <li>
           <%=  idea.title %>
