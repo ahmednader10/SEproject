@@ -103,19 +103,25 @@ class ForumsController < ApplicationController
 		@forum = Forum.find(params[:id])
 	end
 
+	def remove_member
+		 user = params[:user]
+    	forum = params[:forum]
+    	 @membership1 = Membership.where(user_id: user , forum_id: forum)
+    	 @membership1.first.destroy
+    	 render 'list_members'
+	end
+
+
 	def list_members
+		@users = []
 		@forum = Forum.find(params[:id])
-		 forums_ids = Membership.where(forum_id: @forum.forum_id , accept: true)
+		 forums_ids = Membership.where(forum_id: @forum.id , accept: true)
         if !forums_ids.empty?
           forums_ids.each do |r|
-           
+           if !User.where(id: r.user_id).empty?
             @users.concat(User.where(id: r.user_id))
-       #Forum.@forums.each do |forum|
-       # if forum.id == joined_forum.id
-       #   @requests << forum.title
-       # end
-     # end
-
+        end
+      
     end
     end
 	end

@@ -5,7 +5,16 @@
   <% else %>
   
   <% @users.each do |user| %>
-     <%= link_to user.full_name,"#{@requests_users[i].id}" %>
+  <% if  current_user.full_name != user.full_name %>
+     <%= link_to user.full_name,"/users/#{user.id}" %>
+      <% if !Admin.where({user_id: current_user.id , forum_id: @forum.id}).empty? %>
+ 
+ <%= link_to "[remove]", "/forums/remove_member?forum=#{@forum.id}&user=#{user.id}" %>
+
+ <% end %>
+ <% end %>
+ <br>
+
               <% end %>
 
      
@@ -14,7 +23,7 @@
       
       <% end %>
     
-  <% end %>
+  
 
-
+<br>
 <%= link_to "Back to Forum" ,forum_path(@forum) %>

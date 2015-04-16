@@ -94,6 +94,8 @@ Rails.application.routes.draw do
 
   get 'forums/:id/members' => 'forums#list_members', as:'list_members'
 
+  get 'forums/remove_member' => 'forums#remove_member', as:'remove_member'
+
   get 'notifications' => 'notifications#index', as: 'user_notifications'
 
   delete 'notifications/:id' => 'notifications#destroy'
