@@ -5,6 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 user_with_valid_data: 
+ id: 1
  email: omar.ashraf@gmail.com
  password: 12378345345
  username: 3omarashraf
