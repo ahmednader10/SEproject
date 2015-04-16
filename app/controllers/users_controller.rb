@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-
+    user = User.find(params[:id])
   end
 
   def delete
@@ -51,14 +51,13 @@ class UsersController < ApplicationController
 
       # flash[:notice] = 'You should login first'
         redirect_to root_url
-      else
-        if !admin.empty? && @forum.update(forum_params)
-        redirect_to(forums_path)
+      else 
+        if @user.update_attributes(user_params)
+          redirect_to(user_path)
       else
         render 'edit'
       end
-      end
-
+    end
   end
 
   # accept_join_request method gets parameters of the user and the forum from the url and 

@@ -49,7 +49,6 @@ Rails.application.routes.draw do
 
   get 'users/new'
 
-  get 'users/edit'
 
   get 'users/delete'
 
@@ -60,8 +59,6 @@ Rails.application.routes.draw do
   get '/users/reject_join_request' => 'users#reject_join_request'
 
   get '/users/:id' => 'users#show'
-
-  get '/users/profile/:id/edit' => 'users#update'
 
   get '/users/profile/:id' => 'users#profile'
 

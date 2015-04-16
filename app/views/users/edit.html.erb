@@ -2,9 +2,16 @@
  
 
 <div class="mainDiv" id="mainDiv">
-<%= form_for :user, url: users_path(@user), method: :patch do |f| %>
-    <h1>Sign up form</h1>
-
+<%= form_for(current_user) do |f| %>
+    <h1>Edit form</h1>
+<% if current_user.errors.any? %>
+      <h3>Errors</h3>
+      <ul>
+        <% current_user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
   
       </ul>
      <div class="field">
