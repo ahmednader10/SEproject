@@ -92,6 +92,8 @@ Rails.application.routes.draw do
 
   post 'forums/:id/join' => 'forums#join_forum', as:'join_forum'
 
+  get 'forums/:id/members' => 'forums#list_members', as:'list_members'
+
   get 'notifications' => 'notifications#index', as: 'user_notifications'
 
   delete 'notifications/:id' => 'notifications#destroy'

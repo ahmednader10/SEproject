@@ -73,7 +73,7 @@
 <% x.each do |admin| %>
 <% y = Forum.find(admin.forum_id) %>
 <tr>
-<td id="forumcolum"><%=  link_to y.title , forum_path %></td>
+<td id="forumcolum"><%=  link_to y.title , forum_path(y) %></td>
 <td id="ideatitlecolumn"> <%= y.description %> </td>
 </tr>
 <% end %>
@@ -93,11 +93,13 @@
 <%  x =Membership.where(user_id: @current_user.id) %>
 <% x.each do |membership| %>
 <% y = Forum.find(membership.forum_id) %>
-<tr>
+ <% if !Membership.where(user_id: current_user.id , forum_id: y.id, accept: true).empty? %>
+  <tr>
 <td id="forumcolum"><%=  link_to y.title , forum_path(y) %></td>
 <td id="ideatitlecolumn"> <%= y.description %> </td>
 </tr>
 <% end %>
+<%end%>
 </table>
 <% if x.size == 0 %>
 <em> you are not a member in any forums </em>

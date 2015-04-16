@@ -1,0 +1,20 @@
+<p>Forum Members: </p>
+
+  <% if @users.empty? %>
+  <p> No Members in this forum </p>
+  <% else %>
+  
+  <% @users.each do |user| %>
+     <%= link_to user.full_name,"#{@requests_users[i].id}" %>
+              <% end %>
+
+     
+
+
+      
+      <% end %>
+    
+  <% end %>
+
+
+<%= link_to "Back to Forum" ,forum_path(@forum) %>

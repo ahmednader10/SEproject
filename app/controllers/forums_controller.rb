@@ -103,6 +103,23 @@ class ForumsController < ApplicationController
 		@forum = Forum.find(params[:id])
 	end
 
+	def list_members
+		@forum = Forum.find(params[:id])
+		 forums_ids = Membership.where(forum_id: @forum.forum_id , accept: true)
+        if !forums_ids.empty?
+          forums_ids.each do |r|
+           
+            @users.concat(User.where(id: r.user_id))
+       #Forum.@forums.each do |forum|
+       # if forum.id == joined_forum.id
+       #   @requests << forum.title
+       # end
+     # end
+
+    end
+    end
+	end
+
 	# join action enables logged in user to join public forums through clicking on the button 
 	# "join Forum" and also enables logged in user to send request to join private forums and it checks 
 	# if the user has already joined the forum before 
