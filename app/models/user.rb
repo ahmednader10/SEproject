@@ -7,17 +7,7 @@ class User < ActiveRecord::Base
 	validates :email, :username, :uniqueness => true
 	validates :password, :length => { :minimum => 8 }
 
-<<<<<<< HEAD
 
-	has_many :memberships
-	has_many :forums, through: :memberships
-
-
-  	has_many :friends, :through => :friendships 
-	has_many :requested_friends, :through => :friendships, :source => :friend
-	has_many :pending_friends, :through => :friendships, :source => :friend
-	has_many :friendships, :dependent => :destroy
-=======
 	validates :privacy, inclusion: { in: [1,2] }
 	
 	has_many :memberships, :dependent => :delete_all
@@ -27,7 +17,6 @@ class User < ActiveRecord::Base
 	has_many :requested_friends, :through => :friendships, :source => :friend, :dependent => :delete_all
 	has_many :pending_friends, :through => :friendships, :source => :friend, :dependent => :delete_all
 	has_many :friendships, :dependent => :delete_all
->>>>>>> 637c03e3ebd9e2a567686a37062c9b6279fa4dad
 
 	has_many :admins, :dependent => :delete_all
 	has_many :adminForums, class_name: 'Forum', through: :admins, :dependent => :delete_all
@@ -37,8 +26,6 @@ class User < ActiveRecord::Base
 
 	has_many :comments, :dependent => :delete_all
 	has_many :ideas, through: :comments, :dependent => :delete_all
-
-
 
 	#Authenticate method used in Session controller
 	def authenticate (password)
@@ -53,13 +40,13 @@ class User < ActiveRecord::Base
 	#Facebook and Twitter API
 	def self.omniauth(auth)
     	where(auth.slice(:provider, :uid).permit!).first_or_create.tap do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.name = auth.info.name
-      #user.image = auth.info.image
-      #user.token = auth.credentials.token
-      #user.expires_at = Time.at(auth.credentials.expires_at)
-      user.save!
+      		user.provider = auth.provider
+      		user.uid = auth.uid
+      		user.name = auth.info.name
+      		#user.image = auth.info.image
+      		#user.token = auth.credentials.token
+      		#user.expires_at = Time.at(auth.credentials.expires_at)
+      		#user.save!
     	end
 	end
 

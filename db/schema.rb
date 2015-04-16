@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20150415235834) do
-=======
 ActiveRecord::Schema.define(version: 20150416131913) do
->>>>>>> 948bc1d3dd435c38d0c2de8b6acb51ad8613a4a6
 
   create_table "admins", force: true do |t|
     t.integer  "forum_id"
@@ -135,13 +131,7 @@ ActiveRecord::Schema.define(version: 20150416131913) do
     t.string   "name"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
     t.integer  "privacy",                      default: 1
-=======
->>>>>>> 296cfd9685a9f12525666bc6952d38d275ff8e25
->>>>>>> 948bc1d3dd435c38d0c2de8b6acb51ad8613a4a6
   end
 
 end

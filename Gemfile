@@ -28,6 +28,9 @@ gem 'omniauth-facebook'
 # For the Twitter API
 gem 'omniauth-twitter'
 
+# For Facebook and Twitter share
+gem 'social-share-button', '~> 0.1.6'
+
 # No need to use strong parameters  
 
 #gem 'protected_attributes'
@@ -36,6 +39,7 @@ gem 'omniauth-twitter'
 
 # Form helper for model errors
 gem 'dynamic_form'
+
 
 
 

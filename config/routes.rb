@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  
+
   ####################### SysAdmin ###########################
 
   get 'sysadmins/new'
@@ -64,6 +66,11 @@ Rails.application.routes.draw do
   match 'auth/failure', to: redirect('/'), :via => [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', :via => [:get, :post]
   ##############################################################################
+
+  ####################### Social share button ##################################
+  resources :homes, only: [:show]
+  get 'share' => 'homes#show'
+  
   
   #When logged in normally or facebook redirects to this page
   #Change later
@@ -92,6 +99,10 @@ Rails.application.routes.draw do
 
   post 'forums/:id/join' => 'forums#join_forum', as:'join_forum'
 
+  get 'forums/:id/members' => 'forums#list_members', as:'list_members'
+
+  get 'forums/remove_member' => 'forums#remove_member', as:'remove_member'
+
   get 'notifications' => 'notifications#index', as: 'user_notifications'
 
   delete 'notifications/:id' => 'notifications#destroy'
@@ -108,21 +119,13 @@ Rails.application.routes.draw do
 
   get 'admins/added_admin' => 'admins#added_admin'  
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 948bc1d3dd435c38d0c2de8b6acb51ad8613a4a6
   get 'sessions/blockingMessage' => 'sessions#create', as: 'blocking_message'
 
   ###########################################################
 
-<<<<<<< HEAD
-  #get 'sysAdmin' 
 
-
-=======
   # get 'sysAdmin' 
->>>>>>> 948bc1d3dd435c38d0c2de8b6acb51ad8613a4a6
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
 

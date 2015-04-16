@@ -6,7 +6,7 @@
 
 	 		<li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
  			<li> <%= link_to "My Profile" , user_path(current_user.id) %> </li>
- 			<li><%= link_to "Log out", logout_path, method: :delete %></li>
+ 			
  			<li><%= link_to "notifications" ,user_notifications_path %> </li> 
  			<li><%= link_to "friend requests" , friendships_path %></li>
  			<% if current_user != nil %>
