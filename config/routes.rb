@@ -108,14 +108,12 @@ Rails.application.routes.draw do
 
   get 'admins/added_admin' => 'admins#added_admin'  
 
-<<<<<<< HEAD
-=======
   get 'sessions/blockingMessage' => 'sessions#create', as: 'blocking_message'
 
   ###########################################################
 
   #get 'sysAdmin' 
->>>>>>> 4b9efd41ea604df8ab7e426aaef0c6f04e153348
+
 
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
