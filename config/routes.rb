@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get 'sysadmins/index'
 
-  get 'sysadmins/show'
+  get 'sysadmins/show' => 'sysadmins#show', as: 'show'
 
   get 'sysadmins/edit' => 'sysadmins#edit', as: 'edit'
 
@@ -17,6 +17,12 @@ Rails.application.routes.draw do
   post 'sysadmins/new' => 'sysadmins#show'
 
   post 'sysadmins/merge' => 'sysadmins#createMerge'
+
+  get 'sysadmins/forums' => 'sysadmins#forums', as: 'forums_sysadmins'
+
+  get 'sysadmins/userBlocked' => 'sysadmins#userBlocked', as: 'blocked'
+
+  get 'sysadmins/userUnblocked' => 'sysadmins#userUnblocked', as: 'unblocked'
 
   #post 'sysadmins/show' => 'sysadmins#show'
 
@@ -67,7 +73,7 @@ Rails.application.routes.draw do
 
   get 'users/index'
 
-  get 'users/new'
+  get 'users/new' 
 
   get 'users/edit'
 
@@ -102,6 +108,8 @@ Rails.application.routes.draw do
   get 'admins/wrong_email' => 'admins#wrong_email'
 
   get 'admins/added_admin' => 'admins#added_admin'  
+
+  get 'sessions/blockingMessage' => 'sessions#create', as: 'blocking_message'
 
   ###########################################################
 

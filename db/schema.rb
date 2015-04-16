@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415212237) do
+ActiveRecord::Schema.define(version: 20150415235834) do
 
   create_table "admins", force: true do |t|
     t.integer  "forum_id"
@@ -22,6 +22,12 @@ ActiveRecord::Schema.define(version: 20150415212237) do
 
   add_index "admins", ["forum_id"], name: "index_admins_on_forum_id"
   add_index "admins", ["user_id"], name: "index_admins_on_user_id"
+
+  create_table "blocks", force: true do |t|
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "comments", force: true do |t|
     t.integer  "idea_id"

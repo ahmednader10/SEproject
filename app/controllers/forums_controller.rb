@@ -56,9 +56,10 @@ class ForumsController < ApplicationController
 	def update
 		@forum = Forum.find(params[:id])
 		@user = current_user
-
+		if session[:sysadmin] && @forum.update(forum_params)
+			redirect_to(forums_sysadmins_path) and return
+		end
 		if @user == nil
-
 			flash[:notice] = 'You should login first'
 
 			# flash[:notice] = 'You should login first'
@@ -77,12 +78,15 @@ class ForumsController < ApplicationController
 	def destroy
 		@forum = Forum.find(params[:id])
 		@user = current_user
-
+		if session[:sysadmin]
+			@forum.destroy
+			redirect_to forums_sysadmins_path and return
+		end
 		if @user == nil
 			redirect_to root_url
 		else
 			admin = Admin.where({ forum_id: @forum.id, user_id: @user.id })
-			if !admin.empty?
+			if !admin.empty? 
 				# confirm then delete
 				@forum.destroy
 				# admin.destroy
