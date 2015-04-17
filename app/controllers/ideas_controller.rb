@@ -42,9 +42,9 @@ class IdeasController < ApplicationController
 			# This block of code sends a notification to the admins of the forum being posted on
 			# =================================================================
 			admins = Admin.where(forum_id: @forum)	
-			admins.each do |admin|
-				Notification.create(info: (current_user.username + ' has posted on a forum that you administrate (' + @forum.title + ').'), seen: false, user_id: admin.user_id)
-			end
+		#	admins.each do |admin|
+		#		Notification.create(info: (current_user.username + " has posted on a forum that you administrate (" + @forum.title + ")."), seen: false, user_id: admin.user_id)
+		#	end
 			# =================================================================
 
 			redirect_to @forum

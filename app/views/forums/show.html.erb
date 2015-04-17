@@ -11,7 +11,7 @@
  <% if current_user != nil %>
  <li><%= link_to "friend requests" , friendships_path %></li>
  <li> <%= link_to "My Profile" , user_path(current_user.id) %> </li>
- <li><%= link_to "Log out", logout_path, method: :delete %></li>
+ 
  <li><%= link_to "notifications" ,user_notifications_path %> </li> 
  
 
@@ -82,6 +82,9 @@
 <%= link_to 'Post an idea', new_forum_idea_path(@forum) %>
 <br>
 <%= link_to "add new admin", admin_to_be_path %>
+<br>
+<%= link_to "View Forum Members", list_members_path %>
+
 </p>
 
  
