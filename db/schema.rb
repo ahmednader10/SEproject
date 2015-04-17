@@ -131,10 +131,7 @@ ActiveRecord::Schema.define(version: 20150416131913) do
     t.string   "name"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
-<<<<<<< HEAD
     t.integer  "privacy",                      default: 1
-=======
->>>>>>> 296cfd9685a9f12525666bc6952d38d275ff8e25
   end
 
 end
