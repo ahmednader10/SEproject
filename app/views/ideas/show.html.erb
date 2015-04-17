@@ -33,7 +33,7 @@
       <li>
           <strong><%= comment.user.username %>:</strong>
           <%= comment.text %>
-          <%= button_to "Report", :action => "reportcomment"%>
+          <%= button_to "Report", reportcomment_forum_idea_comment_path(@forum, @idea, comment) %>
       </li>
       <%end%>
     </ul>

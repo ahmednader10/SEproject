@@ -142,14 +142,14 @@ Rails.application.routes.draw do
         post :report
         post :destroy
       end
-      resources :comments
+      resources :comments do
       member do
         post :reportcomment
-      end
-    end
-
-
+       end
+     end
+   end
   end
+
   resources :friendships
 
   # The priority is based upon order of creation: first created -> highest priority.
