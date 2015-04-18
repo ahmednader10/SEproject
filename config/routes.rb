@@ -103,9 +103,17 @@ Rails.application.routes.draw do
 
   get 'forums/remove_member' => 'forums#remove_member', as:'remove_member'
 
+  ############################ Notifications #################################
+
   get 'notifications' => 'notifications#index', as: 'user_notifications'
 
   delete 'notifications/:id' => 'notifications#destroy'
+
+  ############################### System log #################################
+
+  get 'syslog' => 'actions#index'
+
+  ############################################################################
 
   get 'users/indentation_error_message' => 'users#indentation_error_message'
 

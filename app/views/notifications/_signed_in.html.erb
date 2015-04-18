@@ -22,7 +22,7 @@
 		<ul>
 		<h4> New Notifications:</h4>
 		<% seenNotifications = [] %>
-		<% @notifications.each do |notification| %>
+		<% @notifications.reverse_each do |notification| %>
 			<% if !notification.seen %>
 				<li>
 					<%= notification.info %> <%= link_to 'delete', ('notifications/' + notification.id.to_s), method: :delete %>
@@ -32,7 +32,7 @@
 			<%end%>
 		<%end%>
 		<h4> Seen Notifications:</h4>
-		<% @notifications.each do |notification| %>
+		<% @notifications.reverse_each do |notification| %>
 			<% if notification.seen and !seenNotifications.include? notification %>
 				<li>
 					<%= notification.info %> <%= link_to 'delete', ('notifications/' + notification.id.to_s), method: :delete %>

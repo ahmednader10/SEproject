@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416131913) do
+ActiveRecord::Schema.define(version: 20150418191244) do
+
+  create_table "actions", force: true do |t|
+    t.string   "info"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
 
   create_table "admins", force: true do |t|
     t.integer  "forum_id"

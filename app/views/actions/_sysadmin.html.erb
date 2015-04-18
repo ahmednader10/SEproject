@@ -1,0 +1,8 @@
+<h1>System log:</h1>
+<ul>
+	<% @actions.reverse_each do |action| %>
+		<li>
+			<%= action.info %> <%= link_to User.find(action.user_id).username, 'users/' + action.user_id.to_s %>
+		</li>
+	<% end %>
+</ul>

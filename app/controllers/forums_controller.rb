@@ -1,4 +1,3 @@
-
 class ForumsController < ApplicationController
 	
 	# Views all forums showing their title and description.
