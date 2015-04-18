@@ -43,6 +43,8 @@ class ForumsController < ApplicationController
   				membership.accept = true
   				membership.save
 
+  				Action.create(info: (@user.username + ' has created a new forum: (' + @forum.title + ')'), user_id: @user.id)
+
   				redirect_to(created_path(@forum))
   			else
   				render 'new'
@@ -66,6 +68,9 @@ class ForumsController < ApplicationController
    		else
    			admin = Admin.where({ forum_id: @forum.id, user_id: @user.id })
    			if !admin.empty? && @forum.update(forum_params)
+
+   				Action.create(info: (@user.username + ' has updated the forum: (' + @forum.title + ')'), user_id: @user.id)
+
 				redirect_to(forums_path)
 			else
 				render 'edit'
@@ -78,6 +83,7 @@ class ForumsController < ApplicationController
 		@forum = Forum.find(params[:id])
 		@user = current_user
 		if session[:sysadmin]
+			Action.create(info: 'A system administrator has deleted the forum: (' + @forum.title + ')', user_id: -1)
 			@forum.destroy
 			redirect_to forums_sysadmins_path and return
 		end
@@ -87,6 +93,7 @@ class ForumsController < ApplicationController
 			admin = Admin.where({ forum_id: @forum.id, user_id: @user.id })
 			if !admin.empty? 
 				# confirm then delete
+				Action.create(info: @user.username + ' has deleted the forum: (' + @forum.title + ')', user_id: @user.id)
 				@forum.destroy
 				# admin.destroy
 				redirect_to forums_path
@@ -107,6 +114,7 @@ class ForumsController < ApplicationController
     	forum = params[:forum]
     	 @membership1 = Membership.where(user_id: user , forum_id: forum)
     	 @membership1.first.destroy
+    	 Action.create(info: current_user.username + ' has removed a member: (' + user.username + ') from the forum: (' + forum.title + ')', user_id: current_user.id)
     	 render 'list_members'
 	end
 
@@ -150,7 +158,8 @@ class ForumsController < ApplicationController
 
 
 		if  membership.save and membership.accept == true 
-		  flash[:notice] = 'Successfully joined forum '
+		 Action.create(info: @user.username + ' has joined the forum: (' + @forum.title + ')', user_id: @user.id)
+		 flash[:notice] = 'Successfully joined forum '
    		 render :action => "show"
 
    		
