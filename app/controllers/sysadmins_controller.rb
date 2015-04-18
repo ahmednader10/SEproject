@@ -108,9 +108,11 @@ class SysadminsController < ApplicationController
       end
 
       old_forum = Forum.where({ id: old_forum_id })
-      old_forum.first.destroy
-
       new_forum = Forum.where({ id: new_forum_id })
+
+      Action.create(info: 'A system admin has merged forum: (' + old_forum.title + ') and forum: (' + new_forum.title + ') into one.', user_id: -1)
+      
+      old_forum.first.destroy
       new_forum.first.title = name
       new_forum.first.description = description
       new_forum.first.save
