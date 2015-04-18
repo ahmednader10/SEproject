@@ -137,7 +137,9 @@ Rails.application.routes.draw do
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
 
-  resources :users 
+  resources :users do
+    post :block_user
+  end
   
   resources :forums do
     resources :admins

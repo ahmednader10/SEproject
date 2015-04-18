@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150418191244) do
+ActiveRecord::Schema.define(version: 20150418232528) do
 
   create_table "actions", force: true do |t|
     t.string   "info"
@@ -29,6 +29,15 @@ ActiveRecord::Schema.define(version: 20150418191244) do
 
   add_index "admins", ["forum_id"], name: "index_admins_on_forum_id"
   add_index "admins", ["user_id"], name: "index_admins_on_user_id"
+
+  create_table "blockers", force: true do |t|
+    t.integer  "blocker_id"
+    t.integer  "blocked_id"
+    t.string   "blocker"
+    t.string   "blocked"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "blocks", force: true do |t|
     t.string   "email"
