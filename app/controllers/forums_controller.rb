@@ -153,12 +153,16 @@ class ForumsController < ApplicationController
    		 redirect_to root_url
    		else
 		membership = @forum.memberships.build(user: @user)
+		if @forum.privacy == '1'
+		Action.create(info: @user.username + ' has joined the forum: (' + @forum.title + ')', user_id: @user.id)
+		else
+		Action.create(info: @user.username + ' has requested to join the forum: (' + @forum.title + ')', user_id: @user.id)
+		end
 		membership.accept = true if @forum.privacy == '1'
 		
 
 
-		if  membership.save and membership.accept == true 
-		 Action.create(info: @user.username + ' has joined the forum: (' + @forum.title + ')', user_id: @user.id)
+		if  membership.save and membership.accept == true
 		 flash[:notice] = 'Successfully joined forum '
    		 render :action => "show"
 
