@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
 			# This line of code sends a notification to the owner of the idea being commented on
 			Notification.create(info: (current_user.username + ' has commented on your idea (' + @idea.title + ').'), seen: false, user_id: @idea.user_id)
 
-			Action.create(info: (current_user.username + 'has commented on idea: (' + @idea.title + ') in the (' Forum.find(@idea.forum_id).title ') forum.'), user_id: current_user.id)
+			Action.create(info: (current_user.username + 'has commented on idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') in forum: (' Forum.find(@idea.forum_id).title ').'), user_id: current_user.id)
 			
 			redirect_to [@forum, @idea] 
 		else
@@ -41,7 +41,7 @@ class CommentsController < ApplicationController
 
 		if @reportcomment.save
 	   		flash[:notice] = "Comment has been reported!"
-	   		Action.create(info: (User.find(@user.id).username + ' has reported a comment (' + Comment.find(@comment.id).text + ') present in idea: (' + Idea.find(@comment.idea_id).title + ') in forum: (' + Forum.find(Idea.find(@comment.idea_id).id).title + ')', user_id: @user.id)
+	   		Action.create(info: (User.find(@user.id).username + ' has reported a comment (' + @comment.text + ') belonging to user: (' + User.find(@comment.user_id).username + ') present in idea: (' + Idea.find(@comment.idea_id).title + ') in forum: (' + Forum.find(Idea.find(@comment.idea_id).id).title + ')', user_id: @user.id)
 		else
 			flash[:notice] = "You've already reported this comment!"
 		end
