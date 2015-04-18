@@ -9,6 +9,7 @@ class ActionsController < ApplicationController
 
 	def create
 		@action = Action.new(action_params)
+		@action.save
 	end
 
 	def destroy
