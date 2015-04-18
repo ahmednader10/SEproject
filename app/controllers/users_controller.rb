@@ -27,6 +27,7 @@ class UsersController < ApplicationController
         redirect_to(:action => 'indentation_error_message')
       else 
         if @user.save
+          Action.create(info: 'A new user: (' + @user.username + ') has signed up.', user_id: @user.id)
           redirect_to(:action => 'index')
         else
           render 'new' 
@@ -53,6 +54,7 @@ class UsersController < ApplicationController
         redirect_to root_url
       else 
         if @user.update_attributes(user_params)
+          Action.create(info: @user.username + ' has updated his personal information.', user_id: @user.id)
           redirect_to(user_path)
       else
         render 'edit'
@@ -70,6 +72,7 @@ class UsersController < ApplicationController
    
     @membership1.first.accept = true
     @membership1.first.save
+    Action.create(info: current_user.username + ' has accepted ' + user.username + "'s join request to forum: (" + forum.title + ').', user_id: current_user.id)
     redirect_to(:action => "admin_join_forums_requests")
   end
 
@@ -82,6 +85,7 @@ class UsersController < ApplicationController
     forum = params[:forum]
     @membership1 = Membership.where(user_id: user , forum_id: forum)
    
+    Action.create(info: current_user.id + ' has rejected ' + user.username + "'s join request to forum: (" + forum.title + ').', user_id: current_user.id)
     @membership1.first.destroy
     redirect_to(:action => "admin_join_forums_requests")
 
