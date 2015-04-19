@@ -170,6 +170,8 @@ Rails.application.routes.draw do
    end
   end
 
+delete 'forums/:forum_id/ideas/:idea_id/comments/:id' => 'comments#destroy', as: 'comment_delete'
+
   resources :friendships
 
   # The priority is based upon order of creation: first created -> highest priority.
