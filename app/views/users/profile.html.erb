@@ -3,7 +3,7 @@
 $(function() {  
   $('#main div').hide(); // Hide divs
   $('#main div: first').show(); // Show first div
-  $("h3").click(function(e) {
+  $("li").click(function(e) {
     e.preventDefault();
     $("li").removeClass("selected");
     $(this).addClass("selected");
@@ -16,7 +16,7 @@ $(function() {
 </script></head>
 
 <body >
-	<div class="headerlist">
+<div class="headerlist">
 <ul id="menu">
 <li > Logo</li>
 
@@ -86,7 +86,7 @@ $(function() {
 <div id="main">
 <ul id="tabbed" >
   <li class="selected"><a href="#forums">Your Forums</a> </li> 
- <li><a href="#memberships">Forums you're in</a></h3>
+ <li><a href="#memberships">Forums you're in</a>
  </li>
  <li> <a href="#ideaslist">Your Ideas</a></li>
 <li><a href="#information">Your Information</a></li>

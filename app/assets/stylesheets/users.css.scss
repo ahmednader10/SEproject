@@ -242,6 +242,7 @@ ul {
 
 ul#tabbed li{
 color:white;
+  display:inline;
   background-color:grey;
   border-radius:25px;
 }
@@ -252,13 +253,6 @@ ul#tabbed li a.selected { color: #000; background-color: #f1f0ee; font-weight: b
 top:500px; }
 
 #forums{
- position: absolute;
-    z-index: 1;
-
-    /* disable visibility by default, delay to enable clicks */
-    visibility: hidden;
-    transition: visibility 0.5s;
-    opacity:0;
 }
 
 
@@ -266,45 +260,15 @@ top:500px; }
 
 
 #information {
- position: absolute;
-    z-index: 1;
-
-    /* disable visibility by default, delay to enable clicks */
-    visibility: hidden;
-    transition: visibility 0.5s;
 }
 
 #ideaslist {
- position: absolute;
-    z-index: 1;
-
-    /* disable visibility by default, delay to enable clicks */
-    visibility: hidden;
-    transition: visibility 0.5s;
 }
 
 #friendlist {
- position: absolute;
-    z-index: 1;
-
-    /* disable visibility by default, delay to enable clicks */
-    visibility: hidden;
-    transition: visibility 0.5s;
 }
 #forums{
- position: absolute;
-    z-index: 1;
-
-    /* disable visibility by default, delay to enable clicks */
-    visibility: hidden;
-    transition: visibility 0.5s;
 }
 #memberships{
- position: absolute;
-    z-index: 1;
-
-    /* disable visibility by default, delay to enable clicks */
-    visibility: hidden;
-    transition: visibility 0.5s;
 }
 

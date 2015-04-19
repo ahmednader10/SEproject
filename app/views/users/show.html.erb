@@ -1,4 +1,6 @@
+<head><script type="text/javascript">
 
+</script></head>
 
 
 
@@ -45,6 +47,15 @@
 </tr>
 </table>
 </div>
+
+<div id="main">
+<ul id="tabbed" >
+  <li class="selected"><a href="#forums">Your Forums</a> </li> 
+ <li><a href="#memberships">Forums you're in</a>
+ </li>
+ <li> <a href="#ideaslist">Your Ideas</a></li>
+<li><a href="#information">Your Information</a></li>
+</ul>
 <div class="forums">
 <table width="371" height="51">
 <tr>
@@ -112,5 +123,7 @@
 <p>email: <%= @user.email %> </p>
 <p>gender : <%= @user.gender %> </p>
 </div>
+</div>
 <% end %>
+
 </body>
