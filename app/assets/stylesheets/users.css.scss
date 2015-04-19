@@ -22,21 +22,6 @@ html{
 	height: 350px;
 }
 
-#information {
-}
-
-#ideaslist {
-}
-
-#friendlist {
-
-}
-#forums{
-}
-#memberships{
-}
-
-
 
 
 
@@ -254,15 +239,72 @@ ul {
 
 
 
-.main{
-position:fixed;
-top:500px;
-}
-
-
 
 ul#tabbed li{
-  display:inline;
-  background-color:blue;
-  border-radius:25px;c
+color:white;
+  background-color:grey;
+  border-radius:25px;
 }
+
+ul#tabbed li a:hover { background-color: #f1f0ee; }
+ul#tabbed li a.selected { color: #000; background-color: #f1f0ee; font-weight: bold; padding: 0.7em 0.3em 0.38em 0.3em; }
+#main { border: 1px solid #c9c3ba; padding: 0.5em; background-color: #f1f0ee;position:fixed;
+top:500px; }
+
+#forums{
+ position: absolute;
+    z-index: 1;
+
+    /* disable visibility by default, delay to enable clicks */
+    visibility: hidden;
+    transition: visibility 0.5s;
+    opacity:0;
+}
+
+
+
+
+
+#information {
+ position: absolute;
+    z-index: 1;
+
+    /* disable visibility by default, delay to enable clicks */
+    visibility: hidden;
+    transition: visibility 0.5s;
+}
+
+#ideaslist {
+ position: absolute;
+    z-index: 1;
+
+    /* disable visibility by default, delay to enable clicks */
+    visibility: hidden;
+    transition: visibility 0.5s;
+}
+
+#friendlist {
+ position: absolute;
+    z-index: 1;
+
+    /* disable visibility by default, delay to enable clicks */
+    visibility: hidden;
+    transition: visibility 0.5s;
+}
+#forums{
+ position: absolute;
+    z-index: 1;
+
+    /* disable visibility by default, delay to enable clicks */
+    visibility: hidden;
+    transition: visibility 0.5s;
+}
+#memberships{
+ position: absolute;
+    z-index: 1;
+
+    /* disable visibility by default, delay to enable clicks */
+    visibility: hidden;
+    transition: visibility 0.5s;
+}
+

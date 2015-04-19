@@ -1,4 +1,21 @@
-<body>
+<head><script type="text/javascript">
+
+$(function() {  
+  $('#main div').hide(); // Hide divs
+  $('#main div: first').show(); // Show first div
+  $("h3").click(function(e) {
+    e.preventDefault();
+    $("li").removeClass("selected");
+    $(this).addClass("selected");
+    var currentTab = $(this.children).attr('href'); // Set currentTab to value of href attribute
+    $('#main div').hide(); // Hide all divs
+    $(currentTab).show(); // Show div with id equal to variable currentTab
+    return false;
+  });
+});
+</script></head>
+
+<body >
 	<div class="headerlist">
 <ul id="menu">
 <li > Logo</li>
@@ -66,14 +83,15 @@
 </table>  
 </div>
 
-<div class="main" >
-<ul id="tabbed">
-  <li id="tab1">Your Forums</li>
-  <li id="tab2">Forums you're in</li>
-  <li id="tab3">Your Ideas</li>
-  <li id="tab4">Your Information</li>
+<div id="main">
+<ul id="tabbed" >
+  <li class="selected"><a href="#forums">Your Forums</a> </li> 
+ <li><a href="#memberships">Forums you're in</a></h3>
+ </li>
+ <li> <a href="#ideaslist">Your Ideas</a></li>
+<li><a href="#information">Your Information</a></li>
 </ul>
-<div id="foroums">
+<div id="forums">
 <table width="371" height="51">
 <tr>
 	<th width="110"  id="forumcolum"> Forum</th>
@@ -94,7 +112,7 @@
 <% end %>
 </div>
 
-<div class="memberships" id"tab">
+<div id="memberships">
 <table width="371" height="51">
 <tr>
   <th  id="forumcolum"> Joined Forum</th>
@@ -119,7 +137,7 @@
 
 
 
-<div id= " ideaslist" >
+<div id= "ideaslist" >
   <table width="371" height="51">
 <tr>
     <th width="57" id="ideatitlecolumn"> Title</th>
