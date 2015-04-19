@@ -20,13 +20,18 @@ class SysadminsController < ApplicationController
   end
 
   def edit
-    @user_tmp = User.find_by(email: params[:q])
+    user_tmp = User.find_by(email: params[:q])
     @users = User.all
-    if @user_tmp
+    if !user_tmp
       #@user_tmp.destroy                #has to be solved
-      render 'edit'
-    else
       render 'index'
+    else
+      #render 'edit'
+      if user_tmp.destroy
+        render 'edit'
+      else
+        render root_path
+      end
     end
   end
 
@@ -38,6 +43,7 @@ class SysadminsController < ApplicationController
       block = Block.new(email: @user_to_be_blocked.email)
       if block.save
         render blocked_path
+        Action.create(info: 'A system admin has blocked: (' + @user_to_be_blocked.username + ')', user_id: -1)
       else
         render 'show'
       end
@@ -52,6 +58,7 @@ class SysadminsController < ApplicationController
       unblock = Block.find_by(email: @user_to_be_unblocked.email)
       if unblock.destroy
         render unblocked_path
+        Action.create(info: 'A system admin has unblocked: (' + @user_to_be_unblocked.username + ')', user_id: -1)
       else
         render 'show'
       end
@@ -110,6 +117,8 @@ class SysadminsController < ApplicationController
         new_forum = Forum.where({ id: new_forum_id })
         new_forum.first.destroy
 
+        Action.create(info: 'A system admin has merged forum: (' + old_forum.title + ') and forum: (' + new_forum.title + ') into one.', user_id: -1)
+
         old_forum = Forum.where({ id: old_forum_id })
         old_forum.first.title = name
         old_forum.first.description = description
@@ -123,5 +132,4 @@ class SysadminsController < ApplicationController
       end
     end
   end
-
 end

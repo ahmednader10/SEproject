@@ -8,6 +8,10 @@ class Forum < ActiveRecord::Base
 
 	validates :privacy, inclusion: { in: ["1", "2"] }
 	
+
+
+
 	has_many :ideas, :dependent => :delete_all
 	has_many :users, through: :ideas, :dependent => :delete_all
+
 end

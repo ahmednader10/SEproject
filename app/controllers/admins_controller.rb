@@ -28,7 +28,7 @@ class AdminsController < ApplicationController
     user = User.find_by(email: user_email)
     
     if User.exists?(:email => params[:admin][:user]) 
-      if Admin.exists?(:forum_id => params[:forum_id], :user_id => current_user.id)
+      if session[:sysadmin] or Admin.exists?(:forum_id => params[:forum_id], :user_id => current_user.id) 
         user_id = user.id
         Admin.create!(forum_id: forum_id, user_id: user_id)
         redirect_to(:action => 'added_admin')

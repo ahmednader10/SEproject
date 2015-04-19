@@ -25,7 +25,10 @@
     </div>
   
 
+<% if current_user != nil && (@user.privacy==2 || !Friendship.where(user_id: current_user.id , friend_id: @user.id , status: 1).empty?)%> 
+<div><p>Private Account</p></div>
 
+<%elsif current_user == nil || (@user.privacy==1 || Friendship.where(user_id: current_user.id , friend_id: @user.id , status: 1))%> 
 <div class="friendlist"> 
 <table width="158" height="360">
 <tr >
@@ -42,7 +45,7 @@
 </tr>
 </table>
 </div>
-<div class="foroums">
+<div class="forums">
 <table width="371" height="51">
 <tr>
 	<th width="110"  id="forumcolum"> Forum </th>
@@ -109,5 +112,5 @@
 <p>email: <%= @user.email %> </p>
 <p>gender : <%= @user.gender %> </p>
 </div>
-
+<% end %>
 </body>

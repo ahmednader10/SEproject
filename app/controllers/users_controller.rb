@@ -27,6 +27,7 @@ class UsersController < ApplicationController
         redirect_to(:action => 'indentation_error_message')
       else 
         if @user.save
+          Action.create(info: 'A new user: (' + @user.username + ') has signed up.', user_id: @user.id)
           redirect_to(:action => 'index')
         else
           render 'new' 
@@ -36,9 +37,29 @@ class UsersController < ApplicationController
   end
 
   def edit
+    user = User.find(params[:id])
   end
 
   def delete
+  end
+
+
+  def update 
+    @user = current_user
+    if @user == nil
+
+      flash[:notice] = 'You should login first'
+
+      # flash[:notice] = 'You should login first'
+        redirect_to root_url
+      else 
+        if @user.update_attributes(user_params)
+          Action.create(info: @user.username + ' has updated his personal information.', user_id: @user.id)
+          redirect_to(user_path)
+      else
+        render 'edit'
+      end
+    end
   end
 
   # accept_join_request method gets parameters of the user and the forum from the url and 
@@ -51,6 +72,7 @@ class UsersController < ApplicationController
    
     @membership1.first.accept = true
     @membership1.first.save
+    Action.create(info: current_user.username + ' has accepted ' + user.username + "'s join request to forum: (" + forum.title + ').', user_id: current_user.id)
     redirect_to(:action => "admin_join_forums_requests")
   end
 
@@ -63,6 +85,7 @@ class UsersController < ApplicationController
     forum = params[:forum]
     @membership1 = Membership.where(user_id: user , forum_id: forum)
    
+    Action.create(info: current_user.id + ' has rejected ' + user.username + "'s join request to forum: (" + forum.title + ').', user_id: current_user.id)
     @membership1.first.destroy
     redirect_to(:action => "admin_join_forums_requests")
 
@@ -102,6 +125,35 @@ class UsersController < ApplicationController
   #current user and if it does redirects to the profile action which renders the profile view
 
 
+
+
+
+
+def block_user
+@user = current_user
+@friend = User.find( params[:user_id])
+
+@blocked= Blocker.new(:blocker_id => @user.id , :blocked_id => @friend.id, :blocker => @user.username, :blocked => @friend.username)
+
+Action.create(info: @user.username + ' has blocked ' + @friend.username + '.', user_id: @user.id)
+
+if @blocked.save 
+  redirect_to friendships_path
+else
+  redirect_to users_path
+end
+
+
+end
+
+
+
+
+
+
+
+
+
    def show
       @user = User.find(params[:id])
       if @user == current_user
@@ -120,7 +172,8 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :username, :gender, :full_name, :password_question, :answer_for_password_question)
+    params.require(:user).permit(:email, :password, :password_confirmation, :username, :gender, :full_name, :password_question, :answer_for_password_question ,:privacy)
+
   end
 
 
