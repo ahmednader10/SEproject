@@ -23,6 +23,7 @@
 
 <p> <%= user.username %>  <%= link_to "Block User",user_block_user_path(:user_id => user.id) ,:method => :post %>
 
+ <%= link_to "Report User",user_report_user_path(:user_id => user.id) ,:method => :post %>
 
 <% unless user ==current_user ||current_user.friends.include?(user)   %>
 <% unless  user.bfriends.include?(current_user) %>
