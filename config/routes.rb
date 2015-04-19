@@ -1,12 +1,12 @@
+
 Rails.application.routes.draw do
 
-  
 
   ####################### SysAdmin ###########################
 
   get 'sysadmins/new'
 
-  get 'sysadmins/index'
+  get 'sysadmins/index' => 'sysadmins#index', as: 'index'
 
   get 'sysadmins/show' => 'sysadmins#show', as: 'show'
 
@@ -80,8 +80,11 @@ Rails.application.routes.draw do
 
   get 'users/index'
 
-  get 'users/new' 
+  get 'users/new'
 
+  get 'users/edit'
+
+  get 'users/show'
 
   get 'users/delete'
 
@@ -147,6 +150,7 @@ Rails.application.routes.draw do
 
   resources :users do
     post :block_user
+    post :report_user
   end
   
   resources :forums do
@@ -167,6 +171,8 @@ Rails.application.routes.draw do
      end
    end
   end
+
+delete 'forums/:forum_id/ideas/:idea_id/comments/:id' => 'comments#destroy', as: 'comment_delete'
 
   resources :friendships
 
@@ -225,4 +231,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
 end

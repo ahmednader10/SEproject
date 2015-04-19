@@ -34,6 +34,7 @@
           <strong><%= comment.user.username %>:</strong>
           <%= comment.text %>
           <%= button_to "Report", reportcomment_forum_idea_comment_path(@forum, @idea, comment) %>
+          <%= button_to "delete", comment_delete_path(@forum, @idea, comment),  method: :delete %>
       </li>
       <%end%>
     </ul>
@@ -44,9 +45,10 @@
          <%= button_to "Report Idea", :action => "report"%>
          <% if !Admin.where(user_id: current_user.id).empty? %>
           <%= button_to "delete idea", :action => :destroy %> 
-          <!-- Facebook and Twitter share button-->
-         <%= social_share_button_tag("My Home Page", :url => "https://www.facebook.com/sharer/sharer.php?u=example.org") %>
-          <% end %>
+        <% end %>
+         <!-- Facebook and Twitter share button-->
+         <%= social_share_button_tag(@idea.text + '  via @', :popup => "true", :url => "http://FarrahAbulkhair.com") %>
+        
         </p>
       
 

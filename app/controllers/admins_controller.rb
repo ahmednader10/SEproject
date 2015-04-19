@@ -31,6 +31,13 @@ class AdminsController < ApplicationController
       if session[:sysadmin] or Admin.exists?(:forum_id => params[:forum_id], :user_id => current_user.id) 
         user_id = user.id
         Admin.create!(forum_id: forum_id, user_id: user_id)
+        
+        if current_user != nil
+          Action.create(info: current_user.username + ' has added ' + user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: current_user.id)
+        else
+          Action.create(info: 'A system administrator has added ' + user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: -1)
+        end
+
         redirect_to(:action => 'added_admin')
       else
          redirect_to(action: 'unauthorized_action') 
