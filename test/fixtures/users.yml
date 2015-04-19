@@ -91,3 +91,24 @@ user_with_invalid_userna:
  full_name: Mohsen Emad
  password_question: What is the name of your best friend?
  answer_for_password_question: Shoukry
+
+rowan:
+ id: 2
+ email: rowan@gmail.com
+ password: Rowan1994
+ username: rowan
+ gender: Female
+ full_name: Rowan Naga
+ password_question: What is the name of your best friend?
+ answer_for_password_question: Raghda
+
+
+raghda:
+ id: 3
+ email: raghda@gmail.com
+ password: Raghda94
+ username: raghda
+ gender: Female
+ full_name: Raghda Khaled
+ password_question: What is the name of your best friend?
+ answer_for_password_question: Rowan

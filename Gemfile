@@ -64,6 +64,11 @@ gem 'coffee-script-source', '1.8.0'
 
 # gem 'devise'
 
+gem 'rake', '10.4.2'
+group :test do
+
+	gem 'shoulda'
+end 
 # Makes errors more clear
 group :development do 
 	gem 'better_errors', '2.1.1'

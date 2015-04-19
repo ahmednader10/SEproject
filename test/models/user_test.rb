@@ -46,4 +46,9 @@ class UserTest < ActiveSupport::TestCase
   	assert_match /\s/, user.username
   end
 
+should have_many(:friendships)
+should have_many(:friends)
+
+
+
 end
