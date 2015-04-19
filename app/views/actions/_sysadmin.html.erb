@@ -7,7 +7,7 @@
 			 <% else %> 
 			 	<%= link_to 'unhide', 'syslog/unhide/' + action.id.to_s, method: :put %>
 			 <% end %> 
-			 <%= action.info %> <% if action.user_id > 0 %> <%= link_to User.find(action.user_id).username, 'users/' + action.user_id.to_s %> <% else %> <%= 'System Administrator' %> <% end %>
+			 <%= action.info %> <% if action.user_id > 0 %> <%= link_to ' ' + User.find(action.user_id).username, 'users/' + action.user_id.to_s %> <% else %> <%= ' System Administrator' %> <% end %>
 		</li>
 	<% end %>
 </ul>

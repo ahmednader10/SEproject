@@ -43,7 +43,7 @@
 
   <!-- check if already joined or pending request -->
 
-  <% if @forum.privacy == "1" %>
+  <% if @forum.privacy == "1" and !session[:sysadmin] %>
   <%= button_to('Join Forum', join_forum_path(@forum),
             method: "post",  data: { disable_with: 'Joining...' }) %>
   <% elsif @forum.privacy == "2" %>
@@ -79,7 +79,9 @@
 
     </ul>
 </tr></table>
-<%= link_to 'Post an idea', new_forum_idea_path(@forum) %>
+<% if !session[:sysadmin] %>
+  <%= link_to 'Post an idea', new_forum_idea_path(@forum) %>
+<% end %>
 <br>
 <%= link_to "add new admin", admin_to_be_path %>
 <br>

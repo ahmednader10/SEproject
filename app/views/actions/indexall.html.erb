@@ -1,7 +1,10 @@
 <html>
+	<%= link_to 'show unhidden only', '/syslog' %>
 	<% if session[:sysadmin] == true %>
 		<%= render 'sysadmin' %>
 	<% else %>
 		<%= render 'not_sysadmin' %>
 	<% end %>
+	<%= link_to 'hide all', '/syslog/hideall', method: :put %>
+	<%= link_to 'unhide all', '/syslog/unhideall', method: :put %>
 </html>
