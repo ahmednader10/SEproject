@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+
 
   
 
@@ -76,7 +76,7 @@ Rails.application.routes.draw do
   #Change later
 
   get     'logged_in' => 'sessions#logged_in'
-  ###########################################################
+  ############################ Users ###############################
 
   get 'users/index'
 
@@ -95,6 +95,8 @@ Rails.application.routes.draw do
 
   get '/users/profile/:id' => 'users#profile'
 
+  ############################ Forums ########################################
+
   get 'forums/created/:id' => 'forums#created', as: 'created'
 
   post 'forums/:id/join' => 'forums#join_forum', as:'join_forum'
@@ -103,9 +105,27 @@ Rails.application.routes.draw do
 
   get 'forums/remove_member' => 'forums#remove_member', as:'remove_member'
 
+  ############################ Notifications #################################
+
   get 'notifications' => 'notifications#index', as: 'user_notifications'
 
   delete 'notifications/:id' => 'notifications#destroy'
+
+  ############################### System log #################################
+
+  get 'syslogall' => 'actions#indexall'
+
+  get 'syslog' => 'actions#index'
+
+  put 'syslog/hide/:id' => 'actions#hide'
+
+  put 'syslog/unhide/:id' => 'actions#unhide'
+
+  put 'syslog/hideall' => 'actions#hideall'
+
+  put 'syslog/unhideall' => 'actions#unhideall'
+
+  ############################################################################
 
   get 'users/indentation_error_message' => 'users#indentation_error_message'
 
@@ -128,8 +148,10 @@ Rails.application.routes.draw do
   # get 'sysAdmin' 
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
-  delete  'forums/:forum_id/ideas/:idea_id/comments/:id' => 'comments#destroy', as: 'comment_delete'
-  resources :users 
+
+  resources :users do
+    post :block_user
+  end
   
   resources :forums do
     resources :admins
@@ -149,6 +171,8 @@ Rails.application.routes.draw do
      end
    end
   end
+
+  delete  'forums/:forum_id/ideas/:idea_id/comments/:id' => 'comments#destroy', as: 'comment_delete'
 
   resources :friendships
 
@@ -207,4 +231,4 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end
+

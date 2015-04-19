@@ -21,9 +21,11 @@ class IdeasController < ApplicationController
 
 	end
 
+	# a method that enables the forum admin to delete any idea written by any member in his forum
 	def destroy
 		@idea = Idea.find(params[:id])
 		@forum = Forum.find(params[:forum_id])
+		Action.create(info: current_user.username + ' has deleted an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_id: current_user.id)
 		@idea.destroy
 		redirect_to forum_path(@forum)
 	end
@@ -39,12 +41,14 @@ class IdeasController < ApplicationController
 
 		if @idea.save
 
+			Action.create(info: current_user.username + ' has posted a new idea: (' + @idea.title + ') on forum: (' + Forum.find(@idea.forum_id).title + ').', user_id: current_user.id)
+
 			# This block of code sends a notification to the admins of the forum being posted on
 			# =================================================================
 			admins = Admin.where(forum_id: @forum)	
-		#	admins.each do |admin|
-		#		Notification.create(info: (current_user.username + " has posted on a forum that you administrate (" + @forum.title + ")."), seen: false, user_id: admin.user_id)
-		#	end
+			admins.each do |admin|
+				Notification.create(info: (current_user.username + " has posted an idea (" + @idea.title + ") a forum that you administrate (" + @forum.title + ")."), seen: false, user_id: admin.user_id)
+			end
 			# =================================================================
 
 			redirect_to @forum
@@ -67,6 +71,7 @@ class IdeasController < ApplicationController
 	 	@likeidea = Likeidea.new(:user_id => @user.id , :idea_id => @idea.id)
 
 		if @likeidea.save
+			Action.create(info: @user.username + ' has liked an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_id: @user.id)
 	   		flash[:notice] = "Idea Liked!"
 		else
 			flash[:notice] = "You've already liked this idea!"
@@ -83,6 +88,7 @@ class IdeasController < ApplicationController
 	 	@reportidea = Reportidea.new(:user_id => @user.id , :idea_id => @idea.id)
 
 		if @reportidea.save
+			Action.create(info: @user.username + ' has reported an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_id: @user.id)
 	   		flash[:notice] = "Idea has been reported!"
 		else
 			flash[:notice] = "You've already reported this idea!"
