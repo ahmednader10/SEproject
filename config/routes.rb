@@ -114,17 +114,13 @@ Rails.application.routes.draw do
 
   ############################### System log #################################
 
-  get 'syslogall' => 'actions#indexall'
+  get 'syslogall' => 'actions#index'
 
-  get 'syslog' => 'actions#index'
+  get 'syslog' => 'actions#indexall'
 
   put 'syslog/hide/:id' => 'actions#hide'
 
   put 'syslog/unhide/:id' => 'actions#unhide'
-
-  put 'syslog/hideall' => 'actions#hideall'
-
-  put 'syslog/unhideall' => 'actions#unhideall'
 
   ############################################################################
 
@@ -152,6 +148,7 @@ Rails.application.routes.draw do
 
   resources :users do
     post :block_user
+    post :report_user
   end
   
   resources :forums do
@@ -173,7 +170,7 @@ Rails.application.routes.draw do
    end
   end
 
-  delete  'forums/:forum_id/ideas/:idea_id/comments/:id' => 'comments#destroy', as: 'comment_delete'
+delete 'forums/:forum_id/ideas/:idea_id/comments/:id' => 'comments#destroy', as: 'comment_delete'
 
   resources :friendships
 

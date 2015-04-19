@@ -1,18 +1,6 @@
 <head><script type="text/javascript">
 
-$(function() {  
-  $('#main div').hide(); // Hide divs
-  $('#main div: first').show(); // Show first div
-  $("li").click(function(e) {
-    e.preventDefault();
-    $("li").removeClass("selected");
-    $(this).addClass("selected");
-    var currentTab = $(this.children).attr('href'); // Set currentTab to value of href attribute
-    $('#main div').hide(); // Hide all divs
-    $(currentTab).show(); // Show div with id equal to variable currentTab
-    return false;
-  });
-});
+
 </script></head>
 
 <body >
