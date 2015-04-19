@@ -25,7 +25,15 @@ class IdeasController < ApplicationController
 	def destroy
 		@idea = Idea.find(params[:id])
 		@forum = Forum.find(params[:forum_id])
-		Action.create(info: current_user.username + ' has deleted an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ')', user_id: current_user.id)
+		if current_user != nil
+			if current_user != User.find(@idea.user_id)
+				Action.create(info: current_user.username + ' has deleted an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_id: current_user.id)
+			else
+				Action.create(info: current_user.username + ' has deleted his idea: (' + @idea.title + ') located in forum: (' + @forum.title + ').', user_id: current_user.id)
+			end
+		else
+			Action.create(info: 'A system admin has deleted an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_id: -1)
+		end
 		@idea.destroy
 		redirect_to forum_path(@forum)
 	end
@@ -41,7 +49,7 @@ class IdeasController < ApplicationController
 
 		if @idea.save
 
-			Action.create(info: current_user.username + ' has posted a new idea: (' + @idea.title + ') on forum: (' + Forum.find(@idea.forum_id).title + ')', user_id: current_user.id)
+			Action.create(info: current_user.username + ' has posted a new idea: (' + @idea.title + ') on forum: (' + Forum.find(@idea.forum_id).title + ').', user_id: current_user.id)
 
 			# This block of code sends a notification to the admins of the forum being posted on
 			# =================================================================
@@ -59,19 +67,24 @@ class IdeasController < ApplicationController
 		end
 	end
 
-	def not_joined_forum
-	end
+	#def not_joined_forum
+	#end
 
-# used to enable the user of the current secession to like an idea
+	# used to enable the user of the current secession to like an idea
 	def like
 		@forum = Forum.find(params[:forum_id])
 		@user = current_user
 		@idea = Idea.find(params[:id])
+		@user= User.find_by(:id => @idea.user_id)
+
+		if (@user.bfriends.include?(current_user))
+
+		else
 
 	 	@likeidea = Likeidea.new(:user_id => @user.id , :idea_id => @idea.id)
-
+		end
 		if @likeidea.save
-			Action.create(info: @user.username + ' has liked an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ')', user_id: @user.id)
+			Action.create(info: @user.username + ' has liked an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_id: @user.id)
 	   		flash[:notice] = "Idea Liked!"
 		else
 			flash[:notice] = "You've already liked this idea!"
@@ -79,7 +92,7 @@ class IdeasController < ApplicationController
 
       	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
 	end
-# allows user to report an idea
+	# allows user to report an idea
 	def report
 		@forum = Forum.find(params[:forum_id])
 		@user = current_user
@@ -87,7 +100,9 @@ class IdeasController < ApplicationController
 
 	 	@reportidea = Reportidea.new(:user_id => @user.id , :idea_id => @idea.id)
 
-		if @reportidea.save
+        if @idea.user_id == @user.id
+	 	flash[:notice] = "Cannot report your own idea!"
+		elsif @reportidea.save
 			Action.create(info: @user.username + ' has reported an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_id: @user.id)
 	   		flash[:notice] = "Idea has been reported!"
 		else
@@ -97,11 +112,10 @@ class IdeasController < ApplicationController
       	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
 	end
 
-# used to allow the user to enter the information needed from him and nothing more inorder not to be able to change the model
-protected
+ # used to allow the user to enter the information needed from him and nothing more inorder not to be able to change the model
+  protected
 	def idea_params
 		params.require(:idea).permit(:title, :text)
-
 	end
 
 	def authenticate_user

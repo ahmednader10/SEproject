@@ -149,9 +149,20 @@ end
 
 
 
+def report_user
+  @user = current_user 
+  @friend = User.find( params[:user_id])
 
+@reported = ReportUser.new(:reporter_id => @user.id , :reported_id => @friend.id , :reporter => @user.username , :reported => @friend.username)
 
-
+if @reported.save
+  flash[:notice] = "User has been reported!"
+  redirect_to friendships_path
+else 
+  flash[:notice] = "You have already reported this user !"
+  redirect_to users_path
+end 
+end 
 
 
    def show
