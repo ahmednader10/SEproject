@@ -1,10 +1,10 @@
 class ActionsController < ApplicationController
 
-	def index
+	def indexall
 		@actions = Action.all
 	end
 
-	def indexall
+	def index
 		@actions = Action.where(hidden: false)
 	end
 
@@ -24,6 +24,18 @@ class ActionsController < ApplicationController
 	def unhide
 		Action.find(params[:id]).update(hidden: false)
 		redirect_to('/syslogall')
+	end
+
+	def hideall
+		Action.all.each do |action|
+			action.update(hidden: true)
+		end
+	end
+
+	def unhideall
+		Action.all.each do |action|
+			action.update(hidden: false)
+		end
 	end
 
 	def destroy
