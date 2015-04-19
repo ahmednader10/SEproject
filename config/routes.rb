@@ -76,7 +76,7 @@ Rails.application.routes.draw do
   #Change later
 
   get     'logged_in' => 'sessions#logged_in'
-  ###########################################################
+  ############################ Users ###############################
 
   get 'users/index'
 
@@ -95,6 +95,8 @@ Rails.application.routes.draw do
 
   get '/users/profile/:id' => 'users#profile'
 
+  ############################ Forums ########################################
+
   get 'forums/created/:id' => 'forums#created', as: 'created'
 
   post 'forums/:id/join' => 'forums#join_forum', as:'join_forum'
@@ -111,7 +113,13 @@ Rails.application.routes.draw do
 
   ############################### System log #################################
 
-  get 'syslog' => 'actions#index'
+  get 'syslogall' => 'actions#index'
+
+  get 'syslog' => 'actions#indexall'
+
+  put 'syslog/hide/:id' => 'actions#hide'
+
+  put 'syslog/unhide/:id' => 'actions#unhide'
 
   ############################################################################
 

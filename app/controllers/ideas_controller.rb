@@ -21,10 +21,11 @@ class IdeasController < ApplicationController
 
 	end
 
+	# a method that enables the forum admin to delete any idea written by any member in his forum
 	def destroy
 		@idea = Idea.find(params[:id])
 		@forum = Forum.find(params[:forum_id])
-		Action.create(info: current_user.username + ' has deleted an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username +') located in forum: (' + @forum.title + ')', user_id: current_user.id)
+		Action.create(info: current_user.username + ' has deleted an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ')', user_id: current_user.id)
 		@idea.destroy
 		redirect_to forum_path(@forum)
 	end
@@ -46,7 +47,7 @@ class IdeasController < ApplicationController
 			# =================================================================
 			admins = Admin.where(forum_id: @forum)	
 			admins.each do |admin|
-				Notification.create(info: (current_user.username + " has posted on a forum that you administrate (" + @forum.title + ")."), seen: false, user_id: admin.user_id)
+				Notification.create(info: (current_user.username + " has posted an idea (" + @idea.title + ") a forum that you administrate (" + @forum.title + ")."), seen: false, user_id: admin.user_id)
 			end
 			# =================================================================
 

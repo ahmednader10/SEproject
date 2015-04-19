@@ -109,6 +109,9 @@ class ForumsController < ApplicationController
 		@forum = Forum.find(params[:id])
 	end
 
+	#method that enables the forum admin to remove any member from his forum and delete
+	# his record from membership table
+
 	def remove_member
 		 user = params[:user]
     	forum = params[:forum]
@@ -117,6 +120,8 @@ class ForumsController < ApplicationController
     	 Action.create(info: current_user.username + ' has removed a member: (' + user.username + ') from the forum: (' + forum.title + ')', user_id: current_user.id)
     	 render 'list_members'
 	end
+
+	#A method that returns a list of all the members in a certain forum
 
 
 	def list_members
