@@ -86,6 +86,7 @@ class UsersController < ApplicationController
     @membership1 = Membership.where(user_id: user , forum_id: forum)
    
     Action.create(info: current_user.id + ' has rejected ' + user.username + "'s join request to forum: (" + forum.title + ').', user_id: current_user.id)
+    Notufication.create(info: 'Your request to join forum: (' + forum.title + ' has been rejected.', user_id: user.id)
     @membership1.first.destroy
     redirect_to(:action => "admin_join_forums_requests")
 
