@@ -43,7 +43,7 @@ class ForumsController < ApplicationController
   				membership.accept = true
   				membership.save
 
-  				Action.create(info: (@user.username + ' has created a new forum: (' + @forum.title + ')'), user_id: @user.id)
+  				Action.create(info: (@user.username + ' has created a new forum: (' + @forum.title + ').'), user_id: @user.id)
 
   				redirect_to(created_path(@forum))
   			else
@@ -69,7 +69,7 @@ class ForumsController < ApplicationController
    			admin = Admin.where({ forum_id: @forum.id, user_id: @user.id })
    			if !admin.empty? && @forum.update(forum_params)
 
-   				Action.create(info: (@user.username + ' has updated the forum: (' + @forum.title + ')'), user_id: @user.id)
+   				Action.create(info: (@user.username + ' has updated the forum: (' + @forum.title + ').'), user_id: @user.id)
 
 				redirect_to(forums_path)
 			else
@@ -83,7 +83,7 @@ class ForumsController < ApplicationController
 		@forum = Forum.find(params[:id])
 		@user = current_user
 		if session[:sysadmin]
-			Action.create(info: 'A system administrator has deleted the forum: (' + @forum.title + ')', user_id: -1)
+			Action.create(info: 'A system administrator has deleted the forum: (' + @forum.title + ').', user_id: -1)
 			@forum.destroy
 			redirect_to forums_sysadmins_path and return
 		end
@@ -93,7 +93,7 @@ class ForumsController < ApplicationController
 			admin = Admin.where({ forum_id: @forum.id, user_id: @user.id })
 			if !admin.empty? 
 				# confirm then delete
-				Action.create(info: @user.username + ' has deleted the forum: (' + @forum.title + ')', user_id: @user.id)
+				Action.create(info: @user.username + ' has deleted the forum: (' + @forum.title + ').', user_id: @user.id)
 				@forum.destroy
 				# admin.destroy
 				redirect_to forums_path
@@ -117,7 +117,7 @@ class ForumsController < ApplicationController
     	forum = params[:forum]
     	 @membership1 = Membership.where(user_id: user , forum_id: forum)
     	 @membership1.first.destroy
-    	 Action.create(info: current_user.username + ' has removed a member: (' + user.username + ') from the forum: (' + forum.title + ')', user_id: current_user.id)
+    	 Action.create(info: current_user.username + ' has removed a member: (' + user.username + ') from the forum: (' + forum.title + ').', user_id: current_user.id)
     	 render 'list_members'
 	end
 
@@ -159,9 +159,9 @@ class ForumsController < ApplicationController
    		else
 		membership = @forum.memberships.build(user: @user)
 		if @forum.privacy == '1'
-		Action.create(info: @user.username + ' has joined the forum: (' + @forum.title + ')', user_id: @user.id)
+		Action.create(info: @user.username + ' has joined the forum: (' + @forum.title + ').', user_id: @user.id)
 		else
-		Action.create(info: @user.username + ' has requested to join the forum: (' + @forum.title + ')', user_id: @user.id)
+		Action.create(info: @user.username + ' has requested to join the forum: (' + @forum.title + ').', user_id: @user.id)
 		end
 		membership.accept = true if @forum.privacy == '1'
 		
