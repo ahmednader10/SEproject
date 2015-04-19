@@ -13,10 +13,14 @@ class User < ActiveRecord::Base
 	has_many :memberships, :dependent => :delete_all
 	has_many :membershipForums, class_name: 'Forum', through: :memberships, :dependent => :delete_all
 
-  	has_many :friends, :through => :friendships, :dependent => :delete_all 
-	has_many :requested_friends, :through => :friendships, :source => :friend, :dependent => :delete_all
-	has_many :pending_friends, :through => :friendships, :source => :friend, :dependent => :delete_all
-	has_many :friendships, :dependent => :delete_all
+  	has_many :friends, :through => :friendships 
+	has_many :requested_friends, :through => :friendships, :source => :friend
+	has_many :pending_friends, :through => :friendships, :source => :friend
+	has_many :friendships, :dependent => :destroy
+    has_many :blockers, :dependent => :destroy, foreign_key: :blocker_id
+    has_many :bfriends , :through => :blockers , source: :friend
+
+
 
 	has_many :admins, :dependent => :delete_all
 	has_many :adminForums, class_name: 'Forum', through: :admins, :dependent => :delete_all

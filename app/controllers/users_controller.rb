@@ -125,6 +125,35 @@ class UsersController < ApplicationController
   #current user and if it does redirects to the profile action which renders the profile view
 
 
+
+
+
+
+def block_user
+@user = current_user
+@friend = User.find( params[:user_id])
+
+@blocked= Blocker.new(:blocker_id => @user.id , :blocked_id => @friend.id, :blocker => @user.username, :blocked => @friend.username)
+
+Action.create(info: @user.username + ' has blocked ' + @friend.username + '.', user_id: @user.id)
+
+if @blocked.save 
+  redirect_to friendships_path
+else
+  redirect_to users_path
+end
+
+
+end
+
+
+
+
+
+
+
+
+
    def show
       @user = User.find(params[:id])
       if @user == current_user
