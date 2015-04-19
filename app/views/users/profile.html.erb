@@ -35,7 +35,7 @@
 <div class=" profilepic" >
 	
 <% if @current_user.name == nil %>
-<h1> <%= @current_user.full_name %> welcome to your profile</h1>
+<h1> <%= @current_user.username %> welcome to your profile</h1>
 <% else %>
 <h1> <%= @current_user.name %> welcome to your profile</h1>
  <% end %>
@@ -49,6 +49,7 @@
 
 
 <div class="friendlist"> 
+
 <table width="158" height="360">
 <tr >	
 <td height="110"> </td>
@@ -65,8 +66,14 @@
 </table>  
 </div>
 
-
-<div class="foroums">
+<div class="main" >
+<ul id="tabbed">
+  <li id="tab1">Your Forums</li>
+  <li id="tab2">Forums you're in</li>
+  <li id="tab3">Your Ideas</li>
+  <li id="tab4">Your Information</li>
+</ul>
+<div id="foroums">
 <table width="371" height="51">
 <tr>
 	<th width="110"  id="forumcolum"> Forum</th>
@@ -87,7 +94,7 @@
 <% end %>
 </div>
 
-<div class="memberships">
+<div class="memberships" id"tab">
 <table width="371" height="51">
 <tr>
   <th  id="forumcolum"> Joined Forum</th>
@@ -112,7 +119,7 @@
 
 
 
-<div class= " ideaslist">
+<div id= " ideaslist" >
   <table width="371" height="51">
 <tr>
     <th width="57" id="ideatitlecolumn"> Title</th>
@@ -133,7 +140,7 @@
 <% end %>
 </div>
 
-<div class="information">
+<div id="information" >
 
  <%= link_to "edit" , edit_user_path(current_user) %>
 <h2> Information </h2>
@@ -141,7 +148,7 @@
 <p>email: <%= @current_user.email %> </p>
 <p>gender : <%= @current_user.gender %> </p>
 </div>
-
+</div>
 
 
 </body>

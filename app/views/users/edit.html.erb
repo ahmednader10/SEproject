@@ -12,9 +12,29 @@
         <% end %>
       </ul>
     <% end %>
-  
-      </ul>
-     <div class="field">
+    <div class="side" style="position: fixed; left: 23px; top: 181px;">
+
+  <ul>
+  <li>
+    <a class='list-item' href='/forums'>
+      Privacy
+    </a>
+  </li>
+  <li>
+    <a class='list-item' href='/friendships'>
+      Pass
+      word
+    </a>
+    </li>
+    <li>
+    <a class='list-item' href='/friendships'>
+      Info  </a>
+  </li>
+
+</ul>
+</div>
+  <div style ="position:absolute; top:50px; left:150px; ">
+           <div class="field">
       <%= f.label :full_name %><br>
       <%= f.text_field :full_name %><br>
      </div> 
@@ -63,5 +83,6 @@
      </div>
      <div class='actions'>
       <%= f.submit "Update Information" %>
+     </div>
      </div>
 <% end %>
