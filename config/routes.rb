@@ -76,7 +76,7 @@ Rails.application.routes.draw do
   #Change later
 
   get     'logged_in' => 'sessions#logged_in'
-  ###########################################################
+  ############################ Users ###############################
 
   get 'users/index'
 
@@ -94,6 +94,8 @@ Rails.application.routes.draw do
   get '/users/:id' => 'users#show'
 
   get '/users/profile/:id' => 'users#profile'
+
+  ############################ Forums ########################################
 
   get 'forums/created/:id' => 'forums#created', as: 'created'
 
