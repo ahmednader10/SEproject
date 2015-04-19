@@ -113,7 +113,13 @@ Rails.application.routes.draw do
 
   ############################### System log #################################
 
-  get 'syslog' => 'actions#index'
+  get 'syslogall' => 'actions#index'
+
+  get 'syslog' => 'actions#indexall'
+
+  put 'syslog/hide/:id' => 'actions#hide'
+
+  put 'syslog/unhide/:id' => 'actions#unhide'
 
   ############################################################################
 
