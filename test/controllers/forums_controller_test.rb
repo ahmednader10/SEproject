@@ -21,7 +21,7 @@ class ForumsControllerTest < ActionController::TestCase
   	assert_generates 'forums/1', {controller: 'forums' , action: 'destroy', id:'1'}
   end
 
-  test "should remove forum" do
-  	assert_generates 'forums/1', {controller: 'forums' , action: 'destroy', id:'1'}
+  test "should remove member from forum" do
+  	assert_generates 'forums/remove_member', {controller: 'forums' , action: 'remove_member'}
   end
 end

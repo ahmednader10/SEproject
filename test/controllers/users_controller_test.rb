@@ -44,6 +44,4 @@ class UsersControllerTest < ActionController::TestCase
   test "should get profile"  do
     assert_generates 'users/profile/1', {controller: 'users' , action: 'profile', id:'1'}
   end
-
-
 end
