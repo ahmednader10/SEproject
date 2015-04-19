@@ -34,7 +34,7 @@
 
 <div class=" profilepic" >
 	
-<% if @current_user.name == nil %>
+<% if @current_user.uid == nil %>
 <h1> <%= @current_user.full_name %> welcome to your profile</h1>
 <% else %>
 <h1> <%= @current_user.name %> welcome to your profile</h1>
