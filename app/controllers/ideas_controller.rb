@@ -24,7 +24,7 @@ class IdeasController < ApplicationController
 	def destroy
 		@idea = Idea.find(params[:id])
 		@forum = Forum.find(params[:forum_id])
-		Action.create(info: current_user.username + ' has deleted an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username +') located in forum: (' + @forum.title + ')', user_id: current_user.id)
+		Action.create(info: current_user.username + ' has deleted an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ')', user_id: current_user.id)
 		@idea.destroy
 		redirect_to forum_path(@forum)
 	end
