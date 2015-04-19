@@ -1,13 +1,12 @@
 
 Rails.application.routes.draw do
 
-  
 
   ####################### SysAdmin ###########################
 
   get 'sysadmins/new'
 
-  get 'sysadmins/index'
+  get 'sysadmins/index' => 'sysadmins#index', as: 'index'
 
   get 'sysadmins/show' => 'sysadmins#show', as: 'show'
 
@@ -81,8 +80,11 @@ Rails.application.routes.draw do
 
   get 'users/index'
 
-  get 'users/new' 
+  get 'users/new'
 
+  get 'users/edit'
+
+  get 'users/show'
 
   get 'users/delete'
 
