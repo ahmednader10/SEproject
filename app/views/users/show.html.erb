@@ -48,18 +48,25 @@
 </table>
 </div>
 
-<div id="main">
-<ul id="tabbed" >
-  <li class="selected"><a href="#forums">Your Forums</a> </li> 
- <li><a href="#memberships">Forums you're in</a>
- </li>
- <li> <a href="#ideaslist">Your Ideas</a></li>
-<li><a href="#information">Your Information</a></li>
-</ul>
-<div class="forums">
+<div>
+<ul class="tabs">
+    <li>
+        <input type="radio" name="tabs" id="tab1" checked />
+        <label for="tab1">Information</label>
+<div id="tab-content1" class="tab-content">
+<h2> Information </h2>
+<p>full name : <%= @user.full_name %> </p>
+<p>email: <%= @user.email %> </p>
+<p>gender : <%= @user.gender %> </p>
+</div>  </li>
+  
+    <li>
+        <input type="radio" name="tabs" id="tab2" />
+        <label for="tab2"> <%= @user.username %>'s Forums</label>
+        <div id="tab-content2" class="tab-content">
 <table width="371" height="51">
 <tr>
-	<th width="110"  id="forumcolum"> Forum </th>
+  <th width="110"  id="forumcolum"> Forum </th>
   <th id="ideatitlecolumn"> Description </th>
 </tr>
 <%  x = Forum.where(user_id: @user.id).order(:title) %>
@@ -75,7 +82,12 @@
 <% end %>
 
 </div>
-<div class="memberships">
+    </li>
+<li>
+  <input type="radio" name="tabs" id="tab3" checked />
+        <label for="tab3">memberships</label>
+ 
+<div id="tab-content3" class="tab-content">
 <table width="371" height="51">
 <tr>
   <th  id="forumcolum"> Joined Forum</th>
@@ -96,12 +108,17 @@
 <em> not a member in any forums </em>
 <% end %>
 </div>
-<div class= " ideaslist">
+ </li>
+    
+
+    <li>  <input type="radio" name="tabs" id="tab4" checked />
+        <label for="tab4">Ideas</label>
+        <div id= "tab-content4" class="tab-content">
   <table width="371" height="51">
 <tr>
     <th width="57" id="ideatitlecolumn"> Title</th>
-	<th width="160" id="ideacolumn"> Idea</th>
-	<th width="110" id="forumcolum"> Forum</th>
+  <th width="160" id="ideacolumn"> Idea</th>
+  <th width="110" id="forumcolum"> Forum</th>
 </tr>
 <%  x = Idea.where(user: @user).order(:text) %>
 <% x.each do |idea| %>
@@ -117,13 +134,8 @@
 <% end %>
 
 </div>
-<div class="information">
-<h2> Information </h2>
-<p>full name : <%= @user.full_name %> </p>
-<p>email: <%= @user.email %> </p>
-<p>gender : <%= @user.gender %> </p>
-</div>
-</div>
+ </li>
+</ul>
 <% end %>
 
 </body>
