@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419014200) do
+ActiveRecord::Schema.define(version: 20150419133646) do
 
   create_table "actions", force: true do |t|
     t.string   "info"
@@ -73,8 +73,9 @@ ActiveRecord::Schema.define(version: 20150419014200) do
     t.string   "friend_name"
     t.boolean  "accepted"
     t.boolean  "rejected"
-    t.string   "requesting"
-    t.string   "pending"
+    t.string   "requester"
+    t.string   "requested"
+    t.string   "requests"
   end
 
   create_table "ideas", force: true do |t|
@@ -110,6 +111,15 @@ ActiveRecord::Schema.define(version: 20150419014200) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+  end
+
+  create_table "report_users", force: true do |t|
+    t.integer  "reporter_id"
+    t.integer  "reported_id"
+    t.string   "reporter"
+    t.string   "reported"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "reportcomments", force: true do |t|

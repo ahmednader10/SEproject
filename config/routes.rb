@@ -147,6 +147,7 @@ Rails.application.routes.draw do
 
   resources :users do
     post :block_user
+    post :report_user
   end
   
   resources :forums do

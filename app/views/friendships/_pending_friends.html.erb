@@ -2,18 +2,22 @@
 <ul>
 
 <% for friendship in current_user.friendships %>
-<% if friendship.pending == nil %>
-<em> no pending requests </em> 
- <% else %> 
+  <% if friendship.status == 0 %>
+
+
 <li>
-	<% if friendship.status != nil  %>
-	<% else %>
-    <%= h friendship.pending %>
+    
+    <%= h friendship.requests %>
     (<%= link_to '[Accept]', friendship, :method => :put, :confirm => 'Accept friend request! Are you sure?' %> |)
     (<%= link_to '[Reject]', friendship, :method => :delete, :confirm => 'Reject friend request! Are you sure?' %>)
 
+
 </li>
-    <% end %>
+
+
+<% else %> 
+<em> no pending requests </em> 
+    
 <%end %>
  
  <%end %>
