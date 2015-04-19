@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 	validates :privacy, inclusion: { in: [1,2] }
 	
 	has_many :memberships, :dependent => :delete_all
-	has_many :membershipForums, class_name: 'Forum', through: :memberships, source: :forum
+	has_many :membershipForums, class_name: 'Forum', through: :membershisp, source: :forum
 
   	has_many :friends, :through => :friendships 
 	has_many :requested_friends, :through => :friendships, :source => :friend
