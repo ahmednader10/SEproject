@@ -4,6 +4,13 @@ Signed in as <strong><%= current_user.full_name %></strong>!<br>
 Signed in as <strong><%= current_user.name %></strong>!<br>
 -->
 
-Signed in as <strong><%= current_user.name %></strong>!<br>
+Signed in as 
+<strong>
+	<% if current_user.uid == nil %>
+		 <%= current_user.full_name %> 
+	<% else %>
+		 <%= current_user.name %>
+	 <% end %>
+</strong>!<br>
 
     <%= link_to "Sign out", signout_path, id: "sign_out" %>
