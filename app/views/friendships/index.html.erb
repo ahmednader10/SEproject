@@ -12,13 +12,30 @@
 </div>
 
 <div style="position:absolute;top:100px;">
-<% @users.each do |user| %>
-<% if user != current_user %>
 
-<p> <%= user.username %> <%= link_to "Add Friend", friendships_path(:friend_id => user.id), :method => :post %> </p>
+
+
+<% @users.each do |user| %>
+
+<% if user == current_user %>
+
+<% else %>
+
+<p> <%= user.username %>  <%= link_to "Block User",user_block_user_path(:user_id => user.id) ,:method => :post %>
+
+
+<% unless user ==current_user ||current_user.friends.include?(user)   %>
+<% unless  user.bfriends.include?(current_user) %>
+
+ <%= link_to "Add Friend", friendships_path(:friend_id => user.id), :method => :post %> 
 
 <% end %>
-<%end %>
+<% end %>
+<% end %>
+</p>
+<% end %>
+
+
 </div>
 
 
