@@ -1,2 +1,14 @@
-Signed in as <strong><%= current_user.name %></strong>!<br>
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+Signed in as 
+<strong>
+	<% if @current_user.name == nil %>
+		<h1>
+ 			<%= @current_user.full_name %> 
+		</h1>
+	<% else %>
+		<h1>
+ 			<%= @current_user.name %>
+		</h1>
+ 	<% end %>
+</strong>!<br>
+    
+<%= link_to "Sign out", signout_path, id: "sign_out" %>
