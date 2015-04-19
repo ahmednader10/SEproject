@@ -1,4 +1,3 @@
-
 class CommentsController < ApplicationController
 	before_action :authenticate_user, only: [:create, :reportcomment, :destroy]
 
@@ -84,5 +83,6 @@ protected
 
 	end
 end
+
 
 

@@ -15,7 +15,7 @@ class SysadminsController < ApplicationController
       session[:sysadmin] = true
       render 'show'
     else
-      render 'index'     #should be changed
+      redirect_to(action: 'index')     #should be changed
     end
   end
 
