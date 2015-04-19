@@ -1,4 +1,5 @@
 <html>
+	<%= link_to 'show unhidden only', '/syslog' %>
 	<% if session[:sysadmin] == true %>
 		<%= render 'sysadmin' %>
 	<% else %>
