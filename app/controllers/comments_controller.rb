@@ -1,5 +1,6 @@
+
 class CommentsController < ApplicationController
-	before_action :authenticate_user, only: [:create, :reportcomment]
+	before_action :authenticate_user, only: [:create, :reportcomment, :destroy]
 
 	#index method list all the comments related to an idea.
 	def index
@@ -49,6 +50,22 @@ class CommentsController < ApplicationController
       	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
 	end
 
+def destroy
+		@forum = Forum.find(params[:forum_id])
+		@user = current_user
+		@idea = Idea.find(params[:idea_id])
+		@comment = Comment.find(params[:id])
+
+		if @comment[:user_id] == @user[:id]
+			@comment.destroy
+			flash[:notice] = "comment deleted"
+		else
+			flash[:notice] = "You can only delete your comments!"
+		end
+
+      	redirect_to forum_idea_path(@forum, @idea)
+	end
+
 # used to allow the user to enter the comment and nothing more inorder not to be able to change the comment's model
 protected
 	def comment_params
@@ -65,4 +82,5 @@ protected
 
 	end
 end
+
 

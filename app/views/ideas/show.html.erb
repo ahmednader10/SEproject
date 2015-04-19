@@ -34,6 +34,7 @@
           <strong><%= comment.user.username %>:</strong>
           <%= comment.text %>
           <%= button_to "Report", reportcomment_forum_idea_comment_path(@forum, @idea, comment) %>
+          <%= button_to "delete", comment_delete_path(@forum, @idea, comment),  method: :delete %>
       </li>
       <%end%>
     </ul>
