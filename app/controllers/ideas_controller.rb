@@ -21,6 +21,7 @@ class IdeasController < ApplicationController
 
 	end
 
+	# a method that enables the forum admin to delete any idea written by any member in his forum
 	def destroy
 		@idea = Idea.find(params[:id])
 		@forum = Forum.find(params[:forum_id])
