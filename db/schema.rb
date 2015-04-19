@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150418232528) do
+ActiveRecord::Schema.define(version: 20150419014200) do
 
   create_table "actions", force: true do |t|
     t.string   "info"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.boolean  "hidden",     default: false
   end
 
   create_table "admins", force: true do |t|
