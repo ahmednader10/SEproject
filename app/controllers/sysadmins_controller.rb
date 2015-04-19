@@ -43,7 +43,7 @@ class SysadminsController < ApplicationController
       block = Block.new(email: @user_to_be_blocked.email)
       if block.save
         render blocked_path
-        Action.create(info: 'A system admin has blocked: (' + @user_to_be_blocked.username + ')', user_id: -1)
+        Action.create(info: 'A system admin has blocked: (' + @user_to_be_blocked.username + ').', user_id: -1)
       else
         render 'show'
       end
@@ -58,7 +58,7 @@ class SysadminsController < ApplicationController
       unblock = Block.find_by(email: @user_to_be_unblocked.email)
       if unblock.destroy
         render unblocked_path
-        Action.create(info: 'A system admin has unblocked: (' + @user_to_be_unblocked.username + ')', user_id: -1)
+        Action.create(info: 'A system admin has unblocked: (' + @user_to_be_unblocked.username + ').', user_id: -1)
       else
         render 'show'
       end
@@ -76,51 +76,60 @@ class SysadminsController < ApplicationController
   end
 
   def createMerge
-    if session[:sysadmin]  != true
+    if params[:forum][:forum1_id] == params[:forum][:forum2_id]
+      flash[:notice] = "Can only merge different forums!"
       render 'merge'
     else
-      if params[:forum][:forum1_id] == params[:forum][:forum2_id]
-      flash[:notice] = "Must merge two different forums!"
-      render 'merge'
-    else
-      old_forum_id = params[:forum][:forum2_id]
-      new_forum_id = params[:forum][:forum1_id]
-      name = params[:forum][:name]
-      description = params[:forum][:description]
+      forum1_id = params[:forum][:forum1_id]
+      forum2_id = params[:forum][:forum2_id]
+
+      forum1 = Forum.where({ id: forum1_id })
+      forum2 = Forum.where ({ id: forum2_id })
+
+      old_forum_id = 0
+      new_forum_id = 0
+
+      if forum1.first.privacy == forum2.first.privacy
+        if forum1.first.created_at < forum2.first.created_at
+          old_forum_id = forum1_id
+          new_forum_id = forum2_id
+        else
+          old_forum_id = forum2_id
+          new_forum_id = forum1_id
+        end
+
+        name = params[:forum][:name]
+        description = params[:forum][:description]
             
-      admins = Admin.where({ forum_id: old_forum_id })
-      ideas = Idea.where({ forum_id: old_forum_id })
-      memberships = Membership.where({ forum_id: old_forum_id })
+        ideas = Idea.where({ forum_id: new_forum_id })
+        memberships = Membership.where({ forum_id: new_forum_id })
 
-      admins.each do |a|
-        a.forum_id = new_forum_id
-        a.save
+        ideas.each do |i|
+          i.forum_id = old_forum_id
+          i.save
+        end
+
+        memberships.each do |m|
+          m.forum_id = old_forum_id
+          m.save
+        end
+
+        new_forum = Forum.where({ id: new_forum_id })
+        new_forum.first.destroy
+
+        Action.create(info: 'A system admin has merged forum: (' + old_forum.title + ') and forum: (' + new_forum.title + ') into one.', user_id: -1)
+
+        old_forum = Forum.where({ id: old_forum_id })
+        old_forum.first.title = name
+        old_forum.first.description = description
+        old_forum.first.save
+
+        # For now
+        redirect_to('/sysadmins/index')
+      else
+        flash[:notice] = "Can only merge forums of the same privacy setting!"
+        render 'merge'
       end
-
-      ideas.each do |i|
-        i.forum_id = new_forum_id
-        i.save
-      end
-
-      memberships.each do |m|
-        m.forum_id = new_forum_id
-        m.save
-      end
-
-      old_forum = Forum.where({ id: old_forum_id })
-      new_forum = Forum.where({ id: new_forum_id })
-
-      Action.create(info: 'A system admin has merged forum: (' + old_forum.title + ') and forum: (' + new_forum.title + ') into one.', user_id: -1)
-      
-      old_forum.first.destroy
-      new_forum.first.title = name
-      new_forum.first.description = description
-      new_forum.first.save
-
-      # For now
-      redirect_to('/sysadmins/index')
-    end
     end
   end
-
 end

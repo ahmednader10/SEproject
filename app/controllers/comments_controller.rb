@@ -1,5 +1,6 @@
+
 class CommentsController < ApplicationController
-	before_action :authenticate_user, only: [:create, :reportcomment]
+	before_action :authenticate_user, only: [:create, :reportcomment, :destroy]
 
 	#index method list all the comments related to an idea.
 	def index
@@ -41,12 +42,28 @@ class CommentsController < ApplicationController
 
 		if @reportcomment.save
 	   		flash[:notice] = "Comment has been reported!"
-	   		Action.create(info: User.find(@user.id).username + ' has reported a comment (' + @comment.text + ') belonging to user: (' + User.find(@comment.user_id).username + ') present in idea: (' + Idea.find(@comment.idea_id).title + ') in forum: (' + Forum.find(Idea.find(@comment.idea_id).id).title + ')', user_id: @user.id)
+	   		Action.create(info: User.find(@user.id).username + ' has reported a comment (' + @comment.text + ') belonging to user: (' + User.find(@comment.user_id).username + ') present in idea: (' + Idea.find(@comment.idea_id).title + ') in forum: (' + Forum.find(Idea.find(@comment.idea_id).id).title + ').', user_id: @user.id)
 		else
 			flash[:notice] = "You've already reported this comment!"
 		end
 
       	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
+	end
+
+def destroy
+		@forum = Forum.find(params[:forum_id])
+		@user = current_user
+		@idea = Idea.find(params[:idea_id])
+		@comment = Comment.find(params[:id])
+
+		if @comment[:user_id] == @user[:id]
+			@comment.destroy
+			flash[:notice] = "comment deleted"
+		else
+			flash[:notice] = "You can only delete your comments!"
+		end
+
+      	redirect_to forum_idea_path(@forum, @idea)
 	end
 
 # used to allow the user to enter the comment and nothing more inorder not to be able to change the comment's model
@@ -65,4 +82,5 @@ protected
 
 	end
 end
+
 
