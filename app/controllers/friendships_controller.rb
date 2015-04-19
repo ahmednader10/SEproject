@@ -17,8 +17,15 @@ def create
 
 @user = current_user
 @friend = User.find( params[:friend_id])
+
 @friendship1 = Friendship.new(:user_id => @user.id , :friend_id => @friend.id,  :requesting => @friend.username, :user_name => @user.username, :friend_name =>@friend.username, :status => 0)
  @friendship2=Friendship.new(:user_id => @friend.id , :friend_id => @user.id,  :pending => @user.username, :user_name => @friend.username, :friend_name =>@user.username, :status => 0)
+
+Action.create(info: @user.username + ' has sent a friend request to ' + @friend.username, user_id: @user.id)
+
+@friendship = Friendship.new(:user_id => @user.id , :friend_id => @friend.id,  :requesting => @friend.username, :user_name => @user.username, :friend_name =>@friend.username, :status => 0)
+
+
 
 
   if @friendship1.save && @friendship2.save

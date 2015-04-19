@@ -135,6 +135,8 @@ def block_user
 
 @blocked= Blocker.new(:blocker_id => @user.id , :blocked_id => @friend.id, :blocker => @user.username, :blocked => @friend.username)
 
+Action.create(info: @user.username + ' has blocked ' + @friend.username + '.', user_id: @user.id)
+
 if @blocked.save 
   redirect_to friendships_path
 else
