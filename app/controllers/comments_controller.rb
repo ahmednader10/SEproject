@@ -21,7 +21,9 @@ class CommentsController < ApplicationController
 		if @comment.save
 			
 			# This line of code sends a notification to the owner of the idea being commented on
-			Notification.create(info: (current_user.username + ' has commented on your idea (' + @idea.title + ').'), seen: false, user_id: @idea.user_id)
+			Notification.create(info: (current_user.username + ' has commented (' + @comment.text + ') on your idea (' + @idea.title + ') on forum: (' + Forum.find(@idea.forum_id).title + ').'), seen: false, user_id: @idea.user_id)
+
+			Action.create(info: current_user.username + ' has commented (' + @comment.text + ') on idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') on forum: (' + Forum.find(@idea.forum_id).title + ').', user_id: current_user.id)
 			
 			redirect_to [@forum, @idea] 
 		else
@@ -30,7 +32,21 @@ class CommentsController < ApplicationController
 	end
 
 	def reportcomment
-	
+	@forum = Forum.find(params[:forum_id])
+		@user = current_user
+		@idea = Idea.find(params[:idea_id])
+		@comment = Comment.find(params[:id])
+
+	 	@reportcomment = Reportcomment.new(:user_id => @user.id , :comment_id => @comment.id)
+
+		if @reportcomment.save
+	   		flash[:notice] = "Comment has been reported!"
+	   		Action.create(info: User.find(@user.id).username + ' has reported a comment (' + @comment.text + ') belonging to user: (' + User.find(@comment.user_id).username + ') present in idea: (' + Idea.find(@comment.idea_id).title + ') in forum: (' + Forum.find(Idea.find(@comment.idea_id).id).title + ')', user_id: @user.id)
+		else
+			flash[:notice] = "You've already reported this comment!"
+		end
+
+      	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
 	end
 
 # used to allow the user to enter the comment and nothing more inorder not to be able to change the comment's model

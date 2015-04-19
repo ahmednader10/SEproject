@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  
+
   ####################### SysAdmin ###########################
 
   get 'sysadmins/new'
@@ -64,12 +66,17 @@ Rails.application.routes.draw do
   match 'auth/failure', to: redirect('/'), :via => [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', :via => [:get, :post]
   ##############################################################################
+
+  ####################### Social share button ##################################
+  resources :homes, only: [:show]
+  get 'share' => 'homes#show'
+  
   
   #When logged in normally or facebook redirects to this page
   #Change later
 
   get     'logged_in' => 'sessions#logged_in'
-  ###########################################################
+  ############################ Users ###############################
 
   get 'users/index'
 
@@ -88,6 +95,8 @@ Rails.application.routes.draw do
 
   get '/users/profile/:id' => 'users#profile'
 
+  ############################ Forums ########################################
+
   get 'forums/created/:id' => 'forums#created', as: 'created'
 
   post 'forums/:id/join' => 'forums#join_forum', as:'join_forum'
@@ -96,9 +105,23 @@ Rails.application.routes.draw do
 
   get 'forums/remove_member' => 'forums#remove_member', as:'remove_member'
 
+  ############################ Notifications #################################
+
   get 'notifications' => 'notifications#index', as: 'user_notifications'
 
   delete 'notifications/:id' => 'notifications#destroy'
+
+  ############################### System log #################################
+
+  get 'syslogall' => 'actions#index'
+
+  get 'syslog' => 'actions#indexall'
+
+  put 'syslog/hide/:id' => 'actions#hide'
+
+  put 'syslog/unhide/:id' => 'actions#unhide'
+
+  ############################################################################
 
   get 'users/indentation_error_message' => 'users#indentation_error_message'
 
@@ -112,15 +135,19 @@ Rails.application.routes.draw do
 
   get 'admins/added_admin' => 'admins#added_admin'  
 
+
   get 'sessions/blockingMessage' => 'sessions#create', as: 'blocking_message'
 
   ###########################################################
+
 
   # get 'sysAdmin' 
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
 
-  resources :users 
+  resources :users do
+    post :block_user
+  end
   
   resources :forums do
     resources :admins
@@ -133,14 +160,14 @@ Rails.application.routes.draw do
         post :report
         post :destroy
       end
-      resources :comments
+      resources :comments do
       member do
         post :reportcomment
-      end
-    end
-
-
+       end
+     end
+   end
   end
+
   resources :friendships
 
   # The priority is based upon order of creation: first created -> highest priority.

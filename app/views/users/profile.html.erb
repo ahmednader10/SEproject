@@ -1,7 +1,3 @@
-
-
-
-
 <body>
 	<div class="headerlist">
 <ul id="menu">
@@ -37,8 +33,16 @@
 </div>
 
 <div class=" profilepic" >
+	
+<% if @current_user.name == nil %>
+<h1> <%= @current_user.full_name %> welcome to your profile</h1>
+<% else %>
+<h1> <%= @current_user.name %> welcome to your profile</h1>
+ <% end %>
 
-<h1> <%= @current_user.username %> welcome to your profile</h1>
+
+
+
   <img src="http://image.shutterstock.com/display_pic_with_logo/308572/135288281/stock-vector-creative-idea-light-bulb-with-concept-of-word-cloud-vector-illustration-modern-template-design-135288281.jpg" width="337";height="270" style="outline:double;outline-color:#303;"/>
   
   </div>
@@ -137,6 +141,7 @@
 <p>email: <%= @current_user.email %> </p>
 <p>gender : <%= @current_user.gender %> </p>
 </div>
+
 
 
 </body>

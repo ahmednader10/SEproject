@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  blocker_id: 1
+  blocked_id: 1
+  blocker: MyString
+  blocked: MyString
+
+two:
+  blocker_id: 1
+  blocked_id: 1
+  blocker: MyString
+  blocked: MyString

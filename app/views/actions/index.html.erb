@@ -1,0 +1,7 @@
+<html>
+	<% if session[:sysadmin] == true %>
+		<%= render 'sysadmin' %>
+	<% else %>
+		<%= render 'not_sysadmin' %>
+	<% end %>
+</html>
