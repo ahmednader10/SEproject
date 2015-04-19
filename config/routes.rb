@@ -128,7 +128,7 @@ Rails.application.routes.draw do
   # get 'sysAdmin' 
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
-
+  delete  'forums/:forum_id/ideas/:idea_id/comments/:id' => 'comments#destroy', as: 'comment_delete'
   resources :users 
   
   resources :forums do
