@@ -83,3 +83,11 @@ user_with_invalid_username:
  password_question: What is the name of your best friend?
  answer_for_password_question: Shoukry
 
+user_with_invalid_userna:
+ email: muhammad@gmail.com
+ password: 88881111
+ username: m_llaohsen
+ gender: Male
+ full_name: Mohsen Emad
+ password_question: What is the name of your best friend?
+ answer_for_password_question: Shoukry
