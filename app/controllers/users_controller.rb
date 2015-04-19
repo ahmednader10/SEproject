@@ -107,15 +107,10 @@ class UsersController < ApplicationController
           requests_ids.each do |r|
             @requests_forums.concat(Forum.where(id: r.forum_id))
             @requests_users.concat(User.where(id: r.user_id))
-       #Forum.@forums.each do |forum|
-       # if forum.id == joined_forum.id
-       #   @requests << forum.title
-       # end
-     # end
-
+       
     end
     end
-   # @forum = Forum.find(19)
+   
    end
    end 
   end
