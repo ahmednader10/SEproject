@@ -47,7 +47,7 @@ class IdeasController < ApplicationController
 			# =================================================================
 			admins = Admin.where(forum_id: @forum)	
 			admins.each do |admin|
-				Notification.create(info: (current_user.username + " has posted on a forum that you administrate (" + @forum.title + ")."), seen: false, user_id: admin.user_id)
+				Notification.create(info: (current_user.username + " has posted an idea (" + @idea.title + ") a forum that you administrate (" + @forum.title + ")."), seen: false, user_id: admin.user_id)
 			end
 			# =================================================================
 
