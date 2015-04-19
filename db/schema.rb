@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416131913) do
+ActiveRecord::Schema.define(version: 20150419014200) do
+
+  create_table "actions", force: true do |t|
+    t.string   "info"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.boolean  "hidden",     default: false
+  end
 
   create_table "admins", force: true do |t|
     t.integer  "forum_id"
@@ -22,6 +30,15 @@ ActiveRecord::Schema.define(version: 20150416131913) do
 
   add_index "admins", ["forum_id"], name: "index_admins_on_forum_id"
   add_index "admins", ["user_id"], name: "index_admins_on_user_id"
+
+  create_table "blockers", force: true do |t|
+    t.integer  "blocker_id"
+    t.integer  "blocked_id"
+    t.string   "blocker"
+    t.string   "blocked"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "blocks", force: true do |t|
     t.string   "email"
@@ -110,8 +127,6 @@ ActiveRecord::Schema.define(version: 20150416131913) do
   end
 
   create_table "sysadmins", force: true do |t|
-    t.string   "username"
-    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
