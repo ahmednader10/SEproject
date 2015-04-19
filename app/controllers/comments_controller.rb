@@ -52,7 +52,7 @@ class CommentsController < ApplicationController
       	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
 	end
 
-def destroy
+	def destroy
 		@forum = Forum.find(params[:forum_id])
 		@user = current_user
 		@idea = Idea.find(params[:idea_id])
