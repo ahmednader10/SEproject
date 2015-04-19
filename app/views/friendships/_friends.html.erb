@@ -5,7 +5,7 @@
   <% for friendship in current_user.friendships %>
 
   <li>
-  	<% if friendship.status != 1  and friendship.blocked ==1  %>
+  	<% if friendship.status = 1   %>
   	
   	<% else %>
     <%= h friendship.friend_name  %>

@@ -17,11 +17,11 @@ def create
 
 @user = current_user
 @friend = User.find( params[:friend_id])
-@friendship = Friendship.new(:user_id => @user.id , :friend_id => @friend.id,  :requesting => @friend.username, :user_name => @user.username, :friend_name =>@friend.username, :status => 0)
- 
+@friendship1 = Friendship.new(:user_id => @user.id , :friend_id => @friend.id,  :requesting => @friend.username, :user_name => @user.username, :friend_name =>@friend.username, :status => 0)
+ @friendship2=Friendship.new(:user_id => @friend.id , :friend_id => @user.id,  :pending => @user.username, :user_name => @friend.username, :friend_name =>@user.username, :status => 0)
 
 
-  if @friendship.save 
+  if @friendship1.save && @friendship2.save
     flash[:success] = "Added friend."
     redirect_to users_path
   else
@@ -42,7 +42,7 @@ if @friendship1.update_attributes(:user_id => @user.id, :friend_id => @friend.us
 flash[:notice] = 'Friend sucessfully accepted!'
 redirect_to friendships_path
 else
-redirect_to new_friendships_path
+redirect_to users_path
 end
 end 
 
