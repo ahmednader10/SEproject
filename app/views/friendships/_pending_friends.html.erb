@@ -1,13 +1,18 @@
 
 <ul>
+<% @users.each do |user| %>
 
-<% for friendship in current_user.friendships %>
-  <% if friendship.status == 0 %>
+<% for friendship in user.friendships %>
+  <%   if friendship.status ==1 || friendship.requested != current_user.username  %>
+<em> no pending requests </em> 
 
 
+
+
+<% else %> 
 <li>
     
-    <%= h friendship.requests %>
+    <%= h friendship.requester %>
     (<%= link_to '[Accept]', friendship, :method => :put, :confirm => 'Accept friend request! Are you sure?' %> |)
     (<%= link_to '[Reject]', friendship, :method => :delete, :confirm => 'Reject friend request! Are you sure?' %>)
 
@@ -15,10 +20,9 @@
 </li>
 
 
-<% else %> 
-<em> no pending requests </em> 
-    
+
+    <%end %>
 <%end %>
- 
  <%end %>
+ 
 </ul>
