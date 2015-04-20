@@ -1,5 +1,52 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# one:
+  # id: 1
+  # title: MyString
+  # description: MyString
+  # privacy: MyString
+
+# two:
+  # title: MyString
+  # description: MyString
+  # privacy: MyString
+
+forum_no_title:
+  description: test
+  privacy: 1
+
+forum_title:
+  title: title
+  description: test
+  privacy: 1
+
+forum_no_privacy:
+  title: title
+  description: test
+
+forum_privacy:
+  title: title
+  description: test
+  privacy: 2
+
+forum_edit:
+  id: 7
+  title: title
+  description: test
+  privacy: 1
+
+forum_created:
+  id: 10
+  title: title
+  description: description
+  privacy: 2
+
+forum_show:
+  id: 3
+  title: title
+  description: description
+  privacy: 1
+
 forum_one: 
  id: 1
  title: testing
@@ -7,9 +54,23 @@ forum_one:
  privacy: 1
  user_id: 1
 
+
 forum_two: 
  id: 2
  title: sports
  description: basketball
  privacy: 2
  user_id: 1
+
+forum_update:
+  id: 70
+  title: title
+  description: description
+  privacy: 1
+
+forum_delete:
+  id: 30
+  title: title
+  description: description
+  privacy: 1
+

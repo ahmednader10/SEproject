@@ -12,13 +12,13 @@ class IdeasControllerTest < ActionController::TestCase
     assert_routing '/forums/1/ideas', {controller: 'ideas', action: 'index', forum_id: '1'}
   end
 
-  #test "should get create idea" do
-  #assert_difference('Idea.count') do
-    #post :create, idea: { text: 'Some title',user_id: '1', title: 'Some title'}, forum_id: 1
-  #end
-  #assert_redirected_to forum_ideas_path('1', assigns(:idea))
-  #assert_routing({ method: 'post', path: '/forums/1/ideas' }, { controller: "ideas", action: "create", forum_id: "1" })
-  #end
+  test "should get create idea" do
+  assert_difference('Idea.count') do
+    post :create, idea: { text: 'Some title',user_id: '1', title: 'Some title'}, forum_id: 1
+  end
+  assert_redirected_to forum_ideas_path('1', assigns(:idea))
+  assert_routing({ method: 'post', path: '/forums/1/ideas' }, { controller: "ideas", action: "create", forum_id: "1" })
+  end
 
   test "should get new idea" do
   	get :new, :forum_id=> 1
