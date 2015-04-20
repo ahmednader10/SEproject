@@ -7,7 +7,7 @@ class IdeasController < ApplicationController
 		@ideas = Idea.where(forum_id: params[:forum_id])
 	end
 	
-	#show method showes the title and text of a chosen idea.
+	#show method shows the title and text of a chosen idea.
 	def show
 		@forum = Forum.find(params[:forum_id])
 		 @idea = Idea.find(params[:id])

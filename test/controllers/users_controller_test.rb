@@ -74,8 +74,20 @@ class UsersControllerTest < ActionController::TestCase
     assert_generates 'users/accept_join_request', {controller: 'users' , action: 'accept_join_request'}
   end
 
-  test "shouldroute to reject join request"  do
+  test "should route to reject join request"  do
     assert_generates 'users/reject_join_request', {controller: 'users' , action: 'reject_join_request'}
   end
+
+  test "should accept join request" do
+    get :accept_join_request, {:forum=>"2",:user=>"1"}
+    assert_response success
+
+  end
+
+  test "should show join requests" do
+    get(:admin_join_forums_requests,{ 'id' => "1" },{ 'user_id' => "1" })
+    assert_response success
+  end
+
 
 end
