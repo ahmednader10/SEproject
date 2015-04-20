@@ -7,9 +7,6 @@ class NotificationsController < ApplicationController
 		end
 	end
 
-	def new
-	end
-
 	#'create' is for creating new notifications and saving them into the database.
 	def create
 		@notification = Notification.new(notification_params)
