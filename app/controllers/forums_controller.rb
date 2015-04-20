@@ -71,6 +71,11 @@ class ForumsController < ApplicationController
 
    				Action.create(info: (@user.username + ' has updated the forum: (' + @forum.title + ').'), user_id: @user.id)
 
+   				admins = Admin.where(forum_id: @forum_id)
+   				admins.each do |a|
+   					Notification.create(info: @user.username + ' has updated your forum: (' + @forum.title + ').', user_id: a.user_id)
+   				end
+
 				redirect_to(forums_path)
 			else
 				render 'edit'
@@ -84,6 +89,12 @@ class ForumsController < ApplicationController
 		@user = current_user
 		if session[:sysadmin]
 			Action.create(info: 'A system administrator has deleted the forum: (' + @forum.title + ').', user_id: -1)
+			
+			admins = Admin.where(forum_id: @forum.id)
+			admins.each do |a|
+				Notification.create(info: 'A system administrator has deleted your forum: (' + @forum.title + ').', user_id: a.user_id)
+			end
+			
 			@forum.destroy
 			redirect_to forums_sysadmins_path and return
 		end
@@ -94,6 +105,14 @@ class ForumsController < ApplicationController
 			if !admin.empty? 
 				# confirm then delete
 				Action.create(info: @user.username + ' has deleted the forum: (' + @forum.title + ').', user_id: @user.id)
+
+				admins = Admin.where(forum_id: @forum.id)
+				admins.each do |a|
+					if a.user_id != @user.id
+						Notification.create(info: @user.username + ' has deleted your forum: (' + @forum.title + ').', user_id: a.user_id)
+					end
+				end
+				
 				@forum.destroy
 				# admin.destroy
 				redirect_to forums_path
@@ -118,6 +137,7 @@ class ForumsController < ApplicationController
     	 @membership1 = Membership.where(user_id: user , forum_id: forum)
     	 @membership1.first.destroy
     	 Action.create(info: current_user.username + ' has removed a member: (' + user.username + ') from the forum: (' + forum.title + ').', user_id: current_user.id)
+    	 Notification.create(info: 'You have been removed from forum: (' + forum.title + ').', user_id: user.id)
     	 render 'list_members'
 	end
 
@@ -171,6 +191,7 @@ class ForumsController < ApplicationController
 		 flash[:notice] = 'Successfully joined forum '
    		 render :action => "show"
 
+   		 Notification.create(info: 'Your request to join forum: (' + @forum.title + ') has been accepted and you have successfully joined.', user_id: @user.id)
    		
    		elsif !membership.save and membership.accept == true  
    				flash[:notice] = 'already member of this forum'
