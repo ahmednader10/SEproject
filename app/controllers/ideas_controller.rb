@@ -36,8 +36,8 @@ class IdeasController < ApplicationController
 			Action.create(info: 'A system admin has deleted an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_id: -1)
 			Notification.create(info: 'Your idea: (' + @idea.title + ') on forum:(' + @forum.title + ') has been deleted.', user_id: @idea.user_id)
 		end
-		@idea.destroy
-		redirect_to forum_path(@forum)
+			@idea.destroy
+			redirect_to forum_path(@forum)
 	end
 
 
