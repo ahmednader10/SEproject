@@ -46,13 +46,6 @@ class UserTest < ActiveSupport::TestCase
   	assert_match /\s/, user.username
   end
 
-  def test_show
-    user = users(:miada)
-    get user_url(user)
-  assert_response :success
-  assert_select "h1" , user.username
-end
-
 
 
 end
