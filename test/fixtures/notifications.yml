@@ -1,9 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  info: MyString
+  info: dummy
   seen: false
-
-two:
-  info: MyString
-  seen: false
+  user_id: 1

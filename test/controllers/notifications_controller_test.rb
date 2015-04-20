@@ -1,6 +1,14 @@
 require 'test_helper'
 
 class NotificationsControllerTest < ActionController::TestCase
+
+	def setup
+		@notification = notifications(:one)
+	end
+
+	def teardown
+		@notification.destroy
+	end
 	
 	test "should get notifications" do
 		get :index
@@ -8,8 +16,8 @@ class NotificationsControllerTest < ActionController::TestCase
 	end
 
 	test "should redirect to notifications" do
-		delete :destroy
-		assert_redirected_to (controller: "notifications", action: "index")
+		delete :destroy , id: @notification.id
+		assert_redirected_to '/notifications'
 	end
 	
 end
