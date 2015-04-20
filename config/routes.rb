@@ -96,7 +96,7 @@ Rails.application.routes.draw do
 
   get '/users/:id' => 'users#show'
 
-  get '/users/profile/:id' => 'users#profile'
+  get '/users/profile/:id' => 'users#profile', as: 'profile'
 
   ############################ Forums ########################################
 
