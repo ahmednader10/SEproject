@@ -32,7 +32,7 @@ class CommentsController < ApplicationController
 			render template: 'ideas/show'
 		end
 	end
-
+# used to allow user to report a certain comment
 	def reportcomment
 	@forum = Forum.find(params[:forum_id])
 		@user = current_user
@@ -54,6 +54,7 @@ class CommentsController < ApplicationController
       	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
 	end
 
+# used to allow user to delete his comments
 	def destroy
 		@forum = Forum.find(params[:forum_id])
 		@user = current_user
@@ -80,7 +81,7 @@ class CommentsController < ApplicationController
 	end
 
 # used to allow the user to enter the comment and nothing more inorder not to be able to change the comment's model
-protected
+	protected
 	def comment_params
 		params.require(:comment).permit(:text)
 	end

@@ -1,11 +1,29 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  text: MyString
+complete_idea:
+  id: 1
+  text: testing
   forum_id: 1
   user_id: 1
+  title: testing
 
-two:
-  text: MyString
-  forum_id: 1
+no_body:
+  forum: forum_one
   user_id: 1
+  title: testing2
+
+no_user:
+  text: testing3
+  forum: forum_one
+  title: testing3
+
+no_forum:
+  text: testing4
+  user_id: 1
+  title: testing4
+
+complete_idea:
+  id: 25
+  text: testing
+  forum_id: 1
+  user_id: 25
+  title: testing
