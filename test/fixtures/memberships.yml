@@ -14,3 +14,8 @@ three:
  user_id: 2
  forum_id: 1
  accept: false
+
+membership:
+  user_id: 1
+  forum_id: 30
+  accept: true
