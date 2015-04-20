@@ -35,6 +35,7 @@ class ForumsControllerTest < ActionController::TestCase
   		assert_equal 'You should login first to be able to join forum',flash[:notice]
   end
 
+
   
   test "should get join forum" do
 	  	session[:user_id]= users(:user_with_valid_data).id

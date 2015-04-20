@@ -1,9 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  user_id: 1
+complete_reportidea:
+  user_id: 25
   idea_id: 1
 
-two:
-  user_id: 1
+no_user:
   idea_id: 1
+
+no_idea:
+  user_id: 1 

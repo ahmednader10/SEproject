@@ -86,3 +86,4 @@ class UsersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:requests_forums)
   end
 end
+

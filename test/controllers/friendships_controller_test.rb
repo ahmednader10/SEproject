@@ -37,6 +37,21 @@ class FriendshipsControllerTest < ActionController::TestCase
 #end 
 	
 
+
+test "should show friendships" do
+    assert_generates '/friendships/1', {controller: 'friendships', action: 'show', id: '1'}
+  end
+
+#test "should get index" do
+    #get :index
+    #assert_response :success
+    #assert_not_nil assigns(:users)
+  #end
+
+
+
+
+
 #test "should get delete" do
 #    get :destroy
 #    assert_response :success
@@ -57,6 +72,16 @@ class FriendshipsControllerTest < ActionController::TestCase
 ##assert_redirected_to users_path(assigns(:user))
 
 #end
+
+
+
+#test "should route to accept friend request" do
+
+	#assert_generates 'friendships/update' , {controller: 'friendships' , action: 'update'}
+  
+#end 
+
+
 
 
 
