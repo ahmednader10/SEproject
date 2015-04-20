@@ -6,3 +6,10 @@ forum_one:
  description: forumtesting
  privacy: 1
  user_id: 1
+
+forum_two: 
+ id: 2
+ title: sports
+ description: basketball
+ privacy: 2
+ user_id: 1

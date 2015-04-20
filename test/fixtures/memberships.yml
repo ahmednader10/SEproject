@@ -14,3 +14,8 @@ three:
  user_id: 2
  forum_id: 1
  accept: false
+
+four:
+ user_id: 2
+ forum_id: 2
+ accept: nil
