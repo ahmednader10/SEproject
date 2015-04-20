@@ -14,7 +14,7 @@ class NotificationsController < ApplicationController
 	def create
 		@notification = Notification.new(notification_params)
 		@notification.save
-		Action.create(info: current_user.username + ' has been sent this notification: (' + @notification.info + ').', user_id: current_user.id)
+		Action.create(info: current_user.username + ' was sent this notification: (' + @notification.info + ').', user_id: current_user.id)
 	end
 
 	# 'update' is used for updating the seen field to true when it is loaded into the notifications page
