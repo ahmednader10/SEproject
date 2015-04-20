@@ -1,7 +1,7 @@
 <h1>System Admin login</h1>
 
 
-<%= form_for(:sysadmin) do |f| %>
+<%= form_for(:sysadmin, url: 'show') do |f| %>
 	<%= f.label :username %><br>
 	<%= f.text_field :username %><br>
 

@@ -1,4 +1,5 @@
 class FriendshipsController < ApplicationController
+before_action :authenticate_user, only: [:create]
 
 
 def show
@@ -14,6 +15,8 @@ end
 
 def create
 
+ 
+
 
 @user = current_user
 @friend = User.find( params[:friend_id])
@@ -27,13 +30,12 @@ Action.create(info: @user.username + ' has sent a friend request to ' + @friend.
 
   if @friendship1.save  && @friendship2.save
     flash[:success] = "Added friend."
-    redirect_to users_path
+    redirect_to root_path
   else
     flash[:error] = "Unable to add friend."
     redirect_to friendships_path
-  end
-
-
+  
+end
   end
 def update
 @user = User.find(current_user)
@@ -56,8 +58,22 @@ def destroy
 
 @friendship = current_user.friendships.find(params[:id]).destroy
 
-redirect_to users_path
+redirect_to root_path
 end
+
+
+
+def authenticate_user
+
+    if current_user == nil
+      redirect_to login_path
+
+    end
+
+if current_user != nil
+flash[:success]= "Successfully logged in "
+end 
+  end
 end
 
 
