@@ -28,7 +28,8 @@ class UsersController < ApplicationController
       else 
         if @user.save
           Action.create(info: 'A new user: (' + @user.username + ') has signed up.', user_id: @user.id)
-          redirect_to(:action => 'index')
+          session[:signin] = "You have successfully signed up! You can now login."
+          redirect_to root_path
         else
           render 'new' 
         end
@@ -108,15 +109,10 @@ class UsersController < ApplicationController
           requests_ids.each do |r|
             @requests_forums.concat(Forum.where(id: r.forum_id))
             @requests_users.concat(User.where(id: r.user_id))
-       #Forum.@forums.each do |forum|
-       # if forum.id == joined_forum.id
-       #   @requests << forum.title
-       # end
-     # end
-
+       
     end
     end
-   # @forum = Forum.find(19)
+   
    end
    end 
   end
