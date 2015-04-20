@@ -8,9 +8,6 @@ class ActionsController < ApplicationController
 		@actions = Action.where(hidden: false)
 	end
 
-	def new
-	end
-
 	def create
 		@action = Action.new(action_params)
 		@action.save

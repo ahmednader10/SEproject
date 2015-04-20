@@ -1,13 +1,12 @@
 
 Rails.application.routes.draw do
 
-  
 
   ####################### SysAdmin ###########################
 
   get 'sysadmins/new'
 
-  get 'sysadmins/index'
+  get 'sysadmins/index' => 'sysadmins#index', as: 'index'
 
   get 'sysadmins/show' => 'sysadmins#show', as: 'show'
 
@@ -17,7 +16,7 @@ Rails.application.routes.draw do
 
   get 'sysadmins/merge' => 'sysadmins#merge'
 
-  post 'sysadmins/new' => 'sysadmins#show'
+  post 'sysadmins/show' => 'sysadmins#show'
 
   post 'sysadmins/merge' => 'sysadmins#createMerge'
 
@@ -81,8 +80,11 @@ Rails.application.routes.draw do
 
   get 'users/index'
 
-  get 'users/new' 
+  get 'users/new'
 
+  get 'users/edit'
+
+  get 'users/show'
 
   get 'users/delete'
 
@@ -94,7 +96,7 @@ Rails.application.routes.draw do
 
   get '/users/:id' => 'users#show'
 
-  get '/users/profile/:id' => 'users#profile'
+  get '/users/profile/:id' => 'users#profile', as: 'profile'
 
   ############################ Forums ########################################
 
@@ -114,13 +116,17 @@ Rails.application.routes.draw do
 
   ############################### System log #################################
 
-  get 'syslogall' => 'actions#index'
+  get 'syslogall' => 'actions#indexall'
 
-  get 'syslog' => 'actions#indexall'
+  get 'syslog' => 'actions#index'
 
   put 'syslog/hide/:id' => 'actions#hide'
 
   put 'syslog/unhide/:id' => 'actions#unhide'
+
+  put 'syslog/hideall' => 'actions#hideall'
+
+  put 'syslog/unhideall' => 'actions#unhideall'
 
   ############################################################################
 
@@ -229,5 +235,5 @@ delete 'forums/:forum_id/ideas/:idea_id/comments/:id' => 'comments#destroy', as:
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end
 
+end

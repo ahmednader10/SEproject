@@ -1,10 +1,23 @@
 require 'test_helper'
 
 class NotificationsControllerTest < ActionController::TestCase
-	test "notifications is working" do
-		get :index
-		assert_response :success
+
+	def setup
+		@notification = notifications(:one)
 	end
 
-	test ""
+	def teardown
+		@notification = nil
+	end
+	
+	test "should get notifications" do
+		get :index
+		assert_response :success, "Failed to get notifications"
+	end
+
+	test "should redirect to notifications" do
+		delete :destroy , id: @notification.id
+		assert_redirected_to '/notifications'
+	end
+	
 end

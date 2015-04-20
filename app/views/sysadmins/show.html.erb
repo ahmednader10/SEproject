@@ -1,8 +1,9 @@
 <%= link_to 'Sign out', root_path %>
 <h1>Welcome, System admin!</h1>
 
+
 <%= form_tag(edit_path, method: "get") do %>
-	<%= text_field_tag(:q) %>
+	<%= text_field_tag(:email_delete) %>
 	<%= submit_tag(:delete) %>
 <% end %>
 
