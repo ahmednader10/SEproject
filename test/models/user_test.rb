@@ -77,4 +77,5 @@ test "that creating friendships on a user works" do
     assert_select "h1" , user.username
   end
 
+
 end
