@@ -131,7 +131,7 @@ class IdeasController < ApplicationController
 
 		if current_user == nil
 			redirect_to @forum
-
+		else
 		Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: !true).empty?
 			render action: :not_joined_forum
 		end
