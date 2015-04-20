@@ -117,7 +117,7 @@ class IdeasController < ApplicationController
 	def idea_params
 		params.require(:idea).permit(:title, :text)
 	end
-
+# used to check that there's a current user to be able to use the above actions
 	def authenticate_user
 		@forum = Forum.find(params[:forum_id])
 
