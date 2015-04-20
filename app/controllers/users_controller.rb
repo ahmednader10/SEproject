@@ -28,7 +28,8 @@ class UsersController < ApplicationController
       else 
         if @user.save
           Action.create(info: 'A new user: (' + @user.username + ') has signed up.', user_id: @user.id)
-          redirect_to(:action => 'index')
+          session[:signin] = "You have successfully signed up! You can now login."
+          redirect_to root_path
         else
           render 'new' 
         end

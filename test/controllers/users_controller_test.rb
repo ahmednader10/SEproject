@@ -25,13 +25,26 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  # This test tries to create a user and then observes the change in the counter 
+  # that keeps track of the users in the system. Moreover, the test makes sure
+  # that the required redirection is successfully done.
   test "should create user" do
     assert_difference('User.count') do
       post :create, user: {email: 'omar.hussein@gmail.com', password: '12345678', username: 'o_abouzaid', full_name: 'Omar Ashraf', gender: 'Male', 
       password_question: 'What is the name of your best friend?', answer_for_password_question: 'Hany'}
     end
-    #assert_redirected_to user_path(assigns(:user))
+    assert_redirected_to '/'
+    #get :create
+    #assert_response :success
+    #assert_not_nil assigns(:user)
+    #assert_equal flash[:signin], "You have successfully signed up! You can now login."
   end
+
+  #test "should get create" do
+  #  get (:create, {'email' => "omar@hotmail.com", "password" => '000011111', 'username' => "username_", 'gender' => "Male",
+  #  'full_name' => "Omar", 'password_question' => "What is the name of your best friend?", 'answer_for_password_question' => "Adham"})
+  #  assert_response :success
+  #end
 
   test "should show user" do
     assert_generates '/users/1', {controller: 'users', action: 'show', id: '1'}
@@ -40,6 +53,4 @@ class UsersControllerTest < ActionController::TestCase
   test "should get profile"  do
     assert_generates 'users/profile/1', {controller: 'users' , action: 'profile', id:'1'}
   end
-
-
 end
