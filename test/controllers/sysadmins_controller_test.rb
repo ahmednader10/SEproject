@@ -12,13 +12,24 @@ class SysadminsControllerTest < ActionController::TestCase
   end
 
   test "should get show" do
-    get :show
+    session[:sysadmin] = "true"
+    post :show, session[:sysadmin]
     assert_response :success
   end
 
+  #test "should not get show" do
+  #  current_user = users(:user_with_valid_data)
+  #  session[:sysadmin] = "true"
+  #  post :show, session[:sysadmin], current_user
+  #  assert_response :success
+  #end
+
   test "should get edit" do
+    #session[:email] = "omar.ashraf@gmail.com"
     get :edit
     assert_response :success
+    assert_not_nil assigns(:users)
+    #assert_not_nil assigns(:user_tmp)
   end
 
   test "should get delete" do
