@@ -7,7 +7,7 @@ class IdeasController < ApplicationController
 		@ideas = Idea.where(forum_id: params[:forum_id])
 	end
 	
-	#show method showes the title and text of a chosen idea.
+	#show method shows the title and text of a chosen idea.
 	def show
 		@forum = Forum.find(params[:forum_id])
 		 @idea = Idea.find(params[:id])
@@ -36,8 +36,8 @@ class IdeasController < ApplicationController
 			Action.create(info: 'A system admin has deleted an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_id: -1)
 			Notification.create(info: 'Your idea: (' + @idea.title + ') on forum:(' + @forum.title + ') has been deleted.', user_id: @idea.user_id)
 		end
-		@idea.destroy
-		redirect_to forum_path(@forum)
+			@idea.destroy
+			redirect_to forum_path(@forum)
 	end
 
 
@@ -125,7 +125,7 @@ class IdeasController < ApplicationController
 	def idea_params
 		params.require(:idea).permit(:title, :text)
 	end
-
+# used to check that there's a current user to be able to use the above actions
 	def authenticate_user
 		@forum = Forum.find(params[:forum_id])
 
