@@ -30,7 +30,7 @@ Action.create(info: @user.username + ' has sent a friend request to ' + @friend.
 
   if @friendship1.save  && @friendship2.save
     flash[:success] = "Added friend."
-    redirect_to users_path
+    redirect_to root_path
   else
     flash[:error] = "Unable to add friend."
     redirect_to friendships_path
@@ -58,7 +58,7 @@ def destroy
 
 @friendship = current_user.friendships.find(params[:id]).destroy
 
-redirect_to users_path
+redirect_to root_path
 end
 
 
