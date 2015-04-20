@@ -54,3 +54,14 @@ forum_one:
  privacy: 1
  user_id: 1
 
+forum_update:
+  id: 70
+  title: title
+  description: description
+  privacy: 1
+
+forum_delete:
+  id: 30
+  title: title
+  description: description
+  privacy: 1
