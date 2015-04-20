@@ -6,16 +6,17 @@ class SysadminsController < ApplicationController
   def index
   end
 
-  def show
+  def show              #show system admin view
     if current_user
       redirect_to logged_in_path and return
     end
 
-    if session[:sysadmin] or (params[:sysadmin][:username] == 'admin' and params[:sysadmin][:password] == 'password')
-      session[:sysadmin] = true
+    if session[:sysadmin] == "true" or (params[:sysadmin][:username] == 'admin' and params[:sysadmin][:password] == 'password')
+      session[:sysadmin] = "true"
       render 'show'
     else
-      redirect_to(action: 'index')     #should be changed
+      flash[:notice] = "Wrong email/password combination."
+      redirect_to(:action => 'new') 
     end
   end
 

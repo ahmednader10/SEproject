@@ -1,5 +1,8 @@
 <h1>System Admin login</h1>
 
+<% if flash[:notice] %>
+	<%= flash[:notice] %>
+<% end %>
 
 <%= form_for(:sysadmin, url: 'show') do |f| %>
 	<%= f.label :username %><br>
