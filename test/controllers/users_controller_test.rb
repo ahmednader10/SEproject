@@ -19,11 +19,6 @@ class UsersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:user)
   end
 
-  #test "should get edit" do
-   # get :edit
-    #assert_response :success
-  #end
-
   # This test just makes sure that the "delete" action was called successfully.
   test "should get delete" do
     get :delete
@@ -55,11 +50,6 @@ class UsersControllerTest < ActionController::TestCase
         password_question: 'What is the name of your best friend?', answer_for_password_question: 'Hany'}
     end
     assert_response :success
-  end
-
-  test "should get show" do
-    #get :show
-    #assert_response :success
   end
 
   test "should route to admin_join_forums_requests" do
