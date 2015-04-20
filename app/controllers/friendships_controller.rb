@@ -15,11 +15,7 @@ end
 
 def create
 
-if  params[:friend_id] == nil 
-flash[:notice] = "Friend Required"
-
-
-end 
+ 
 
 
 @user = current_user
@@ -38,9 +34,8 @@ Action.create(info: @user.username + ' has sent a friend request to ' + @friend.
   else
     flash[:error] = "Unable to add friend."
     redirect_to friendships_path
-  end
-
-
+  
+end
   end
 def update
 @user = User.find(current_user)
@@ -67,11 +62,6 @@ redirect_to users_path
 end
 
 
-def show_flash
-    [:notice, :error, :warning].collect do |key|
-      content_tag(:div, flash[key], :id => key, :class => "flash flash_#{key}") unless flash[key].blank?
-    end.join
-  end
 
 def authenticate_user
 
