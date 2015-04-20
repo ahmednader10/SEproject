@@ -7,14 +7,11 @@ class NotificationsController < ApplicationController
 		end
 	end
 
-	def new
-	end
-
 	#'create' is for creating new notifications and saving them into the database.
 	def create
 		@notification = Notification.new(notification_params)
 		@notification.save
-		Action.create(info: current_user.username + ' has been sent this notification: (' + @notification.info + ').', user_id: current_user.id)
+		Action.create(info: current_user.username + ' was sent this notification: (' + @notification.info + ').', user_id: current_user.id)
 	end
 
 	# 'update' is used for updating the seen field to true when it is loaded into the notifications page
@@ -25,8 +22,13 @@ class NotificationsController < ApplicationController
 
 	#'destroy' is for deleting notifications from the database
 	def destroy
-		Action.create(info: current_user.username + ' has deleted this notification: (' + @notification.info + ').', user_id: current_user.id)
-		Notification.destroy(params[:id])
+		@notification = Notification.find(params[:id])
+		if current_user != nil
+			Action.create(info: current_user.username + ' has deleted this notification: (' + @notification.info + ') belonging to ' + User.find(@notification.user_id).username + '.', user_id: current_user.id)
+		else
+			Action.create(info: 'A system has deleted this notification: (' + @notification.info + ') belonging to ' + User.find(@notification.user_id).username + '.', user_id: -1)
+		end
+		@notification.destroy
 		redirect_to('/notifications')
 	end
 
@@ -36,4 +38,5 @@ protected
 	def notification_params
 		params.require(:notification).permit(:info, :seen, :user_id)
 	end
+
 end

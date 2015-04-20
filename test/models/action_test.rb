@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class ActionTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+	 test "action should not be saved without a user id" do
+	 	action = Action.new
+	 	assert_not action.save
+	 end
 end
