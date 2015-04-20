@@ -19,13 +19,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:user)
   end
 
-
   # This test just makes sure that the "delete" action was called successfully.
-  test "should get edit" do
-   # get :edit
-    #assert_response :success
-  end
-
   test "should get delete" do
     get :delete
     assert_response :success
@@ -37,24 +31,25 @@ class UsersControllerTest < ActionController::TestCase
   test "should create user" do
     assert_difference('User.count') do
       post :create, user: {email: 'omar.hussein@gmail.com', password: '12345678', username: 'o_abouzaid', full_name: 'Omar Ashraf', gender: 'Male', 
-      password_question: 'What is the name of your best friend?', answer_for_password_question: 'Hany'}
+        password_question: 'What is the name of your best friend?', answer_for_password_question: 'Hany'}
     end
     assert_redirected_to '/'
-    #get :create
-    #assert_response :success
-    #assert_not_nil assigns(:user)
-    #assert_equal flash[:signin], "You have successfully signed up! You can now login."
+    post :create, user: {email: 'omar.hussein@gmail.com', password: '12345678', username: 'o_abouzaid', full_name: 'Omar Ashraf', gender: 'Male', 
+        password_question: 'What is the name of your best friend?', answer_for_password_question: 'Hany'}
+    assert_response :success
+    assert_nil flash[:notice]
+    assert_not_nil assigns(:user)
+    assert_match session[:signin], "You have successfully signed up! You can now login."
   end
 
-  #test "should get create" do
-  #  get (:create, {'email' => "omar@hotmail.com", "password" => '000011111', 'username' => "username_", 'gender' => "Male",
-  #  'full_name' => "Omar", 'password_question' => "What is the name of your best friend?", 'answer_for_password_question' => "Adham"})
-  #  assert_response :success
-  #end
-
-  test "should get show" do
-    #get :show
-    #assert_response :success
+  # This test assures that the counter that keeps track of users won't be incremented
+  # in case the user is not valid.
+  test "should not create user" do
+    assert_no_difference('User.count') do
+      post :create, user: {email: 'omar.hussein@gmail.com', password: '1678', username: 'o_abouzaid', full_name: 'Omar Ashraf', gender: 'Male', 
+        password_question: 'What is the name of your best friend?', answer_for_password_question: 'Hany'}
+    end
+    assert_response :success
   end
 
   test "should route to admin_join_forums_requests" do
