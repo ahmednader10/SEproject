@@ -28,11 +28,11 @@ class UsersController < ApplicationController
       else 
         if @user.save
           Action.create(info: 'A new user: (' + @user.username + ') has signed up.', user_id: @user.id)
-          redirect_to(:action => 'index')
+          session[:signin] = "You have successfully signed up! You can now login."
+          redirect_to root_path
         else
           render 'new' 
         end
-
       end
   end
 
@@ -86,6 +86,7 @@ class UsersController < ApplicationController
     @membership1 = Membership.where(user_id: user , forum_id: forum)
    
     Action.create(info: current_user.id + ' has rejected ' + user.username + "'s join request to forum: (" + forum.title + ').', user_id: current_user.id)
+    Notufication.create(info: 'Your request to join forum: (' + forum.title + ' has been rejected.', user_id: user.id)
     @membership1.first.destroy
     redirect_to(:action => "admin_join_forums_requests")
 
@@ -107,15 +108,10 @@ class UsersController < ApplicationController
           requests_ids.each do |r|
             @requests_forums.concat(Forum.where(id: r.forum_id))
             @requests_users.concat(User.where(id: r.user_id))
-       #Forum.@forums.each do |forum|
-       # if forum.id == joined_forum.id
-       #   @requests << forum.title
-       # end
-     # end
-
+       
     end
     end
-   # @forum = Forum.find(19)
+   
    end
    end 
   end

@@ -1,9 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  user_id: 1
+complete_reportcomment:
+  user_id: 25
   comment_id: 1
 
-two:
-  user_id: 1
+no_user:
   comment_id: 1
+
+no_comment:
+  user_id: 1 
