@@ -35,4 +35,24 @@ class ForumsControllerTest < ActionController::TestCase
   	assert_equal 'You should login first to be able to join forum',flash[:notice]
   end
 
+  test "should get join forum" do
+  	user = users(:user_with_valid_data)
+  	current_user = user
+  	get(:join_forum, {'id'=>"1"})
+  	assert_response :success
+  end
+
+  test "should get list of members" do
+  	
+  	get(:list_members, {'id'=>"1"})
+  	assert_response :success
+  end
+
+  test "should get remove member" do
+  	
+  	get(:remove_member, {'id'=>"1"})
+  	assert_response :success
+  end
+
+
 end
