@@ -1,4 +1,5 @@
 class FriendshipsController < ApplicationController
+before_action :authenticate_user, only: [:create]
 
 
 def show
@@ -13,6 +14,12 @@ end
 
 
 def create
+
+if  params[:friend_id] == nil 
+flash[:notice] = "Friend Required"
+
+
+end 
 
 
 @user = current_user
@@ -58,6 +65,25 @@ def destroy
 
 redirect_to users_path
 end
+
+
+def show_flash
+    [:notice, :error, :warning].collect do |key|
+      content_tag(:div, flash[key], :id => key, :class => "flash flash_#{key}") unless flash[key].blank?
+    end.join
+  end
+
+def authenticate_user
+
+    if current_user == nil
+      redirect_to login_path
+
+    end
+
+if current_user != nil
+flash[:success]= "Successfully logged in "
+end 
+  end
 end
 
 

@@ -46,9 +46,21 @@ class UserTest < ActiveSupport::TestCase
   	assert_match /\s/, user.username
   end
 
+
 should have_many(:friendships)
 should have_many(:friends)
 
+  
+test "that no error is raised when trying to access a friend list" do 
 
-
+  assert_nothing_raised do
+    user= users(:raghda)
+    user.friends
+end
+end
+test "that creating friendships on a user works" do 
+ users(:raghda).friends << users(:rowan)
+ users(:raghda).friends.reload
+ assert users(:raghda).friends.include?(users(:rowan))
+ end
 end
