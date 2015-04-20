@@ -1,6 +1,5 @@
 class SysadminsController < ApplicationController
   def new
-
   end
 
   def index
@@ -41,7 +40,7 @@ class SysadminsController < ApplicationController
     else
       block = Block.new(email: @user_to_be_blocked.email)
       if block.save
-        render blocked_path
+        redirect_to blocked_path
         Action.create(info: 'A system admin has blocked: (' + @user_to_be_blocked.username + ').', user_id: -1)
       else
         render 'show'
@@ -56,7 +55,7 @@ class SysadminsController < ApplicationController
     else
       unblock = Block.find_by(email: @user_to_be_unblocked.email)
       if unblock.destroy
-        render unblocked_path
+        redirect_to unblocked_path
         Action.create(info: 'A system admin has unblocked: (' + @user_to_be_unblocked.username + ').', user_id: -1)
       else
         render 'show'

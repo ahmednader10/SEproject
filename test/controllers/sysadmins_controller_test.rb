@@ -37,4 +37,23 @@ class SysadminsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "shout get forums" do
+    get :forums
+    assert_response :success
+    assert_not_nil assigns(:forums)
+  end
+
+  test "should block user" do
+    post :userBlocked, {'block_user' => "omar.ashraf@gmail.com"}
+    assert_redirected_to blocked_path
+    assert_not_nil assigns(:block)
+  end
+
+  #test "should unblock user" do
+    #unblock_tmp = Block.new(email: "omar.ashraf@gmail.com")
+   # post :userUnblocked, {'unblock_user' => "omar.ashraf@gmail.com"}
+    #assert_redirected_to unblocked_path
+    #assert_not_nil assigns(:user_to_be_unblocked)
+ # end
+
 end
