@@ -21,8 +21,10 @@ class CommentsController < ApplicationController
 		if @comment.save
 			
 			# This line of code sends a notification to the owner of the idea being commented on
-			Notification.create(info: (current_user.username + ' has commented: (' + @comment.text + ') on your idea: (' + @idea.title + ') on forum: (' + Forum.find(@idea.forum_id).title + ').'), seen: false, user_id: @idea.user_id)
-
+			if current_user.id != @idea.user_id
+				Notification.create(info: (current_user.username + ' has commented: (' + @comment.text + ') on your idea: (' + @idea.title + ') on forum: (' + Forum.find(@idea.forum_id).title + ').'), seen: false, user_id: @idea.user_id)
+			end
+			
 			Action.create(info: current_user.username + ' has commented: (' + @comment.text + ') on idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') on forum: (' + Forum.find(@idea.forum_id).title + ').', user_id: current_user.id)
 			
 			redirect_to [@forum, @idea] 
@@ -63,12 +65,13 @@ class CommentsController < ApplicationController
 			flash[:notice] = "comment deleted"
 			if current_user == nil
 				Action.create(info: 'A system administrator has deleted a comment: (' + @comment.text + ') on idea: (' + @idea.title + ') on forum: (' + @forum.title + ').', user_id: -1)
+				Notification.create(info: 'Your comment: (' + @comment.text + ') on idea: (' + @idea.title + ') on forum: (' + @forum.title + ') has been deleted.', user_id: @comment.user_id)
 			elsif @comment.user_id == @user.id
 				Action.create(info: @user.username + ' has deleted his comment: (' + @comment.text + ') on idea: (' + @idea.title + ') on forum: (' + @forum.title + ').', user_id: @user.id)
 			else
 				Action.create(info: @user.username + ' has deleted a comment: (' + @comment.text + ') on idea: (' + @idea.title + ') on forum: (' + @forum.title + ') belonging to ' + User.find(@comment.user_id).username + '.', user_id: @user.id)
+				Notification.create(info: 'Your comment: (' + @comment.text + ') on idea: (' + @idea.title + ') on forum: (' + @forum.title + ') has been deleted.', user_id: @comment.user_id)
 			end
-			Notification.create(info: 'Your comment: (' + @comment.text + ') on idea: (' + @idea.title + ') on forum: (' + @forum.title + ') has been deleted.', user_id: @comment.user_id)
 		else
 			flash[:notice] = "You can only delete your comments!"
 		end
