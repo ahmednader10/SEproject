@@ -7,7 +7,7 @@ class NotificationsControllerTest < ActionController::TestCase
 	end
 
 	def teardown
-		@notification.destroy
+		@notification = nil
 	end
 	
 	test "should get notifications" do

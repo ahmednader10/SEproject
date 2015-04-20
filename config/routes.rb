@@ -124,6 +124,10 @@ Rails.application.routes.draw do
 
   put 'syslog/unhide/:id' => 'actions#unhide'
 
+  put 'syslog/hideall' => 'actions#hideall'
+
+  put 'syslog/unhideall' => 'actions#unhideall'
+
   ############################################################################
 
   get 'users/indentation_error_message' => 'users#indentation_error_message'
