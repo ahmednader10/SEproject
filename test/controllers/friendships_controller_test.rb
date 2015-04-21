@@ -80,13 +80,7 @@ end
 
 
 
-#test "should create a friendship"  do 
-	#assert_difference('Friendship.count') do
-	#	post :create , friendship1: {user_id: 2 , friend_id: 3 ,  user_name: rowan, friend_name: raghda, :status => 0, requester: => rowan , requested: raghda} ,friendship2:{user_id: 3 ,friend_id:2 , user_name: raghda , requests: => rowan}
-#end 
-##assert_redirected_to users_path(assigns(:user))
 
-#end
 
 
 

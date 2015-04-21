@@ -32,6 +32,7 @@ user_without_an_email:
  password_question: What is the name of your pet?
  answer_for_password_question: Tori
 
+
 user_with_short_password:
  email: yassine@gmail.com
  password: 1237
@@ -75,7 +76,7 @@ user_with_repeated_username:
  password_question: What is the name of your best friend?
  answer_for_password_question: Omar
 
-user_with_an_existing_ameil:
+user_with_an_existing_email:
  email: yasmine@gmail.com
  password: 88881111
  username: yasmine_muhammad
@@ -132,4 +133,13 @@ raghda:
  full_name: Raghda Khaled
  password_question: What is the name of your best friend?
  answer_for_password_question: Rowan
+
+user_with_another_repeated_email:
+ email: emad.hussein@hotmail.com
+ password: 99991111
+ username: username_
+ gender: Male
+ full_name: Emad Hussein
+ password_question: What is the name of your best friend?
+ answer_for_password_question: Rami
 
