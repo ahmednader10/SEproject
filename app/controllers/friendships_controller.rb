@@ -5,6 +5,7 @@ before_action :authenticate_user, only: [:create]
 def show
  @users= User.all
   @friend = User.find(params[:id])
+  @friends = Friendship.all
 
 end 
 def index
@@ -47,8 +48,8 @@ def update
 
 if @friendship.update_attributes(user_id: @friend.user_id,friend_id: @user.id, status: 1) 
 flash[:notice] = 'Friend sucessfully accepted!'
-Action.create(info: @user.username + ' has accepted ' + @friend.username + "'s friend request." + user_id: @user.id)
-Notification.create(info: @user.username + ' has accepted your friend request.', user_id: @friend.id)
+#Action.create(info: @user.username + ' has accepted ' + @friend.username + "'s friend request." + user_id: => @user.id)
+#Notification.create(info: @user.username + ' has accepted your friend request.', user_id: => @friend.id)
 redirect_to friendships_path
 else
 redirect_to users_path
@@ -57,8 +58,8 @@ end
 
 
 def destroy
-
-@friendship = current_user.friendships.find(params[:id]).destroy
+  
+@friend = Friendship.find(params[:id]).destroy
 
 redirect_to root_path
 end

@@ -128,14 +128,14 @@ class IdeasController < ApplicationController
 # used to check that there's a current user to be able to use the above actions
 	def authenticate_user
 		@forum = Forum.find(params[:forum_id])
-
 		if current_user == nil
 			redirect_to @forum
+		else
 
-		Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: !true).empty?
+			Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: !true).empty?
+
 			render action: :not_joined_forum
 		end
-
 	end
 
 	def check_forum_not_joined
