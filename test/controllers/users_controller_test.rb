@@ -119,10 +119,6 @@ assert_response :success
 get :show , id: @user.id
 end  
 
-test "should redirect to profile" do
-
-end
-
 #tests the generated url from showing a user's profile
   test "should get profile"  do
     assert_generates 'users/profile/1', {controller: 'users' , action: 'profile', id:'1'}
