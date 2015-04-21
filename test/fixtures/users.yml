@@ -103,6 +103,26 @@ user_with_invalid_userna:
  password_question: What is the name of your best friend?
  answer_for_password_question: Shoukry
 
+<<<<<<< HEAD
+
+miada:
+ email: miada@what.com
+ password: blablabla
+ username: miada
+ gender: Female
+ full_name: Miada Nour 
+ password_question:  What is the name of your best friend?
+ answer_for_password_question: whocares
+
+dumb:
+ email: dumb@dumb.com
+ password: dummydummy
+ username: dummy
+ gender: Male
+ full_name: dumb dummy
+ password_question:  What is the name of your best friend?
+ answer_for_password_question: dummy
+=======
 user_with_valid_data1: 
  id: 25
  email: hadeel@gmail.com
@@ -142,4 +162,5 @@ user_with_another_repeated_email:
  full_name: Emad Hussein
  password_question: What is the name of your best friend?
  answer_for_password_question: Rami
+>>>>>>> 3c4a08f4501f839fd7ec66b73cd9678a30d15316
 
