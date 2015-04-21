@@ -3,7 +3,7 @@ require 'test_helper'
 class IdeasControllerTest < ActionController::TestCase
 
 	tests IdeasController
-# tests destroy action
+# tests route to destroy action
     test "should route to remove idea" do
       assert_generates 'forums/1/ideas/4', {controller: 'ideas' , action: 'destroy', id:'4', forum_id:'1'}
     end
@@ -29,7 +29,7 @@ class IdeasControllerTest < ActionController::TestCase
     assert_routing '/forums/1/ideas/new', {controller: 'ideas', action: 'new', forum_id: '1'}
   end
 
-
+  #tests that an idea is destroyed correctly on clicking on the delete buttons
   test "should get destroy idea" do
     @forum = forums(:forum_one)
     delete(:destroy, {'id' => "1", 'forum_id' => @forum.id})
@@ -52,8 +52,4 @@ end
  test "should get report idea" do
   assert_generates '/forums/1/ideas/3/report', {controller: 'ideas', action: 'report', forum_id: '1', id: '3'}
  end
-
-	test "should remove idea" do
-  	assert_generates 'forums/1/ideas/4', {controller: 'ideas' , action: 'destroy', id:'4', forum_id:'1'}
-  end
 end
