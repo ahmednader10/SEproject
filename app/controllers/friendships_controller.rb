@@ -26,7 +26,7 @@ def create
 
 
   Action.create(info: @user.username + ' has sent a friend request to ' + @friend.username, user_id: @user.id)
-  Noticfication.create(info: @user.username + ' has sent you a friend request.', user_id: @friend.id)
+  #Noticfication.create(info: @user.username + ' has sent you a friend request.', user_id: @friend.id)
 
 
   if @friendship.save  
@@ -59,7 +59,7 @@ end
 
 def destroy
   
-@friend = Friendship.find(params[:id]).destroy
+@friendship = Friendship.find(params[:id]).destroy
 
 redirect_to root_path
 end

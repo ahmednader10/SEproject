@@ -2,8 +2,15 @@
 <ul>
 <% @users.each do |user| %>
 
+
 <% for friendship in user.friendships %>
-  <%   if friendship.status ==1 || friendship.requested != current_user.username  %>
+<%   if friendship.requested == current_user.username  %> 
+
+<% else %> 
+
+
+
+  <%   if friendship.status = true  %>
 <em> no pending requests </em> 
 
 
@@ -19,9 +26,9 @@
 
 </li>
 
+<%end %>
+<%end %>
 
-
-    <%end %>
 <%end %>
  <%end %>
  
