@@ -1,10 +1,17 @@
 class SysadminsController < ApplicationController
+  
+  # This action just calls the "new" view.
   def new
   end
 
+  # This action just calls the "index" view.
   def index
   end
 
+  # "show" action checks if the username and password of system admin are correct
+  # and then re-directs the system admin to his homepage. Also if the system admin
+  # is already logged in, then the homepage appears. Otherwise, an error message
+  # indication wrong username/password combination.
   def show              #show system admin view
     if current_user
       redirect_to logged_in_path and return
@@ -19,6 +26,9 @@ class SysadminsController < ApplicationController
     end
   end
 
+  # "edit" action takes a valid email and enables the system to delete the user
+  # with this specified email. If the email is wrong, then the system admin is 
+  # redirected to a page with an error message.
   def edit
     @user_tmp = User.find_by(email: params[:email_delete])
     @users = User.all
@@ -33,12 +43,17 @@ class SysadminsController < ApplicationController
     end
   end
 
+  # This action just calls the deleteUser view.
   def deleteUser
   end
 
+  # This action just calls the missingUser view.
   def missingUser
   end
 
+  # This action takes an email, and allows the system admin to block a user.
+  # In case the user is successfully blocked, a page with a message indicating
+  # this appears. Otherwise, the same page is still there as is.
   def userBlocked
     @user_to_be_blocked = User.find_by(email: params[:block_user])
     if !@user_to_be_blocked
@@ -46,14 +61,18 @@ class SysadminsController < ApplicationController
     else
       @block = Block.new(email: @user_to_be_blocked.email)
       if @block.save
-        redirect_to blocked_path
-        Action.create(info: 'A system admin has blocked: (' + @user_to_be_blocked.username + ').', user_id: -1)
+        #flash[:notice] = "Blocked user!"
+        render blocked_path
+        #Action.create(info: 'A system admin has blocked: (' + @user_to_be_blocked.username + ').', user_id: -1)
       else
         render 'show'
       end
     end
   end
 
+  # This action takes an email, and allows the system admin to unblock a user.
+  # In case the user is successfully unblocked, a page with a message indicating
+  # this appears. Otherwise, the same page is still there as is.
   def userUnblocked
     @user_to_be_unblocked = User.find_by(email: params[:unblock_user])
     if !@user_to_be_unblocked
@@ -61,18 +80,21 @@ class SysadminsController < ApplicationController
     else
       @unblock = Block.find_by(email: @user_to_be_unblocked.email)
       if @unblock.destroy
-        redirect_to unblocked_path
-        Action.create(info: 'A system admin has unblocked: (' + @user_to_be_unblocked.username + ').', user_id: -1)
+        #flash[:notice] = "UnBlocked user!"
+        render unblocked_path
+        #Action.create(info: 'A system admin has unblocked: (' + @user_to_be_unblocked.username + ').', user_id: -1)
       else
         render 'show'
       end
     end
   end
 
+  # This action just calls the "forums" view.
   def forums
     @forums = Forum.all
   end
 
+  # This action just calls the "delete" view.
   def delete
   end 
 
