@@ -120,7 +120,7 @@ class UsersController < ApplicationController
 
 
 
-
+#this method blocks a user from the system so he can't add him
 
   def block_user
   @user = current_user
@@ -140,7 +140,7 @@ class UsersController < ApplicationController
   end
 
 
-
+#this method reports a user from the system
 
   def report_user
     @user = current_user 

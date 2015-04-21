@@ -1,23 +1,22 @@
 class FriendshipsController < ApplicationController
 before_action :authenticate_user, only: [:create]
 
-
+#This method displays all the users and friendships in the system
 def show
  @users= User.all
   @friend = User.find(params[:id])
   @friends = Friendship.all
 
 end 
+
+#This method displays current friends, the friend requests and the requested 
 def index
   @users= User.all
 
 end 
 
-
+#This  ethod creates a friendship, a user adds a friend and it's saved in friendships table
 def create
-
- 
-
 
 @user = current_user
 @friend = User.find( params[:friend_id])
@@ -42,6 +41,9 @@ def create
   
 end
   end
+
+
+  #This method is for accepting the friend request, the status is changed to true in the friendships table
 def update
 @user = User.find(current_user)
 @friend = Friendship.find( params[:id])
@@ -60,7 +62,7 @@ redirect_to users_path
 end
 end 
 
-
+#This method removes or deletes the friend request and removes the friendship from the table 
 def destroy
   
 @friendship = Friendship.find(params[:id]).destroy
@@ -69,7 +71,7 @@ redirect_to root_path
 end
 
 
-
+#this method checks that the user is currently logged in 
 def authenticate_user
 
     if current_user == nil
