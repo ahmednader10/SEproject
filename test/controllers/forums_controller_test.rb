@@ -79,41 +79,40 @@ class ForumsControllerTest < ActionController::TestCase
   	assert_redirected_to forums_path
   end
  
-  test "should get destroy" do
- #	user = User.create
- #	session[:user_id] = user.id
-  #  delete(:destroy, {'id' => "1"})
-  #  assert_response :success
-  end
-
+  #tests the correct route when requesting join a forum
   test "should route to join forum" do
   		assert_generates 'forums/1/join', {controller: 'forums' , action: 'join_forum', id:'1'}
   end
 
+  #tests the correct route to show a forum's members
   test "should route to show forum members" do
   	 	assert_generates 'forums/1/members', {controller: 'forums' , action: 'list_members', id:'1'}
   end
 
+  #tests the correct route when an admin deletes his forum
   test "should route to remove forum" do
   		assert_generates 'forums/1', {controller: 'forums' , action: 'destroy', id:'1'}
   end
 
+  #test the correct route to remove a member from a forum by its admin
   test "should route to remove member from forum" do
   		assert_generates 'forums/remove_member', {controller: 'forums' , action: 'remove_member'}
   end
 
+  #tests that the list of members of a forum is not empty
   test "forum members not empty" do
   		get(:list_members, {'id'=>"1"})
   		assert_not_nil assigns(:users)
   end
 
+  #tests that a user can't join a forum when not logged in
   test "shouldn't join without login" do
   		get(:join_forum, {'id'=>"1"})
   		assert_equal 'You should login first to be able to join forum',flash[:notice]
   end
 
 
-  
+  #tests that a user can't request to join a forum more than once until receiving response
   test "should get join forum" do
 	  	session[:user_id]= users(:user_with_valid_data).id
 	  	get(:join_forum, {'id'=>"1"})
@@ -121,18 +120,21 @@ class ForumsControllerTest < ActionController::TestCase
 	  	assert_equal 'already member of this forum',flash[:notice]
   end
 
+  #tests that a user can successfully join a forum
   test "should join forum" do
 	  	session[:user_id]= users(:user_2).id
 	  	get(:join_forum, {'id'=>"1"})
 	  	assert_equal 'Successfully joined forum',flash[:notice]
   end
 
+  #tests that a pending request is generated  correctly when a user requests to join a private forum
    test "should send request to join forum" do
 	  	session[:user_id]= users(:user_2).id
 	  	get(:join_forum, {'id'=>"2"})
 	  	assert_equal 'Pending request',flash[:notice]
   end
 
+  #tests that a user can't request to join a private forum more than once until receiving a response
   test "shouldn't send request to join forum 2 times" do
 	  	session[:user_id]= users(:rowan).id
 	  	get(:join_forum, {'id'=>"2"})
@@ -140,16 +142,9 @@ class ForumsControllerTest < ActionController::TestCase
 		assert_not_nil assigns(:membership)
   end
 
-
+  #test checks that showing a list of forum members was successful
   test "should get list of members" do
   		get(:list_members, {'id'=>"1"})
   		assert_response :success
-  		assert_not_nil assigns(:users)
-  end
-
-  #test gives error
-  test "should get remove member" do
-  	#	get(:remove_member,{ 'id' => "1" },{'user_id'=>"1"})
-  	#	assert_not_nil assigns(:membership1)
-  end
+  	end
 end

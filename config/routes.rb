@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   ####################### SysAdmin ###########################
 
-  get 'sysadmins/new'
+  get 'sysadmins/new' => 'sysadmins#new', as: 'new'
 
   get 'sysadmins/index' => 'sysadmins#index', as: 'index'
 
@@ -140,9 +140,9 @@ Rails.application.routes.draw do
 
   post 'forums/:id/admins/new' => 'admins#new', as: 'admin_to_be'
 
-  get 'admins/unauthorized_action' => 'admins#unauthorized_action'
+  get 'admins/unauthorized_action' => 'admins#unauthorized_action', as: 'unauthorized_action'
 
-  get 'admins/wrong_email' => 'admins#wrong_email'
+  get 'admins/wrong_email' => 'admins#wrong_email', as: 'wrong_email'
 
   get 'admins/added_admin' => 'admins#added_admin', as: 'added_admin' 
 

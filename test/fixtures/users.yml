@@ -14,15 +14,6 @@ user_with_valid_data:
  password_question: What is the name of your best friend?
  answer_for_password_question: Youssef
 
-
-#user_without_an_email:
-# password: thisismypassword
-# username: username_
-# gender: Female
-# full_name: Laila
-# password_question: What is the name of your pet?
-# answer_for_password_question: Tori
-
 user_2: 
  id: 4
  email: ahmed.nader@gmail.com
@@ -85,7 +76,7 @@ user_with_repeated_username:
  password_question: What is the name of your best friend?
  answer_for_password_question: Omar
 
-user_with_an_existing_ameil:
+user_with_an_existing_email:
  email: yasmine@gmail.com
  password: 88881111
  username: yasmine_muhammad
@@ -111,6 +102,26 @@ user_with_invalid_userna:
  full_name: Mohsen Emad
  password_question: What is the name of your best friend?
  answer_for_password_question: Shoukry
+
+
+
+miada:
+ email: miada@what.com
+ password: blablabla
+ username: miada
+ gender: Female
+ full_name: Miada Nour 
+ password_question:  What is the name of your best friend?
+ answer_for_password_question: whocares
+
+dumb:
+ email: dumb@dumb.com
+ password: dummydummy
+ username: dummy
+ gender: Male
+ full_name: dumb dummy
+ password_question:  What is the name of your best friend?
+ answer_for_password_question: dummy
 
 user_with_valid_data1: 
  id: 25
@@ -142,4 +153,14 @@ raghda:
  full_name: Raghda Khaled
  password_question: What is the name of your best friend?
  answer_for_password_question: Rowan
+
+user_with_another_repeated_email:
+ email: emad.hussein@hotmail.com
+ password: 99991111
+ username: username_
+ gender: Male
+ full_name: Emad Hussein
+ password_question: What is the name of your best friend?
+ answer_for_password_question: Rami
+
 

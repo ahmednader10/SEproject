@@ -21,3 +21,11 @@ admin:
 adimn_1:
   user_id: 1
   forum_id: 30
+
+repeated_record_in_admins_table:
+  user_id: 1
+  forum_id: 60
+
+normal_record: 
+  user_id: 1
+  forum_id: 60
