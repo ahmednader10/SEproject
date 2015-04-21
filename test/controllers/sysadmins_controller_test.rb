@@ -45,7 +45,6 @@ class SysadminsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-
   test "should get forums" do
     get :forums
     assert_response :success
@@ -61,14 +60,16 @@ class SysadminsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:block)
   end
 
+  # This test calls the action "userUnblocked" and passes an email
+  # to be unblocked and ensures that the controller redirects to
+  # the specified view
   test "should unblock user" do
-    #unblock_tmp = Block.new(email: "omar.ashraf@gmail.com")
-    #post :userUnblocked, {'unblock_user' => "omar.ashraf@gmail.com"}
-    #assert_redirected_to unblocked_path
-    #assert_not_nil assigns(:user_to_be_unblocked)
+    post :userUnblocked, {'unblock_user' => "omar.ashraf@gmail.com"}
+    assert_redirected_to unblocked_path
+    assert_not_nil assigns(:unblock)
   end
 
-
+  # Tests merging two forums together.
   test "should merge forums" do
     @forum1 = forums(:forum1)
     @forum2 = forums(:forum2)
@@ -81,6 +82,7 @@ class SysadminsControllerTest < ActionController::TestCase
     assert_redirected_to '/sysadmins/index'
   end
 
+  # Tests failure when trying to merge a forum with itself.
   test "should not merge forum with itself" do
     @forum1 = forums(:forum1)
     @forum2 = forums(:forum1)
@@ -88,11 +90,11 @@ class SysadminsControllerTest < ActionController::TestCase
     assert_equal "Can only merge different forums!", flash[:notice]
   end
 
+  # Tests failure when trying to merge two forums of different privacy setting. That is, a public forum with a private forum.
   test "should not merge forums of different privacy setting" do
     @forum1 = forums(:forum1)
     @forum2 = forums(:forum3)
     post(:createMerge, forum: {forum1_id: @forum1.id, forum2_id: @forum2.id, name: "title", description: "description"})
     assert_equal "Can only merge forums of the same privacy setting!", flash[:notice]
   end
-
 end

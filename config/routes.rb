@@ -140,7 +140,7 @@ Rails.application.routes.draw do
 
   post 'forums/:id/admins/new' => 'admins#new', as: 'admin_to_be'
 
-  get 'admins/unauthorized_action' => 'admins#unauthorized_action'
+  get 'admins/unauthorized_action' => 'admins#unauthorized_action', as: 'unauthorized_action'
 
   get 'admins/wrong_email' => 'admins#wrong_email'
 
