@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
 
 	# creates a new comment
    def new
-   	@idea = Idea.find(params[:id])
+   	@idea = Idea.find(params[:idea_id])
 		@comment = Comment.new
    end
 
