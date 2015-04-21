@@ -37,4 +37,10 @@ class SysadminsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should merge forums" do
+    forum1 = forums(:forum1)
+    forum2 = forums(:forum2)
+    get(:createMerge, forum1_id: forum1, forum_id: forum2)
+    assert_redirected_to '/sysadmins/index'
+  end
 end
