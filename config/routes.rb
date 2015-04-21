@@ -26,6 +26,10 @@ Rails.application.routes.draw do
 
   get 'sysadmins/userUnblocked' => 'sysadmins#userUnblocked', as: 'unblocked'
 
+  get 'sysadmins/deleteUser' => 'sysadmins#deleteUser', as: 'deleteUser'
+
+  get 'sysadmins/missingUser' => 'sysadmins#missingUser', as: 'missingUser'
+
   #post 'sysadmins/show' => 'sysadmins#show'
 
   ############### Admin ######################################
@@ -140,7 +144,7 @@ Rails.application.routes.draw do
 
   get 'admins/wrong_email' => 'admins#wrong_email'
 
-  get 'admins/added_admin' => 'admins#added_admin'  
+  get 'admins/added_admin' => 'admins#added_admin', as: 'added_admin' 
 
 
   get 'sessions/blockingMessage' => 'sessions#create', as: 'blocking_message'

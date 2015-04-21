@@ -41,8 +41,14 @@ class AdminsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  #test "should add admin" do
-  #  get :create
-  #end
+  # 
+  test "should add admin" do
+    post :create, {'forum_id' => 1}, admins: {user: "omar.ashraf@gmail.com"}
+    assert_response :success
+    assert_not_nil assigns(:user)
+    assert_redirected_to added_admin_path
+  end
+
+  
 
 end

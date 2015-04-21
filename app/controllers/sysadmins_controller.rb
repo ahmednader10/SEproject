@@ -1,6 +1,5 @@
 class SysadminsController < ApplicationController
   def new
-
   end
 
   def index
@@ -21,17 +20,23 @@ class SysadminsController < ApplicationController
   end
 
   def edit
-    user_tmp = User.find_by(email: params[:email_delete])
+    @user_tmp = User.find_by(email: params[:email_delete])
     @users = User.all
-    if !user_tmp
-      render 'index'
+    if !@user_tmp
+      redirect_to missingUser_path
     else
-      if user_tmp.destroy
-        render 'edit'
+      if @user_tmp.destroy
+        redirect_to deleteUser_path
       else
-        render root_path
+        render 'show'
       end
     end
+  end
+
+  def deleteUser
+  end
+
+  def missingUser
   end
 
   def userBlocked
@@ -39,9 +44,9 @@ class SysadminsController < ApplicationController
     if !@user_to_be_blocked
       render 'show'
     else
-      block = Block.new(email: @user_to_be_blocked.email)
-      if block.save
-        render blocked_path
+      @block = Block.new(email: @user_to_be_blocked.email)
+      if @block.save
+        redirect_to blocked_path
         Action.create(info: 'A system admin has blocked: (' + @user_to_be_blocked.username + ').', user_id: -1)
       else
         render 'show'
@@ -54,9 +59,9 @@ class SysadminsController < ApplicationController
     if !@user_to_be_unblocked
       render 'show'
     else
-      unblock = Block.find_by(email: @user_to_be_unblocked.email)
-      if unblock.destroy
-        render unblocked_path
+      @unblock = Block.find_by(email: @user_to_be_unblocked.email)
+      if @unblock.destroy
+        redirect_to unblocked_path
         Action.create(info: 'A system admin has unblocked: (' + @user_to_be_unblocked.username + ').', user_id: -1)
       else
         render 'show'
