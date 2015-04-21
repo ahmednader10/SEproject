@@ -43,6 +43,8 @@ class UsersController < ApplicationController
   def delete
   end
 
+#this method is used to update the user attributes it checks all validations that are required for user 
+#if all the checks are valid then the information gets updated and are saved in the data base
 
   def update 
     @user = current_user

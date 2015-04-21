@@ -61,8 +61,9 @@ class SysadminsController < ApplicationController
     else
       @block = Block.new(email: @user_to_be_blocked.email)
       if @block.save
-        redirect_to blocked_path
-        Action.create(info: 'A system admin has blocked: (' + @user_to_be_blocked.username + ').', user_id: -1)
+        #flash[:notice] = "Blocked user!"
+        render blocked_path
+        #Action.create(info: 'A system admin has blocked: (' + @user_to_be_blocked.username + ').', user_id: -1)
       else
         render 'show'
       end
@@ -79,8 +80,9 @@ class SysadminsController < ApplicationController
     else
       @unblock = Block.find_by(email: @user_to_be_unblocked.email)
       if @unblock.destroy
-        redirect_to unblocked_path
-        Action.create(info: 'A system admin has unblocked: (' + @user_to_be_unblocked.username + ').', user_id: -1)
+        #flash[:notice] = "UnBlocked user!"
+        render unblocked_path
+        #Action.create(info: 'A system admin has unblocked: (' + @user_to_be_unblocked.username + ').', user_id: -1)
       else
         render 'show'
       end
