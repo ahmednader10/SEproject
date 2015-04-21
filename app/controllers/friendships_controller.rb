@@ -5,6 +5,7 @@ before_action :authenticate_user, only: [:create]
 def show
  @users= User.all
   @friend = User.find(params[:id])
+  @friends = Friendship.all
 
 end 
 def index
@@ -55,8 +56,8 @@ end
 
 
 def destroy
-
-@friendship = current_user.friendships.find(params[:id]).destroy
+  
+@friend = Friendship.find(params[:id]).destroy
 
 redirect_to root_path
 end

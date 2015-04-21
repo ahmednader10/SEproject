@@ -72,5 +72,7 @@ class UsersControllerTest < ActionController::TestCase
   test "shouldroute to reject join request"  do
     assert_generates 'users/reject_join_request', {controller: 'users' , action: 'reject_join_request'}
   end
+  
+
 
 end
