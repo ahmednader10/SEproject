@@ -130,84 +130,62 @@ class ForumsController < ApplicationController
 
 	#method that enables the forum admin to remove any member from his forum and delete
 	# his record from membership table
-
 	def remove_member
-		 user = params[:user]
+		user = params[:user]
     	forum = params[:forum]
-    	 @membership1 = Membership.where(user_id: user , forum_id: forum)
-    	 @membership1.first.destroy
-    	 Action.create(info: current_user.username + ' has removed a member: (' + user.username + ') from the forum: (' + forum.title + ').', user_id: current_user.id)
-    	 Notification.create(info: 'You have been removed from forum: (' + forum.title + ').', user_id: user.id)
-    	 render 'list_members'
+    	@membership1 = Membership.where(user_id: user , forum_id: forum)
+    	@membership1.first.destroy
+    	Action.create(info: current_user.username + ' has removed a member: (' + user.username + ') from the forum: (' + forum.title + ').', user_id: current_user.id)
+    	Notification.create(info: 'You have been removed from forum: (' + forum.title + ').', user_id: user.id)
+    	render 'list_members'
 	end
 
 	#A method that returns a list of all the members in a certain forum
-
-
 	def list_members
 		@users = []
 		@forum = Forum.find(params[:id])
-		 forums_ids = Membership.where(forum_id: @forum.id , accept: true)
+		forums_ids = Membership.where(forum_id: @forum.id , accept: true)
         if !forums_ids.empty?
-          forums_ids.each do |r|
-           if !User.where(id: r.user_id).empty?
-            @users.concat(User.where(id: r.user_id))
-        end
-      
-    end
-    end
+          	forums_ids.each do |r|
+           		if !User.where(id: r.user_id).empty?
+            		@users.concat(User.where(id: r.user_id))
+        		end
+      		end
+    	end
 	end
 
 	# join action enables logged in user to join public forums through clicking on the button 
 	# "join Forum" and also enables logged in user to send request to join private forums and it checks 
 	# if the user has already joined the forum before 
-
 	def join_forum
-	
-		
-
 		@user = current_user
 		@forum = Forum.find(params[:id])
-
-
-		
 		if @user == nil
-
-			 flash[:notice] = 'You should login first to be able to join forum'
-
-   		 redirect_to root_url
+			flash[:notice] = 'You should login first to be able to join forum'
+			redirect_to root_url
    		else
-		membership = @forum.memberships.build(user: @user)
-		if @forum.privacy == '1'
-		Action.create(info: @user.username + ' has joined the forum: (' + @forum.title + ').', user_id: @user.id)
-		else
-		Action.create(info: @user.username + ' has requested to join the forum: (' + @forum.title + ').', user_id: @user.id)
+			@membership = @forum.memberships.build(user: @user)
+			if @forum.privacy == '1'
+				Action.create(info: @user.username + ' has joined the forum: (' + @forum.title + ').', user_id: @user.id)
+			else
+				Action.create(info: @user.username + ' has requested to join the forum: (' + @forum.title + ').', user_id: @user.id)
+			end
+			@membership.accept = true if @forum.privacy == '1'
+			if  @membership.save and @membership.accept == true
+			 	flash[:notice] = 'Successfully joined forum'
+	   		 	render :action => "show"
+				Notification.create(info: 'Your request to join forum: (' + @forum.title + ') has been accepted and you have successfully joined.', user_id: @user.id)
+	   		elsif !@membership.save and @membership.accept == true  
+	   			flash[:notice] = 'already member of this forum'
+	   			render :action => "show"
+			elsif !@membership.save and @membership.accept == nil  
+	   			flash[:notice] = 'already sent request to join this forum'
+	   			render :action => "show"
+			elsif @membership.accept == nil
+			   	flash[:notice] = 'Pending request'
+			   	render :action => "show"
+			end
 		end
-		membership.accept = true if @forum.privacy == '1'
-		
-
-
-		if  membership.save and membership.accept == true
-		 flash[:notice] = 'Successfully joined forum '
-   		 render :action => "show"
-
-   		 Notification.create(info: 'Your request to join forum: (' + @forum.title + ') has been accepted and you have successfully joined.', user_id: @user.id)
-   		
-   		elsif !membership.save and membership.accept == true  
-   				flash[:notice] = 'already member of this forum'
-   				render :action => "show"
-
-   		elsif !membership.save and membership.accept == nil  
-   				flash[:notice] = 'already sent request to join this forum'
-   				render :action => "show"
-
-   		elsif membership.accept == nil
-   				flash[:notice] = 'Pending request'
-   				render :action => "show"
-
-		end
-		end
-  		
   		#send notification joined successfully
 	end
  

@@ -10,14 +10,16 @@ class NotificationsController < ApplicationController
 	#'create' is for creating new notifications and saving them into the database.
 	def create
 		@notification = Notification.new(notification_params)
-		@notification.save
-		Action.create(info: current_user.username + ' was sent this notification: (' + @notification.info + ').', user_id: current_user.id)
+		if @notification.save
+			Action.create(info: current_user.username + ' was sent this notification: (' + @notification.info + ').', user_id: current_user.id)
+		end
 	end
 
 	# 'update' is used for updating the seen field to true when it is loaded into the notifications page
 	def update
-		@notification.update(notification_params)
-		Action.create(info: current_user.username + ' has seen this notification: (' + @notification.info + ').', user_id: current_user.id)
+		if @notification.update(notification_params)
+			Action.create(info: current_user.username + ' has seen this notification: (' + @notification.info + ').', user_id: current_user.id)
+		end
 	end
 
 	#'destroy' is for deleting notifications from the database
