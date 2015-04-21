@@ -42,6 +42,21 @@ test "should show friendships" do
     assert_generates '/friendships/1', {controller: 'friendships', action: 'show', id: '1'}
   end
 
+
+
+test "should get index" do 
+	assert_generates '/friendships', {controller: 'friendships', action: 'index'}
+
+end
+
+
+test "should destroy friendship" do
+	assert_generates '/friendships/1', {controller: 'friendships', action: 'destroy', id: '1'}
+end
+
+
+
+
 #test "should get index" do
     #get :index
     #assert_response :success

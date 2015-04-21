@@ -14,6 +14,16 @@ user_with_valid_data:
  password_question: What is the name of your best friend?
  answer_for_password_question: Youssef
 
+user_2: 
+ id: 4
+ email: ahmed.nader@gmail.com
+ password: 28111993
+ username: ahmednader10
+ gender: Male
+ full_name: Ahmed Nader
+ password_question: What is the name of your best friend?
+ answer_for_password_question: x
+
 user_without_an_email:
  password: thisismypassword
  username: username_

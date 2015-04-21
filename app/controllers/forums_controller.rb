@@ -164,24 +164,24 @@ class ForumsController < ApplicationController
 			flash[:notice] = 'You should login first to be able to join forum'
 			redirect_to root_url
    		else
-			membership = @forum.memberships.build(user: @user)
+			@membership = @forum.memberships.build(user: @user)
 			if @forum.privacy == '1'
 				Action.create(info: @user.username + ' has joined the forum: (' + @forum.title + ').', user_id: @user.id)
 			else
 				Action.create(info: @user.username + ' has requested to join the forum: (' + @forum.title + ').', user_id: @user.id)
 			end
-			membership.accept = true if @forum.privacy == '1'
-			if  membership.save and membership.accept == true
-			 	flash[:notice] = 'Successfully joined forum '
+			@membership.accept = true if @forum.privacy == '1'
+			if  @membership.save and @membership.accept == true
+			 	flash[:notice] = 'Successfully joined forum'
 	   		 	render :action => "show"
 				Notification.create(info: 'Your request to join forum: (' + @forum.title + ') has been accepted and you have successfully joined.', user_id: @user.id)
-	   		elsif !membership.save and membership.accept == true  
+	   		elsif !@membership.save and @membership.accept == true  
 	   			flash[:notice] = 'already member of this forum'
 	   			render :action => "show"
-			elsif !membership.save and membership.accept == nil  
+			elsif !@membership.save and @membership.accept == nil  
 	   			flash[:notice] = 'already sent request to join this forum'
 	   			render :action => "show"
-			elsif membership.accept == nil
+			elsif @membership.accept == nil
 			   	flash[:notice] = 'Pending request'
 			   	render :action => "show"
 			end
