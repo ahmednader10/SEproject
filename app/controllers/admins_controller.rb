@@ -25,7 +25,7 @@ class AdminsController < ApplicationController
   def create 
     forum_id = params[:forum_id]
     user_email = params[:admin][:user]
-    user = User.find_by(email: user_email)
+    @user = User.find_by(email: user_email)
     
     if User.exists?(:email => params[:admin][:user]) 
       if session[:sysadmin] or Admin.exists?(:forum_id => params[:forum_id], :user_id => current_user.id) 
