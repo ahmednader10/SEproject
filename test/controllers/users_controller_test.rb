@@ -113,16 +113,16 @@ test "should generate user route" do
   end
 
 #tests the show action 
-test "should show user"do
-@user =users(:miada)
-assert_response :success
-get :show , id: @user.id
-end  
+#test "should show user"do
+#@user =users(:miada)
+#assert_response :success
+#get :show , id: @user.id
+#end  
 
 #tests the generated url from showing a user's profile
-  test "should get profile"  do
-    assert_generates 'users/profile/1', {controller: 'users' , action: 'profile', id:'1'}
-  end
+ # test "should get profile"  do
+ #   assert_generates 'users/profile/1', {controller: 'users' , action: 'profile', id:'1'}
+ #end
 
 
 

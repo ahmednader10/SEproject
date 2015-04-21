@@ -49,9 +49,11 @@ class AdminsController < ApplicationController
     end
   end
 
+  # This action just calls the "edit" view.
   def edit
   end
 
+  # This action just calls the "delete" view.
   def delete
   end
 end
