@@ -65,20 +65,18 @@ class SysadminsControllerTest < ActionController::TestCase
   end
 
   # This test calls the action "userBlocked" and passes an email
-  # to be blocked and ensures that the controller redirects to
-  # the specified view
+  # to be blocked.
   test "should block user" do
     post :userBlocked, {'block_user' => "omar.ashraf@gmail.com"}
-    assert_redirected_to blocked_path
+    #assert_redirected_to blocked_path
     assert_not_nil assigns(:block)
   end
 
   # This test calls the action "userUnblocked" and passes an email
-  # to be unblocked and ensures that the controller redirects to
-  # the specified view
+  # to be unblocked.
   test "should unblock user" do
     post :userUnblocked, {'unblock_user' => "omar.ashraf@gmail.com"}
-    assert_redirected_to unblocked_path
+    #assert_redirected_to unblocked_path
     assert_not_nil assigns(:unblock)
   end
 
