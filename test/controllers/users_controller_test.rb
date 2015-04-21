@@ -59,15 +59,6 @@ class UsersControllerTest < ActionController::TestCase
       assert_generates 'users/join_requests', {controller: 'users' , action: 'admin_join_forums_requests'}
   end
 
-  #this test checks the route to show another user's profile
-  test "should show user" do
-      assert_generates '/users/1', {controller: 'users', action: 'show', id: '1'}
-  end
-
-  test "should get profile"  do
-      assert_generates 'users/profile/1', {controller: 'users' , action: 'profile', id:'1'}
-  end
-
   #this test checks the route when a forum admin accepts a join request
 
   test "should route to accept join request"  do
@@ -110,6 +101,15 @@ end
 #tests the generated url from showing a user
 test "should generate user route" do
     assert_generates '/users/1', {controller: 'users', action: 'show', id: '1'}
+  end
+  #this test checks the route to show another user's profile
+  test "should show user" do
+      assert_generates '/users/1', {controller: 'users', action: 'show', id: '1'}
+  end
+
+#checks the generated url for the user profile
+  test "should get profile"  do
+      assert_generates 'users/profile/1', {controller: 'users' , action: 'profile', id:'1'}
   end
 
 #tests the show action 
