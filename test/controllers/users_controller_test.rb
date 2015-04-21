@@ -103,7 +103,7 @@ test "should generate user route" do
     assert_generates '/users/1', {controller: 'users', action: 'show', id: '1'}
   end
   #this test checks the route to show another user's profile
-  test "should show user" do
+  test "should show user route" do
       assert_generates '/users/1', {controller: 'users', action: 'show', id: '1'}
   end
 
