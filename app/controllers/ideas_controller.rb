@@ -132,16 +132,18 @@ class IdeasController < ApplicationController
 			redirect_to @forum
 		else
 
-			Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: !true).empty?
+			if Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?
 
 			render action: :not_joined_forum
+		end
 		end
 	end
 
 	def check_forum_not_joined
 		@forum = Forum.find(params[:forum_id])
 			if current_user != nil and Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?
-			render action: :not_joined_forum
+				render action: :not_joined_forum
+
 		end
 	end
 end
