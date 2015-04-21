@@ -45,6 +45,7 @@ class SysadminsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+
   test "should get forums" do
     get :forums
     assert_response :success
@@ -65,6 +66,33 @@ class SysadminsControllerTest < ActionController::TestCase
     #post :userUnblocked, {'unblock_user' => "omar.ashraf@gmail.com"}
     #assert_redirected_to unblocked_path
     #assert_not_nil assigns(:user_to_be_unblocked)
+  end
+
+
+  test "should merge forums" do
+    @forum1 = forums(:forum1)
+    @forum2 = forums(:forum2)
+    assert_difference('Forum.count', -1) do
+      post(:createMerge, forum: {forum1_id: @forum1.id, forum2_id: @forum2.id, name: "title", description: "description"})
+    end
+    forum_merged = Forum.where(id: @forum1.id)
+    assert_match forum_merged.first.title, "title"
+    assert_match forum_merged.first.description, "description"
+    assert_redirected_to '/sysadmins/index'
+  end
+
+  test "should not merge forum with itself" do
+    @forum1 = forums(:forum1)
+    @forum2 = forums(:forum1)
+    post(:createMerge, forum: {forum1_id: @forum1.id, forum2_id: @forum2.id, name: "title", description: "description"})
+    assert_equal "Can only merge different forums!", flash[:notice]
+  end
+
+  test "should not merge forums of different privacy setting" do
+    @forum1 = forums(:forum1)
+    @forum2 = forums(:forum3)
+    post(:createMerge, forum: {forum1_id: @forum1.id, forum2_id: @forum2.id, name: "title", description: "description"})
+    assert_equal "Can only merge forums of the same privacy setting!", flash[:notice]
   end
 
 end

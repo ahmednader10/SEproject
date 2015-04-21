@@ -76,9 +76,14 @@ class SysadminsController < ApplicationController
   def delete
   end 
 
+  # This action is only for rendering the merge view
   def merge
   end
 
+  # This is where merging occurs. The older of the two forums is kept in the database with the new name and description
+  # specified, and all the ideas and members of the other forum are transferred to that one. Only the admins of the older
+  # froum remain. Finally, the other forum is deleted from the database and the older one is considered to be the
+  # merged version.
   def createMerge
     if params[:forum][:forum1_id] == params[:forum][:forum2_id]
       flash[:notice] = "Can only merge different forums!"
@@ -88,7 +93,7 @@ class SysadminsController < ApplicationController
       forum2_id = params[:forum][:forum2_id]
 
       forum1 = Forum.where({ id: forum1_id })
-      forum2 = Forum.where ({ id: forum2_id })
+      forum2 = Forum.where({ id: forum2_id })
 
       old_forum_id = 0
       new_forum_id = 0
@@ -118,15 +123,16 @@ class SysadminsController < ApplicationController
           m.save
         end
 
-        new_forum = Forum.where({ id: new_forum_id })
-        new_forum.first.destroy
-
-        Action.create(info: 'A system admin has merged forum: (' + old_forum.title + ') and forum: (' + new_forum.title + ') into one.', user_id: -1)
-
         old_forum = Forum.where({ id: old_forum_id })
         old_forum.first.title = name
         old_forum.first.description = description
         old_forum.first.save
+
+        new_forum = Forum.where({ id: new_forum_id })
+
+        Action.create(info: 'A system admin has merged forum: (' + old_forum.first.title + ') and forum: (' + new_forum.first.title + ') into one.', user_id: -1)
+
+        new_forum.first.destroy
 
         # For now
         redirect_to('/sysadmins/index')
