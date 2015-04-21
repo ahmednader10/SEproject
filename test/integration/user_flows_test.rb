@@ -6,7 +6,6 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
   # end
 
   test "login and browse site" do
-    # login via https
     https!
     get "/"
     assert_response :success
