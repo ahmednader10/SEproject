@@ -1,9 +1,7 @@
-<div align "center"><h1>Successfully Logged in! </h1></div>
-<!--
-Signed in as <strong><%= current_user.full_name %></strong>!<br>
-Signed in as <strong><%= current_user.name %></strong>!<br>
--->
+<div align "center"><h1>Already logged in! </h1></div>
 
+<!-- If already logged in normally, shows user's full name.-->
+<!-- If already logged in with facebook or twitter, show's username used in the social networks.-->
 Signed in as 
 <strong>
 	<% if current_user.uid == nil %>

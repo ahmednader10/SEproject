@@ -21,7 +21,7 @@ class IdeasController < ApplicationController
 
 	end
 
-	# a method that enables the forum admin to delete any idea written by any member in his forum
+	# a method that enables the forum admin to delete any idea written by any member in his forum or the user to delete his ideas
 	def destroy
 		@idea = Idea.find(params[:id])
 		@forum = Forum.find(params[:forum_id])
@@ -132,16 +132,18 @@ class IdeasController < ApplicationController
 			redirect_to @forum
 		else
 
-			Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: !true).empty?
+			if Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?
 
 			render action: :not_joined_forum
+		end
 		end
 	end
 
 	def check_forum_not_joined
 		@forum = Forum.find(params[:forum_id])
 			if current_user != nil and Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?
-			render action: :not_joined_forum
+				render action: :not_joined_forum
+
 		end
 	end
 end

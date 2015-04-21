@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   ####################### SysAdmin ###########################
 
-  get 'sysadmins/new'
+  get 'sysadmins/new' => 'sysadmins#new', as: 'new'
 
   get 'sysadmins/index' => 'sysadmins#index', as: 'index'
 
@@ -25,6 +25,10 @@ Rails.application.routes.draw do
   get 'sysadmins/userBlocked' => 'sysadmins#userBlocked', as: 'blocked'
 
   get 'sysadmins/userUnblocked' => 'sysadmins#userUnblocked', as: 'unblocked'
+
+  get 'sysadmins/deleteUser' => 'sysadmins#deleteUser', as: 'deleteUser'
+
+  get 'sysadmins/missingUser' => 'sysadmins#missingUser', as: 'missingUser'
 
   #post 'sysadmins/show' => 'sysadmins#show'
 
@@ -65,7 +69,7 @@ Rails.application.routes.draw do
   match 'auth/:provider/callback', to: 'sessions#createF', :via => [:get, :post]
   match 'auth/failure', to: redirect('/'), :via => [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', :via => [:get, :post]
-  ##############################################################################
+ 
 
   ####################### Social share button ##################################
   resources :homes, only: [:show]
@@ -136,11 +140,11 @@ Rails.application.routes.draw do
 
   post 'forums/:id/admins/new' => 'admins#new', as: 'admin_to_be'
 
-  get 'admins/unauthorized_action' => 'admins#unauthorized_action'
+  get 'admins/unauthorized_action' => 'admins#unauthorized_action', as: 'unauthorized_action'
 
-  get 'admins/wrong_email' => 'admins#wrong_email'
+  get 'admins/wrong_email' => 'admins#wrong_email', as: 'wrong_email'
 
-  get 'admins/added_admin' => 'admins#added_admin'  
+  get 'admins/added_admin' => 'admins#added_admin', as: 'added_admin' 
 
 
   get 'sessions/blockingMessage' => 'sessions#create', as: 'blocking_message'
@@ -183,8 +187,8 @@ delete 'forums/:forum_id/ideas/:idea_id/comments/:id' => 'comments#destroy', as:
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
-  #Login as the Homepage
+  # Login as the homepage
+  # To be changed later
    root 'sessions#new'
 
   # Example of regular route:
