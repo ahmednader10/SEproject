@@ -69,7 +69,7 @@ Rails.application.routes.draw do
   match 'auth/:provider/callback', to: 'sessions#createF', :via => [:get, :post]
   match 'auth/failure', to: redirect('/'), :via => [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', :via => [:get, :post]
-  ##############################################################################
+ 
 
   ####################### Social share button ##################################
   resources :homes, only: [:show]
@@ -187,8 +187,8 @@ delete 'forums/:forum_id/ideas/:idea_id/comments/:id' => 'comments#destroy', as:
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
-  #Login as the Homepage
+  # Login as the homepage
+  # To be changed later
    root 'sessions#new'
 
   # Example of regular route:
