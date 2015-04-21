@@ -24,13 +24,13 @@ user_2:
  password_question: What is the name of your best friend?
  answer_for_password_question: x
 
-#user_without_an_email:
-# password: thisismypassword
-# username: username_
-# gender: Female
-# full_name: Laila
-# password_question: What is the name of your pet?
-# answer_for_password_question: Tori
+user_without_an_email:
+ password: thisismypassword
+ username: username_
+ gender: Female
+ full_name: Laila
+ password_question: What is the name of your pet?
+ answer_for_password_question: Tori
 
 
 user_with_short_password:

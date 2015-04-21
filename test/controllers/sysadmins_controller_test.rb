@@ -44,7 +44,7 @@ class SysadminsControllerTest < ActionController::TestCase
   # of the user to be deleted, the right page with the error message
   # appears.
   test "should not get edit" do
-    get :edit
+    get :edit, {'email_delete' => "omar.ashraf@gmail.co"}
     assert_nil assigns(:user_tmp)
     assert_redirected_to missingUser_path
   end

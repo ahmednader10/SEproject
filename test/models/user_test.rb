@@ -70,12 +70,12 @@ test "that creating friendships on a user works" do
  assert users(:raghda).friends.include?(users(:rowan))
  end
 
-  def test_show
-    user = users(:miada)
-    get user_url(user)
-    assert_response :success
-    assert_select "h1" , user.username
-  end
+  #def test_show
+  #  user = users(:miada)
+  #  get user_url(user)
+  #  assert_response :success
+  #  assert_select "h1" , user.username
+  #end
 
 
 end
