@@ -14,6 +14,15 @@ user_with_valid_data:
  password_question: What is the name of your best friend?
  answer_for_password_question: Youssef
 
+
+#user_without_an_email:
+# password: thisismypassword
+# username: username_
+# gender: Female
+# full_name: Laila
+# password_question: What is the name of your pet?
+# answer_for_password_question: Tori
+
 user_2: 
  id: 4
  email: ahmed.nader@gmail.com
@@ -31,6 +40,7 @@ user_without_an_email:
  full_name: Laila
  password_question: What is the name of your pet?
  answer_for_password_question: Tori
+
 
 user_with_short_password:
  email: yassine@gmail.com

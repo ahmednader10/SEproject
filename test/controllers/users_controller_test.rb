@@ -72,6 +72,8 @@ class UsersControllerTest < ActionController::TestCase
   test "should route to reject join request"  do
       assert_generates 'users/reject_join_request', {controller: 'users' , action: 'reject_join_request'}
   end
+  
+
 
   test "should accept join request" do
    # get :accept_join_request, {:forum=>"2",:user=>"1"}
@@ -85,5 +87,22 @@ class UsersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:requests_forums)
     assert_not_nil assigns(:requests_forums)
   end
+
+  test "should accept join request" do
+    get(:accept_join_request,{ 'id' => "1" })
+    assert_response :success
+  end
+
+
+
+  test "should block a user" do 
+     assert_generates 'users/1/block_user', {controller: 'users' , action: 'block_user', user_id:'1'}
+   end
+
+
+test "should report a user" do 
+     assert_generates 'users/1/report_user', {controller: 'users' , action: 'report_user', user_id:'1'}
+   end
+
 end
 

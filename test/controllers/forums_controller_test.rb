@@ -51,7 +51,7 @@ class ForumsControllerTest < ActionController::TestCase
   	@forum = forums(:forum_update)
   	session[:user_id] = users(:user_with_valid_data).id
   	patch(:update, id: @forum, forum: {title: 'title_updated', description: 'description_updated', privacy: '2'})
-  	forum_new = Forum.where(id: 70)
+  	forum_new = Forum.where(id: @forum.id)
   	assert_match forum_new.first.title, "title_updated"
   	assert_match forum_new.first.description, "description_updated"
   	assert_match forum_new.first.privacy, "2"

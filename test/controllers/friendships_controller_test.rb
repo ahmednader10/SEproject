@@ -42,6 +42,21 @@ test "should show friendships" do
     assert_generates '/friendships/1', {controller: 'friendships', action: 'show', id: '1'}
   end
 
+
+
+test "should get index" do 
+	assert_generates '/friendships', {controller: 'friendships', action: 'index'}
+
+end
+
+
+test "should destroy friendship" do
+	assert_generates '/friendships/1', {controller: 'friendships', action: 'destroy', id: '1'}
+end
+
+
+
+
 #test "should get index" do
     #get :index
     #assert_response :success
@@ -65,13 +80,7 @@ test "should show friendships" do
 
 
 
-#test "should create a friendship"  do 
-	#assert_difference('Friendship.count') do
-	#	post :create , friendship1: {user_id: 2 , friend_id: 3 ,  user_name: rowan, friend_name: raghda, :status => 0, requester: => rowan , requested: raghda} ,friendship2:{user_id: 3 ,friend_id:2 , user_name: raghda , requests: => rowan}
-#end 
-##assert_redirected_to users_path(assigns(:user))
 
-#end
 
 
 
