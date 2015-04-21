@@ -14,19 +14,25 @@ class SysadminsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  # This test ensures that the "show" action is called successfully.
   test "should get show" do
     session[:sysadmin] = "true"
-    post :show, session[:sysadmin]
+    post :show
     assert_response :success
   end
 
-  #test "should not get show" do
-    #current_user = users(:user_with_short_password)
-  #  #session[:sysadmin] = "true"
-  #  post :show, {'user_id' => 1}
-  #  assert_response :success
-  #end
+  # This test ensures that when given a wrong username and password
+  # combination for the system admin, a re-direction for the right 
+  # page occurs. Also, the error message appears.
+  test "should not get show" do
+    session[:sysadmin] = "tre"
+    post :show, sysadmin: {username: "admin", password: "passord"}
+    assert_redirected_to new_path
+    assert_match flash[:notice], "Wrong email/password combination."
+  end
 
+  # This test ensures that when deleting a user with a valid email,
+  # a re-direction to the right page occurs.
   test "should get edit" do
     get :edit, {'email_delete' => "omar.ashraf@gmail.com"}
     assert_not_nil assigns(:users)
@@ -34,17 +40,24 @@ class SysadminsControllerTest < ActionController::TestCase
     assert_redirected_to deleteUser_path
   end
 
+  # This test ensures that whenever there is an error in the email
+  # of the user to be deleted, the right page with the error message
+  # appears.
   test "should not get edit" do
     get :edit
     assert_nil assigns(:user_tmp)
     assert_redirected_to missingUser_path
   end
 
+  # This test ensures that the delete action is called successfully.
   test "should get delete" do
     get :delete
     assert_response :success
   end
 
+  # This test ensures that the "forums" action is called successfully.
+  # Also, it nakes sure that the instance variable assigned there is not
+  # nil.
   test "should get forums" do
     get :forums
     assert_response :success

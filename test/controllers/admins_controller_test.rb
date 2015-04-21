@@ -41,11 +41,22 @@ class AdminsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  # This test makes sure that "create" action is called successfully and
+  # that when an admin is added, a re-directions to a specific view occurs.
   test "should add admin" do
     @forum = forums(:forum_two)
     session[:sysadmin] = "true"
     post :create, forum_id: @forum, admin: {user: "omar.ashraf@gmail.com"}
     assert_redirected_to added_admin_path
+  end
+
+  # This test ensures that if the email is wrong, the correct page for displaying
+  # an error appears.
+  test "should not add admin" do
+    @forum = forums(:forum_two)
+    session[:sysadmin] = "true"
+    post :create, forum_id: @forum, admin: {user: "omar.ashraf@gmail.co"}
+    assert_redirected_to wrong_email_path
   end
 
 end
