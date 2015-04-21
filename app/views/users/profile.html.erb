@@ -41,12 +41,6 @@
 	
 
 
-
-<% if @current_user.uid == nil %>
-<h1> <%= @current_user.full_name %> welcome to your profile</h1>
-<% end %>
-
-
 <% if @current_user.name == nil %>
 <h1> <%= @current_user.username %> welcome to your profile</h1>
 <% else %>

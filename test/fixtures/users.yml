@@ -91,3 +91,23 @@ user_with_invalid_userna:
  full_name: Mohsen Emad
  password_question: What is the name of your best friend?
  answer_for_password_question: Shoukry
+
+
+miada:
+ email: miada@what.com
+ password: blablabla
+ username: miada
+ gender: Female
+ full_name: Miada Nour 
+ password_question:  What is the name of your best friend?
+ answer_for_password_question: whocares
+
+dumb:
+ email: dumb@dumb.com
+ password: dummydummy
+ username: dummy
+ gender: Male
+ full_name: dumb dummy
+ password_question:  What is the name of your best friend?
+ answer_for_password_question: dummy
+
