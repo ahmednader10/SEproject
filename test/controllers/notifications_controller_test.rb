@@ -16,7 +16,9 @@ class NotificationsControllerTest < ActionController::TestCase
 	end
 
 	test "should redirect to notifications" do
-		delete :destroy , id: @notification.id
+		assert_difference('Notification.count', difference = -1) do
+			delete :destroy , id: @notification.id
+		end
 		assert_redirected_to '/notifications'
 	end
 	

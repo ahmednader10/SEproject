@@ -1,38 +1,42 @@
 class SysadminsController < ApplicationController
   def new
-
   end
 
   def index
   end
 
-  def show
+  def show              #show system admin view
     if current_user
       redirect_to logged_in_path and return
     end
 
-    if session[:sysadmin] or (params[:sysadmin][:username] == 'admin' and params[:sysadmin][:password] == 'password')
-      session[:sysadmin] = true
+    if session[:sysadmin] == "true" or (params[:sysadmin][:username] == 'admin' and params[:sysadmin][:password] == 'password')
+      session[:sysadmin] = "true"
       render 'show'
     else
-      redirect_to(action: 'index')     #should be changed
+      flash[:notice] = "Wrong email/password combination."
+      redirect_to(:action => 'new') 
     end
   end
 
   def edit
-    user_tmp = User.find_by(email: params[:q])
+    @user_tmp = User.find_by(email: params[:email_delete])
     @users = User.all
-    if !user_tmp
-      #@user_tmp.destroy                #has to be solved
-      render 'index'
+    if !@user_tmp
+      redirect_to missingUser_path
     else
-      #render 'edit'
-      if user_tmp.destroy
-        render 'edit'
+      if @user_tmp.destroy
+        redirect_to deleteUser_path
       else
-        render root_path
+        render 'show'
       end
     end
+  end
+
+  def deleteUser
+  end
+
+  def missingUser
   end
 
   def userBlocked
@@ -40,9 +44,9 @@ class SysadminsController < ApplicationController
     if !@user_to_be_blocked
       render 'show'
     else
-      block = Block.new(email: @user_to_be_blocked.email)
-      if block.save
-        render blocked_path
+      @block = Block.new(email: @user_to_be_blocked.email)
+      if @block.save
+        redirect_to blocked_path
         Action.create(info: 'A system admin has blocked: (' + @user_to_be_blocked.username + ').', user_id: -1)
       else
         render 'show'
@@ -55,9 +59,9 @@ class SysadminsController < ApplicationController
     if !@user_to_be_unblocked
       render 'show'
     else
-      unblock = Block.find_by(email: @user_to_be_unblocked.email)
-      if unblock.destroy
-        render unblocked_path
+      @unblock = Block.find_by(email: @user_to_be_unblocked.email)
+      if @unblock.destroy
+        redirect_to unblocked_path
         Action.create(info: 'A system admin has unblocked: (' + @user_to_be_unblocked.username + ').', user_id: -1)
       else
         render 'show'
@@ -72,9 +76,14 @@ class SysadminsController < ApplicationController
   def delete
   end 
 
+  # This action is only for rendering the merge view
   def merge
   end
 
+  # This is where merging occurs. The older of the two forums is kept in the database with the new name and description
+  # specified, and all the ideas and members of the other forum are transferred to that one. Only the admins of the older
+  # froum remain. Finally, the other forum is deleted from the database and the older one is considered to be the
+  # merged version.
   def createMerge
     if params[:forum][:forum1_id] == params[:forum][:forum2_id]
       flash[:notice] = "Can only merge different forums!"
@@ -84,7 +93,7 @@ class SysadminsController < ApplicationController
       forum2_id = params[:forum][:forum2_id]
 
       forum1 = Forum.where({ id: forum1_id })
-      forum2 = Forum.where ({ id: forum2_id })
+      forum2 = Forum.where({ id: forum2_id })
 
       old_forum_id = 0
       new_forum_id = 0
@@ -114,15 +123,16 @@ class SysadminsController < ApplicationController
           m.save
         end
 
-        new_forum = Forum.where({ id: new_forum_id })
-        new_forum.first.destroy
-
-        Action.create(info: 'A system admin has merged forum: (' + old_forum.title + ') and forum: (' + new_forum.title + ') into one.', user_id: -1)
-
         old_forum = Forum.where({ id: old_forum_id })
         old_forum.first.title = name
         old_forum.first.description = description
         old_forum.first.save
+
+        new_forum = Forum.where({ id: new_forum_id })
+
+        Action.create(info: 'A system admin has merged forum: (' + old_forum.first.title + ') and forum: (' + new_forum.first.title + ') into one.', user_id: -1)
+
+        new_forum.first.destroy
 
         # For now
         redirect_to('/sysadmins/index')

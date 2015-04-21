@@ -25,19 +25,19 @@ class AdminsController < ApplicationController
   def create 
     forum_id = params[:forum_id]
     user_email = params[:admin][:user]
-    user = User.find_by(email: user_email)
+    @user = User.find_by(email: user_email)
     
     if User.exists?(:email => params[:admin][:user]) 
       if session[:sysadmin] or Admin.exists?(:forum_id => params[:forum_id], :user_id => current_user.id) 
-        user_id = user.id
+        user_id = @user.id
         Admin.create!(forum_id: forum_id, user_id: user_id)
         
         if current_user != nil
-          Action.create(info: current_user.username + ' has added ' + user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: current_user.id)
-          Notification.create(info: current_user.username + ' has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: user.id)
+          Action.create(info: current_user.username + ' has added ' + @user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: current_user.id)
+          Notification.create(info: current_user.username + ' has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: @user.id)
         else
-          Action.create(info: 'A system administrator has added ' + user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: -1)
-          Notification.create(info: 'A system administrator has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: user.id)
+          Action.create(info: 'A system administrator has added ' + @user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: -1)
+          Notification.create(info: 'A system administrator has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: @user.id)
         end
 
         redirect_to(:action => 'added_admin')

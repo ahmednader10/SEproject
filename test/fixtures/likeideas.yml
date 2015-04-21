@@ -1,9 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user_id: 1
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+
+complete_likeidea:
+  user_id: 25
   idea_id: 1
 
-two:
-  user_id: 1
+no_user:
   idea_id: 1
+
+no_idea:
+  user_id: 1  

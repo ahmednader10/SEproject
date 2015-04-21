@@ -4,12 +4,28 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-normal_record: 
- user_id: 1
- forum_id: 2
+#normal_record: 
+# user_id: 1
+# forum_id: 2
 # column: value
 #
-repeated_record_in_admins_table: 
- user_id: 2
- forum_id: 2
+#repeated_record_in_admins_table: 
+# user_id: 1
+# forum_id: 2
 #  column: value
+
+admin:
+  user_id: 1
+  forum_id: 70
+
+adimn_1:
+  user_id: 1
+  forum_id: 30
+
+repeated_record_in_admins_table:
+  user_id: 1
+  forum_id: 60
+
+normal_record: 
+  user_id: 1
+  forum_id: 60

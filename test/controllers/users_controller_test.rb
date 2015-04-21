@@ -7,24 +7,24 @@ class UsersControllerTest < ActionController::TestCase
   # This test checks that a request to "index" action was successful and also makes sure
   # that the variable "users" has some data since the controller do so to this variable.
   test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:users)
+      get :index
+      assert_response :success
+      assert_not_nil assigns(:users)
   end
 
   # This test checks that a request to "new" action was successful and also makes sure
   # that the variable "user" is not equal to nil, since it was assigned a value in the 
   # "new" action.
   test "should get new" do
-    get :new
-    assert_response :success
-    assert_not_nil assigns(:user)
+      get :new
+      assert_response :success
+      assert_not_nil assigns(:user)
   end
 
   # This test just makes sure that the "delete" action was called successfully.
   test "should get delete" do
-    get :delete
-    assert_response :success
+      get :delete
+      assert_response :success
   end
 
   # This test tries to create a user and then observes the change in the counter 
@@ -54,18 +54,50 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  #this test checks the route to show join forums requests
   test "should route to admin_join_forums_requests" do
       assert_generates 'users/join_requests', {controller: 'users' , action: 'admin_join_forums_requests'}
-    end
+  end
 
+  #this test checks the route to show another user's profile
+  test "should show user" do
+      assert_generates '/users/1', {controller: 'users', action: 'show', id: '1'}
+  end
+
+  test "should get profile"  do
+      assert_generates 'users/profile/1', {controller: 'users' , action: 'profile', id:'1'}
+  end
+
+  #this test checks the route when a forum admin accepts a join request
 
   test "should route to accept join request"  do
-    assert_generates 'users/accept_join_request', {controller: 'users' , action: 'accept_join_request'}
+      assert_generates 'users/accept_join_request', {controller: 'users' , action: 'accept_join_request'}
   end
 
-  test "shouldroute to reject join request"  do
-    assert_generates 'users/reject_join_request', {controller: 'users' , action: 'reject_join_request'}
+  #this test checks the route when the admin rejects a join request
+  test "should route to reject join request"  do
+      assert_generates 'users/reject_join_request', {controller: 'users' , action: 'reject_join_request'}
   end
+  
+
+
+  #this test checks the admin receives correctly requests when users request to join his forum
+  test "should get join requests" do
+    session[:user_id]= users(:user_with_valid_data).id
+    get(:admin_join_forums_requests,{ 'id' => "1" })
+    assert_response :success
+    assert_not_nil assigns(:requests_forums)
+    assert_not_nil assigns(:requests_forums)
+  end
+
+  test "should block a user" do 
+     assert_generates 'users/1/block_user', {controller: 'users' , action: 'block_user', user_id:'1'}
+   end
+
+
+  test "should report a user" do 
+     assert_generates 'users/1/report_user', {controller: 'users' , action: 'report_user', user_id:'1'}
+   end
 
 #this test show that a user can edit his information and that after the information is updated the page redirects back to itself to patch the informatiom
 
@@ -99,3 +131,4 @@ end
 
 
 end
+
