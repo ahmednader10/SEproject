@@ -110,7 +110,28 @@ class ForumsControllerTest < ActionController::TestCase
 	  	session[:user_id]= users(:user_with_valid_data).id
 	  	get(:join_forum, {'id'=>"1"})
 	  	assert_response :success
+	  	assert_equal 'already member of this forum',flash[:notice]
   end
+
+  test "should join forum" do
+	  	session[:user_id]= users(:user_2).id
+	  	get(:join_forum, {'id'=>"1"})
+	  	assert_equal 'Successfully joined forum',flash[:notice]
+  end
+
+   test "should send request to join forum" do
+	  	session[:user_id]= users(:user_2).id
+	  	get(:join_forum, {'id'=>"2"})
+	  	assert_equal 'Pending request',flash[:notice]
+  end
+
+  test "shouldn't send request to join forum 2 times" do
+	  	session[:user_id]= users(:rowan).id
+	  	get(:join_forum, {'id'=>"2"})
+		assert_equal 'already sent request to join this forum',flash[:notice]
+		assert_not_nil assigns(:membership)
+  end
+
 
   test "should get list of members" do
   		get(:list_members, {'id'=>"1"})
