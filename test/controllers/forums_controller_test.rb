@@ -120,6 +120,14 @@ class ForumsControllerTest < ActionController::TestCase
 	  	assert_equal 'already member of this forum',flash[:notice]
   end
 
+  test "should get join private forum" do
+      session[:user_id]= users(:user_with_valid_data).id
+      get(:join_forum, {'id'=>"2"})
+      assert_response :success
+      assert_equal 'already member of this forum',flash[:notice]
+  end
+
+
   #tests that a user can successfully join a forum
   test "should join forum" do
 	  	session[:user_id]= users(:user_2).id

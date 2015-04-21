@@ -175,11 +175,11 @@ class ForumsController < ApplicationController
 			 	flash[:notice] = 'Successfully joined forum'
 	   		 	render :action => "show"
 				Notification.create(info: 'Your request to join forum: (' + @forum.title + ') has been accepted and you have successfully joined.', user_id: @user.id)
-	   		elsif !@membership.save and @membership.accept == true  
+	   		elsif @membership.accept == true  and !@membership.save 
 	   			flash[:notice] = 'already member of this forum'
 	   			render :action => "show"
-			elsif !@membership.save and @membership.accept == nil  
-	   			flash[:notice] = 'already sent request to join this forum'
+			elsif @membership.accept == nil and !@membership.save  
+				flash[:notice] = 'already sent request to join this forum'
 	   			render :action => "show"
 			elsif @membership.accept == nil
 			   	flash[:notice] = 'Pending request'
