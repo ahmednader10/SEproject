@@ -27,3 +27,9 @@ complete_idea:
   forum_id: 1
   user_id: 25
   title: testing
+
+no_title:
+  text: testing3
+  user_id: 1
+  forum: forum_one
+  
