@@ -5,36 +5,42 @@ class ForumsControllerTest < ActionController::TestCase
   #   assert true
   # end
 
+  # Tests fetching the /forums/index page.
   test "should get index" do
   	get :index
   	assert_response :success
   	assert_not_nil assigns(:forums)
   end
 
+  # Tests fetching the /forums/new page.
   test "should get new" do
   	get :new
   	assert_response :success
   	assert_not_nil assigns(:forum)
   end
 
+  # Tests fetching the forums/edit/:id page.
   test "should get edit" do
   	get(:edit, {'id' => "7"})
   	assert_response :success
   	assert_not_nil assigns(:forum)
   end
 
+  # Tests fetching the forums/created/:id page.
   test "should get created" do
   	get(:created, {'id' => "10"})
   	assert_response :success
   	assert_not_nil assigns(:forum)
   end
 
+  # Tests fetching the forums/show/:id page of a particular forum.
   test "should get show" do
   	get(:show, {'id' => "3"}, {'user_id' => "1"})
   	assert_response :success
   	assert_not_nil assigns(:forum)
   end
 
+  # Tests creating a forum and the assignment of an admin to it.
   test "should create forum" do
   	assert_difference('Forum.count') do
   		assert_difference('Admin.count') do
@@ -47,6 +53,7 @@ class ForumsControllerTest < ActionController::TestCase
   	assert_redirected_to created_path(assigns(:forum))
   end
 
+  # Tests updating a forum.
   test "should update forum" do
   	@forum = forums(:forum_update)
   	session[:user_id] = users(:user_with_valid_data).id
@@ -58,6 +65,7 @@ class ForumsControllerTest < ActionController::TestCase
   	assert_redirected_to forums_path
   end
 
+  # Tests deleting a forum.
   test "should delete forum" do
   	@forum = forums(:forum_delete)
   	session[:user_id] = users(:user_with_valid_data).id

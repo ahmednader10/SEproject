@@ -37,6 +37,7 @@ class SysadminsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  # Tests merging two forums together.
   test "should merge forums" do
     @forum1 = forums(:forum1)
     @forum2 = forums(:forum2)
@@ -49,6 +50,7 @@ class SysadminsControllerTest < ActionController::TestCase
     assert_redirected_to '/sysadmins/index'
   end
 
+  # Tests failure when trying to merge a forum with itself.
   test "should not merge forum with itself" do
     @forum1 = forums(:forum1)
     @forum2 = forums(:forum1)
@@ -56,6 +58,7 @@ class SysadminsControllerTest < ActionController::TestCase
     assert_equal "Can only merge different forums!", flash[:notice]
   end
 
+  # Tests failure when trying to merge two forums of different privacy setting. That is, a public forum with a private forum.
   test "should not merge forums of different privacy setting" do
     @forum1 = forums(:forum1)
     @forum2 = forums(:forum3)
