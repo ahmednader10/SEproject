@@ -1,5 +1,5 @@
 <html>	
-	<% if session[:sysadmin] == true %>
+	<% if session[:sysadmin] == "true" %>
 		<%= link_to 'show hidden', '/syslogall' %>
 		<%= render 'sysadmin' %>
 		<%= link_to 'hide all', '/syslog/hideall', method: :put %>
