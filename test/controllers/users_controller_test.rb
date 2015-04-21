@@ -87,5 +87,17 @@ class UsersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:requests_forums)
     assert_not_nil assigns(:requests_forums)
   end
+
+
+
+  test "should block a user" do 
+     assert_generates 'users/1/block_user', {controller: 'users' , action: 'block_user', user_id:'1'}
+   end
+
+
+test "should report a user" do 
+     assert_generates 'users/1/report_user', {controller: 'users' , action: 'report_user', user_id:'1'}
+   end
+
 end
 
