@@ -11,8 +11,8 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     get "/"
     assert_response :success
  
-    post_via_redirect "/login", session: {email: users(:user_with_valid_data).email, password: users(:user_with_valid_data).password}
-    assert_equal '/logged_in', path
+    post_via_redirect "login", session: {email: users(:user_with_valid_data).email, password: users(:user_with_valid_data).password}
+    assert_equal '/login', path
  
     https!(false)
     get "/forums/"
