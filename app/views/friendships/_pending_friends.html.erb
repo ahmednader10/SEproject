@@ -4,19 +4,10 @@
 
 
 <% for friendship in user.friendships %>
-<%   if friendship.requested == current_user.username  %> 
-
-<% else %> 
 
 
 
-  <%   if friendship.status = true  %>
-<em> no pending requests </em> 
-
-
-
-
-<% else %> 
+<% if friendship.requested == current_user.username && friendship.status != true   %>
 <li>
     
     <%= h friendship.requester %>
@@ -26,10 +17,23 @@
 
 </li>
 
-<%end %>
-<%end %>
+<% else %>
+
+<em> no pending requests </em>
+
+
+
+
+
 
 <%end %>
- <%end %>
+
+
+
+<%end %>
+
+
+<%end %>
+  
  
 </ul>
