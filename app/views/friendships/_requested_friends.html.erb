@@ -12,9 +12,8 @@
 
 <% for friendship in user.friendships %>
 <li>
-	<% if friendship.status = 0 || friendship.requested == current_user.username  %>
+	<% if friendship.status == false   %>
   
-
     <%= h friendship.requester %>
     (<%= link_to "cancel", friendship, :method => :delete %>)
     <%else%>

@@ -3,24 +3,35 @@
 <ul>
 
 
-  
+<% @users.each do |user| %>
 
-<% @friends.each do |friend| %>
+
+<% for friendship in user.friendships %>
+
+
 
   <li>
   	
-  	<% if friend.user_name == current_user.username && friend.status ==true %>
+<% if  friendship.friend_name == current_user.username && friendship.status == true %>
   	
-    <%= h friend.friend_name%>
-    
- 
-  (<%= link_to "remove", friend, :method => :delete %>)
-      
+
+  	
+    <%= h friendship.user_name %>
+    (<%= link_to "remove", friendship, :method => :delete %>)
 <% end %> 
+
+
+
+
+
+    
+       
+
   </li>
-  <% end %>  
+   
  
 
-
+<% end %> 
+<% end %> 
   
 </ul>
