@@ -24,11 +24,14 @@ class UsersController < ApplicationController
     indentation_check = @user.username.match(/\s/) ? true : false
       if indentation_check == true
         flash[:notice] = "Username can't have spaces in it."
-        redirect_to(:action => 'indentation_error_message')
+        #redirect_to(:action => 'indentation_error_message')
+        render 'new'
       else 
         if @user.save
           Action.create(info: 'A new user: (' + @user.username + ') has signed up.', user_email: @user.email)
           session[:signin] = "You have successfully signed up! You can now login."
+          @current_user = User.where(email: params[:email])
+          #redirect_to profile_path(current_user)
           redirect_to root_path
         else
           render 'new' 
