@@ -63,7 +63,7 @@ class SysadminsController < ApplicationController
       if @block.save
         #flash[:notice] = "Blocked user!"
         render blocked_path
-        Action.create(info: 'A system admin has blocked: (' + @user_to_be_blocked.username + ').', user_id: -1)
+        Action.create(info: 'A system admin has blocked: (' + @user_to_be_blocked.username + ').', user_email: 'SystemAdmin')
       else
         render 'show'
       end
@@ -82,7 +82,7 @@ class SysadminsController < ApplicationController
       if @unblock.destroy
         #flash[:notice] = "UnBlocked user!"
         render unblocked_path
-        Action.create(info: 'A system admin has unblocked: (' + @user_to_be_unblocked.username + ').', user_id: -1)
+        Action.create(info: 'A system admin has unblocked: (' + @user_to_be_unblocked.username + ').', user_email: 'SystemAdmin')
       else
         render 'show'
       end
@@ -152,7 +152,7 @@ class SysadminsController < ApplicationController
 
         new_forum = Forum.where({ id: new_forum_id })
 
-        Action.create(info: 'A system admin has merged forum: (' + old_forum.first.title + ') and forum: (' + new_forum.first.title + ') into one.', user_id: -1)
+        Action.create(info: 'A system admin has merged forum: (' + old_forum.first.title + ') and forum: (' + new_forum.first.title + ') into one.', user_email: 'SystemAdmin')
 
         new_forum.first.destroy
 
