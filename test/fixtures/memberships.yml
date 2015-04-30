@@ -26,3 +26,8 @@ membership:
   forum_id: 30
   accept: true
 
+membership2:
+  user_id: 1
+  forum_id: 2
+  accept: true
+
