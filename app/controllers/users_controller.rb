@@ -30,6 +30,8 @@ class UsersController < ApplicationController
         if @user.save
           Action.create(info: 'A new user: (' + @user.username + ') has signed up.', user_email: @user.email)
           session[:signin] = "You have successfully signed up! You can now login."
+          @current_user = User.where(email: params[:email])
+          #redirect_to profile_path(current_user)
           redirect_to root_path
         else
           render 'new' 

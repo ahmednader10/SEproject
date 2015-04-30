@@ -137,8 +137,6 @@ ActiveRecord::Schema.define(version: 20150430115004) do
   end
 
   create_table "sysadmins", force: true do |t|
-    t.string   "username"
-    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
