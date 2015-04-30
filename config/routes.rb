@@ -149,6 +149,8 @@ Rails.application.routes.draw do
 
   get 'sessions/blockingMessage' => 'sessions#create', as: 'blocking_message'
 
+  get 'friendships/new'
+
   ###########################################################
 
 
