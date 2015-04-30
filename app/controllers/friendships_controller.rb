@@ -29,7 +29,7 @@ def create
 @user = current_user
 @friend = User.find( params[:friend_id])
 
-@friendship = Friendship.new(:user_id => @user.id , :friend_id => @friend.id,  :user_name => @user.username, :friend_name =>@friend.username, :status => 0, :requester => @user.username , :requested => @friend.username)
+@friendship = Friendship.new(:user_id => @user.id , :friend_id => @friend.id,  :user_name => @user.username, :friend_name =>@friend.username,  :requester => @user.username , :requested => @friend.username)
 
 
   Action.create(info: @user.username + ' has sent a friend request to ' + @friend.username, user_email: @user.email) 
@@ -68,6 +68,17 @@ else
 redirect_to users_path
 end
 end 
+
+def reject
+@user = User.find(current_user)
+@friend = Friendship.find( params[:id])
+  @friendship = Friendship.find_by( user_id: @friend.user_id,friend_id: @user.id)
+  if @friendship.update_attributes(user_id: @friend.user_id,friend_id: @user.id, status: 0)
+    redirect_to friendships_path
+else
+redirect_to users_path
+end
+end
 
 #This method removes or deletes the friend request and removes the friendship from the table 
 def destroy
