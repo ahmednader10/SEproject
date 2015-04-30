@@ -42,6 +42,8 @@
   <% end %>
 
   <!-- check if already joined or pending request -->
+  <% y = Forum.where(id: params[:id]) %>
+ <% if Membership.where(user_id: current_user.id , forum_id: y.first.id, accept: true).empty? %>
 
   <% if @forum.privacy == "1" and !session[:sysadmin] %>
   <%= button_to('Join Forum', join_forum_path(@forum),
@@ -49,6 +51,7 @@
   <% elsif @forum.privacy == "2" %>
   <%= button_to('Request joining forum', join_forum_path(@forum),
             method: "post",  data: { disable_with: 'Pending...' }) %>
+  <% end %>
   <% end %>
   
   <% if flash[:notice] %>

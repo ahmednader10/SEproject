@@ -133,11 +133,13 @@ class ForumsController < ApplicationController
 	def remove_member
 		user = params[:user]
     	forum = params[:forum]
-    	@membership1 = Membership.where(user_id: user , forum_id: forum)
-    	@membership1.first.destroy
-    	Action.create(info: current_user.username + ' has removed a member: (' + user.username + ') from the forum: (' + forum.title + ').', user_id: current_user.id)
-    	Notification.create(info: 'You have been removed from forum: (' + forum.title + ').', user_id: user.id)
-    	render 'list_members'
+    	@membership1 = Membership.find_by(user_id: user , forum_id: forum)
+        @membership1.destroy 
+    	
+    	#Action.create(info: current_user.username + ' has removed a member: (' + user.username + ') from the forum: (' + forum.title + ').', user_id: current_user.id)
+    	#Notification.create(info: 'You have been removed from forum: (' + forum.title + ').', user_id: user.id)
+    	redirect_to 'list_members'
+   
 	end
 
 	#A method that returns a list of all the members in a certain forum
@@ -176,6 +178,7 @@ class ForumsController < ApplicationController
 	   		 	render :action => "show"
 				Notification.create(info: 'Your request to join forum: (' + @forum.title + ') has been accepted and you have successfully joined.', user_id: @user.id)
 	   		elsif @membership.accept == true  and !@membership.save 
+	   			#need to check in the database first if this record already exists
 	   			flash[:notice] = 'already member of this forum'
 	   			render :action => "show"
 			elsif @membership.accept == nil and !@membership.save  

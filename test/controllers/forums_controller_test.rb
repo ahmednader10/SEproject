@@ -65,6 +65,8 @@ class ForumsControllerTest < ActionController::TestCase
   	assert_redirected_to forums_path
   end
 
+
+
   # Tests deleting a forum.
   test "should delete forum" do
   	@forum = forums(:forum_delete)
