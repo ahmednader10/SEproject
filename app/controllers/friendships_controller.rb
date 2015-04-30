@@ -4,10 +4,18 @@ before_action :authenticate_user, only: [:create]
 #This method displays all the users and friendships in the system
 def show
  @users= User.all
-  @friend = User.find(params[:id])
+  #@friend = User.find(params[:id])
   @friends = Friendship.all
 
 end 
+
+def edit 
+@users= User.all
+  
+  @friends = Friendship.all
+
+
+  end 
 
 #This method displays current friends, the friend requests and the requested 
 def index

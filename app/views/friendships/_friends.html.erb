@@ -16,7 +16,7 @@
   	
 
   	
-    <%= h friendship.user_name %>
+    <%= h link_to friendship.user_name, user, :action => 'profile' %>
     (<%= link_to "remove", friendship, :method => :delete %>)
 <% end %> 
 
