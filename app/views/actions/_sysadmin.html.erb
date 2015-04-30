@@ -3,11 +3,17 @@
 	<% @actions.reverse_each do |action| %>
 		<li>
 			<% if action.hidden == false %> 
-			 	<%= link_to 'hide', 'syslog/hide/' + action.id.to_s, method: :put %>
-			 <% else %> 
-			 	<%= link_to 'unhide', 'syslog/unhide/' + action.id.to_s, method: :put %>
-			 <% end %> 
-			 <%= action.info + ' (' + action.created_at.to_s + ')' %> <% if action.user_email != 'SystemAdmin' %> <%= link_to ' ' + User.where(email: action.user_email).first.username, 'users/' + User.where(email: action.user_email).first.id.to_s %> <% else %> <%= ' System Administrator' %> <% end %>
+				<%= link_to 'hide', 'syslog/hide/' + action.id.to_s, method: :put %>
+			<% else %> 
+				<%= link_to 'unhide', 'syslog/unhide/' + action.id.to_s, method: :put %>
+			<% end %> 
+			<%= action.info + ' (' + action.created_at.to_s + ')' %> 
+			<% user = User.where(email: action.user_email).first %>
+			<% if user != nil %>
+			<%= link_to ' ' + User.where(email: action.user_email).first.username, 'users/' + User.where(email: action.user_email).first.id.to_s %>
+			<% else %>
+				<%= action.user_email %>
+			<% end %>
 		</li>
 	<% end %>
 </ul>
