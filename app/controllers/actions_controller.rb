@@ -45,7 +45,7 @@ class ActionsController < ApplicationController
 protected
 
 	def action_params
-		params.require(:action).permit(:info, :user_id)
+		params.require(:action).permit(:info, :user_email)
 	end
 
 end

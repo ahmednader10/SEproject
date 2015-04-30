@@ -33,10 +33,10 @@ class AdminsController < ApplicationController
         Admin.create!(forum_id: forum_id, user_id: user_id)
         
         if current_user != nil
-          Action.create(info: current_user.username + ' has added ' + @user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: current_user.id)
+          Action.create(info: current_user.username + ' has added ' + @user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_email: current_user.email)
           Notification.create(info: current_user.username + ' has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: @user.id)
         else
-          Action.create(info: 'A system administrator has added ' + @user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: -1)
+          Action.create(info: 'A system administrator has added ' + @user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_email: 'SystemAdmin')
           Notification.create(info: 'A system administrator has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: @user.id)
         end
 
