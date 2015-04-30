@@ -27,13 +27,13 @@ class IdeasController < ApplicationController
 		@forum = Forum.find(params[:forum_id])
 		if current_user != nil
 			if current_user != User.find(@idea.user_id)
-				Action.create(info: current_user.username + ' has deleted an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_id: current_user.id)
+				Action.create(info: current_user.username + ' has deleted an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_email: current_user.email)
 				Notification.create(info: 'Your idea: (' + @idea.title + ') on forum:(' + @forum.title + ') has been deleted.', user_id: @idea.user_id)
 			else
-				Action.create(info: current_user.username + ' has deleted his idea: (' + @idea.title + ') located in forum: (' + @forum.title + ').', user_id: current_user.id)
+				Action.create(info: current_user.username + ' has deleted his idea: (' + @idea.title + ') located in forum: (' + @forum.title + ').', user_email: current_user.email)
 			end
 		else
-			Action.create(info: 'A system admin has deleted an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_id: -1)
+			Action.create(info: 'A system admin has deleted an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_email: 'SystemAdmin')
 			Notification.create(info: 'Your idea: (' + @idea.title + ') on forum:(' + @forum.title + ') has been deleted.', user_id: @idea.user_id)
 		end
 			@idea.destroy
@@ -51,7 +51,7 @@ class IdeasController < ApplicationController
 
 		if @idea.save
 
-			Action.create(info: current_user.username + ' has posted a new idea: (' + @idea.title + ') on forum: (' + Forum.find(@idea.forum_id).title + ').', user_id: current_user.id)
+			Action.create(info: current_user.username + ' has posted a new idea: (' + @idea.title + ') on forum: (' + Forum.find(@idea.forum_id).title + ').', user_email: current_user.email)
 
 			# This block of code sends a notification to the admins of the forum being posted on
 			# =================================================================
@@ -88,7 +88,7 @@ class IdeasController < ApplicationController
 	 	@likeidea = Likeidea.new(:user_id => @user.id , :idea_id => @idea.id)
 		end
 		if @likeidea.save
-			Action.create(info: @user.username + ' has liked an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_id: @user.id)
+			Action.create(info: @user.username + ' has liked an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_email: @user.email)
 			if @user.id != @idea.user_id	
 				Notification.create(info: @user.username + ' has liked your idea: (' + @idea.title + ') on forum: (' + @forum.title + ').', user_id: @idea.user_id)
 	   		end
@@ -110,7 +110,7 @@ class IdeasController < ApplicationController
         if @idea.user_id == @user.id
 	 	flash[:notice] = "Cannot report your own idea!"
 		elsif @reportidea.save
-			Action.create(info: @user.username + ' has reported an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_id: @user.id)
+			Action.create(info: @user.username + ' has reported an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_email: @user.email)
 	   		Notification.create(info: 'Your idea: (' + @idea.title + ' on forum: (' + @forum.title + ') has been reported.', user_id: @idea.user_id)
 	   		flash[:notice] = "Idea has been reported!"
 		else

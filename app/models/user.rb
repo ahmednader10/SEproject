@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 	validates :password, :confirmation => true
 	validates :email, :username, :uniqueness => true
 	validates :password, :length => { :minimum => 8 }
+	validates :answer_for_password_question, :presence => true
 
 
 	validates :privacy, inclusion: { in: [1,2] }
