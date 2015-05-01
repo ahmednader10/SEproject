@@ -83,7 +83,9 @@
   <%= link_to 'Post an idea', new_forum_idea_path(@forum) %>
 <% end %>
 <br>
-<%= link_to "add new admin", admin_to_be_path %>
+<% if Admin.exists?(user_id: current_user.id, forum_id: params[:id]) %>
+  <%= link_to "add new admin", admin_to_be_path %>
+<% end %>
 <br>
 <%= link_to "View Forum Members", list_members_path %>
 
