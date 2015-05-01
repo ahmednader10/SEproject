@@ -25,5 +25,15 @@ class ForumTest < ActiveSupport::TestCase
   	assert forum.save
   end
 
+  test "should not save forum without category" do
+    forum = forums(:forum_no_category)
+    assert_not forum.save
+  end
+
+  test "should save forum with category" do
+    forum = forums(:forum_category)
+    assert forum.save
+  end
+
   
 end
