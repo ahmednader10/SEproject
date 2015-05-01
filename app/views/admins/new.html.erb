@@ -1,7 +1,16 @@
 <%= form_for [@forum, @admin] do |f| %>
 	<div class="field">
+
+		<% ary = [] %>
+		<% users = User.all %>
+		<% users.each do |u| %>
+			<% if Admin.find_by(user_id: u.id, forum_id: params[:forum_id]) == nil %>
+				<% ary.push(u) %>
+			<% end %>
+		<% end %>
+
 	  	<%= f.label :user, "Add an admin by entering his email: " %><br>
-	   	<%= f.text_field :user %><br>
+	   	<%= f.collection_select(:user, ary, :email, :email) %><br>
 	</div>
 
 	<div class='actions'>

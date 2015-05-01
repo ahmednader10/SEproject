@@ -55,7 +55,7 @@ class ForumsController < ApplicationController
   				membership.accept = true
   				membership.save
 
-  				Action.create(info: (@user.username + ' has created a new forum: (' + @forum.title + ').'), user_id: @user.id)
+  				Action.create(info: (@user.username + ' has created a new forum: (' + @forum.title + ').'), user_email: @user.email)
 
   				redirect_to(forums_path)
   			else
@@ -91,7 +91,7 @@ class ForumsController < ApplicationController
    			admin = Admin.where({ forum_id: @forum.id, user_id: @user.id })
    			if !admin.empty? && @forum.update(forum_params)
 
-   				Action.create(info: (@user.username + ' has updated the forum: (' + @forum.title + ').'), user_id: @user.id)
+   				Action.create(info: (@user.username + ' has updated the forum: (' + @forum.title + ').'), user_email: @user.email)
 
    				admins = Admin.where(forum_id: @forum_id)
    				admins.each do |a|
@@ -110,7 +110,7 @@ class ForumsController < ApplicationController
 		@forum = Forum.find(params[:id])
 		@user = current_user
 		if session[:sysadmin]
-			Action.create(info: 'A system administrator has deleted the forum: (' + @forum.title + ').', user_id: -1)
+			Action.create(info: 'A system administrator has deleted the forum: (' + @forum.title + ').', user_email: 'SystemAdmin')
 			
 			admins = Admin.where(forum_id: @forum.id)
 			admins.each do |a|
@@ -126,7 +126,7 @@ class ForumsController < ApplicationController
 			admin = Admin.where({ forum_id: @forum.id, user_id: @user.id })
 			if !admin.empty? 
 				# confirm then delete
-				Action.create(info: @user.username + ' has deleted the forum: (' + @forum.title + ').', user_id: @user.id)
+				Action.create(info: @user.username + ' has deleted the forum: (' + @forum.title + ').', user_email: @user.email)
 
 				admins = Admin.where(forum_id: @forum.id)
 				admins.each do |a|
@@ -155,12 +155,12 @@ class ForumsController < ApplicationController
 	def remove_member
 		user = params[:user]
     	forum = params[:forum]
-    	@membership1 = Membership.where(user_id: user , forum_id: forum)
-    	@membership1.first.destroy
-    	Action.create(info: current_user.username + ' has removed a member: (' + user.username + ') from the forum: (' + forum.title + ').', user_id: current_user.id)
-    	Notification.create(info: 'You have been removed from forum: (' + forum.title + ').', user_id: user.id)
+		@membership1 = Membership.where(user_id: user , forum_id: forum)
+        @membership1.first.destroy 
+    	#Action.create(info: current_user.username + ' has removed a member: (' + user.username + ') from the forum: (' + forum.title + ').', user_id: current_user.id)
+    	#Notification.create(info: 'You have been removed from forum: (' + forum.title + ').', user_id: user.id)
     	render 'list_members'
-	end
+    end
 
 	#A method that returns a list of all the members in a certain forum
 	def list_members
@@ -188,20 +188,21 @@ class ForumsController < ApplicationController
    		else
 			@membership = @forum.memberships.build(user: @user)
 			if @forum.privacy == '1'
-				Action.create(info: @user.username + ' has joined the forum: (' + @forum.title + ').', user_id: @user.id)
+				Action.create(info: @user.username + ' has joined the forum: (' + @forum.title + ').', user_email: @user.email)
 			else
-				Action.create(info: @user.username + ' has requested to join the forum: (' + @forum.title + ').', user_id: @user.id)
+				Action.create(info: @user.username + ' has requested to join the forum: (' + @forum.title + ').', user_email: @user.email)
 			end
 			@membership.accept = true if @forum.privacy == '1'
 			if  @membership.save and @membership.accept == true
 			 	flash[:notice] = 'Successfully joined forum'
 	   		 	render :action => "show"
 				Notification.create(info: 'Your request to join forum: (' + @forum.title + ') has been accepted and you have successfully joined.', user_id: @user.id)
-	   		elsif !@membership.save and @membership.accept == true  
+	   		elsif @membership.accept == true  and !@membership.save 
+	   			#need to check in the database first if this record already exists
 	   			flash[:notice] = 'already member of this forum'
 	   			render :action => "show"
-			elsif !@membership.save and @membership.accept == nil  
-	   			flash[:notice] = 'already sent request to join this forum'
+			elsif @membership.accept == nil and !@membership.save  
+				flash[:notice] = 'already sent request to join this forum'
 	   			render :action => "show"
 			elsif @membership.accept == nil
 			   	flash[:notice] = 'Pending request'

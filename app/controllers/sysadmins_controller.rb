@@ -17,7 +17,7 @@ class SysadminsController < ApplicationController
       redirect_to logged_in_path and return
     end
 
-    if session[:sysadmin] == "true" or (params[:sysadmin][:username] == 'admin' and params[:sysadmin][:password] == 'password')
+    if session[:sysadmin] == "true" or (params[:sysadmin][:username] == 'gus' and params[:sysadmin][:password] == 'lospollos')
       session[:sysadmin] = "true"
       render 'show'
     else
@@ -30,7 +30,7 @@ class SysadminsController < ApplicationController
   # with this specified email. If the email is wrong, then the system admin is 
   # redirected to a page with an error message.
   def edit
-    @user_tmp = User.find_by(email: params[:email_delete])
+    @user_tmp = User.find_by(email: params[:user_all])
     @users = User.all
     if !@user_tmp
       redirect_to missingUser_path
@@ -63,7 +63,7 @@ class SysadminsController < ApplicationController
       if @block.save
         #flash[:notice] = "Blocked user!"
         render blocked_path
-        Action.create(info: 'A system admin has blocked: (' + @user_to_be_blocked.username + ').', user_id: -1)
+        Action.create(info: 'A system admin has blocked: (' + @user_to_be_blocked.username + ').', user_email: 'SystemAdmin')
       else
         render 'show'
       end
@@ -82,7 +82,7 @@ class SysadminsController < ApplicationController
       if @unblock.destroy
         #flash[:notice] = "UnBlocked user!"
         render unblocked_path
-        Action.create(info: 'A system admin has unblocked: (' + @user_to_be_unblocked.username + ').', user_id: -1)
+        Action.create(info: 'A system admin has unblocked: (' + @user_to_be_unblocked.username + ').', user_email: 'SystemAdmin')
       else
         render 'show'
       end
@@ -152,7 +152,7 @@ class SysadminsController < ApplicationController
 
         new_forum = Forum.where({ id: new_forum_id })
 
-        Action.create(info: 'A system admin has merged forum: (' + old_forum.first.title + ') and forum: (' + new_forum.first.title + ') into one.', user_id: -1)
+        Action.create(info: 'A system admin has merged forum: (' + old_forum.first.title + ') and forum: (' + new_forum.first.title + ') into one.', user_email: 'SystemAdmin')
 
         new_forum.first.destroy
 

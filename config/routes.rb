@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   get 'sysadmins/missingUser' => 'sysadmins#missingUser', as: 'missingUser'
 
-  #post 'sysadmins/show' => 'sysadmins#show'
+  get 'sysadmins/test'
 
   ############### Admin ######################################
 
@@ -79,7 +79,7 @@ Rails.application.routes.draw do
   #When logged in normally or facebook redirects to this page
   #Change later
 
-  get     'logged_in' => 'sessions#logged_in'
+  get 'logged_in' => 'sessions#logged_in'
   ############################ Users ###############################
 
   get 'users/index'
@@ -134,7 +134,7 @@ Rails.application.routes.draw do
 
   ############################################################################
 
-  get 'users/indentation_error_message' => 'users#indentation_error_message'
+  #get 'users/indentation_error_message' => 'users#indentation_error_message'
 
   get 'search' => 'search#search'
 
@@ -146,8 +146,9 @@ Rails.application.routes.draw do
 
   get 'admins/added_admin' => 'admins#added_admin', as: 'added_admin' 
 
-
   get 'sessions/blockingMessage' => 'sessions#create', as: 'blocking_message'
+
+  
 
   ###########################################################
 
@@ -182,7 +183,11 @@ Rails.application.routes.draw do
 
 delete 'forums/:forum_id/ideas/:idea_id/comments/:id' => 'comments#destroy', as: 'comment_delete'
 
-  resources :friendships
+  resources :friendships do
+    #put :update
+    put :reject
+  end 
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
