@@ -148,7 +148,7 @@ Rails.application.routes.draw do
 
   get 'sessions/blockingMessage' => 'sessions#create', as: 'blocking_message'
 
-  get 'friendships/new'
+  
 
   ###########################################################
 
@@ -183,7 +183,11 @@ Rails.application.routes.draw do
 
 delete 'forums/:forum_id/ideas/:idea_id/comments/:id' => 'comments#destroy', as: 'comment_delete'
 
-  resources :friendships
+  resources :friendships do
+    #put :update
+    put :reject
+  end 
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
