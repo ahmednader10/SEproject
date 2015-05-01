@@ -43,12 +43,12 @@
 
   <!-- check if already joined or pending request -->
   <% y = Forum.where(id: params[:id]) %>
- <% if Membership.where(user_id: current_user.id , forum_id: y.first.id, accept: true).empty? %>
+ <% if session[:sysadmin] or Membership.where(user_id: current_user.id , forum_id: y.first.id, accept: true).empty? %>
 
   <% if @forum.privacy == "1" and !session[:sysadmin] %>
   <%= button_to('Join Forum', join_forum_path(@forum),
             method: "post",  data: { disable_with: 'Joining...' }) %>
-  <% elsif @forum.privacy == "2" %>
+  <% elsif @forum.privacy == "2" and !session[:sysadmin] %>
   <%= button_to('Request joining forum', join_forum_path(@forum),
             method: "post",  data: { disable_with: 'Pending...' }) %>
   <% end %>
@@ -71,7 +71,7 @@
           <%= link_to idea.title , forum_idea_path(@forum.id, idea.id) %>
       </li>
       <%end%>
-      <% elsif @forum.privacy == "2" and !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
+      <% elsif @forum.privacy == "2" and (session[:sysadmin] or !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?) %>
 
       <% Idea.where(forum_id: params[:id]).each do |idea| %>
       <li>
@@ -86,7 +86,7 @@
   <%= link_to 'Post an idea', new_forum_idea_path(@forum) %>
 <% end %>
 <br>
-<% if Admin.exists?(user_id: current_user.id, forum_id: params[:id]) %>
+<% if session[:sysadmin] or Admin.exists?(user_id: current_user.id, forum_id: params[:id]) %>
   <%= link_to "add new admin", admin_to_be_path %>
 <% end %>
 <br>

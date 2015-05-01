@@ -17,7 +17,7 @@ class SysadminsController < ApplicationController
       redirect_to logged_in_path and return
     end
 
-    if session[:sysadmin] == "true" or (params[:sysadmin][:username] == 'admin' and params[:sysadmin][:password] == 'password')
+    if session[:sysadmin] == "true" or (params[:sysadmin][:username] == 'gus' and params[:sysadmin][:password] == 'lospollos')
       session[:sysadmin] = "true"
       render 'show'
     else
@@ -30,7 +30,7 @@ class SysadminsController < ApplicationController
   # with this specified email. If the email is wrong, then the system admin is 
   # redirected to a page with an error message.
   def edit
-    @user_tmp = User.find_by(email: params[:email_delete])
+    @user_tmp = User.find_by(email: params[:user_all])
     @users = User.all
     if !@user_tmp
       redirect_to missingUser_path
