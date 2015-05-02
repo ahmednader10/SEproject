@@ -1,5 +1,8 @@
 class Forum < ActiveRecord::Base
 	validates :title, :presence => true
+	validates :category, :presence => true
+	validates_uniqueness_of :title, :scope => :category
+
 	has_many :memberships, :dependent => :destroy
 	has_many :users, through: :memberships, :dependent => :destroy
 
