@@ -1,6 +1,10 @@
 <%= link_to 'Sign out', root_path %>
 <h1>Welcome, System admin!</h1>
 
+
+<% if flash[:notice] %>
+	<%= flash[:notice] %>
+<% end %>
 <% @user_all = User.all %>
 <%= form_tag(edit_path, method: "get") do %>
 	<%= select_tag "user_all", options_from_collection_for_select(@user_all, "email", "email") %>
@@ -9,15 +13,22 @@
 
 <%= link_to 'control forums', forums_sysadmins_path %>
 
+
 <% @arr_unblocked = [] %>
 <% @user_all.each do |u| %>
 	<% if !Block.find_by(email: u.email) %>
 		<% @arr_unblocked.push(u) %>
 	<% end %>
 <% end %>
+
+</br>
+<% if flash[:danger] %>
+	<%= flash[:danger] %>
+<% end %>
+
 <%= form_tag(blocked_path, method: "get") do %>
 	<%= select_tag "block_user", options_from_collection_for_select(@arr_unblocked, "email", "email") %>
-	<%= submit_tag(:block) %>
+	<%= submit_tag(:block, :id => "block_btn") %>
 <% end %>
 
 <% @unblock_user = Block.all %>

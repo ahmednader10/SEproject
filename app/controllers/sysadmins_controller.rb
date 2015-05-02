@@ -31,12 +31,15 @@ class SysadminsController < ApplicationController
   # redirected to a page with an error message.
   def edit
     @user_tmp = User.find_by(email: params[:user_all])
+    @deleted_user = @user_tmp
     @users = User.all
     if !@user_tmp
       redirect_to missingUser_path
     else
-      if @user_tmp.destroy
-        redirect_to deleteUser_path
+      @user_delete_from_blocks = Block.find_by(email: @user_tmp.email)
+      if @user_delete_from_blocks.destroy and @user_tmp.destroy
+        flash[:notice] = "The user " + @deleted_user.email + "has been deleted from the system."
+        redirect_to show_path
       else
         render 'show'
       end
@@ -56,13 +59,14 @@ class SysadminsController < ApplicationController
   # this appears. Otherwise, the same page is still there as is.
   def userBlocked
     @user_to_be_blocked = User.find_by(email: params[:block_user])
+    @blocked = @user_to_be_blocked
     if !@user_to_be_blocked
       render 'show'
     else
       @block = Block.new(email: @user_to_be_blocked.email)
       if @block.save
-        #flash[:notice] = "Blocked user!"
-        render blocked_path
+        flash[:danger] = "The user " + @blocked.email + " has been blocked."
+        redirect_to show_path
         Action.create(info: 'A system admin has blocked: (' + @user_to_be_blocked.username + ').', user_email: 'SystemAdmin')
       else
         render 'show'
@@ -75,13 +79,14 @@ class SysadminsController < ApplicationController
   # this appears. Otherwise, the same page is still there as is.
   def userUnblocked
     @user_to_be_unblocked = User.find_by(email: params[:unblock_user])
+    @unblocked = @user_to_be_unblocked
     if !@user_to_be_unblocked
       render 'show'
     else
       @unblock = Block.find_by(email: @user_to_be_unblocked.email)
       if @unblock.destroy
-        #flash[:notice] = "UnBlocked user!"
-        render unblocked_path
+        flash[:danger] = "The user " + @unblocked.email + "has been unblocked." 
+        redirect_to show_path
         Action.create(info: 'A system admin has unblocked: (' + @user_to_be_unblocked.username + ').', user_email: 'SystemAdmin')
       else
         render 'show'
