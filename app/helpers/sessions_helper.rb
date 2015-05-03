@@ -1,7 +1,7 @@
 module SessionsHelper
 
-	#Logs user in with a temporary id that expires upon browser close.
-	#Encrypted version of user id
+	# Logs user in with a temporary id that expires upon browser close.
+	# Encrypted version of user id
 	def log_in(user)
     	session[:user_id] = user.id
   	end

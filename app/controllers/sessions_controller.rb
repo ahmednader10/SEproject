@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
   def create 
    	
    	 user = User.find_by(email: params[:session][:email].downcase)
-  	blocked_user = Block.find_by(email: user.email)
+  	 blocked_user = Block.find_by(email: user.email)
 
     if user and user.authenticate(params[:session][:password]) and blocked_user
       render blocking_message_path and return
@@ -28,8 +28,8 @@ class SessionsController < ApplicationController
     	log_in user
       Action.create(info: current_user.username + ' has logged in.', user_id: current_user.id)
 
-    #Redirects to an empty page
-    #To be changed later
+    # Redirects to an empty page
+    # To be changed later
     	redirect_to user
 
     else
