@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 	validates :password, :confirmation => true
 	validates :email, :username, :uniqueness => true
 	validates :password, :length => { :minimum => 8 }
+	validates :answer_for_password_question, :presence => true
 
 
 	validates :privacy, inclusion: { in: [1,2] }
@@ -32,6 +33,8 @@ class User < ActiveRecord::Base
 
 	has_many :comments, :dependent => :destroy
 	has_many :ideas, through: :comments
+
+	#has_many :blocks, :dependent => :destroy
 
 	#Authenticate method used in Session controller
 	def authenticate (password)

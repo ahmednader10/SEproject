@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
 
     # log_in method located in session_helper
     	log_in user
-      Action.create(info: current_user.username + ' has logged in.', user_id: current_user.id)
+      Action.create(info: current_user.username + ' has logged in.', user_email: current_user.email)
 
     # Redirects to an empty page
     # To be changed later
@@ -47,7 +47,7 @@ class SessionsController < ApplicationController
   def createF
         user = User.omniauth(env['omniauth.auth'])
         session[:user_id] = user.id
-        Action.create(info: current_user.username + ' has logged in using facebook.', user_id: current_user.id)
+        Action.create(info: current_user.username + ' has logged in using facebook.', user_email: current_user.email)
         redirect_to user
   end
 
@@ -56,7 +56,7 @@ class SessionsController < ApplicationController
   # redirects to login
   # Login as a new user
   def destroy
-    #Action.create(info: current_user.username + ' has logged out.', user_id: current_user.id)
+    Action.create(info: current_user.username + ' has logged out.', user_email: current_user.email)
     log_out
     redirect_to root_url
   end
