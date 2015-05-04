@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 	has_many :requested_friends, :through => :friendships, :source => :friend
 	has_many :pending_friends, :through => :friendships, :source => :friend
 	has_many :friendships, :dependent => :destroy
-    has_many :blockers, :dependent => :destroy, foreign_key: :blocker_id
+    has_many :blockers, :dependent => :destroy, foreign_key: :blocker_id ,:counter_cache => true
     has_many :bfriends , :through => :blockers , source: :friend
     has_many :report_users , :dependent => :destroy, foreign_key: :reporter_id
     has_many :rfriends , :through => :report_users , source: :friend

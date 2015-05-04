@@ -20,6 +20,7 @@ def edit
 #This method displays current friends, the friend requests and the requested 
 def index
   @users= User.all
+  @friendship = Friendship.all
 
 end 
 
