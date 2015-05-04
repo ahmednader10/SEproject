@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   get 'sysadmins/missingUser' => 'sysadmins#missingUser', as: 'missingUser'
 
-  #post 'sysadmins/show' => 'sysadmins#show'
+  get 'sysadmins/test'
 
   ############### Admin ######################################
 

@@ -30,10 +30,12 @@ class AdminsController < ApplicationController
     if User.exists?(:email => params[:admin][:user]) 
       if session[:sysadmin] or Admin.exists?(:forum_id => params[:forum_id], :user_id => current_user.id) 
         user_id = @user.id
+
         Admin.create!(forum_id: forum_id, user_id: user_id)
         membership = Forum.find_by(id: forum_id).memberships.build(user: @user)
         membership.accept = true
         membership.save
+
         
         if current_user != nil
           Action.create(info: current_user.username + ' has added ' + @user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_email: current_user.email)
@@ -45,7 +47,7 @@ class AdminsController < ApplicationController
 
         redirect_to(:action => 'added_admin')
       else
-         redirect_to(action: 'unauthorized_action') 
+         redirect_to(action: 'unauthorized_action')   #unauthorized
       end
     else
         redirect_to(action: 'wrong_email')

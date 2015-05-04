@@ -3,6 +3,11 @@ class ForumsController < ApplicationController
 	# Views all forums showing their title and description.
 	def index
 		@forums = Forum.all
+		@user = current_user
+
+		if @user == nil
+			redirect_to root_url
+		end
 	end
 
 	# Views a specific forum. Users can post ideas here.
@@ -37,6 +42,13 @@ class ForumsController < ApplicationController
    		else
    			admin = @forum.admins.build(user: @user)
 
+   			if @forum.category == "Other"
+   				@forum.category = params[:forum][:other_category]
+   				Category.create(title: @forum.category)
+   			elsif @forum.category == "- Select a category -"
+   				@forum.category = nil
+   			end
+
    			membership = @forum.memberships.build(user: @user)
    			if @forum.save && admin.save
 
@@ -45,7 +57,7 @@ class ForumsController < ApplicationController
 
   				Action.create(info: (@user.username + ' has created a new forum: (' + @forum.title + ').'), user_email: @user.email)
 
-  				redirect_to(created_path(@forum))
+  				redirect_to(forums_path)
   			else
   				render 'new'
   			end
@@ -57,6 +69,16 @@ class ForumsController < ApplicationController
 	def update
 		@forum = Forum.find(params[:id])
 		@user = current_user
+
+		if params[:forum][:category] == "Other"
+   			#@forum.category = params[:forum][:other_category]
+   			params[:forum][:category] = params[:forum][:other_category]
+   			Category.create(title: params[:forum][:other_category])
+   		elsif params[:forum][:category] == "- Select a category -"
+   			#@forum.category = nil
+   			params[:forum][:category] = nil
+   		end
+
 		if session[:sysadmin] && @forum.update(forum_params)
 			redirect_to(forums_sysadmins_path) and return
 		end
@@ -193,7 +215,7 @@ class ForumsController < ApplicationController
  	# Strong parameters
 	  private
 	  def forum_params
-	    params.require(:forum).permit(:title, :description, :privacy)
+	    params.require(:forum).permit(:title, :description, :privacy, :category)
 	  end
 
 end
