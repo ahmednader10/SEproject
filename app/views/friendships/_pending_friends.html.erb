@@ -12,14 +12,11 @@
     
     <%= h friendship.requester %>
     (<%= link_to '[Accept]', friendship, :method => :put, :confirm => 'Accept friend request! Are you sure?' %> |)
-    (<%= link_to '[Reject]', friendship_reject_path(:friendship_id => :id, :id => friendship.id), :method => :put, :confirm => 'Reject friend request! Are you sure?' %>)
+    (<%= link_to '[Reject]', friendship, :method => :delete, :confirm => 'Reject friend request! Are you sure?' %>)
 
 
 </li>
 
-<% else %>
-
-<em> no pending requests </em>
 
 
 
@@ -31,6 +28,8 @@
 
 
 <%end %>
+
+
 
 
 <%end %>
