@@ -59,26 +59,32 @@
   <% end %>
 
     <ul>
-      <% if @forum.privacy == "1" and (session[:sysadmin] or Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?) %>
+        <% if session[:sysadmin] %>
+            <% Idea.where(forum_id: params[:id]).each do |idea| %>
+        <li>
+            <%= link_to idea.title , forum_idea_path(@forum.id, idea.id) %>
+        </li>
+        <%end%>        
+        <% elsif @forum.privacy == "1" and (session[:sysadmin] || Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?) %>
               <% Idea.where(forum_id: params[:id]).each do |idea| %>
-      <li>
-          <%=  idea.title %>
-      </li>
-      <%end%>
-      <% elsif @forum.privacy == "1" and !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
-              <% Idea.where(forum_id: params[:id]).each do |idea| %>
-      <li>
-          <%= link_to idea.title , forum_idea_path(@forum.id, idea.id) %>
-      </li>
-      <%end%>
-      <% elsif @forum.privacy == "2" and (session[:sysadmin] or !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?) %>
+              <li>
+                  <%=  idea.title %>
+              </li>
+              <%end%>
+        <% elsif (@forum.privacy == "1" and !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?) %>
+                <% Idea.where(forum_id: params[:id]).each do |idea| %>
+        <li>
+            <%= link_to idea.title , forum_idea_path(@forum.id, idea.id) %>
+        </li>
+        <%end%>
+        <% elsif (@forum.privacy == "2" and (session[:sysadmin] or !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?)) %>
 
-      <% Idea.where(forum_id: params[:id]).each do |idea| %>
-      <li>
-          <%= link_to idea.title , forum_idea_path(@forum.id, idea.id) %>
-      </li>
-      <%end%>
-      <%end%>
+        <% Idea.where(forum_id: params[:id]).each do |idea| %>
+        <li>
+            <%= link_to idea.title , forum_idea_path(@forum.id, idea.id) %>
+        </li>
+        <%end%>
+        <%end%>
 
     </ul>
 </tr></table>

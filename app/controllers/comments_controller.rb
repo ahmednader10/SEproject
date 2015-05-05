@@ -61,7 +61,8 @@ class CommentsController < ApplicationController
 		@idea = Idea.find(params[:idea_id])
 		@comment = Comment.find(params[:id])
 
-		if @comment[:user_id] == @user[:id] || !Admin.where({ forum_id: @forum.id, user_id: @user.id }).empty?
+		
+		if 	@comment[:user_id] == @user[:id] || !Admin.where({ forum_id: @forum.id, user_id: @user.id }).empty?
 			@comment.destroy
 			flash[:notice] = "comment deleted"
 			if current_user == nil
