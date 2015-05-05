@@ -21,6 +21,7 @@ def edit
 def index
   @users= User.all
 
+
 end 
 
 #This  ethod creates a friendship, a user adds a friend and it's saved in friendships table
@@ -39,10 +40,10 @@ def create
 
   if @friendship.save  
     flash[:success] = "Added friend."
-    redirect_to root_path
+    redirect_to friendships_path
   else
     flash[:error] = "Unable to add friend."
-    redirect_to friendships_path
+    redirect_to root_path
   
 end
   end
