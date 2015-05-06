@@ -32,7 +32,7 @@ class UsersController < ApplicationController
           session[:signin] = "You have successfully signed up! You can now login."
           @current_user_new = User.where(email: params[:email])
           current_user = @user
-          redirect_to users_profile(@user)
+          redirect_to root_path
           #redirect_to profile_path(@current_user_new)
         else
           render 'new' 
