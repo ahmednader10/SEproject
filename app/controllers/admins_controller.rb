@@ -27,31 +27,28 @@ class AdminsController < ApplicationController
     user_email = params[:admin][:user]
     @user = User.find_by(email: user_email)
     
-    if User.exists?(:email => params[:admin][:user]) 
-      if session[:sysadmin] or Admin.exists?(:forum_id => params[:forum_id], :user_id => current_user.id) 
-        user_id = @user.id
+    if session[:sysadmin] or Admin.exists?(:forum_id => params[:forum_id], :user_id => current_user.id) 
+      user_id = @user.id
 
-        Admin.create!(forum_id: forum_id, user_id: user_id)
-        membership = Forum.find_by(id: forum_id).memberships.build(user: @user)
-        membership.accept = true
-        membership.save
+      Admin.create!(forum_id: forum_id, user_id: user_id)
+      membership = Forum.find_by(id: forum_id).memberships.build(user: @user)
+      membership.accept = true
+      membership.save
 
-        
-        if current_user != nil
-          Action.create(info: current_user.username + ' has added ' + @user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_email: current_user.email)
-          Notification.create(info: current_user.username + ' has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: @user.id)
-        else
-          Action.create(info: 'A system administrator has added ' + @user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_email: 'SystemAdmin')
-          Notification.create(info: 'A system administrator has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: @user.id)
-        end
-
-        redirect_to(:action => 'added_admin')
+      flash[:notice] = "The specified admin has been added to this forum."
+      if current_user != nil
+        Action.create(info: current_user.username + ' has added ' + @user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_email: current_user.email)
+        Notification.create(info: current_user.username + ' has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: @user.id)
       else
-         redirect_to(action: 'unauthorized_action')   #unauthorized
+        Action.create(info: 'A system administrator has added ' + @user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_email: 'SystemAdmin')
+        Notification.create(info: 'A system administrator has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: @user.id)
       end
+
+      redirect_to admin_to_be_path(params[:forum_id])
     else
-        redirect_to(action: 'wrong_email')
+       redirect_to(action: 'unauthorized_action')   #unauthorized
     end
+    
   end
 
   # This action just calls the "edit" view.
