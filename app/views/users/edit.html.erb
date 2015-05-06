@@ -19,7 +19,7 @@
 </ul>  
 </div>
 <div style="position:relative; top:150px;">
-<%= form_for(current_user) do |f| %>
+<%= form_for((current_user) , html: {multipart: true}) do |f| %>
     <h1>Edit form</h1>
 <% if current_user.errors.any? %>
       <h3>Errors</h3>
@@ -93,6 +93,13 @@
     <%= f.radio_button :privacy, 2 %><br>
   </p>
      </div>
+
+     <div>
+       <p>
+         <%= f.file_field :image %>
+       </p>
+     </div>
+
      <div class='actions'>
       <%= f.submit "Update Information" %>
      </div>

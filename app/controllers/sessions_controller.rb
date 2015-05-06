@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
   # renders to new if doesnt match with an error on top
   def create 
    	
-   	 user = User.find_by(email: params[:session][:email].downcase)
+   	user = User.find_by(email: params[:session][:email].downcase)
   	blocked_user = Block.find_by(email: user.email)
 
     if user and user.authenticate(params[:session][:password]) and blocked_user
