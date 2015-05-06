@@ -1,13 +1,4 @@
-<html>
-
-
-<head>
-
-</head>
-
-
-<body>
-
+<%= link_to 'Homepage', root_path %>
 <div class="mainDiv" id="mainDiv">
 	<%= form_for(@user) do |f| %>
 		<h1>Sign up form</h1>
@@ -65,12 +56,15 @@
 	   	<%= f.text_field :answer_for_password_question %><br><br>
 	   </div>
 	  
+      <div>
+        <p>
+          <%= f.file_field :image %>
+        </p>
+      </div>
+
 	   <div class='actions'>
 	   	<%= f.submit "Sign Up" %>
 	   </div>
 
 	<% end %>
 </div>
-</body>
-
-</html>

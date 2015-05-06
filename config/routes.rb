@@ -102,6 +102,8 @@ Rails.application.routes.draw do
 
   get '/users/profile/:id' => 'users#profile', as: 'profile'
 
+  get 'users/profile/:id/removeAvatar' => 'users#deleteImage' , as: 'deleteImage'
+
   ############################ Forums ########################################
 
   get 'forums/created/:id' => 'forums#created', as: 'created'
