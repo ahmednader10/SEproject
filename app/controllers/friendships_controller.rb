@@ -20,7 +20,7 @@ def edit
 #This method displays current friends, the friend requests and the requested 
 def index
   @users= User.all
-  @friendship = Friendship.all
+
 
 end 
 
@@ -40,10 +40,10 @@ def create
 
   if @friendship.save  
     flash[:success] = "Added friend."
-    redirect_to root_path
+    redirect_to friendships_path
   else
     flash[:error] = "Unable to add friend."
-    redirect_to friendships_path
+    redirect_to root_path
   
 end
   end

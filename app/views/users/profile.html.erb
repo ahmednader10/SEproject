@@ -1,7 +1,10 @@
-<head><script type="text/javascript">
+<head><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-</script></head>
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script></head>
 
 <body >
 <div class="headerlist">
@@ -49,14 +52,26 @@
   <h1> <%= @current_user.name %> welcome to your profile</h1>
  <% end %>
 
-  
-
-
-
-  <img src="http://image.shutterstock.com/display_pic_with_logo/308572/135288281/stock-vector-creative-idea-light-bulb-with-concept-of-word-cloud-vector-illustration-modern-template-design-135288281.jpg" width="337";height="270" style="outline:double;outline-color:#303;"/>
-  
+<div style="position:absolute;left:300px;">
+<button class="btn btn-primary btn-xs" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  Upload
+</button>
+<button class="btn btn-primary btn-xs" type="button" >
+    Delete
+</button>
+<div class="collapse" id="collapseExample">
+  <div class="well">
+    <%= form_for((current_user) , html: {multipart: true}) do |f| %>
+        <p>
+         <%= f.file_field :image %>
+       </p>
+       <%= f.submit "Upload Image" %>
+  <%end%>
   </div>
-
+</div>
+</div>
+<%= link_to image_tag(current_user.image.url,:style=>'width:450px; height:400px;'), current_user.image.url %>
+  </div>
 
 <div class="friendlist"> 
 

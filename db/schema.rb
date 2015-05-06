@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20150430194311) do
-=======
-ActiveRecord::Schema.define(version: 20150503144953) do
->>>>>>> 2d8a95ac3a5f77a1f7804374c05b36fe2c3b52ed
+ActiveRecord::Schema.define(version: 20150506042515) do
 
   create_table "actions", force: true do |t|
     t.string   "info"
@@ -148,8 +144,6 @@ ActiveRecord::Schema.define(version: 20150503144953) do
   end
 
   create_table "sysadmins", force: true do |t|
-    t.string   "username"
-    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -170,6 +164,10 @@ ActiveRecord::Schema.define(version: 20150503144953) do
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
     t.integer  "privacy",                      default: 1
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
 end
