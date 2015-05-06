@@ -81,12 +81,8 @@ class IdeasController < ApplicationController
 		@idea = Idea.find(params[:id])
 		@user= User.find_by(:id => @idea.user_id)
 
-		if (@user.bfriends.include?(current_user))
-
-		else
-
 	 	@likeidea = Likeidea.new(:user_id => @user.id , :idea_id => @idea.id)
-		end
+		
 		if @likeidea.save
 			Action.create(info: @user.username + ' has liked an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_email: @user.email)
 			if @user.id != @idea.user_id	
