@@ -22,7 +22,43 @@
 </ul>  
 </div>
 <div class=" profilepic" >
-<h1> <%= @user.username %> </h1>
+
+
+  <h1> <%= @user.username %>  </h1>
+
+<% unless  current_user.rfriends.include?(@user) %>
+  <h1><%= link_to "Report User",user_report_user_path(:user_id => @user.id) ,:method => :post %></h1>
+<% end %>
+
+<% unless  current_user.bfriends.include?(@user) %>
+   <h1><%= link_to "Block User",user_block_user_path(:user_id => @user.id) ,:method => :post %></h1>
+<% end %>
+
+
+
+
+
+
+<% unless @user ==current_user ||current_user.friends.include?(@user)  || @user.friends.include?(current_user)  %>
+<% unless  @user.bfriends.include?(current_user) %>
+
+ <h1> <%= link_to "Add Friend", friendships_path(:friend_id => @user.id), :method => :post %> </h1>
+<% end %>
+<% else %>
+
+
+<% for friendship in current_user.friendships %>
+<% if current_user.friends.include?(@user) && friendship.status == nil %>
+
+  <% end %>
+<% end %>
+<h2> Friend Request Sent </h2>
+<% end %>
+
+
+
+
+
   <img src="http://image.shutterstock.com/display_pic_with_logo/308572/135288281/stock-vector-creative-idea-light-bulb-with-concept-of-word-cloud-vector-illustration-modern-template-design-135288281.jpg" width="337";height="270" style="outline:double;outline-color:#303;"/>
     </div>
   

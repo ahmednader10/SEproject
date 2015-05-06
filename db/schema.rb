@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430115004) do
+ActiveRecord::Schema.define(version: 20150506042515) do
 
   create_table "actions", force: true do |t|
     t.string   "info"
@@ -46,6 +46,12 @@ ActiveRecord::Schema.define(version: 20150430115004) do
     t.datetime "updated_at"
   end
 
+  create_table "categories", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "comments", force: true do |t|
     t.integer  "idea_id"
     t.integer  "user_id"
@@ -61,6 +67,7 @@ ActiveRecord::Schema.define(version: 20150430115004) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "category"
   end
 
   create_table "friendships", force: true do |t|
@@ -159,6 +166,10 @@ ActiveRecord::Schema.define(version: 20150430115004) do
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
     t.integer  "privacy",                      default: 1
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
 end

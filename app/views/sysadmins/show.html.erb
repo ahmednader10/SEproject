@@ -2,20 +2,38 @@
 <h1>Welcome, System admin!</h1>
 
 
+<% if flash[:notice] %>
+	<%= flash[:notice] %>
+<% end %>
+<% @user_all = User.all %>
 <%= form_tag(edit_path, method: "get") do %>
-	<%= text_field_tag(:email_delete) %>
+	<%= select_tag "user_all", options_from_collection_for_select(@user_all, "email", "email") %>
 	<%= submit_tag(:delete) %>
 <% end %>
 
 <%= link_to 'control forums', forums_sysadmins_path %>
 
-<%= form_tag(blocked_path, method: "get") do %>
-	<%= text_field_tag(:block_user) %>
-	<%= submit_tag(:block) %>
+
+<% @arr_unblocked = [] %>
+<% @user_all.each do |u| %>
+	<% if !Block.find_by(email: u.email) %>
+		<% @arr_unblocked.push(u) %>
+	<% end %>
 <% end %>
 
+</br>
+<% if flash[:danger] %>
+	<%= flash[:danger] %>
+<% end %>
+
+<%= form_tag(blocked_path, method: "get") do %>
+	<%= select_tag "block_user", options_from_collection_for_select(@arr_unblocked, "email", "email") %>
+	<%= submit_tag(:block, :id => "block_btn") %>
+<% end %>
+
+<% @unblock_user = Block.all %>
 <%= form_tag(unblocked_path, method: "get") do %>
-	<%= text_field_tag(:unblock_user) %>
+	<%= select_tag "unblock_user", options_from_collection_for_select(@unblock_user, "email", "email") %>
 	<%= submit_tag(:unblock) %>
 <% end %>
 
