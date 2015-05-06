@@ -35,9 +35,8 @@ class User < ActiveRecord::Base
 	has_many :ideas, through: :comments
 
 
-	has_attached_file :image
+	has_attached_file :image 
 
-	validates :image, :attachment_presence => true
 	validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
 	#has_many :blocks, :dependent => :destroy

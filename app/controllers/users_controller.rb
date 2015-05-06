@@ -172,17 +172,26 @@ class UsersController < ApplicationController
 
     #opens the profile view of the user
       def profile
-        @current_user = current_user
+        @user = current_user
 
+     
       end
-      
+
+  def upload
+    @user = current_user
+       if @user.image.save
+          Action.create(info: @user.username + ' has updated his personal picture.', user_email: @user.email)
+          redirect_to(user_path)
+        end
+  end
+
     # user_params action requires the model user and whenever we want to retrieve the user's parameteres
     # we can do so using this action. Also it prevents a user from hacking into the app and changing the
     # model.
     private
 
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :username, :gender, :full_name, :password_question, :answer_for_password_question ,:privacy , :image)
+      params.require(:user).permit(:email, :password, :password_confirmation, :username, :gender, :full_name, :password_question, :answer_for_password_question ,:privacy,:image )
 
     end
 end
