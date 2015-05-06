@@ -17,7 +17,7 @@
 <% if  friendship.friend_name == current_user.username && friendship.status == true %>
   	
 <% if user.bfriends.include?(current_user) %>
-<%= h friendship.user_name %>
+<%= h friendship.user_name %> (<%= link_to "remove", friendship, :method => :delete %>)
 <% else %>
   	
     <%= h link_to friendship.user_name, user, :action => 'profile' %>
