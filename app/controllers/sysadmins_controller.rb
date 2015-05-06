@@ -37,7 +37,10 @@ class SysadminsController < ApplicationController
       redirect_to missingUser_path
     else
       @user_delete_from_blocks = Block.find_by(email: @user_tmp.email)
-      if @user_delete_from_blocks.destroy and @user_tmp.destroy
+      if @user_delete_from_blocks
+        @user_delete_from_blocks.destroy
+      end
+      if @user_tmp.destroy
         flash[:notice] = "The user " + @deleted_user.email + "has been deleted from the system."
         redirect_to show_path
       else
