@@ -45,7 +45,7 @@
          <%= button_to "Report Idea", :action => "report"%>
          <% f = Forum.where(id: params[:forum_id]) %>
          <% i = Idea.where(id: params[:id]) %>
-         <% if i.first.user_id == current_user.id or !Admin.where(user_id: current_user.id , forum_id: f.first.id).empty? %>
+         <% if session[:sysadmin] or i.first.user_id == current_user.id or !Admin.where(user_id: current_user.id , forum_id: f.first.id).empty? %>
           <%= button_to "delete idea", :action => :destroy %> 
         <% end %>
          <!-- Facebook and Twitter share button-->
