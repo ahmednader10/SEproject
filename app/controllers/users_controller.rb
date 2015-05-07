@@ -117,9 +117,10 @@ class UsersController < ApplicationController
     forum = params[:forum]
     @forum = Forum.find(forum)
     @membership1 = Membership.where(user_id: user , forum_id: forum)
-    Action.create(info: current_user.id + ' has rejected ' + @user.username + "'s join request to forum: (" + @forum.title + ').', user_email: current_user.email)
-    Notification.create(info: 'Your request to join forum: (' + @forum.title + ' has been rejected.', user_id: user.id)
-    @membership1.first.destroy
+    Action.create(info: current_user.username + ' has rejected ' + @user.username + "'s join request to forum: (" + @forum.title + ").", user_email: current_user.email)
+    Notification.create(info: 'Your request to join forum: (' + @forum.title + ' has been rejected.', user_id: user)
+    @membership1.first.accept = false
+    @membership1.first.save
     redirect_to(:action => "admin_join_forums_requests")
   end
 
