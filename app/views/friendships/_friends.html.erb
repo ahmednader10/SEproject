@@ -20,26 +20,32 @@
 <%= h friendship.user_name %> (<%= link_to "remove", friendship, :method => :delete %>)
 <% else %>
   	
-    <%= h link_to friendship.user_name, user, :action => 'profile' %>
+    <%= link_to friendship.user_name, user_path(friendship.user_id) %>
     (<%= link_to "remove", friendship, :method => :delete %>)
 
 
 <% end %> 
 <% end %> 
+
+
+
 <% if friendship.user_name == current_user.username && friendship.status == true %>
 
-<%= h link_to friendship.friend_name, user, :action => 'profile' %>
+<% if user.bfriends.include?(current_user) %>
+<%= h friendship.friend_name %> (<%= link_to "remove", friendship, :method => :delete %>)
+<% else %>
+
+<%= link_to friendship.friend_name, user_path(friendship.friend_id) %>
     (<%= link_to "remove", friendship, :method => :delete %>)
 
 
+
+<% end %> 
 <% end %> 
 
 
 
-
-
-    
-       
+   
 
   </li>
    

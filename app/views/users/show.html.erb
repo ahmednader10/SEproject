@@ -49,10 +49,10 @@
 
 <% for friendship in current_user.friendships %>
 <% if current_user.friends.include?(@user) && friendship.status == nil %>
-
+<h2> Friend Request Sent </h2>
   <% end %>
 <% end %>
-<h2> Friend Request Sent </h2>
+
 <% end %>
 
 
