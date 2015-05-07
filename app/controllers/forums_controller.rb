@@ -160,7 +160,7 @@ class ForumsController < ApplicationController
         @membership1.first.destroy 
     	#Action.create(info: current_user.username + ' has removed a member: (' + user.username + ') from the forum: (' + forum.title + ').', user_id: current_user.id)
     	#Notification.create(info: 'You have been removed from forum: (' + forum.title + ').', user_id: user.id)
-    	render 'list_members'
+    	redirect_to 'list_members'
     end
 
 	#A method that returns a list of all the members in a certain forum
@@ -195,19 +195,19 @@ class ForumsController < ApplicationController
 			end
 			@membership.accept = true if @forum.privacy == '1'
 			if  @membership.save and @membership.accept == true
-			 	flash[:notice] = 'Successfully joined forum'
-	   		 	render :action => "show"
+			 	flash[:success] = 'Successfully joined forum'
+	   		 	redirect_to :action => "show"
 				Notification.create(info: 'Your request to join forum: (' + @forum.title + ') has been accepted and you have successfully joined.', user_id: @user.id)
 	   		elsif @membership.accept == true  and !@membership.save 
 	   			#need to check in the database first if this record already exists
-	   			flash[:notice] = 'already member of this forum'
-	   			render :action => "show"
+	   			flash[:member] = 'already member of this forum'
+	   			redirect_to :action => "show"
 			elsif @membership.accept == nil and !@membership.save  
-				flash[:notice] = 'already sent request to join this forum'
-	   			render :action => "show"
+				flash[:requestsent] = 'already sent request to join this forum'
+	   			redirect_to :action => "show"
 			elsif @membership.accept == nil
-			   	flash[:notice] = 'Pending request'
-			   	render :action => "show"
+			   	flash[:pending] = 'Pending request'
+			   	redirect_to :action => "show"
 			end
 		end
   		#send notification joined successfully
