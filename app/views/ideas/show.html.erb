@@ -59,7 +59,8 @@
          <% f = Forum.where(id: params[:forum_id]) %>
          <% i = Idea.where(id: params[:id]) %>
          <% if session[:sysadmin] or i.first.user_id == current_user.id or !Admin.where(user_id: current_user.id, forum_id: f.first.id).empty? %>
-          <%= button_to "delete idea", :action => :destroy  %> 
+          <%= button_to "delete idea", :action => :destroy %> 
+
         <% end %>
          <!-- Facebook and Twitter share button-->
          <%= social_share_button_tag(@idea.text + '  via @', :popup => "true", :url => "http://FarrahAbulkhair.com") %>
