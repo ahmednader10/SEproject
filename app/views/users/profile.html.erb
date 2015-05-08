@@ -7,39 +7,43 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script></head>
 
 <body >
-<div class="headerlist">
-<ul id="menu">
-<li > Logo</li>
+  <div class="headerlist">
+    <ul id="menu">
+      <li > Logo</li>
 
- <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
- <% if current_user != nil %>
- <li><%= link_to "friend requests" , edit_friendship_path %></li>
- <li><%= link_to "Log out", logout_path, method: :delete %></li>
- <% if !Admin.where(user_id: current_user.id).empty? %>
- <li><%= link_to "requests to join my forums", :action => :admin_join_forums_requests %> </li>
- <% end %>
- <li><%= link_to "notifications" ,user_notifications_path %> </li>
- <% end %>
-</ul>  
+    <li>
+      <img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/>
+    </li>
+    <% if current_user != nil %>
+    <li><%= link_to "friend requests" , edit_friendship_path %></li>
+    <li><%= link_to "Log out", logout_path, method: :delete %></li>
+    <% if !Admin.where(user_id: current_user.id).empty? %>
+    <li><%= link_to "requests to join my forums", :action => :admin_join_forums_requests %> </li>
+    <% end %>
+    <li><%= link_to "notifications" ,user_notifications_path %> </li>
+    <% end %>
+    </ul>  
+  </div>
+
+  <div class="side" style="position: fixed; left: 23px; top: 181px;">
+   <ul>
+    <li>
+      <a class='list-item' href='/forums'>
+        Forums
+      </a>
+    </li>
+    <li>
+      <a class='list-item' href='/friendships/:id'>
+        Friends
+      </a>
+    </li>
+  </ul>
 </div>
 
-<div class="side" style="position: fixed; left: 23px; top: 181px;">
 
-  <ul>
-  <li>
-    <a class='list-item' href='/forums'>
-      Forums
-    </a>
-  </li>
-  <li>
-    <a class='list-item' href='/friendships/:id'>
-      Friends
-    </a>
-  </li>
 
-</ul>
-</div>
 
+<!-- Profile picture and update pic and delete here -->
 <div class=" profilepic" >
 <% if @current_user.uid == nil %>
   <h1> <%= @current_user.full_name %> welcome to your profile</h1>
@@ -47,66 +51,60 @@
   <h1> <%= @current_user.name %> welcome to your profile</h1>
  <% end %>
 <div style="position:absolute;left:300px;">
-<%= link_to "Delete", deleteImage_path(current_user) %>
-<button class="btn btn-primary btn-xs" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-Upload
-</button>
-<div class="collapse" id="collapseExample">
-  <div class="well">
-    <%= form_for((current_user) , html: {multipart: true}) do |f| %>
-        <% if current_user.errors.any? %>
-             <h3>Errors</h3>
+  <%= link_to "Delete", deleteImage_path(current_user) %>
+  <button class="btn btn-primary btn-xs" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  Upload
+  </button>
+  <div class="collapse" id="collapseExample">
+    <div class="well">
+      <%= form_for((current_user) , html: {multipart: true}) do |f| %>
+          <% if current_user.errors.any? %>
+            <h3>Errors</h3>
               <ul>
-                  <% current_user.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                  <% end %>
+                <% current_user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
               </ul>
-        <% end %>
-       <p>
+          <% end %>
+        <p>
          <%= f.hidden_field :image, value: '' %>
          <%= f.file_field :image %>
        </p>
        <%= f.submit "Upload Image" %>
        <% end %>
+    </div>
   </div>
-</div>
-</div>
-<%= link_to image_tag(current_user.image.url,:style=>'width:450px; height:400px;'), current_user.image.url %>
-</div>
-
-
-
-
-<div class="friendlist"> 
-  <table width="158" height="360">
-    <tr >	
-      <td height="110"> </td>
-      <td  height="110"> </td>
-    </tr>
-    <tr height="110">
-      <td height="114"> </td>
-      <td> </td>
-    </tr>
-    <tr height="110">
-      <td> </td>
-      <td> </td>
-    </tr>
-  </table>  
+  </div>
+  <%= link_to image_tag(current_user.image.url,:style=>'width:450px; height:400px;'), current_user.image.url %>
 </div>
 
 
+
+
+<!-- Friends block here -->
+<div class="friendlist">
+
+</div>
+
+
+
+
+<!-- tabs for information , foroums , memberships , ideas -->
 <div>
   <ul class="tabs">
+<!-- INFORMATION here -->    
     <li>
         <input type="radio" name="tabs" id="tab1" checked />
         <label for="tab1">Information</label>
-          <div id="tab-content1" class="tab-content" >
+        <div id="tab-content1" class="tab-content" >
             <%= link_to "edit" , edit_user_path(current_user) %>
             <h2> Information </h2>
-              <p>full name : <%= @current_user.full_name %> </p>
-              <p>email: <%= @current_user.email %> </p>
-              <p>gender : <%= @current_user.gender %> </p>
-          </div>
+            <p>full name : <%= @current_user.full_name %> </p>
+            <p>email: <%= @current_user.email %> </p>
+            <p>gender : <%= @current_user.gender %> </p>
+        </div>
+    </li>
+<!-- FOROUMS here -->
     <li>
           <input type="radio" name="tabs" id="tab2" />
           <label for="tab2"> Your Forums</label>
@@ -130,6 +128,7 @@ Upload
             <% end %>
           </div>    
     </li>
+<!-- MEMBERSHIPS here -->
     <li>
       <input type="radio" name="tabs" id="tab3" checked />
       <label for="tab3">memberships</label>
@@ -155,6 +154,7 @@ Upload
         <% end %>
       </div>
     </li>
+<!-- IDEAS here -->
     <li>  
       <input type="radio" name="tabs" id="tab4" checked />
       <label for="tab4">Ideas</label>
