@@ -63,6 +63,7 @@ Upload
               </ul>
         <% end %>
        <p>
+         <%= f.hidden_field :image, value: '' %>
          <%= f.file_field :image %>
        </p>
        <%= f.submit "Upload Image" %>
