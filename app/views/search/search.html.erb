@@ -27,25 +27,26 @@
 			<%= select_tag(:type, "<option>All</option><option>Users</option><option>Forums</option><option>Ideas</option>".html_safe) %>
 			<%= submit_tag("Search") %>
 		<% end %>
-	
-		<% if @results != nil && @results.count != 0 %>
-			<h2>Results:</h2>
-			<ul>
-			<% @results.each do |result| %>
-				<% if User.all.include? result %>
-					<li>user: <%= link_to result.username, result %> <%= ' (fullname: ' + result.full_name + ')' %></li>
-				<% elsif Forum.all.include? result %>
-					<li>forum: <%= link_to result.title, result %> <%= ' (description: ' + result.description + ')' %></li>
-				<% else %>
-					<% forum = Forum.find(result.forum_id) %>
-					<li>idea: <%= link_to result.title, forum_idea_path(forum.id, result.id) %> <%= ' (description: ' + result.text + ')' %></li>
+		
+		<% if params[:q].to_s.length != 0 %>
+			<% if @results != nil && @results.count != 0 %>
+				<h2>Results:</h2>
+				<ul>
+				<% @results.each do |result| %>
+					<% if User.all.include? result %>
+						<li>user: <%= link_to result.username, result %> <%= ' (fullname: ' + result.full_name + ')' %></li>
+					<% elsif Forum.all.include? result %>
+						<li>forum: <%= link_to result.title, result %> <%= ' (description: ' + result.description + ')' %></li>
+					<% else %>
+						<% forum = Forum.find(result.forum_id) %>
+						<li>idea: <%= link_to result.title, forum_idea_path(forum.id, result.id) %> <%= ' (description: ' + result.text + ')' %></li>
+					<% end %>
 				<% end %>
+				</ul>
+				<%else%>
+				<h2> No results found </h2>
 			<% end %>
-			</ul>
-			<%else%>
-			<h2> mafesh haga esmha keda ya brens </h2>
-		<% end %>
-
+		<%end%>
 	
 	</div>
 </html>
