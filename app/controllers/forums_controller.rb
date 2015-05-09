@@ -158,13 +158,17 @@ class ForumsController < ApplicationController
 		@membership1 = Membership.where(user_id: user , forum_id: forum)
 		
         @membership1.first.destroy 
-    	#Action.create(info: current_user.username + ' has removed a member: (' + user.username + ') from the forum: (' + forum.title + ').', user_id: current_user.id)
-    	#Notification.create(info: 'You have been removed from forum: (' + forum.title + ').', user_id: user.id)
-    	redirect_to 'list_members'
+    	Action.create(info: current_user.username + ' has removed a member: (' + user.username + ') from the forum: (' + forum.title + ').', user_email: current_user.email)
+    	Notification.create(info: 'You have been removed from forum: (' + forum.title + ').', user_id: user.id)
+    	# redirect_to 'list_members'
+    	redirect_to list_members_path(id: forum)
     end
 
 	#A method that returns a list of all the members in a certain forum
 	def list_members
+		# @forum = Forum.find(params[:id])
+		# @users = @forum.accepted_users
+		
 		@users = []
 		@forum = Forum.find(params[:id])
 		forums_ids = Membership.where(forum_id: @forum.id , accept: true)

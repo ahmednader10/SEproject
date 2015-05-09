@@ -1,0 +1,714 @@
+/* line 1, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+h1 {
+  font-family: "DIN condensed", "Book Antiqua", Palatino, DIN condensed;
+  font-size: 36px;
+  color: #333;
+}
+
+/* line 7, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+body {
+  margin: auto;
+  height: 100%;
+}
+
+/* line 11, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+html {
+  height: 100%;
+}
+
+/* line 14, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+#listhorizontal {
+  margin: 25px;
+}
+
+/* line 17, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.profilepic {
+  position: relative;
+  left: 140px;
+  top: 76px;
+  width: 550px;
+  height: 350px;
+}
+
+/* line 31, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+h2 {
+  font-family: "DIN condensed", cursive;
+  text-outline: #0FC;
+  text-shadow: #0C6;
+}
+
+/* line 37, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+p {
+  font-family: "DIN condensed", cursive;
+  color: #333;
+}
+
+/* line 42, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+ul#menu {
+  padding: 0;
+}
+
+/* line 46, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+ul#menu li {
+  display: inline;
+  color: black;
+  font-family: "DIN condensed", cursive;
+  font-weight: 900;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px 4px 0 0;
+}
+
+/* line 55, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+table {
+  text-align: center;
+}
+
+/* line 59, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.headerlist {
+  background: -webkit-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: -moz-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: -ms-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: -o-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background-size: 10px 10px, 10px 10px, 100% 100%;
+  background-position: 1px 1px, 0px 0px, center center;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+}
+
+/* line 77, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+#ideatitlecolumn {
+  border: 2px solid;
+  border-radius: 25px;
+  background-color: #C90;
+  color: white;
+}
+
+/* line 83, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+#ideacolumn {
+  border: 2px solid;
+  border-radius: 25px;
+  background-color: #606;
+  color: white;
+}
+
+/* line 90, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+#forumcolum {
+  border: 2px solid;
+  border-radius: 25px;
+  background-color: #396;
+  color: white;
+}
+
+/* line 97, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 103, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+html {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 108, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+body {
+  width: 100%;
+  height: 100%;
+  display: box;
+  box-align: center;
+  box-pack: center;
+  transform: translate3d(0, 0, 0);
+}
+
+/* line 117, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.clearfix {
+  zoom: 1;
+}
+
+/* line 120, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.clearfix:before, .clearfix:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+
+/* line 126, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.clearfix:after {
+  clear: both;
+}
+
+/* line 130, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+body {
+  background: #f2f2f2;
+}
+
+/* line 134, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+ul {
+  position: relative;
+  -moz-transform: rotate(-35deg) skew(deg, 5deg);
+  -ms-transform: rotate(-35deg) skew(deg, 5deg);
+  -webkit-transform: rotate(-35deg) skew(deg, 5deg);
+  transform: rotate(-35deg) skew(deg, 5deg);
+}
+
+/* line 142, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.list-item {
+  background: -webkit-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: -moz-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: -ms-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: -o-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background-size: 10px 10px, 10px 10px, 100% 100%;
+  background-position: 1px 1px, 0px 0px, center center;
+  color: #575757;
+  text-align: center;
+  font-size: 16px;
+  height: 2.5em;
+  width: 4em;
+  vertical-align: middle;
+  line-height: 1em;
+  border-bottom: 1px solid #060606;
+  position: relative;
+  display: block;
+  text-decoration: none;
+  -moz-box-shadow: -2em 1.5em 0 #e1e1e1;
+  -webkit-box-shadow: -2em 1.5em 0 #e1e1e1;
+  box-shadow: -2em 1.5em 0 #e1e1e1;
+  -moz-transition: all 0.25s linear;
+  -o-transition: all 0.25s linear;
+  -webkit-transition: all 0.25s linear;
+  transition: all 0.25s linear;
+}
+
+/* line 169, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.list-item:hover {
+  background: #ff6e42;
+  color: #fffcfb;
+  -moz-transform: translate(0.9em, -0.9em);
+  -ms-transform: translate(0.9em, -0.9em);
+  -webkit-transform: translate(0.9em, -0.9em);
+  transform: translate(0.9em, -0.9em);
+  -moz-transition: all 0.25s linear;
+  -o-transition: all 0.25s linear;
+  -webkit-transition: all 0.25s linear;
+  transition: all 0.25s linear;
+  -moz-box-shadow: -2em 2em 0 #e1e1e1;
+  -webkit-box-shadow: -2em 2em 0 #e1e1e1;
+  box-shadow: -2em 2em 0 #e1e1e1;
+}
+
+/* line 184, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.list-item:hover:before, .list-item:hover:after {
+  -moz-transition: all 0.25s linear;
+  -o-transition: all 0.25s linear;
+  -webkit-transition: all 0.25s linear;
+  transition: all 0.25s linear;
+}
+
+/* line 190, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.list-item:hover:before {
+  background: #b65234;
+  width: 1em;
+  top: 0.5em;
+  left: -1em;
+}
+
+/* line 196, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.list-item:hover:after {
+  background: #b65234;
+  width: 1em;
+  bottom: -2.5em;
+  left: 1em;
+  height: 4em;
+}
+
+/* line 203, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.list-item:before, .list-item:after {
+  -moz-transition: all 0.25s linear;
+  -o-transition: all 0.25s linear;
+  -webkit-transition: all 0.25s linear;
+  transition: all 0.25s linear;
+}
+
+/* line 209, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.list-item:after {
+  content: "";
+  position: absolute;
+  height: 4em;
+  background: #181818;
+  width: 0.5em;
+  bottom: -2.25em;
+  left: 1.5em;
+  -moz-transform: rotate(90deg) skew(0deg, 45deg);
+  -ms-transform: rotate(90deg) skew(0deg, 45deg);
+  -webkit-transform: rotate(90deg) skew(0deg, 45deg);
+  transform: rotate(90deg) skew(0deg, 45deg);
+}
+
+/* line 222, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.list-item:before {
+  content: "";
+  position: absolute;
+  height: 2.5em;
+  background: #121212;
+  width: 0.5em;
+  top: 0.25em;
+  left: -0.5em;
+  -moz-transform: skewY(-45deg);
+  -ms-transform: skewY(-45deg);
+  -webkit-transform: skewY(-45deg);
+  transform: skewY(-45deg);
+}
+
+/* line 242, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.tabs {
+  width: 1050px;
+  float: none;
+  list-style: none;
+  position: relative;
+  margin: 80px 0 0 10px;
+  text-align: left;
+}
+/* line 249, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.tabs li {
+  float: left;
+  display: block;
+}
+/* line 253, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.tabs input[type="radio"] {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+/* line 258, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.tabs label {
+  display: block;
+  padding: 14px 21px;
+  border-radius: 2px 2px 0 0;
+  font-size: 20px;
+  font-weight: normal;
+  text-transform: uppercase;
+  background: -webkit-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: -moz-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: -ms-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: -o-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background-size: 10px 10px, 10px 10px, 100% 100%;
+  background-position: 1px 1px, 0px 0px, center center;
+  color: #575757;
+  cursor: pointer;
+  position: relative;
+  top: 4px;
+  transition: all 0.2s ease-in-out;
+}
+/* line 278, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.tabs label:hover {
+  background: #4d004d;
+}
+/* line 282, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.tabs .tab-content {
+  box-shadow: inset 0 0 0 10px grey,  inset 0 0 3px 12px black, 0 6px 20px black;
+  z-index: 2;
+  display: none;
+  overflow: hidden;
+  width: 100%;
+  font-size: 17px;
+  line-height: 25px;
+  padding: 25px;
+  position: absolute;
+  top: 53px;
+  left: 0;
+  background: -webkit-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: -moz-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: -ms-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: -o-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background-size: 10px 10px, 10px 10px, 100% 100%;
+  background-position: 1px 1px, 0px 0px, center center;
+  color: #575757;
+}
+/* line 309, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.tabs [id^="tab"]:checked + label {
+  top: 0;
+  padding-top: 17px;
+  background: #340033;
+}
+/* line 314, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+.tabs [id^="tab"]:checked ~ [id^="tab-content"] {
+  display: block;
+}
+
+/* line 319, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+p.link {
+  clear: both;
+  margin: 380px 0 0 15px;
+}
+/* line 322, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+p.link a {
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  color: #fff;
+  padding: 5px 10px;
+  margin: 0 5px;
+  background-color: #340033;
+  transition: all 0.2s ease-in;
+}
+/* line 331, /home/miada/SEproject/app/assets/stylesheets/users.css.scss */
+p.link a:hover {
+  background: -webkit-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: -moz-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: -ms-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: -o-radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background: radial-gradient(center, circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 21%), -webkit-radial-gradient(center, circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, silver);
+  background-size: 10px 10px, 10px 10px, 100% 100%;
+  background-position: 1px 1px, 0px 0px, center center;
+  color: #575757;
+}
+/*
+
+        Creating a sprite from following images:
+
+        app/assets/images/sprites/social-share-button/baidu.png (16x16)
+        app/assets/images/sprites/social-share-button/delicious.png (16x16)
+        app/assets/images/sprites/social-share-button/douban.png (16x16)
+        app/assets/images/sprites/social-share-button/email.png (16x16)
+        app/assets/images/sprites/social-share-button/facebook.png (16x16)
+        app/assets/images/sprites/social-share-button/flickr.png (16x16)
+        app/assets/images/sprites/social-share-button/google_bookmark.png (16x16)
+        app/assets/images/sprites/social-share-button/google_plus.png (16x16)
+        app/assets/images/sprites/social-share-button/kaixin001.png (16x16)
+        app/assets/images/sprites/social-share-button/pinterest.png (16x16)
+        app/assets/images/sprites/social-share-button/plurk.png (16x16)
+        app/assets/images/sprites/social-share-button/qq.png (16x16)
+        app/assets/images/sprites/social-share-button/renren.png (16x16)
+        app/assets/images/sprites/social-share-button/tqq.png (16x16)
+        app/assets/images/sprites/social-share-button/tumblr.png (16x16)
+        app/assets/images/sprites/social-share-button/twitter.png (16x16)
+        app/assets/images/sprites/social-share-button/weibo.png (16x16)
+
+        Output files:
+          app/assets/images/sprites/social-share-button.png
+          app/assets/stylesheets/social-share-button.scss
+
+        Output size:
+          80x64
+
+*/
+/* line 32, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+.social-share-button-baidu {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/assets/sprites/social-share-button.png") 0px 0px no-repeat;
+}
+
+/* line 33, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+.social-share-button-delicious {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/assets/sprites/social-share-button.png") -16px 0px no-repeat;
+}
+
+/* line 34, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+.social-share-button-douban {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/assets/sprites/social-share-button.png") 0px -16px no-repeat;
+}
+
+/* line 35, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+.social-share-button-email {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/assets/sprites/social-share-button.png") -16px -16px no-repeat;
+}
+
+/* line 36, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+.social-share-button-facebook {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/assets/sprites/social-share-button.png") -32px 0px no-repeat;
+}
+
+/* line 37, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+.social-share-button-flickr {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/assets/sprites/social-share-button.png") -32px -16px no-repeat;
+}
+
+/* line 38, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+.social-share-button-google_bookmark {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/assets/sprites/social-share-button.png") 0px -32px no-repeat;
+}
+
+/* line 39, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+.social-share-button-google_plus {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/assets/sprites/social-share-button.png") -16px -32px no-repeat;
+}
+
+/* line 40, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+.social-share-button-kaixin001 {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/assets/sprites/social-share-button.png") -32px -32px no-repeat;
+}
+
+/* line 41, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+.social-share-button-pinterest {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/assets/sprites/social-share-button.png") -48px 0px no-repeat;
+}
+
+/* line 42, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+.social-share-button-plurk {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/assets/sprites/social-share-button.png") -48px -16px no-repeat;
+}
+
+/* line 43, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+.social-share-button-qq {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/assets/sprites/social-share-button.png") -48px -32px no-repeat;
+}
+
+/* line 44, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+.social-share-button-renren {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/assets/sprites/social-share-button.png") 0px -48px no-repeat;
+}
+
+/* line 45, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+.social-share-button-tqq {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/assets/sprites/social-share-button.png") -16px -48px no-repeat;
+}
+
+/* line 46, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+.social-share-button-tumblr {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/assets/sprites/social-share-button.png") -32px -48px no-repeat;
+}
+
+/* line 47, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+.social-share-button-twitter {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/assets/sprites/social-share-button.png") -48px -48px no-repeat;
+}
+
+/* line 48, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+.social-share-button-weibo {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/assets/sprites/social-share-button.png") -64px 0px no-repeat;
+}
+
+@media only screen and (-webkit-device-pixel-ratio: 2) {
+  /* line 51, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+  .social-share-button-baidu {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/sprites/social-share-button@2x.png") 0px 0px no-repeat;
+    background-size: 80px 64px;
+  }
+
+  /* line 52, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+  .social-share-button-delicious {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/sprites/social-share-button@2x.png") -16px 0px no-repeat;
+    background-size: 80px 64px;
+  }
+
+  /* line 53, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+  .social-share-button-douban {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/sprites/social-share-button@2x.png") 0px -16px no-repeat;
+    background-size: 80px 64px;
+  }
+
+  /* line 54, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+  .social-share-button-email {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/sprites/social-share-button@2x.png") -16px -16px no-repeat;
+    background-size: 80px 64px;
+  }
+
+  /* line 55, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+  .social-share-button-facebook {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/sprites/social-share-button@2x.png") -32px 0px no-repeat;
+    background-size: 80px 64px;
+  }
+
+  /* line 56, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+  .social-share-button-flickr {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/sprites/social-share-button@2x.png") -32px -16px no-repeat;
+    background-size: 80px 64px;
+  }
+
+  /* line 57, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+  .social-share-button-google_bookmark {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/sprites/social-share-button@2x.png") 0px -32px no-repeat;
+    background-size: 80px 64px;
+  }
+
+  /* line 58, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+  .social-share-button-google_plus {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/sprites/social-share-button@2x.png") -16px -32px no-repeat;
+    background-size: 80px 64px;
+  }
+
+  /* line 59, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+  .social-share-button-kaixin001 {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/sprites/social-share-button@2x.png") -32px -32px no-repeat;
+    background-size: 80px 64px;
+  }
+
+  /* line 60, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+  .social-share-button-pinterest {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/sprites/social-share-button@2x.png") -48px 0px no-repeat;
+    background-size: 80px 64px;
+  }
+
+  /* line 61, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+  .social-share-button-plurk {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/sprites/social-share-button@2x.png") -48px -16px no-repeat;
+    background-size: 80px 64px;
+  }
+
+  /* line 62, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+  .social-share-button-qq {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/sprites/social-share-button@2x.png") -48px -32px no-repeat;
+    background-size: 80px 64px;
+  }
+
+  /* line 63, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+  .social-share-button-renren {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/sprites/social-share-button@2x.png") 0px -48px no-repeat;
+    background-size: 80px 64px;
+  }
+
+  /* line 64, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+  .social-share-button-tqq {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/sprites/social-share-button@2x.png") -16px -48px no-repeat;
+    background-size: 80px 64px;
+  }
+
+  /* line 65, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+  .social-share-button-tumblr {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/sprites/social-share-button@2x.png") -32px -48px no-repeat;
+    background-size: 80px 64px;
+  }
+
+  /* line 66, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+  .social-share-button-twitter {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/sprites/social-share-button@2x.png") -48px -48px no-repeat;
+    background-size: 80px 64px;
+  }
+
+  /* line 67, /home/miada/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/social-share-button-0.1.8/app/assets/stylesheets/social-share-button.scss */
+  .social-share-button-weibo {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/sprites/social-share-button@2x.png") -64px 0px no-repeat;
+    background-size: 80px 64px;
+  }
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+
+default
+
+ */
+
+
+ 
