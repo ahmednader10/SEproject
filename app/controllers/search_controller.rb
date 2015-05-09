@@ -8,13 +8,16 @@ class SearchController < ApplicationController
 				@results += Forum.where("UPPER(title) LIKE ('%' || UPPER(:q) || '%')", q: params[:q])
 				@results += Idea.where("UPPER(title) LIKE ('%' || UPPER(:q) || '%')", q: params[:q])
 			elsif params[:type] == 'Users'
-				results = User.where("UPPER(username) LIKE ('%' || UPPER(:q) || '%') OR UPPER(full_name) LIKE ('%' || UPPER(:q) || '%')", q: params[:q])
+				@results = User.where("UPPER(username) LIKE ('%' || UPPER(:q) || '%') OR UPPER(full_name) LIKE ('%' || UPPER(:q) || '%')", q: params[:q])
 			elsif params[:type] == 'Forums'
 				@results = Forum.where("UPPER(title) LIKE ('%' || UPPER(:q) || '%')", q: params[:q])
 			elsif params[:type] == 'Ideas'
 				@results = Idea.where("UPPER(title) LIKE ('%' || UPPER(:q) || '%')", q: params[:q])
 			end
 		end
+	end
+
+	def advanced_search
 	end
 
 end
