@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
 	has_many :ideas, through: :comments
 
 
-	has_attached_file :image ,:default_url => "/assets/images/missing.png"
+	has_attached_file :image ,:default_url => "missing.png"
 	validates_attachment_content_type :image, :content_type => /\Aimage/
   # Validate filename
  	validates_attachment_file_name :image, :matches => [/png\Z/, /jpe?g\Z/]
