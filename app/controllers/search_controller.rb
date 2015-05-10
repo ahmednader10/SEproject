@@ -51,7 +51,7 @@ class SearchController < ApplicationController
 				else
 					toDay = params[:today]
 				end
-				from = Time.new(fromYear, fromMonth, fromDay, 0, 0, 0)
+				from = Time.new(fromYear, fromMonth, fromDay)
 				to = Time.new(toYear.to_i, toMonth.to_i, toDay, 23, 59, 59)
 				if params[:type] == 'All'
 					results1 = User.where("(UPPER(username) LIKE ('%' || UPPER(:q) || '%') OR UPPER(full_name) LIKE ('%' || UPPER(:q) || '%')) AND created_at BETWEEN :from AND :to", q: params[:q], from: from, to: to)
