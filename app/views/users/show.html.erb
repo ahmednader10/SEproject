@@ -5,6 +5,10 @@
 
 
 <body>
+<ul class="nav nav-pills" role="tablist">
+              <li role="presentation" class="active"><a href="/forums" >forums</a></li>
+              <li> <%= link_to image_tag(current_user.image.url,:style=>'width:50px ;height:30px;'), user_path(current_user) %></li>
+            </ul>
 <div class="row" style="margin-top:100px;">
   <div class="col-sm-3">
     <!-- SideBAR -->

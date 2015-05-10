@@ -7,8 +7,18 @@
 <!-- Latest compiled JavaScript -->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script></head>
 
-<div>
-  <!-- HEADER -->
+<div><ul class="nav nav-pills" role="tablist">
+              <li role="presentation" class="active"><a href="/forums" >forums</a></li>
+             <% if current_user != nil %>
+             <li role="presentation" class="active"><%= link_to "friend requests" , friendships_path %></li>
+             <li><%= link_to "Log out", logout_path, method: :delete %></li>
+             <% if !Admin.where(user_id: current_user.id).empty? %>
+             <li role="presentation" class="active"><%= link_to "requests to join my forums", :action => :admin_join_forums_requests %> </li>
+             <%end%>
+              <li role="presentation" class="active"><%= link_to "friends" , friendship_path(current_user) %></li>
+              <li> <%= link_to image_tag(current_user.image.url,:style=>'width:50px ;height:40px;'), user_path(current_user) %></li>
+              
+            </ul>
 </div>
   <div class="row" style="margin-top:100px;">
   <div class="col-sm-3">
@@ -16,13 +26,12 @@
   </div>
     <div class="col-sm-5">
     <!-- MAIN -->
-    <div>
-      <h2>Welcome to you profile</h2>
-          <% if @current_user.uid == nil %>
+        <% if @current_user.uid == nil %>
             <h1> <%= @current_user.full_name %> welcome to your profile</h1>
           <% else %>
             <h1> <%= @current_user.name %> welcome to your profile</h1>
           <% end %>
+    <div>
           <%= link_to "Delete", deleteImage_path(current_user) %>
           <button style="position:absolute; left:400px;" class="btn btn-primary btn-xs" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
       Upload
@@ -141,3 +150,4 @@
   </div>
   
 </body>
+<%end %>
