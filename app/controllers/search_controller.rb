@@ -24,25 +24,25 @@ class SearchController < ApplicationController
 				if params[:type] == 'All'
 					results1 = User.where("UPPER(username) LIKE ('%' || UPPER(:q) || '%') OR UPPER(full_name) LIKE ('%' || UPPER(:q) || '%')", q: params[:q])
 					if params[:sortby] == 'Newest'
-						results1 = results1.order(created_at: :asc)
-					elsif params[:sortby] == 'Oldest'
 						results1 = results1.order(created_at: :desc)
+					elsif params[:sortby] == 'Oldest'
+						results1 = results1.order(created_at: :asc)
 					elsif params[:sortby] == 'Most Popular'
 						results1 = results1.sort_by{|result| (Friendship.where(user_id: result.id).count + Friendship.where(friend_id: result.id).count)}
 					end
 					results2 = Forum.where("UPPER(title) LIKE ('%' || UPPER(:q) || '%')", q: params[:q])
 					if params[:sortby] == 'Newest'
-						results2 = results2.order(created_at: :asc)
-					elsif params[:sortby] == 'Oldest'
 						results2 = results2.order(created_at: :desc)
+					elsif params[:sortby] == 'Oldest'
+						results2 = results2.order(created_at: :asc)
 					elsif params[:sortby] == 'Most Popular'
 						results2 = results2.sort_by{|result| Membership.where(forum_id: result2.id).count}
 					end
 					results3 = Idea.where("UPPER(title) LIKE ('%' || UPPER(:q) || '%')", q: params[:q])
 					if params[:sortby] == 'Newest'
-						results3 = results3.order(created_at: :asc)
-					elsif params[:sortby] == 'Oldest'
 						results3 = results3.order(created_at: :desc)
+					elsif params[:sortby] == 'Oldest'
+						results3 = results3.order(created_at: :asc)
 					elsif params[:sortby] == 'Most Popular'
 						results3 = results3.sort_by{|result| Likeidea.where(idea_id: result2.id).count}
 					end
@@ -50,27 +50,27 @@ class SearchController < ApplicationController
 				elsif params[:type] == 'Users'
 					@results = User.where("UPPER(username) LIKE ('%' || UPPER(:q) || '%') OR UPPER(full_name) LIKE ('%' || UPPER(:q) || '%')", q: params[:q])
 					if params[:sortby] == 'Newest'
-						@results = @results.order(created_at: :asc)
-					elsif params[:sortby] == 'Oldest'
 						@results = @results.order(created_at: :desc)
+					elsif params[:sortby] == 'Oldest'
+						@results = @results.order(created_at: :asc)
 					elsif params[:sortby] == 'Most Popular'
 						@results = @results.sort_by{|result| (Friendship.where(user_id: result.id).count + Friendship.where(friend_id: result.id).count)}
 					end
 				elsif params[:type] == 'Forums'
 					@results = Forum.where("UPPER(title) LIKE ('%' || UPPER(:q) || '%')", q: params[:q])
 					if params[:sortby] == 'Newest'
-						@results = @results.order(created_at: :asc)
-					elsif params[:sortby] == 'Oldest'
 						@results = @results.order(created_at: :desc)
+					elsif params[:sortby] == 'Oldest'
+						@results = @results.order(created_at: :asc)
 					elsif params[:sortby] == 'Most Popular'
 						@results = @results.sort_by{|result| Membership.where(forum_id: result2.id).count}
 					end
 				elsif params[:type] == 'Ideas'
 					@results = Idea.where("UPPER(title) LIKE ('%' || UPPER(:q) || '%')", q: params[:q])
 					if params[:sortby] == 'Newest'
-						@results = @results.order(created_at: :asc)
-					elsif params[:sortby] == 'Oldest'
 						@results = @results.order(created_at: :desc)
+					elsif params[:sortby] == 'Oldest'
+						@results = @results.order(created_at: :asc)
 					elsif params[:sortby] == 'Most Popular'
 						@results = @results.sort_by{|result| Likeidea.where(idea_id: result2.id).count}
 					end
