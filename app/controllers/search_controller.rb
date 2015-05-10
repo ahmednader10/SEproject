@@ -51,12 +51,12 @@ class SearchController < ApplicationController
 				else
 					toDay = params[:today]
 				end
-				from = Time.new(fromYear, fromMonth, fromDay).to_date
-				to = Time.new(toYear.to_i, toMonth.to_i, toDay).to_date
+				from = Time.new(fromYear, fromMonth, fromDay, 0, 0, 0)
+				to = Time.new(toYear.to_i, toMonth.to_i, toDay, 23, 59, 59)
 				if params[:type] == 'All'
 					results1 = User.where("(UPPER(username) LIKE ('%' || UPPER(:q) || '%') OR UPPER(full_name) LIKE ('%' || UPPER(:q) || '%')) AND created_at BETWEEN :from AND :to", q: params[:q], from: from, to: to)
 					results2 = Forum.where("(UPPER(title) LIKE ('%' || UPPER(:q) || '%')) AND created_at BETWEEN :from AND :to", q: params[:q], from: from, to: to)
-					results3 = Idea.where("UPPER(title) LIKE ('%' || UPPER(:q) || '%') AAND created_at BETWEEN :from AND :to", q: params[:q], from: from, to: to)
+					results3 = Idea.where("UPPER(title) LIKE ('%' || UPPER(:q) || '%') AND created_at BETWEEN :from AND :to", q: params[:q], from: from, to: to)
 					if params[:sortby] == 'Newest'
 						results1 = results1.order(created_at: :desc)
 						results2 = results2.order(created_at: :desc)
