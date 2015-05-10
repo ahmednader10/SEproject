@@ -1,3 +1,105 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<title>Bootstrap Example</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<!-- <link rel="stylesheet" href="style.css"> -->
+		<%= stylesheet_link_tag 'style' %>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	</head>
+	<body>
+		<nav class="navbar navbar-fixed-top white">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">iDea</a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li><input class="form-control" type="text" placeholder="Looking for something?" style="margin-top: 9px; width: 250px;"></a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						
+        				<li><a href="#">Notifications</a></li>
+        				<li class="dropdown">
+  							<a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+  							<% if @current_user.uid == nil %>
+  								<%= @current_user.full_name %>
+							<% else %>
+  								<%= @current_user.name %>
+ 							<% end %>
+ 							 <span class="caret"></span></a>
+  							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user"></i> Profile</a></li>
+    							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-cog"></i> Settings</a></li>
+    							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-question"></i> Help</a></li>
+    							<li role="presentation" class="divider"></li>
+    							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
+  							</ul>
+        				</li>
+      				</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="jumbotron other-color">
+			<div class="container-fluid" style="margin-top: 40px;">
+				<div class="profileImg">
+					<%= image_tag 'bulb.jpg', class: "img-circle", width: "215", height: "200" %>
+				</div>
+				
+				<!-- <div class="col-md-3">
+					<%= image_tag 'bulb.jpg', class: "img-circle", width: "280", height: "265" %>
+				</div>
+				<div class="col-md-3">
+					<% if @current_user.uid == nil %>
+  						<%= @current_user.full_name %>
+					<% else %>
+  						<%= @current_user.name %>
+ 					<% end %>
+				</div> -->
+
+			</div>
+		</div>
+
+		<!-- <div class="container-fluid" style="margin-top: 50px;">
+			<div class="col-md-3">
+				<div class="tabbable tabs-left" style="margin-left: 100px;">
+					<ul class="nav nav-tabs">
+ 		 				<li class="active"><a data-toggle="pill" href="#home">Forums</a></li>
+  						<li><a data-toggle="pill" href="#menu1">Ideas</a></li>
+  						<li><a data-toggle="pill" href="#menu2">Friends</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div class="tab-content">
+  					<div id="home" class="tab-pane fade in active">
+   						<h3>Forums</h3>
+   						<p>Some content.</p>
+  					</div>
+  					<div id="menu1" class="tab-pane fade">
+    					<h3>Ideas</h3>
+    					<p>Some content in menu 1.</p>
+  					</div>
+  					<div id="menu2" class="tab-pane fade" style="margin-top: -45px;">
+    					<!- <h3>Friends</h3>
+    					<p>Some content in menu 2.</p> ->
+    					<ul class="nav nav-tabs">
+ 	 						<li class="active"><a data-toggle="pill" href="#hom">My Friends</a></li>
+  							<li><a data-toggle="pill" href="#menu">Requests</a></li>
+						</ul>
+  					</div>
+				</div>	
+			</div>
+		</div> -->
+	</body>
+</html>
+=======
 <body>
 <head><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -151,3 +253,4 @@
   
 </body>
 <%end %>
+>>>>>>> 5ac7df0ee4eef5a4f3dccbe463f592301054d693
