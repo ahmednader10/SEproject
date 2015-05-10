@@ -194,7 +194,7 @@ delete 'forums/:forum_id/ideas/:idea_id/comments/:id' => 'comments#destroy', as:
 
   # Login as the homepage
   # To be changed later
-   root 'sessions#new'
+   root 'sessions#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

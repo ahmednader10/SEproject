@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<title>Bootstrap Example</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<%= stylesheet_link_tag 'style' %>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	</head>
+	<body style="background: #EEE;">
+		<nav class="navbar navbar-fixed-top white">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">iDea</a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li class="<%= root_path %>"><a href="#">Home</a></li>
+						<li><a href="<%= about_path %>">About</a></li>
+						<li><a href="<%= contactus_path %>">Contact us</a></li>
+						<li><a href="<%= jobs_path %>">Jobs</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<div class="left-inner-addon">
+								<i class="glyphicon glyphicon-search"></i>
+								<input class="form-control" type="text" placeholder="Looking for something?" style="margin-top: 9px; width: 250px;">
+							</div>
+						</li>
+        				<li><a data-toggle="modal" data-target="#signUp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        				<li><a data-toggle="modal" data-target="#logIn" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      				</ul>
+				</div>
+			</div>
+		</nav>
+
+		<br><br>
+
+		<div class="jumbotron other-color">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-3">
+						<%= image_tag 'bulb.jpg', style: "margin-left: 78px; margin-top: 5px;", class: "img-circle", width: "280", height: "265" %>
+					</div>
+					<div class="col-md-9 white-font">
+						<h1 class="lead">iDea</h1>
+						<hr class="half-rule">
+						<p class="lead" style="font-size: 19px;">Share your ideas with the world.</p>
+						<a href="#" class="btn btn-success btn-lg started-btn">Get Started</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="jumbotron" style="height: 600px; background: #H1H1H1;">
+			<div class="container-fluid blue-font">
+				<h1 class="lead" style="margin-top: 190px; font-size: 40px;">What you think about, you can write about!</h1>
+				<hr class="quarter-rule">
+				<div class="container" style="margin-top: 70px;">
+					<div class="row">
+						<div class="col-md-4" style="">
+							<%= image_tag 'share.jpg', style: "border-style: solid; border-width: 1px; border-color: #DCDCDC; margin-bottom: 10px;", class: "img-circle", width: "200", height: "190" %>
+							<!-- <p style="font-size: 13px;"></p> -->
+							<h3 style="font-weight: 400; margin-bottom: 5px; color: #72A3CD;">Share</h3>
+							<p class="info">Your ideas make a difference. Find peers with similar interests and share your ideas together.</p>
+						</div>
+						<div class="col-md-4">
+							<%= image_tag 'forums.jpg', style: "border-style: solid; border-width: 1px; border-color: #DCDCDC; margin-bottom: 10px;", class: "img-circle", width: "200", height: "190" %>
+							<!-- <p style="font-size: 13px;"></p> -->
+							<h3 style="font-weight: 400; margin-bottom: 5px; color: #72A3CD;">Organize</h3>
+							<p class="info">Ideas are better organized in forums. Add your ideas to relevant forums or even create your own.</p>
+							<a href="#" class="btn btn-info btn-lg" style="margin-top: 100px; margin-bottom: 20px;">Join now!</a>
+							<p class="info">(We know you can't wait)</p>
+						</div>
+						<div class="col-md-4">
+							<%= image_tag 'likecomment.jpg', style: "border-style: solid; border-width: 1px; border-color: #DCDCDC; margin-bottom: 10px;", class: "img-circle", width: "200", height: "190" %>
+							<!-- <p style="font-size: 13px;"></p> -->
+							<h3 style="font-weight: 400; margin-bottom: 5px; color: #72A3CD;">Appreciate</h3>
+							<p class="info">If someone's idea appeals to you, show appreciaton by liking it. You can even discuss the idea and add to it in its very own comments section.</p>
+						</div>
+					</div>
+				</div> 
+			</div>
+		</div>
+
+		<!-- Modal -->
+  		<div class="modal fade" id="logIn" role="dialog">
+    		<div class="modal-dialog">
+    
+      <!-- Modal content-->
+      			<div class="modal-content" style="margin: 170px auto; width: 400px;">
+        			<div class="modal-header">
+          				<button type="button" class="close" data-dismiss="modal">&times;</button>
+          				<!-- <h4 class="modal-title">Modal Header</h4> -->
+          				<h2 style="text-align: center; margin-bottom: 60px;">Log in</h2>
+
+          				<%= form_for(:session, url: login_path) do |f| %>
+
+  	 					    <div class="left-inner-addon">
+  	 					    	<i class="glyphicon glyphicon-user"></i>
+  	 					    	<%= f.email_field :email, class: 'form-control', placeholder: "Email" %><br>
+  	 					    </div>
+	
+							<div class="left-inner-addon">
+      							<i class="glyphicon glyphicon-lock"></i>
+      							<%= f.password_field :password, class: 'form-control', placeholder: "Password" %><br>
+      						</div>
+
+      						<h5><%= link_to "Forgot password?", forgot_path %></h5><br>
+
+      						<%= f.submit "Log in", class: "btn btn-primary" %><br><br>
+      						<a href="<%= "/auth/TWITTER "%>" id="sign_in" class="btn btn-omar"><i class="fa fa-twitter"></i> Sign in with Twitter</a>
+      						<a href="<%= "/auth/facebook" %>" id="sign_in" class="btn btn-farah"><i class="fa fa-facebook"></i> Sign in with Facebook</a>
+
+      					<% end %>
+        			</div>
+
+        			<!-- <div class="modal-body">
+          				<p>Some text in the modal.</p>
+        			</div>
+        			<div class="modal-footer">
+          				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        			</div> -->
+      			</div>
+      
+    		</div>
+  		</div>
+
+  		<!-- Modal -->
+  		<div class="modal fade" id="signUp" role="dialog">
+    		<div class="modal-dialog">
+    
+      <!-- Modal content-->
+      			<div class="modal-content" style="margin: auto auto; width: 400px;">
+        			<div class="modal-header">
+          				<button type="button" class="close" data-dismiss="modal">&times;</button>
+          				<!-- <h4 class="modal-title">Modal Header</h4> -->
+          				<h2 style="text-align: center; margin-bottom: 60px;">Sign up</h2>
+
+				        <%= form_for(@user) do |f| %>
+
+							<% if @user.errors.any? %>
+								<h3>Errors</h3>
+								<ul>
+									<% @user.errors.full_messages.each do |message| %>
+										<li><%= message %></li>
+									<% end %>
+								</ul>
+							<% end %>
+
+							<% if flash[:notice] %>
+								<%= flash[:notice] %>
+							<% end %>
+
+					   		<div class="field left-inner-addon">
+					   			<i class="glyphicon glyphicon-sunglasses"></i>
+					   			<%= f.text_field :full_name, class: 'form-control', placeholder: "Full Name" %><br>
+					   		</div> 
+
+					   		<div class="field left-inner-addon">
+					   			<i class="glyphicon glyphicon-user"></i>
+					   			<%= f.text_field :username, class: 'form-control', placeholder: "Username" %><br>
+					   		</div>
+
+					   		<div class="field left-inner-addon">
+					   			<i class="glyphicon glyphicon-envelope"></i>
+					   			<%= f.email_field :email, class: 'form-control', placeholder: "Email" %><br>
+					   		</div>
+
+					   		<div class="field left-inner-addon">
+					   			<i class="glyphicon glyphicon-lock"></i>
+					   			<%= f.password_field :password, class: 'form-control', placeholder: "Password" %><br>
+					   		</div>
+
+					   		<div class="field left-inner-addon">
+					   			<i class="glyphicon glyphicon-lock"></i>
+					   			<%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Password Confirmation" %><br>
+					   		</div>
+					 
+					 	  	<div class="field">
+					 	  		<%= f.label :gender, "Gender" %><br>
+					   			<%= f.select :gender, ['Male', 'Female'], {}, class: 'selectpicker' %>
+					   			<!-- <button name="user[gender]" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Gender <span class="caret"></span></button>
+					   			<ul class="dropdown-menu">
+    								<li>Male</li>
+  							 	 	<li><a href="#">CSS</a></li>
+    								<li><a href="#">JavaScript</a></li>
+  								</ul><br> -->
+					   		</div>   
+
+					   		<div class="field">
+					   			<%= f.label :password_question, "Choose a question (in case you forgot the password)", style: 'margin-top: 15px;' %><br>
+					   			<%= f.select :password_question, ['What is the name of your best friend?', 'What is the name of your pet?', 'Who was your first English teacher?'], {}, class: 'selectpicker' %><br>
+					   		</div> 
+
+					   		<div class="field left-inner-addon">
+					   			<i class="fa fa-user-secret"></i>
+					   			<%= f.text_field :answer_for_password_question, class: 'form-control', placeholder: "Your answer here", style: 'margin-top: 10px;' %><br><br>
+					   		</div>
+					  
+					  	 	<div class='actions'>
+					   			<%= f.submit "Sign Up", class: "btn btn-primary"  %>
+					   		</div>
+
+						<% end %>
+        			</div>
+      			</div>
+    		</div>
+  		</div>
+
+		<footer class="footer" style="margin-top: 440px; height: 200px; background: #000;">
+			<div class="container">
+				<p>This is a footer.</p>
+			</div>
+		</footer>
+	</body>
+</html>

@@ -3,6 +3,10 @@ class SessionsController < ApplicationController
 
   # Checks if the user accessing the page is a current user
   # Redirects to Logged in
+  def index
+    @user = User.new
+  end
+
   def new
     session.delete(:sysadmin)
     if current_user

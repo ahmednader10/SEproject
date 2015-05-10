@@ -64,6 +64,9 @@ gem 'coffee-script-source', '1.8.0'
 
 # gem 'devise'
 
+gem 'bootstrap-sass', '~> 3.3.4'
+# gem 'sass-rails', '>= 3.2'
+
 gem 'rake', '10.4.2'
 group :test do
 
