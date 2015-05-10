@@ -40,6 +40,7 @@ gem 'social-share-button', '~> 0.1.6'
 # Form helper for model errors
 gem 'dynamic_form'
 
+gem 'paperclip'
 
 
 

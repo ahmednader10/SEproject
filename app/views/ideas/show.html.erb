@@ -1,4 +1,5 @@
-   <div class="headerlist">
+<%= link_to 'back to forum', forum_path(params[:forum_id]) %>
+<div class="headerlist">
 <ul id="menu">
 <li> Logo</li>
 
@@ -16,55 +17,70 @@
 </ul>  
 </div>
 <html>
-		<h2><%=@idea.title%></h2>
+    <h2><%=@idea.title%></h2>
 
-		<p>
+    <p>
 
-		<h4>Forum: <%=@forum.title%></h4>
-		<p>
+    <h4>Forum: <%=@forum.title%></h4>
+    <p>
 
-				<%= @idea.text %>
-		</p>
-		<div>
-			<h5>Comments</h5>
+        <%= @idea.text %>
+    </p>
+    <div>
+      <h5>Comments</h5>
 
-			<ul>
+      <ul>
       <% @idea.comments.includes(:user).each do |comment| %>
       <li>
           <strong><%= comment.user.username %>:</strong>
           <%= comment.text %>
-          <%= button_to "Report", reportcomment_forum_idea_comment_path(@forum, @idea, comment) %>
-          <%= button_to "delete", comment_delete_path(@forum, @idea, comment),  method: :delete %>
+
+            <% if session[:sysadmin] or (comment.user_id != current_user.id and Reportcomment.where(user_id: current_user.id, comment_id: comment.id).empty?) %>
+          <%= button_to "Report Comment", reportcomment_forum_idea_comment_path(@forum, @idea, comment) %>
+          <% end %>
+          <% if session[:sysadmin] or comment.user_id == current_user.id or !Admin.where(user_id: current_user.id, forum_id: @forum.id).empty? %>
+          <%= button_to "delete Comment", comment_delete_path(@forum, @idea, comment),  method: :delete, data: { confirm: "Are you sure you want to delete this comment?" }%>
+
+          <% end %>
       </li>
       <%end%>
     </ul>
-    	</div>
+      </div>
   
        <p>
+
+        <% if session[:sysadmin] or Likeidea.where(user_id: current_user.id, idea_id: @idea.id).empty? %>
          <%= button_to "Like Idea", :action => "like"%>
+         <% end %>
+         <% if session[:sysadmin] or (@idea.user_id != current_user.id and Reportidea.where(user_id: current_user.id, idea_id: @idea.id).empty?) %>
          <%= button_to "Report Idea", :action => "report"%>
-         
+         <%end%>
+
+         <% f = Forum.where(id: params[:forum_id]) %>
+         <% i = Idea.where(id: params[:id]) %>
+         <% if session[:sysadmin] or i.first.user_id == current_user.id or !Admin.where(user_id: current_user.id, forum_id: f.first.id).empty? %>
           <%= button_to "delete idea", :action => :destroy %> 
-        
+
+        <% end %>
          <!-- Facebook and Twitter share button-->
          <%= social_share_button_tag(@idea.text + '  via @', :popup => "true", :url => "http://FarrahAbulkhair.com") %>
         
         </p>
       
 
-		<h5>Post Comment</h5>
+    <h5>Post Comment</h5>
 
-		<%= form_for [@forum, @idea, @comment] do |f| %>
-  			<%= f.error_messages %>
+    <%= form_for [@forum, @idea, @comment] do |f| %>
+        <%= f.error_messages %>
 
- 			 <p>
-    		<%= f.text_area :text %><br>
-  			</p>
+       <p>
+        <%= f.text_area :text %><br>
+        </p>
  
-  			<p>
-   			 <%= f.submit "Comment" %>
-  			</p>
-			<%end%>
+        <p>
+         <%= f.submit "Comment" %>
+        </p>
+      <%end%>
       <p>
         <% if flash[:notice] %>
     <div class="notice"><%= flash[:notice] %></div>

@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150430194311) do
+=======
+ActiveRecord::Schema.define(version: 20150506042515) do
+>>>>>>> 5ac7df0ee4eef5a4f3dccbe463f592301054d693
 
   create_table "actions", force: true do |t|
     t.string   "info"
@@ -166,6 +170,10 @@ ActiveRecord::Schema.define(version: 20150430194311) do
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
     t.integer  "privacy",                      default: 1
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
 end

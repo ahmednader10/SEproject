@@ -102,6 +102,8 @@ Rails.application.routes.draw do
 
   get '/users/profile/:id' => 'users#profile', as: 'profile'
 
+  get 'users/profile/:id/removeAvatar' => 'users#deleteImage' , as: 'deleteImage'
+
   ############################ Forums ########################################
 
   get 'forums/created/:id' => 'forums#created', as: 'created'
@@ -137,6 +139,8 @@ Rails.application.routes.draw do
   #get 'users/indentation_error_message' => 'users#indentation_error_message'
 
   get 'search' => 'search#search'
+
+  get 'advancedsearch' => 'search#advanced_search'
 
   post 'forums/:id/admins/new' => 'admins#new', as: 'admin_to_be'
 

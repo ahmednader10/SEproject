@@ -61,7 +61,8 @@ class CommentsController < ApplicationController
 		@idea = Idea.find(params[:idea_id])
 		@comment = Comment.find(params[:id])
 
-		if @comment[:user_id] == @user[:id] || !Admin.where({ forum_id: @forum.id, user_id: @user.id }).empty?
+
+		#if 	session[:sysadmin] or @comment[:user_id] == @user[:id]
 			@comment.destroy
 			flash[:notice] = "comment deleted"
 			if current_user == nil
@@ -73,9 +74,9 @@ class CommentsController < ApplicationController
 				Action.create(info: @user.username + ' has deleted a comment: (' + @comment.text + ') on idea: (' + @idea.title + ') on forum: (' + @forum.title + ') belonging to ' + User.find(@comment.user_id).username + '.', user_email: @user.email)
 				Notification.create(info: 'Your comment: (' + @comment.text + ') on idea: (' + @idea.title + ') on forum: (' + @forum.title + ') has been deleted.', user_id: @comment.user_id)
 			end
-		else
-			flash[:notice] = "You can only delete your comments!"
-		end
+		#else
+		#	flash[:notice] = "You can only delete your comments!"
+		#end
 
       	redirect_to forum_idea_path(@forum, @idea)
 	end
@@ -90,7 +91,7 @@ class CommentsController < ApplicationController
 	def authenticate_user
 		@idea = Idea.find(params[:idea_id])
 
-		if current_user == nil
+		if current_user == nil and !session[:sysadmin]
 			redirect_to login_path
 		end
 

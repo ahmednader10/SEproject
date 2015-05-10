@@ -14,6 +14,7 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap.min
 //= require_tree .
 
 #= require social-share-button
