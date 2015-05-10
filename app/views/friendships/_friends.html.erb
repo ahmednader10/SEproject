@@ -16,7 +16,7 @@
 <%= h friendship.user.username %> (<%= link_to "remove", friendship, :method => :delete %>)
 <% else %>
   	
-    <%= link_to friendship.user.username, user_path(user.id) %>
+    <%= link_to friendship.user.username, user_path(friendship.user.id) %>
     (<%= link_to "remove", friendship, :method => :delete %>)
 
 
@@ -30,7 +30,7 @@
 <%= h friendship.friend.username %> (<%= link_to "remove", friendship, :method => :delete %>)
 <% else %>
 
-<%= link_to friendship.friend.username, user_path(user.id) %>
+<%= link_to friendship.friend.username, user_path(friendship.friend.id) %>
     (<%= link_to "remove", friendship, :method => :delete %>)
 
 
