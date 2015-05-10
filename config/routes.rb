@@ -140,6 +140,8 @@ Rails.application.routes.draw do
 
   get 'search' => 'search#search'
 
+  get 'advancedsearch' => 'search#advanced_search'
+
   post 'forums/:id/admins/new' => 'admins#new', as: 'admin_to_be'
 
   get 'admins/unauthorized_action' => 'admins#unauthorized_action', as: 'unauthorized_action'

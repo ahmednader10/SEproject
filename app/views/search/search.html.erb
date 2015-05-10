@@ -25,7 +25,9 @@
 			<%= text_field_tag(:q) %>
 			<%= label_tag(:type, "Search for:") %>
 			<%= select_tag(:type, "<option>All</option><option>Users</option><option>Forums</option><option>Ideas</option>".html_safe) %>
+			<%= hidden_field_tag(:searchtype, "normal") %>
 			<%= submit_tag("Search") %>
+			<%= link_to "Advanced search", "/advancedsearch" %>
 		<% end %>
 		
 		<% if params[:q].to_s.length != 0 %>
