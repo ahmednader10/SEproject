@@ -1,7 +1,46 @@
-<%= link_to "Homepage", root_url %>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<title>Bootstrap Example</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<%= stylesheet_link_tag 'style' %>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	</head>
+	<body style="background: #EEE;">
+		<nav class="navbar navbar-fixed-top white">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="<%= root_path %>">iDea</a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li><a href="<%= about_path %>">About</a></li>
+						<li><a href="<%= contactus_path %>">Contact us</a></li>
+						<li><a href="<%= jobs_path %>">Jobs</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							
+						</li>
+        				<li><a data-toggle="modal" data-target="#signUp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        				<li><a data-toggle="modal" data-target="#logIn" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      				</ul>
+				</div>
+			</div>
+		</nav>
 
-<h1><u>Contact us:</u></h1>
-
-Email: <h2><font color = "#3265ba">Farah@ideas.com</font></h2><br>
-Phone number: <h2><font color = "#3265ba">b0000000111 </font> </h2><br>
-Fax: <h2><font color = "#3265ba">b0000011001</font></h2><br>
+		<div class="jumbotron other-color" style="height: 300px;">
+			<div class="container-fluid">
+				<h1 style="color: white; margin-left: 345px; margin-top: 90px;" >Contact us!</h1>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<h4 style="margin-left: 50px;">For more information about our services, you are welcomed to contact us through out <a href="mailto:ideas.management.sys@gmail.com?Subject=A%20suggestion" target="_top">email</a>. Also, we will be more than happy to listen to suggestions and ideas to improve our services.</h4> 
+		</div>
+	</body>
+</html>

@@ -15,21 +15,17 @@
 		<nav class="navbar navbar-fixed-top white">
 			<div class="container">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">iDea</a>
+					<a class="navbar-brand" href="<%= root_path %>">iDea</a>
 				</div>
 				<div>
 					<ul class="nav navbar-nav">
-						<li class="<%= root_path %>"><a href="#">Home</a></li>
 						<li><a href="<%= about_path %>">About</a></li>
 						<li><a href="<%= contactus_path %>">Contact us</a></li>
 						<li><a href="<%= jobs_path %>">Jobs</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<div class="left-inner-addon">
-								<i class="glyphicon glyphicon-search"></i>
-								<input class="form-control" type="text" placeholder="Looking for something?" style="margin-top: 9px; width: 250px;">
-							</div>
+							
 						</li>
         				<li><a data-toggle="modal" data-target="#signUp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
         				<li><a data-toggle="modal" data-target="#logIn" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -50,7 +46,7 @@
 						<h1 class="lead">iDea</h1>
 						<hr class="half-rule">
 						<p class="lead" style="font-size: 19px;">Share your ideas with the world.</p>
-						<a href="#" class="btn btn-success btn-lg started-btn">Get Started</a>
+						<a href="#" class="btn btn-success btn-lg started-btn" data-toggle="modal" data-target="#signUp">Get Started</a>
 					</div>
 				</div>
 			</div>
@@ -73,7 +69,7 @@
 							<!-- <p style="font-size: 13px;"></p> -->
 							<h3 style="font-weight: 400; margin-bottom: 5px; color: #72A3CD;">Organize</h3>
 							<p class="info">Ideas are better organized in forums. Add your ideas to relevant forums or even create your own.</p>
-							<a href="#" class="btn btn-info btn-lg" style="margin-top: 100px; margin-bottom: 20px;">Join now!</a>
+							<a href="#" class="btn btn-info btn-lg" style="margin-top: 100px; margin-bottom: 20px;" data-toggle="modal" data-target="#signUp">Join now!</a>
 							<p class="info">(We know you can't wait)</p>
 						</div>
 						<div class="col-md-4">
