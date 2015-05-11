@@ -43,6 +43,7 @@
         			<div class="modal-header">
           				<button type="button" class="close" data-dismiss="modal">&times;</button>
           				<h3 style="text-align: center;">My friends</h3>
+          			</br>
           				<table class="table table-hover">
 						    <thead>
 						      <tr >
@@ -76,7 +77,7 @@
 		
   		</br>
 
-		<a data-toggle="modal" data-target="#requests" >Friend reuests</a>
+		<a data-toggle="modal" data-target="#requests" >Friend requests</a>
 		<div class="modal fade" id="requests" role="dialog">
     		<div class="modal-dialog">
     
@@ -85,6 +86,7 @@
         			<div class="modal-header">
           				<button type="button" class="close" data-dismiss="modal">&times;</button>
           				<h3 style="text-align: center;">Friend requests</h3>
+          			</br>
           				<table class="table table-hover">
 						    <tbody>
 								<% users = User.all %>
@@ -99,6 +101,47 @@
 						</table>  
           				
         			</div>
+
+        			<!-- <div class="modal-body">
+          				<p>Some text in the modal.</p>
+        			</div>
+        			<div class="modal-footer">
+          				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        			</div> -->
+      			</div>
+      
+    		</div>
+  		</div>
+  		</br>
+  		<a data-toggle="modal" data-target="#info">Info</a>
+  		<div class="modal fade" id="info" role="dialog">
+    		<div class="modal-dialog">
+    
+      <!-- Modal content-->
+      			<div class="modal-content" style="margin: 170px auto; width: 400px;">
+        			<div class="modal-header">
+          				<button type="button" class="close" data-dismiss="modal">&times;</button>
+          				<h3 style="text-align: center;">My personal info <i><a href="<% =edit_user_path(current_user) %>" class="fa fa-pencil-square-o" style="font-size 1em;"></a></i></h3>
+
+         			</br>
+          				<table class="table table-hover">
+							<tr>
+								<td>Name</td>
+								<td><%= current_user.full_name %></td>
+							</tr>
+							<tr>
+								<td>Username</td>
+								<td><%= current_user.username %></td>
+							</tr>
+							<tr>
+								<td>Email</td>
+								<td><%= current_user.email %></td>
+							</tr>
+							
+						</table>  
+          				
+        			</div>
+
 
         			<!-- <div class="modal-body">
           				<p>Some text in the modal.</p>
