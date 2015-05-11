@@ -64,6 +64,7 @@ flash[:notice] = 'Friend sucessfully accepted!'
 accepted = User.find(@friend.user_id)
 Action.create(info: current_user.username + ' has accepted ' + accepted.username + "'s friend request.", user_email: @user.email)
 Notification.create(info: current_user.username + ' has accepted your friend request.', user_id: accepted.id)
+@user.increment!(:friend_count, by = 1)
 redirect_to friendships_path
 else
 redirect_to users_path
