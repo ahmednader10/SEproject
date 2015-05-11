@@ -35,7 +35,104 @@
 			</div>
 		</div>
 
-		<a data-toggle="modal" data-target="#my_friends" >My friends</a>
+			<div class="col-sm-4">
+				<h3 style="text-align: center;">
+					My personal info
+					 <i>
+					 	<a href="<% root_path %>" class="fa fa-pencil-square-o" style="font-size 1em;"></a>
+					 </i>
+				</h3>
+
+         			</br>
+          				<table class="table table-hover">
+							<tr>
+								<td>Name</td>
+								<td><%= current_user.full_name %></td>
+							</tr>
+							<tr>
+								<td>Username</td>
+								<td><%= current_user.username %></td>
+							</tr>
+							<tr>
+								<td>Email</td>
+								<td><%= current_user.email %></td>
+							</tr>
+							
+						</table> 
+			</div>
+
+
+		<div class="col-sm-8">
+			<ul class="nav nav-tabs">
+			  <li class="active"><a data-toggle="tab" href="#friends">Friends <span class="badge">2</span></a></li>
+			  <li><a data-toggle="tab" href="#requests">Requests <span class="badge">4</span></a></li>
+			  <li><a data-toggle="tab" href="#forums">Forums <span class="badge"><%= Membership.where(user_id: current_user.id, accept: true).count %></span></a></li>
+			  <li><a data-toggle="tab" href="#ideas">Ideas <span class="badge"><%= Idea.where(user_id: current_user.id).count %></span></a></li>
+			</ul>
+			<div class="tab-content">
+			  <div id="friends" class="tab-pane fade in active">
+			    <table class="table table-hover">
+				    <tbody>
+						<% users = User.all %>
+          				<% users.each do |user| %>
+          				<tr>
+          					<td><a href="<%= profile_path(user.id) %>"><%= user.full_name %></a></td>
+          					<td><%= user.email %></td>
+						</tr>
+          				<% end %>
+				    </tbody>
+				</table> 
+			  </div>
+			  <div id="requests" class="tab-pane fade">
+			    <table class="table table-hover">
+				    <tbody>
+						<% users = User.all %>
+          				<% users.each do |user| %>
+          				<tr>
+          					<td><a href="<%= profile_path(user.id) %>"><%= user.full_name %></a></td>
+          					<td><a href="#" style="color: green;"><i class="glyphicon glyphicon-ok"></i></a></td>
+          					<td><a href="#" style="color: red;"><i class="glyphicon glyphicon-remove"></i></a></td>
+						</tr>
+          				<% end %>
+				    </tbody>
+				</table>  
+			  </div>
+			  <div id="forums" class="tab-pane fade">
+			    <h3>Menu 2</h3>
+			    <p>Some content in menu 2.</p>
+			  </div>
+			  <div id="ideas" class="tab-pane fade">
+			    <h3>Menu 2</h3>
+			    <p>Some content in menu 2.</p>
+			  </div>
+			</div>
+			
+			<div style="margin-top:80px">
+				<nav> 
+				  <ul class="pagination">
+				    <li>
+				      <a href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    <li><a href="#">1</a></li>
+				    <li><a href="#">2</a></li>
+				    <li><a href="#">3</a></li>
+				    <li><a href="#">4</a></li>
+				    <li><a href="#">5</a></li>
+				    <li>
+				      <a href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				</nav>
+			</div>
+		</div>
+
+		
+		
+		<!-- Start of modal -->
 		<div class="modal fade" id="my_friends" role="dialog">
     		<div class="modal-dialog">
     
@@ -78,7 +175,7 @@
 		
   		</br>
 
-		<a data-toggle="modal" data-target="#requests" >Friend requests</a>
+		
 		<div class="modal fade" id="requests" role="dialog">
     		<div class="modal-dialog">
     
@@ -114,7 +211,7 @@
     		</div>
   		</div>
   		</br>
-  		<a data-toggle="modal" data-target="#info">Info</a>
+  		
   		<div class="modal fade" id="info" role="dialog">
     		<div class="modal-dialog">
     
