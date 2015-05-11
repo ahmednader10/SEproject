@@ -3,6 +3,10 @@ class SessionsController < ApplicationController
 
   # Checks if the user accessing the page is a current user
   # Redirects to Logged in
+  def index
+    @user = User.new
+  end
+
   def new
     session.delete(:sysadmin)
     if current_user
@@ -17,7 +21,9 @@ class SessionsController < ApplicationController
    	
 
    	user = User.find_by(email: params[:session][:email].downcase)
+    if user != nil
   	blocked_user = Block.find_by(email: user.email)
+  end
 
     if user and user.authenticate(params[:session][:password]) and blocked_user
       render blocking_message_path and return

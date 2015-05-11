@@ -1,6 +1,10 @@
+<% forum = Forum.find_by(id: params[:forum_id]) %>
+<%= link_to 'back', forum_path(forum) %>
 <%= form_for [@forum, @admin] do |f| %>
 	<div class="field">
-
+		<% if flash[:notice] %>
+			<%= flash[:notice] %>
+		<% end %>
 		<% ary = [] %>
 		<% users = User.all %>
 		<% users.each do |u| %>

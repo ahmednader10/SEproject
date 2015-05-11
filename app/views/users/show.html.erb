@@ -5,173 +5,124 @@
 
 
 <body>
-		<div class="headerlist">
-<ul id="menu">
-<li > Logo</li>
+<ul class="nav nav-pills" role="tablist">
+              <li role="presentation" class="active"><a href="/forums" >forums</a></li>
+              <li> <%= link_to image_tag(current_user.image.url,:style=>'width:50px ;height:30px;'), user_path(current_user) %></li>
+            </ul>
+<div class="row" style="margin-top:100px;">
+  <div class="col-sm-3">
+    <!-- SideBAR -->
+  </div>
+    <div class="col-sm-5">
+    <!-- MAIN -->
+          <h1> <%= @user.username %>  </h1>
+            <% unless  current_user.rfriends.include?(@user) %>
+              <%= link_to "Report User",user_report_user_path(:user_id => @user.id) ,:method => :post %></h1>
+            <% end %>
+            <% unless  current_user.bfriends.include?(@user) %>
+              <%= link_to "Block User",user_block_user_path(:user_id => @user.id) ,:method => :post %>
+            <% end %>
+            <% unless @user ==current_user ||current_user.friends.include?(@user)  || @user.friends.include?(current_user)  %>
+            <% unless  @user.bfriends.include?(current_user) %>
 
- <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
- <% if current_user != nil %>
- <li><%= link_to "friend requests" , friendships_path %></li>
- <li><%= link_to "Log out", logout_path, method: :delete %></li>
-  <li> <%= link_to "My Profile" , :action => :profile %> </li>
- <% if !Admin.where(user_id: current_user.id).empty? %>
- <li><%= link_to "requests to join my forums", :action => :admin_join_forums_requests %> </li>
- <% end %>
- <% end %>
+             <%= link_to "Add Friend", friendships_path(:friend_id => @user.id), :method => :post %> 
+            <% end %>
+            <% else %>
+            <% for friendship in current_user.friendships %>
+            <% if current_user.friends.include?(@user) && friendship.status == nil %>
+            <h2> Friend Request Sent </h2>
+              <% end %>
+            <% end %>
 
-</ul>  
-</div>
-<div class=" profilepic" >
+            <% end %>
+            <%= link_to image_tag(@user.image.url,:style=>'width:450px; height:400px;'), asset_path(@user.image.url) %>
+      <div style="height:10px;  margin-top:20px; margin-bottom:20px;" >
+        <!-- SPACE GAP -->
+        <% if current_user != nil && (@user.privacy==2 && !current_user.friends.include?(@user))%> 
 
+        <div><p>Private Account</p></div>
 
-  <h1> <%= @user.username %>  </h1>
+        <%elsif current_user == nil || (@user.privacy==1 ||current_user.friends.include?(@user) )%> 
 
-<% unless  current_user.rfriends.include?(@user) %>
-  <h1><%= link_to "Report User",user_report_user_path(:user_id => @user.id) ,:method => :post %></h1>
-<% end %>
+      </div>
+      <div class="row">
+            <div style="margin:15px;">
+            
+            <div role="tabpanel" style="background-color:#cc99ff;">
+            <!-- Nav tabs -->
+            <ul class="nav nav-pills" role="tablist" style="margin-left:150px;">
+              <li role="presentation" class="active"><a href="#info" aria-controls="home" role="tab" data-toggle="tab">Information</a></li>
+              <li role="presentation"><a href="#foroms" aria-controls="foroms" role="tab" data-toggle="tab">Forums</a></li>
+              <li role="presentation"><a href="#ideas" aria-controls="ideas" role="tab" data-toggle="tab">Ideas</a></li>
+              <li role="presentation"><a href="#memberships" file:///home/miada/SEproject/app/views/users/bootstrapprofilelayout.htmlaria-controls="memberships" role="tab" data-toggle="tab">Memberships</a></li>
+            </ul>
+          </div>
+            <!-- Tab panes -->
+          <div class="tab-content">
+             <div role="tabpanel" class="tab-pane active" id="info"> information tab is here</div>
+             <div role="tabpanel" class="tab-pane" id="foroms">
+                <table width="371" height="51">
+                  <tr>
+                    <th width="110"  id="forumcolum"> Forum </th>
+                    <th id="ideatitlecolumn"> Description </th>
+                  </tr>
+                  <%  x = Forum.where(user_id: @user.id).order(:title) %>
+                  <% x.each do |forum| %>
+                  <tr>
+                  <td id="forumcolum"><%=  link_to forum.title , forum %></td>
+                  <td id="ideatitlecolumn"> <%= y.description %> </td>
+                  </tr>
+                  <% end %>
+                </table>
+                <% if x.size == 0 %>
+                <em> forumless </em>
+                <% end %>
+             </div>
+             <div role="tabpanel" class="tab-pane" id="ideas">
+                 <table width="371" height="51">
+                <tr>
+                    <th width="57" id="ideatitlecolumn"> Title</th>
+                  <th width="160" id="ideacolumn"> Idea</th>
+                  <th width="110" id="forumcolum"> Forum</th>
+                </tr>
+                <%  x = Idea.where(user: @user).order(:text) %>
+                <% x.each do |idea| %>
+                <tr>
+                  <td id="ideatitlecolumn"><%= link_to idea.title , forum_idea_path(idea.forum.id, idea.id)%></td>
+                  <td id="ideacolumn"><%= idea.text %></td>
+                  <td id="forumcolum"> <%= link_to idea.forum.title , idea.forum %>  </td>
+                </tr>
+                <% end %>
+                </table>
+                <% if x.size == 0 %>
+                <em> still Idealess </em>
+                <% end %>
+                 </div>
+             <div role="tabpanel" class="tab-pane" id="memberships">
+                <table width="371" height="51">
+                  <tr>
+                    <th  id="forumcolum"> Joined Forum</th>
+                    <th id="ideatitlecolumn"> Description </th>
+                  </tr>
 
-<% unless  current_user.bfriends.include?(@user) %>
-   <h1><%= link_to "Block User",user_block_user_path(:user_id => @user.id) ,:method => :post %></h1>
-<% end %>
+                  <%  x =Membership.where(user_id: @user.id) %>
+                  <% x.each do |membership| %>
+                  <% y = Forum.find(membership.forum_id) %>
+                  <tr>
+                  <td id="forumcolum"><%=  link_to y.title , forum_path %></td>
+                  <td id="ideatitlecolumn"> <%= y.description %> </td>
+                  </tr>
 
-
-
-
-
-
-<% unless @user ==current_user ||current_user.friends.include?(@user)  || @user.friends.include?(current_user)  %>
-<% unless  @user.bfriends.include?(current_user) %>
-
- <h1> <%= link_to "Add Friend", friendships_path(:friend_id => @user.id), :method => :post %> </h1>
-<% end %>
-<% else %>
-
-
-<% for friendship in current_user.friendships %>
-<% if current_user.friends.include?(@user) && friendship.status == nil %>
-
-  <% end %>
-<% end %>
-<h2> Friend Request Sent </h2>
-<% end %>
-
-
-
-
-
-  <img src="http://image.shutterstock.com/display_pic_with_logo/308572/135288281/stock-vector-creative-idea-light-bulb-with-concept-of-word-cloud-vector-illustration-modern-template-design-135288281.jpg" width="337";height="270" style="outline:double;outline-color:#303;"/>
-    </div>
-  
-
-<% if current_user != nil && (@user.privacy==2 || !Friendship.where(user_id: current_user.id , friend_id: @user.id , status: 1).empty?)%> 
-<div><p>Private Account</p></div>
-
-<%elsif current_user == nil || (@user.privacy==1 || Friendship.where(user_id: current_user.id , friend_id: @user.id , status: 1))%> 
-<div class="friendlist"> 
-<table width="158" height="360">
-<tr >
-<td height="110"> </td>
-<td  height="110"> </td>
-</tr>
-<tr height="110">
-<td height="114"> </td>
-<td> </td>
-</tr>
-<tr height="110">
-<td> </td>
-<td> </td>
-</tr>
-</table>
-</div>
-
-<div>
-<ul class="tabs">
-    <li>
-        <input type="radio" name="tabs" id="tab1" checked />
-        <label for="tab1">Information</label>
-<div id="tab-content1" class="tab-content">
-<h2> Information </h2>
-<p>full name : <%= @user.full_name %> </p>
-<p>email: <%= @user.email %> </p>
-<p>gender : <%= @user.gender %> </p>
-</div>  </li>
-  
-    <li>
-        <input type="radio" name="tabs" id="tab2" />
-        <label for="tab2"> <%= @user.username %>'s Forums</label>
-        <div id="tab-content2" class="tab-content">
-<table width="371" height="51">
-<tr>
-  <th width="110"  id="forumcolum"> Forum </th>
-  <th id="ideatitlecolumn"> Description </th>
-</tr>
-<%  x = Forum.where(user_id: @user.id).order(:title) %>
-<% x.each do |forum| %>
-<tr>
-<td id="forumcolum"><%=  link_to forum.title , forum %></td>
-<td id="ideatitlecolumn"> <%= y.description %> </td>
-</tr>
-<% end %>
-</table>
-<% if x.size == 0 %>
-<em> forumless </em>
-<% end %>
-
-</div>
-    </li>
-<li>
-  <input type="radio" name="tabs" id="tab3" checked />
-        <label for="tab3">memberships</label>
- 
-<div id="tab-content3" class="tab-content">
-<table width="371" height="51">
-<tr>
-  <th  id="forumcolum"> Joined Forum</th>
-  <th id="ideatitlecolumn"> Description </th>
-</tr>
-
-<%  x =Membership.where(user_id: @user.id) %>
-<% x.each do |membership| %>
-<% y = Forum.find(membership.forum_id) %>
-<tr>
-<td id="forumcolum"><%=  link_to y.title , forum_path %></td>
-<td id="ideatitlecolumn"> <%= y.description %> </td>
-</tr>
-
-<% end %>
-</table>
-<% if x.size == 0 %>
-<em> not a member in any forums </em>
-<% end %>
-</div>
- </li>
-    
-
-    <li>  <input type="radio" name="tabs" id="tab4" checked />
-        <label for="tab4">Ideas</label>
-        <div id= "tab-content4" class="tab-content">
-  <table width="371" height="51">
-<tr>
-    <th width="57" id="ideatitlecolumn"> Title</th>
-  <th width="160" id="ideacolumn"> Idea</th>
-  <th width="110" id="forumcolum"> Forum</th>
-</tr>
-<%  x = Idea.where(user: @user).order(:text) %>
-<% x.each do |idea| %>
-<tr>
-<td id="ideatitlecolumn"><%= link_to idea.title , forum_idea_path(idea.forum.id, idea.id)%></td>
-<td id="ideacolumn"><%= idea.text %></td>
-<td id="forumcolum"> <%= link_to idea.forum.title , idea.forum %>  </td>
-</tr>
-<% end %>
-</table>
-<% if x.size == 0 %>
-<em> still Idealess </em>
-<% end %>
-
-</div>
- </li>
-</ul>
-<% end %>
-
+                  <% end %>
+                </table>
+                <% if x.size == 0 %>
+                <em> not a member in any forums </em>
+                <% end %>
+             </div>
+          </div>
+            </div>
+        </div>    
+      </div>
+  </div>
+<%end%>
 </body>

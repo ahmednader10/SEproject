@@ -1,3 +1,106 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<title>Bootstrap Example</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<!-- <link rel="stylesheet" href="style.css"> -->
+		<%= stylesheet_link_tag 'style' %>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	</head>
+	<body>
+		<nav class="navbar navbar-fixed-top white">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">iDea</a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li><input class="form-control" type="text" placeholder="Looking for something?" style="margin-top: 9px; width: 250px;"></a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						
+        				<li><a href="#">Notifications</a></li>
+        				<li class="dropdown">
+  							<a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+  							<% if @current_user.uid == nil %>
+  								<%= @current_user.full_name %>
+							<% else %>
+  								<%= @current_user.name %>
+ 							<% end %>
+ 							 <span class="caret"></span></a>
+  							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user"></i> Profile</a></li>
+    							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-cog"></i> Settings</a></li>
+    							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-question"></i> Help</a></li>
+    							<li role="presentation" class="divider"></li>
+    							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
+  							</ul>
+        				</li>
+      				</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="jumbotron other-color">
+			<div class="container-fluid" style="margin-top: 40px;">
+				<div class="profileImg">
+					<%= image_tag 'bulb.jpg', class: "img-circle", width: "215", height: "200" %>
+				</div>
+				
+				<!-- <div class="col-md-3">
+					<%= image_tag 'bulb.jpg', class: "img-circle", width: "280", height: "265" %>
+				</div>
+				<div class="col-md-3">
+					<% if @current_user.uid == nil %>
+  						<%= @current_user.full_name %>
+					<% else %>
+  						<%= @current_user.name %>
+ 					<% end %>
+				</div> -->
+
+			</div>
+		</div>
+
+		<!-- <div class="container-fluid" style="margin-top: 50px;">
+			<div class="col-md-3">
+				<div class="tabbable tabs-left" style="margin-left: 100px;">
+					<ul class="nav nav-tabs">
+ 		 				<li class="active"><a data-toggle="pill" href="#home">Forums</a></li>
+  						<li><a data-toggle="pill" href="#menu1">Ideas</a></li>
+  						<li><a data-toggle="pill" href="#menu2">Friends</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div class="tab-content">
+  					<div id="home" class="tab-pane fade in active">
+   						<h3>Forums</h3>
+   						<p>Some content.</p>
+  					</div>
+  					<div id="menu1" class="tab-pane fade">
+    					<h3>Ideas</h3>
+    					<p>Some content in menu 1.</p>
+  					</div>
+  					<div id="menu2" class="tab-pane fade" style="margin-top: -45px;">
+    					<!- <h3>Friends</h3>
+    					<p>Some content in menu 2.</p> ->
+    					<ul class="nav nav-tabs">
+ 	 						<li class="active"><a data-toggle="pill" href="#hom">My Friends</a></li>
+  							<li><a data-toggle="pill" href="#menu">Requests</a></li>
+						</ul>
+  					</div>
+				</div>	
+			</div>
+		</div> -->
+	</body>
+</html>
+=======
+<body>
 <head><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -6,186 +109,148 @@
 <!-- Latest compiled JavaScript -->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script></head>
 
-<body >
-<div class="headerlist">
-<ul id="menu">
-<li > Logo</li>
-
- <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
- <% if current_user != nil %>
- <li><%= link_to "friend requests" , edit_friendship_path %></li>
- <li><%= link_to "Log out", logout_path, method: :delete %></li>
- <% if !Admin.where(user_id: current_user.id).empty? %>
- <li><%= link_to "requests to join my forums", :action => :admin_join_forums_requests %> </li>
- <% end %>
- <li><%= link_to "notifications" ,user_notifications_path %> </li>
- <% end %>
-</ul>  
+<div><ul class="nav nav-pills" role="tablist">
+              <li role="presentation" class="active"><a href="/forums" >forums</a></li>
+             <% if current_user != nil %>
+             <li role="presentation" class="active"><%= link_to "friend requests" , friendships_path %></li>
+             <li><%= link_to "Log out", logout_path, method: :delete %></li>
+             <% if !Admin.where(user_id: current_user.id).empty? %>
+             <li role="presentation" class="active"><%= link_to "requests to join my forums", :action => :admin_join_forums_requests %> </li>
+             <%end%>
+              <li role="presentation" class="active"><%= link_to "friends" , friendship_path(current_user) %></li>
+              <li> <%= link_to image_tag(current_user.image.url,:style=>'width:50px ;height:40px;'), user_path(current_user) %></li>
+              
+            </ul>
 </div>
-
-<div class="side" style="position: fixed; left: 23px; top: 181px;">
-
-  <ul>
-  <li>
-    <a class='list-item' href='/forums'>
-      Forums
-    </a>
-  </li>
-  <li>
-    <a class='list-item' href='/friendships/:id'>
-      Friends
-    </a>
-  </li>
-
-</ul>
-</div>
-
-<div class=" profilepic" >
-	
-
-
-
-<% if @current_user.uid == nil %>
-  <h1> <%= @current_user.full_name %> welcome to your profile</h1>
-  <% else %>
-
-  <h1> <%= @current_user.name %> welcome to your profile</h1>
- <% end %>
-
-<div style="position:absolute;left:300px;">
-<button class="btn btn-primary btn-xs" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-  Upload
-</button>
-<button class="btn btn-primary btn-xs" type="button" >
-    Delete
-</button>
-<div class="collapse" id="collapseExample">
-  <div class="well">
-    <%= form_for((current_user) , html: {multipart: true}) do |f| %>
-        <p>
-         <%= f.file_field :image %>
-       </p>
-       <%= f.submit "Upload Image" %>
-  <%end%>
+  <div class="row" style="margin-top:100px;">
+  <div class="col-sm-3">
+    <!-- SideBAR -->
   </div>
-</div>
-</div>
-<%= link_to image_tag(current_user.image.url,:style=>'width:450px; height:400px;'), current_user.image.url %>
+    <div class="col-sm-5">
+    <!-- MAIN -->
+        <% if @current_user.uid == nil %>
+            <h1> <%= @current_user.full_name %> welcome to your profile</h1>
+          <% else %>
+            <h1> <%= @current_user.name %> welcome to your profile</h1>
+          <% end %>
+    <div>
+          <%= link_to "Delete", deleteImage_path(current_user) %>
+          <button style="position:absolute; left:400px;" class="btn btn-primary btn-xs" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      Upload
+      </button>
+
+      <%= link_to image_tag(current_user.image.url,:style=>'width:450px; height:400px;'), asset_path(current_user.image.url) %>
+      <div class="collapse" id="collapseExample">
+        <div class="well" style="z-index:1;">
+          <%= form_for((current_user) , html: {multipart: true}) do |f| %>
+              <% if current_user.errors.any? %>
+                <h3>Errors</h3>
+                  <ul>
+                    <% current_user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                    <% end %>
+                  </ul>
+              <% end %>
+            <p>
+             <%= f.hidden_field :image, value: '' %>
+             <%= f.file_field :image %>
+           </p>
+           <%= f.submit "Upload Image" %>
+           <% end %>
+        </div>
+      </div>
+      </div>
+        
+      <div style="height:10px;  margin-top:20px; margin-bottom:20px;" >
+        <!-- SPACE GAP -->
+      </div>
+      <div class="row">
+            <div style="margin:15px;">
+            
+            <div role="tabpanel" style="background-color:#cc99ff;">
+            <!-- Nav tabs -->
+            <ul class="nav nav-pills" role="tablist" style="margin-left:150px;">
+              <li role="presentation" class="active"><a href="#info" aria-controls="home" role="tab" data-toggle="tab">Information</a></li>
+              <li role="presentation"><a href="#foroms" aria-controls="foroms" role="tab" data-toggle="tab">Forums</a></li>
+              <li role="presentation"><a href="#ideas" aria-controls="ideas" role="tab" data-toggle="tab">Ideas</a></li>
+              <li role="presentation"><a href="#memberships" file:///home/miada/SEproject/app/views/users/bootstrapprofilelayout.htmlaria-controls="memberships" role="tab" data-toggle="tab">Memberships</a></li>
+            </ul>
+          </div>
+            <!-- Tab panes -->
+          <div class="tab-content">
+             <div role="tabpanel" class="tab-pane active" id="info">
+                <%= link_to "edit" , edit_user_path(current_user) %>  
+                <h2> Information </h2>
+                <p>full name : <%= @current_user.full_name %> </p>
+                <p>email: <%= @current_user.email %> </p>
+                <p>gender : <%= @current_user.gender %> </p>
+             </div>
+             <div role="tabpanel" class="tab-pane" id="foroms">
+              <table width="371" height="51">
+               <tr>
+                 <th width="110"  id="forumcolum"> Forum</th>
+                 <th id="ideatitlecolumn"> Description </th>
+               </tr>
+               <%  x = Admin.where(user_id: @current_user.id) %>
+               <% x.each do |admin| %>
+               <% y = Forum.find(admin.forum_id) %>
+               <tr>
+                <td id="forumcolum"><%=  link_to y.title , forum_path(y) %></td>
+                <td id="ideatitlecolumn"> <%= y.description %> </td>
+               </tr>
+               <% end %>
+               </table>
+               <% if x.size == 0 %>
+               <em> forumless </em>
+               <% end %>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="ideas">
+              <table width="371" height="51">
+                <tr>
+                 <th width="57" id="ideatitlecolumn"> Title</th>
+                 <th width="160" id="ideacolumn"> Idea</th>
+                 <th width="110" id="forumcolum"> Forum</th>
+                </tr>
+                <%  x = Idea.where(user: @current_user).order(:text) %>
+                <% x.each do |idea| %>
+                <tr>
+                  <td id="ideatitlecolumn"><%= link_to idea.title , forum_idea_path(idea.forum.id, idea.id) %></td>
+                  <td id="ideacolumn"><%=  idea.text %></td>
+                  <td id="forumcolum"> <%= link_to idea.forum.title , idea.forum %>  </td>
+                </tr>
+                <% end %>
+              </table>
+              <% if x.size == 0 %>
+              <em> still Idealess </em>
+              <% end %>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="memberships">
+              <table width="371" height="51">
+                <tr>
+                  <th  id="forumcolum"> Joined Forum</th>
+                  <th id="ideatitlecolumn"> Description </th>
+                </tr>
+                <%  x =Membership.where(user_id: @current_user.id) %>
+                <% x.each do |membership| %>
+                <% y = Forum.find(membership.forum_id) %>
+                <% if !Membership.where(user_id: current_user.id , forum_id: y.id, accept: true).empty? %>
+                <tr>
+                  <td id="forumcolum"><%=  link_to y.title , forum_path(y) %></td>
+                  <td id="ideatitlecolumn"> <%= y.description %> </td>
+                </tr>
+                <% end %>
+                <%end%>
+              </table>
+              <% if x.size == 0 %>
+              <em> you are not a member in any forums </em>
+              <% end %>
+          </div>
+          </div>
+        </div>
+      </div>    
+    </div>
   </div>
-
-<div class="friendlist"> 
-
-<table width="158" height="360">
-<tr >	
-<td height="110"> </td>
-<td  height="110"> </td>
-</tr>
-<tr height="110">
-<td height="114"> </td>
-<td> </td>
-</tr>
-<tr height="110">
-<td> </td>
-<td> </td>
-</tr>
-</table>  
-</div>
-
-<div>
-
-<ul class="tabs">
-    <li>
-        <input type="radio" name="tabs" id="tab1" checked />
-        <label for="tab1">Information</label>
-
-<div id="tab-content1" class="tab-content" >
-
- <%= link_to "edit" , edit_user_path(current_user) %>
-<h2> Information </h2>
-<p>full name : <%= @current_user.full_name %> </p>
-<p>email: <%= @current_user.email %> </p>
-<p>gender : <%= @current_user.gender %> </p>
-</div>
-    <li>
-        <input type="radio" name="tabs" id="tab2" />
-        <label for="tab2"> Your Forums</label>
-
-<div id="tab-content2" class="tab-content">
-<table width="371" height="51">
-<tr>
-  <th width="110"  id="forumcolum"> Forum</th>
-  <th id="ideatitlecolumn"> Description </th>
-</tr>
-
-<%  x = Admin.where(user_id: @current_user.id) %>
-<% x.each do |admin| %>
-<% y = Forum.find(admin.forum_id) %>
-<tr>
-<td id="forumcolum"><%=  link_to y.title , forum_path(y) %></td>
-<td id="ideatitlecolumn"> <%= y.description %> </td>
-</tr>
-<% end %>
-</table>
-<% if x.size == 0 %>
-<em> forumless </em>
-<% end %>
-</div>    </li>
-<li>
-  <input type="radio" name="tabs" id="tab3" checked />
-        <label for="tab3">memberships</label>
-<div id="tab-content3" class="tab-content">
-<table width="371" height="51">
-<tr>
-  <th  id="forumcolum"> Joined Forum</th>
-  <th id="ideatitlecolumn"> Description </th>
-</tr>
-
-<%  x =Membership.where(user_id: @current_user.id) %>
-<% x.each do |membership| %>
-<% y = Forum.find(membership.forum_id) %>
- <% if !Membership.where(user_id: current_user.id , forum_id: y.id, accept: true).empty? %>
-  <tr>
-<td id="forumcolum"><%=  link_to y.title , forum_path(y) %></td>
-<td id="ideatitlecolumn"> <%= y.description %> </td>
-</tr>
-<% end %>
-<%end%>
-</table>
-<% if x.size == 0 %>
-<em> you are not a member in any forums </em>
-<% end %>
-</div>
- 
- </li>
-    
-
-    <li>  <input type="radio" name="tabs" id="tab4" checked />
-        <label for="tab4">Ideas</label>
-<div id= "tab-content4" class="tab-content" >
-  <table width="371" height="51">
-<tr>
-    <th width="57" id="ideatitlecolumn"> Title</th>
-  <th width="160" id="ideacolumn"> Idea</th>
-  <th width="110" id="forumcolum"> Forum</th>
-</tr>
-<%  x = Idea.where(user: @current_user).order(:text) %>
-<% x.each do |idea| %>
-<tr>
-<td id="ideatitlecolumn"><%= link_to idea.title , forum_idea_path(idea.forum.id, idea.id) %></td>
-<td id="ideacolumn"><%=  idea.text %></td>
-<td id="forumcolum"> <%= link_to idea.forum.title , idea.forum %>  </td>
-</tr>
-<% end %>
-</table>
-<% if x.size == 0 %>
-<em> still Idealess </em>
-<% end %>
-</div>
-
- </li>
-</ul>
-
-</div>
-
-
+  
 </body>
+<%end %>
+>>>>>>> 5ac7df0ee4eef5a4f3dccbe463f592301054d693

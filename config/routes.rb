@@ -106,6 +106,8 @@ Rails.application.routes.draw do
 
   get '/users/profile/:id' => 'users#profile', as: 'profile'
 
+  get 'users/profile/:id/removeAvatar' => 'users#deleteImage' , as: 'deleteImage'
+
   ############################ Forums ########################################
 
   get 'forums/created/:id' => 'forums#created', as: 'created'
@@ -141,6 +143,8 @@ Rails.application.routes.draw do
   #get 'users/indentation_error_message' => 'users#indentation_error_message'
 
   get 'search' => 'search#search'
+
+  get 'advancedsearch' => 'search#advanced_search'
 
   post 'forums/:id/admins/new' => 'admins#new', as: 'admin_to_be'
 
@@ -198,7 +202,7 @@ delete 'forums/:forum_id/ideas/:idea_id/comments/:id' => 'comments#destroy', as:
 
   # Login as the homepage
   # To be changed later
-   root 'sessions#new'
+   root 'sessions#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
