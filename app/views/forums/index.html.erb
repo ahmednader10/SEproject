@@ -1,50 +1,137 @@
-  <div class="headerlist">
-<ul id="menu">
-<li> Logo</li>
 
- <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
- <% if current_user != nil %>
- <li><%= link_to "friend requests" , friendships_path %></li>
- <li> <%= link_to "My Profile" , user_path(current_user.id) %> </li>
- 
- <li><%= link_to "notifications" ,user_notifications_path %> </li>  
- <li><%= link_to "Log out", logout_path, method: :delete %></li>
- <% if !Admin.where(user_id: current_user.id).empty? %>
- <li><%= link_to "requests to join my forums",:controller => "users" ,:action => :admin_join_forums_requests %> </li>
- <% end %>
- <% end %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <%= stylesheet_link_tag 'style' %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-fixed-top white">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="<%= user_path(current_user.id) %>">iDea</a>
+        </div>
+        <div>
+          <ul class="nav navbar-nav">
+            <li><input class="form-control" type="text" placeholder="Looking for something?" style="margin-top: 9px; width: 250px;"></a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            
+                <li><a href="#">Notifications</a></li>
+                <li class="dropdown">
+                <a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                <% if @current_user.uid == nil %>
+                  <%= @current_user.full_name %>
+              <% else %>
+                  <%= @current_user.name %>
+              <% end %>
+               <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= user_path(current_user.id) %>"><i class="fa fa-user"></i> Profile</a></li>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= help_path %>"><i class="fa fa-question"></i> Help</a></li>
+                  <li role="presentation" class="divider"></li>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= signout_path %>"><i class="fa fa-sign-out"></i> Logout</a></li>
+                </ul>
+                </li>
+              </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="jumbotron other-color">
+      <h1 class="text-center" style="color: #fff;">Categories</h1>
+      <div class="container" style="margin-top: 48px;">
+        <div class="row">
+          <div class="col-sm-4">
+            <!--First category-->
+            <div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
+              <div class="flipper">
+                <div class="front">
+                  <%= image_tag 'bulb.jpg', class: "img-circle", width: "215", height: "200" %>
+                </div>
+                <div class="back" style="border-radius: 100px; color: #96BADA; background-color: #fff;">
+                  <h4 class="lead" style="margin-top: 80px;">Movies</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+            <div class="col-sm-4">
+            <!--Second category-->
+            <div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
+              <div class="flipper">
+                <div class="front">
+                  <%= image_tag 'bulb.jpg', class: "img-circle", width: "215", height: "200" %>
+                </div>
+                <div class="back" style="border-radius: 100px; color: #96BADA; background-color: #fff;">
+                  <h4 class="lead" style="margin-top: 80px;">Movies</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+            <div class="col-sm-4">
+            <!--Third category-->
+            <div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
+              <div class="flipper">
+                <div class="front">
+                  <%= image_tag 'bulb.jpg', class: "img-circle", width: "215", height: "200" %>
+                </div>
+                <div class="back" style="border-radius: 100px; color: #96BADA; background-color: #fff;">
+                  <h4 class="lead" style="margin-top: 80px;">Movies</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 100px;">
+          <div class="col-sm-4">
+            <!--Fourth category-->
+            <div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
+              <div class="flipper">
+                <div class="front">
+                  <%= image_tag 'bulb.jpg', class: "img-circle", width: "215", height: "200" %>
+                </div>
+                <div class="back" style="border-radius: 100px; color: #96BADA; background-color: #fff;">
+                  <h4 class="lead" style="margin-top: 80px;">Movies</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+            <div class="col-sm-4">
+            <!--Fifth category-->
+            <div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
+              <div class="flipper">
+                <div class="front">
+                  <%= image_tag 'bulb.jpg', class: "img-circle", width: "215", height: "200" %>
+                </div>
+                <div class="back" style="border-radius: 100px; color: #96BADA; background-color: #fff;">
+                  <h4 class="lead" style="margin-top: 80px;">Movies</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+            <div class="col-sm-4">
+            <!--Sixth category-->
+            <div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
+              <div class="flipper">
+                <div class="front">
+                  <%= image_tag 'bulb.jpg', class: "img-circle", width: "215", height: "200" %>
+                </div>
+                <div class="back" style="border-radius: 100px; color: #96BADA; background-color: #fff;">
+                  <h4 class="lead" style="margin-top: 80px;">Movies</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-</div>
-<h1>Listing forums</h1>
- 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Privacy</th>
-
-  </tr>
- 
-  <% @forums.each do |forum| %>
-    <tr>
-      <td><%= link_to "#{forum.title}", forum_path(forum) %></td>
-      
-      <td><%= forum.description %></td>
-      
-      <% if forum.privacy == "1" %>
-      <td>Public</td>
-      <% elsif forum.privacy == "2" %>
-      <td>Private</td>
-      <% end %>
-      
-      <% if !Admin.where({ forum_id: forum.id, user_id: @user.id }).empty? %>
-      <td><%= link_to 'Edit', edit_forum_path(forum) %></td>
-      <td><%= link_to 'Delete', forum_path(forum), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
-
-<% if session[:sysadmin] != true %>
-<%= link_to "Create new forum", 'forums/new' %>
-<% end %>
+  </body>
+</html>

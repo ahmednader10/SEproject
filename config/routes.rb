@@ -51,9 +51,9 @@ Rails.application.routes.draw do
 
   post   'login'   => 'sessions#create'
   
-  delete 'logout'  => 'sessions#destroy'
+  delete 'logout'  => 'sessions#destroy', as: 'logout'
   
-  get 'help' => 'sessions#help'
+  get 'help' => 'sessions#help', as: 'help'
   
   get 'tempguest' => 'sessions#tempguest'
   
