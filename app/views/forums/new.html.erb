@@ -49,15 +49,15 @@
 
   <p>
     <%= f.label :category, "Category" %>
-    <%= f.collection_select(:category, Category.all, :title, :title) %><br>
+    <%= f.collection_select(:category, [Category.new(title: '- Select a category -')] + Category.all + [Category.new(title: 'Other')], :title, :title) %><br>
     <label id="catLabel" style="visibility:hidden;">Please specify:</label>
     <%= f.text_field :category, :id => 'cat', :name => 'forum[other_category]', :style => 'visibility:hidden;' %>
   </p>
 
   <script>
     $(document).ready(function() {
-      $('#forum_category').prepend('<option selected="selected">- Select a category -</option>');
-      $('#forum_category').append('<option value="Other">Other</option>');
+      // $('#forum_category').prepend('<option selected="selected">- Select a category -</option>');
+      // $('#forum_category').append('<option value="Other">Other</option>');
       document.getElementById("forum_category").onchange = function() {
         var field = document.getElementById("cat");
         var label = document.getElementById("catLabel");
