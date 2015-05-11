@@ -41,14 +41,10 @@ class CommentsController < ApplicationController
 
 	 	@reportcomment = Reportcomment.new(:user_id => @user.id , :comment_id => @comment.id)
 
-	 if @comment.user_id == @user.id
-	 	flash[:notice] = "Cannot report your own comment!"
-		elsif @reportcomment.save
+		if @reportcomment.save
 	   		flash[:notice] = "Comment has been reported!"
 	   		Action.create(info: User.find(@user.id).username + ' has reported a comment: (' + @comment.text + ') belonging to user: (' + User.find(@comment.user_id).username + ') present in idea: (' + Idea.find(@comment.idea_id).title + ') in forum: (' + Forum.find(Idea.find(@comment.idea_id).forum_id).title + ').', user_email: @user.email)
 	   		Notification.create(info: 'Your comment: (' + @comment.text + ') on idea: (' + @idea.title + ') on forum: (' + @forum.title + ') has been reported', seen: false, user_id: @comment.user_id)
-		else
-			flash[:notice] = "You've already reported this comment!"
 		end
 
       	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
