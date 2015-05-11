@@ -2,6 +2,10 @@
 	background: #96BADA;
 }
 
+.forum-color {
+	background: #E1672D;
+}
+
 .white {
 	background: #FFFFFF;
 }
@@ -34,8 +38,15 @@ hr {
 	margin: 30px auto;
 }
 
+.rule {
+	width: 350px;
+	margin-bottom: 10px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
 .quarter-rule {
-	width: 130px;
+	width: 30px;
 	margin: 45px auto;
 	border-top: 1px solid #97BBDA;
 }
@@ -46,6 +57,11 @@ p.info {
 
 .profileImg {
 	width: 215px;
+	margin: 0 auto;
+}
+
+.forumImg {
+	width: 265px;
 	margin: 0 auto;
 }
 
