@@ -1,0 +1,217 @@
+<nav class="navbar navbar-fixed-top white">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="<%= root_path %>">iDea</a>
+		</div>
+		<div>
+			<ul class="nav navbar-nav">
+				<li><a data-toggle="modal" data-target="#help">About</a></li>
+				<li><a href="<%= contactus_path %>">Contact us</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				
+				<li><a data-toggle="modal" data-target="#signUp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+				<li><a data-toggle="modal" data-target="#logIn" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				</ul>
+		</div>
+	</div>
+</nav>
+
+<!-- Modal -->
+  		<div class="modal fade" id="logIn" role="dialog">
+    		<div class="modal-dialog">
+    
+      <!-- Modal content-->
+      			<div class="modal-content" style="margin: 170px auto; width: 400px;">
+        			<div class="modal-header">
+          				<button type="button" class="close" data-dismiss="modal">&times;</button>
+          				<!-- <h4 class="modal-title">Modal Header</h4> -->
+          				<h2 style="text-align: center; margin-bottom: 60px;">Log in</h2>
+
+          				<%= form_for(:session, url: login_path) do |f| %>
+
+  	 					    <div class="left-inner-addon">
+  	 					    	<i class="glyphicon glyphicon-user"></i>
+  	 					    	<%= f.email_field :email, class: 'form-control', placeholder: "Email" %><br>
+  	 					    </div>
+	
+							<div class="left-inner-addon">
+      							<i class="glyphicon glyphicon-lock"></i>
+      							<%= f.password_field :password, class: 'form-control', placeholder: "Password" %><br>
+      						</div>
+
+      						<h5><%= link_to "Forgot password?", forgotpw_new_path %></h5><br>
+
+      						<%= f.submit "Log in", class: "btn btn-primary" %><br><br>
+      						<a href="<%= "/auth/TWITTER "%>" id="sign_in" class="btn btn-omar"><i class="fa fa-twitter"></i> Sign in with Twitter</a>
+      						<a href="<%= "/auth/facebook" %>" id="sign_in" class="btn btn-farah"><i class="fa fa-facebook"></i> Sign in with Facebook</a>
+
+      					<% end %>
+        			</div>
+
+        			<!-- <div class="modal-body">
+          				<p>Some text in the modal.</p>
+        			</div>
+        			<div class="modal-footer">
+          				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        			</div> -->
+      			</div>
+      
+    		</div>
+  		</div>
+      <!-- Modal -->
+      <div class="modal fade" id="help" role="dialog">
+      <div class="modal-dialog">
+
+    <!-- Modal content-->
+          <div class="modal-content" style="margin: 170px auto; width: 400px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <!-- <h4 class="modal-title">Modal Header</h4> -->
+                <h2 style="text-align: center; margin-bottom: 30px;"><i class="glyphicon glyphicon-question-sign"></i>Help</h2><hr>
+
+                <div class="left-inner-addon">
+                      <h5>Small minds discuss people, average minds discuss events,great minds discuss ideas.</h5>
+                </div>
+                <hr>
+                <div class="left-inner-addon">
+                  <u><h3>FAQs</h3></u>
+                </div>
+
+                  <ul>
+                    <li>What za wepsite about?</li>
+                  </ul>
+
+
+            </div>
+
+            <!-- <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div> -->
+            </div>
+
+        </div>
+      </div>
+  		<!-- Modal -->
+  		<div class="modal fade" id="help" role="dialog">
+    		<div class="modal-dialog">
+    
+      <!-- Modal content-->
+      			<div class="modal-content" style="margin: 170px auto; width: 400px;">
+        			<div class="modal-header">
+          				<button type="button" class="close" data-dismiss="modal">&times;</button>
+          				<!-- <h4 class="modal-title">Modal Header</h4> -->
+          				<h2 style="text-align: center; margin-bottom: 30px;"><i class="glyphicon glyphicon-question-sign"></i>Help</h2><hr>
+
+  	 					    <div class="left-inner-addon">
+  	  	 					    	<h5>Small minds discuss people, average minds discuss events,great minds discuss ideas.</h5>
+  	 					    </div>
+								<hr>
+							<div class="left-inner-addon">
+      							
+      							<u><h3>FAQs</h3></u>
+      						</div>
+
+      						<ul>
+      							<li>What is the website about?</li>
+      						</ul>
+
+
+        			</div>
+
+        			<!-- <div class="modal-body">
+          				<p>Some text in the modal.</p>
+        			</div>
+        			<div class="modal-footer">
+          				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        			</div> -->
+      			</div>
+      
+    		</div>
+  		</div>
+
+  		<!-- Modal -->
+  		<div class="modal fade" id="signUp" role="dialog">
+    		<div class="modal-dialog">
+    
+      <!-- Modal content-->
+      			<div class="modal-content" style="margin: auto auto; width: 400px;">
+        			<div class="modal-header">
+          				<button type="button" class="close" data-dismiss="modal">&times;</button>
+          				<!-- <h4 class="modal-title">Modal Header</h4> -->
+          				<h2 style="text-align: center; margin-bottom: 60px;">Sign up</h2>
+
+				        <%= form_for(@user) do |f| %>
+
+							<% if @user.errors.any? %>
+								<h3>Errors</h3>
+								<ul>
+									<% @user.errors.full_messages.each do |message| %>
+										<li><%= message %></li>
+									<% end %>
+								</ul>
+							<% end %>
+
+							<% if flash[:notice] %>
+								<%= flash[:notice] %>
+							<% end %>
+
+					   		<div class="field left-inner-addon">
+					   			<i class="glyphicon glyphicon-sunglasses"></i>
+					   			<%= f.text_field :full_name, class: 'form-control', placeholder: "Full Name" %><br>
+					   		</div> 
+
+					   		<div class="field left-inner-addon">
+					   			<i class="glyphicon glyphicon-user"></i>
+					   			<%= f.text_field :username, class: 'form-control', placeholder: "Username" %><br>
+					   		</div>
+
+					   		<div class="field left-inner-addon">
+					   			<i class="glyphicon glyphicon-envelope"></i>
+					   			<%= f.email_field :email, class: 'form-control', placeholder: "Email" %><br>
+					   		</div>
+
+					   		<div class="field left-inner-addon">
+					   			<i class="glyphicon glyphicon-lock"></i>
+					   			<%= f.password_field :password, class: 'form-control', placeholder: "Password" %><br>
+					   		</div>
+
+					   		<div class="field left-inner-addon">
+					   			<i class="glyphicon glyphicon-lock"></i>
+					   			<%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Password Confirmation" %><br>
+					   		</div>
+					 
+					 	  	<div class="field">
+					 	  		<%= f.label :gender, "Gender" %><br>
+					   			<%= f.select :gender, ['Male', 'Female'], {}, class: 'selectpicker' %>
+					   			<!-- <button name="user[gender]" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Gender <span class="caret"></span></button>
+					   			<ul class="dropdown-menu">
+    								<li>Male</li>
+  							 	 	<li><a href="#">CSS</a></li>
+    								<li><a href="#">JavaScript</a></li>
+  								</ul><br> -->
+					   		</div>   
+
+					   		<div class="field">
+					   			<%= f.label :password_question, "Choose a question (in case you forgot the password)", style: 'margin-top: 15px;' %><br>
+					   			<%= f.select :password_question, ['What is the name of your best friend?', 'What is the name of your pet?', 'Who was your first English teacher?'], {}, class: 'selectpicker' %><br>
+					   		</div> 
+
+					   		<div class="field left-inner-addon">
+					   			<i class="fa fa-user-secret"></i>
+					   			<%= f.text_field :answer_for_password_question, class: 'form-control', placeholder: "Your answer here", style: 'margin-top: 10px;' %><br><br>
+					   		</div>
+					  
+					  	 	<div class='actions'>
+					   			<%= f.submit "Sign Up", class: "btn btn-primary"  %>
+					   		</div>
+
+						<% end %>
+        			</div>
+      			</div>
+      			
+    		</div>
+  		</div>

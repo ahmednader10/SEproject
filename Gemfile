@@ -35,7 +35,7 @@ gem 'social-share-button', '~> 0.1.6'
 
 #gem 'protected_attributes'
 
-
+gem 'figaro'
 
 # Form helper for model errors
 gem 'dynamic_form'
