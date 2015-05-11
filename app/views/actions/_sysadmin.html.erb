@@ -1,19 +1,39 @@
-<h1>System log:</h1>
-<ul>
-	<% @actions.reverse_each do |action| %>
-		<li>
-			<% if action.hidden == false %> 
-				<%= link_to 'hide', 'syslog/hide/' + action.id.to_s, method: :put %>
-			<% else %> 
-				<%= link_to 'unhide', 'syslog/unhide/' + action.id.to_s, method: :put %>
-			<% end %> 
-			<%= action.info + ' (' + action.created_at.to_s + ')' %> 
-			<% user = User.where(email: action.user_email).first %>
-			<% if user != nil %>
-			<%= link_to ' ' + User.where(email: action.user_email).first.username, 'users/' + User.where(email: action.user_email).first.id.to_s %>
-			<% else %>
-				<%= action.user_email %>
-			<% end %>
-		</li>
-	<% end %>
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<title>Bootstrap Example</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<%= stylesheet_link_tag 'style' %>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	</head>
+	<body style="background: #EEE;">
+			<%= render "/shared/navbar_sys_admin"%>
+		<div style="margin-top:80px">
+			<h1>System log:</h1>
+			<ul>
+				<% @actions.reverse_each do |action| %>
+					<li>
+						<% if action.hidden == false %> 
+							<%= link_to 'hide', 'syslog/hide/' + action.id.to_s, method: :put %>
+						<% else %> 
+							<%= link_to 'unhide', 'syslog/unhide/' + action.id.to_s, method: :put %>
+						<% end %> 
+						<%= action.info + ' (' + action.created_at.to_s + ')' %> 
+						<% user = User.where(email: action.user_email).first %>
+						<% if user != nil %>
+						<%= link_to ' ' + User.where(email: action.user_email).first.username, 'users/' + User.where(email: action.user_email).first.id.to_s %>
+						<% else %>
+							<%= action.user_email %>
+						<% end %>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+	</body>
+</html>
+

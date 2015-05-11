@@ -1,0 +1,31 @@
+<%= link_to "Homepage", root_url %><br>
+
+<font color= "#FF0000"> Page under development.</font>
+<font color = "#585b5e"><h1>Forgot password?</h1></font><br>
+<font color = "#585b5e"><h2><u>Send password through email:</u></h2></font><br>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(:session, url: forgotpw_sendx_path) do |f| %>
+
+
+  	<div class="field">
+	   	<%= f.label :email %><br>
+	   	<%= f.email_field :email %> <%= f.submit "Send Password"  %><br>
+	</div>
+
+<!--
+<font color = "0a47ad"><div align= "center"><h1>OR</h1></div></font><br>
+<font color = "#585b5e"><h2><u>Answer the following questions to reset password:</u></h2></font> <br>
+
+<%= f.label :password_question, "What is the name of your best friend?" %><br>
+<%= f.text_field :q1 %><br>
+<%= f.label :password_question, "What is the name of your pet?" %><br>
+<%= f.text_field :q2 %><br>
+<%= f.label :password_question, "Who was your first English teacher?" %><br>
+<%= f.text_field :q3 %><br>
+<%= f.submit "Submit" %>
+-->
+<%end%>
+</div>
+
+

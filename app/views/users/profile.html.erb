@@ -12,38 +12,8 @@
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	</head>
 	<body>
-		<nav class="navbar navbar-fixed-top white">
-			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">iDea</a>
-				</div>
-				<div>
-					<ul class="nav navbar-nav">
-						<li><input class="form-control" type="text" placeholder="Looking for something?" style="margin-top: 9px; width: 250px;"></a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						
-        				<li><a href="#">Notifications</a></li>
-        				<li class="dropdown">
-  							<a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-  							<% if current_user.uid == nil %>
-  								<%= current_user.full_name %>
-							<% else %>
-  								<%= current_user.name %>
- 							<% end %>
- 							 <span class="caret"></span></a>
-  							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user"></i> Profile</a></li>
-    							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-cog"></i> Settings</a></li>
-    							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-question"></i> Help</a></li>
-    							<li role="presentation" class="divider"></li>
-    							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
-  							</ul>
-        				</li>
-      				</ul>
-				</div>
-			</div>
-		</nav>
+
+	<%= render "/shared/navbarloggedin" %>
 
 		<div class="jumbotron other-color">
 			<div class="container-fluid" style="margin-top: 40px;">
@@ -65,6 +35,82 @@
 			</div>
 		</div>
 
+		<a data-toggle="modal" data-target="#my_friends" >My friends</a>
+		<div class="modal fade" id="my_friends" role="dialog">
+    		<div class="modal-dialog">
+    
+      <!-- Modal content-->
+      			<div class="modal-content" style="margin: 170px auto; width: 400px;">
+        			<div class="modal-header">
+          				<button type="button" class="close" data-dismiss="modal">&times;</button>
+          				<h3 style="text-align: center;">My friends</h3>
+          				<table class="table table-hover">
+						    <thead>
+						      <tr >
+						        <td >Name</td>
+						        <td>Email</td>
+						      </tr>
+						    </thead>
+						    <tbody>
+								<% users = User.all %>
+		          				<% users.each do |user| %>
+		          				<tr>
+		          					<td><a href="<%= profile_path(user.id) %>"><%= user.full_name %></a></td>
+		          					<td><%= user.email %></td>
+								</tr>
+		          				<% end %>
+						    </tbody>
+						</table>  
+          				
+        			</div>
+
+        			<!-- <div class="modal-body">
+          				<p>Some text in the modal.</p>
+        			</div>
+        			<div class="modal-footer">
+          				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        			</div> -->
+      			</div>
+      
+    		</div>
+  		</div>
+		
+  		</br>
+
+		<a data-toggle="modal" data-target="#requests" >Friend reuests</a>
+		<div class="modal fade" id="requests" role="dialog">
+    		<div class="modal-dialog">
+    
+      <!-- Modal content-->
+      			<div class="modal-content" style="margin: 170px auto; width: 400px;">
+        			<div class="modal-header">
+          				<button type="button" class="close" data-dismiss="modal">&times;</button>
+          				<h3 style="text-align: center;">Friend requests</h3>
+          				<table class="table table-hover">
+						    <tbody>
+								<% users = User.all %>
+		          				<% users.each do |user| %>
+		          				<tr>
+		          					<td><a href="<%= profile_path(user.id) %>"><%= user.full_name %></a></td>
+		          					<td><a href="#" style="color: green;"><i class="glyphicon glyphicon-ok"></i></a></td>
+		          					<td><a href="#" style="color: red;"><i class="glyphicon glyphicon-remove"></i></a></td>
+								</tr>
+		          				<% end %>
+						    </tbody>
+						</table>  
+          				
+        			</div>
+
+        			<!-- <div class="modal-body">
+          				<p>Some text in the modal.</p>
+        			</div>
+        			<div class="modal-footer">
+          				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        			</div> -->
+      			</div>
+      
+    		</div>
+  		</div>
 		<!-- <div class="container-fluid" style="margin-top: 50px;">
 			<div class="col-md-3">
 				<div class="tabbable tabs-left" style="margin-left: 100px;">

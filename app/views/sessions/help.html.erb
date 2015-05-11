@@ -1,10 +1,53 @@
 <%= link_to "Homepage", root_url %>
-<u><H1>Help</H1><br></u>
-
-*Help text inserted here* <br>
-
-<u><h1>FAQ:</h1></u><br>
-
-*frequently asked questions*
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<title>Bootstrap Example</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<!-- <link rel="stylesheet" href="style.css"> -->
+		<%= stylesheet_link_tag 'style' %>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	</head>
+	<body>
+		<nav class="navbar navbar-fixed-top white">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="<%= user_path(current_user.id) %>">iDea</a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li><input class="form-control" type="text" placeholder="Looking for something?" style="margin-top: 9px; width: 250px;"></a></li>
+            <li><button class=""></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						
+        				<li><a href="#">Notifications</a></li>
+        				<li class="dropdown">
+  							<a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+  							<% if @current_user.uid == nil %>
+  								<%= @current_user.full_name %>
+							<% else %>
+  								<%= @current_user.name %>
+ 							<% end %>
+ 							 <span class="caret"></span></a>
+  							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    							<li role="presentation"><a role="menuitem" tabindex="-1" href="<%= user_path(current_user.id) %>"><i class="fa fa-user"></i> Profile</a></li>
+    							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-cog"></i> Settings</a></li>
+    							<li role="presentation"><a role="menuitem" tabindex="-1" href="<%= help_path %>"><i class="fa fa-question"></i> Help</a></li>
+    							<li role="presentation" class="divider"></li>
+    							<li role="presentation"><a role="menuitem" tabindex="-1" href="<%= signout_path %>"><i class="fa fa-sign-out"></i> Logout</a></li>
+  							</ul>
+        				</li>
+      				</ul>
+				</div>
+			</div>
+		</nav>
+		
+	</head>
+</html>	
 
 

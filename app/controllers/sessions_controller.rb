@@ -19,6 +19,7 @@ class SessionsController < ApplicationController
   # renders to new if doesnt match with an error on top
   def create 
    	
+
    	user = User.find_by(email: params[:session][:email].downcase)
     if user != nil
   	blocked_user = Block.find_by(email: user.email)
@@ -34,9 +35,9 @@ class SessionsController < ApplicationController
     	log_in user
       Action.create(info: current_user.username + ' has logged in.', user_email: current_user.email)
 
-    #Redirects to an empty page
-    #To be changed later
-    	redirect_to user
+    # Redirects to an empty page
+    # To be changed later
+    	redirect_to user_path(current_user.id)
 
     else
 
@@ -103,6 +104,7 @@ class SessionsController < ApplicationController
   # Sends an email to user including their password
   # Answer personal questions and if matches you can change password onspot 
   def forgot
+     
   end
 
 end

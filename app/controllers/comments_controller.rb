@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
 			
 			# This line of code sends a notification to the owner of the idea being commented on
 			if current_user.id != @idea.user_id
-				Notification.create(info: (current_user.username + ' has commented: (' + @comment.text + ') on your idea: (' + @idea.title + ') on forum: (' + Forum.find(@idea.forum_id).title + ').'), seen: false, user_id: @idea.user_id)
+				Notification.create(info: current_user.username + ' has commented: (' + @comment.text + ') on your idea: (' + @idea.title + ') on forum: (' + Forum.find(@idea.forum_id).title + ').', seen: false, user_id: @idea.user_id)
 			end
 			
 			Action.create(info: current_user.username + ' has commented: (' + @comment.text + ') on idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') on forum: (' + Forum.find(@idea.forum_id).title + ').', user_email: current_user.email)
