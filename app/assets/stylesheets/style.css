@@ -278,3 +278,6 @@ border: 3px solid #ffaca6;
     font-size:2em;
     vertical-align:middle;
 }
+.verticalLine {
+    border-left: thick solid #ff0000;
+}

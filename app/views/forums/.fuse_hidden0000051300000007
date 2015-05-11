@@ -55,9 +55,9 @@
   </p>
 
   <script>
-    $(document).ready(function() {}
-      $('#forum_category').prepend('<option selected="selected">- Select a category -</option>');
-      $('#forum_category').append('<option value="Other">Other</option>');
+    $(document).ready(function() {
+      // $('#forum_category').prepend('<option selected="selected">- Select a category -</option>');
+      // $('#forum_category').append('<option value="Other">Other</option>');
       document.getElementById("forum_category").onchange = function() {
         var field = document.getElementById("cat");
         var label = document.getElementById("catLabel");
