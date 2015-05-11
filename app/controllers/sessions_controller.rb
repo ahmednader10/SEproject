@@ -31,7 +31,7 @@ class SessionsController < ApplicationController
 
     # Redirects to an empty page
     # To be changed later
-    	redirect_to user
+    	redirect_to user_path(current_user.id)
 
     else
 
@@ -98,6 +98,7 @@ class SessionsController < ApplicationController
   # Sends an email to user including their password
   # Answer personal questions and if matches you can change password onspot 
   def forgot
+     
   end
 
 end

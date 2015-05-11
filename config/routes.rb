@@ -64,6 +64,10 @@ Rails.application.routes.draw do
   get 'jobs' => 'sessions#jobs'
   
   get 'forgot' => 'sessions#forgot'
+
+  get 'forgotpw/new' => 'forgotpw#new'
+
+  post 'forgotpw/sendx' => 'forgotpw#sendx'
   
   ######################Facebook and Twitter Login###############################
   match 'auth/:provider/callback', to: 'sessions#createF', :via => [:get, :post]
