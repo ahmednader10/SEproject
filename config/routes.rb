@@ -51,9 +51,9 @@ Rails.application.routes.draw do
 
   post   'login'   => 'sessions#create'
   
-  delete 'logout'  => 'sessions#destroy'
+  delete 'logout'  => 'sessions#destroy', as: 'logout'
   
-  get 'help' => 'sessions#help'
+  get 'help' => 'sessions#help', as: 'help'
   
   get 'tempguest' => 'sessions#tempguest'
   
@@ -64,6 +64,10 @@ Rails.application.routes.draw do
   get 'jobs' => 'sessions#jobs'
   
   get 'forgot' => 'sessions#forgot'
+
+  get 'forgotpw/new' => 'forgotpw#new'
+
+  post 'forgotpw/sendx' => 'forgotpw#sendx'
   
   ######################Facebook and Twitter Login###############################
   match 'auth/:provider/callback', to: 'sessions#createF', :via => [:get, :post]
@@ -140,6 +144,8 @@ Rails.application.routes.draw do
 
   get 'search' => 'search#search'
 
+  get 'advancedsearch' => 'search#advanced_search'
+
   post 'forums/:id/admins/new' => 'admins#new', as: 'admin_to_be'
 
   get 'admins/unauthorized_action' => 'admins#unauthorized_action', as: 'unauthorized_action'
@@ -196,7 +202,7 @@ delete 'forums/:forum_id/ideas/:idea_id/comments/:id' => 'comments#destroy', as:
 
   # Login as the homepage
   # To be changed later
-   root 'sessions#new'
+   root 'sessions#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

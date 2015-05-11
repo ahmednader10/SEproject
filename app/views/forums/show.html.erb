@@ -43,7 +43,7 @@
 
   <!-- check if already joined or pending request -->
   <% y = Forum.where(id: params[:id]) %>
-  <% if !Membership.where(user_id: current_user.id , forum_id: y.first.id, accept: nil).empty? %>
+  <% if session[:sysadmin] or !Membership.where(user_id: current_user.id , forum_id: y.first.id, accept: nil).empty? %>
     <div class="alert alert-info">
       Pending request.
    </div>
