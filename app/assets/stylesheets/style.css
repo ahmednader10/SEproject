@@ -245,3 +245,20 @@ p.info {
     transform: rotateX(-180deg);
   }
 
+/* Alert message */
+@import url('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
+.isa_error {
+margin: 10px 0px;
+padding:2px;
+border-radius:.5em;
+border: 3px solid #ffaca6;
+}
+.isa_error {
+    color: #D8000C;
+    background-color: #FFBABA;
+}
+.isa_error i {
+    margin:2px 22px;
+    font-size:2em;
+    vertical-align:middle;
+}
