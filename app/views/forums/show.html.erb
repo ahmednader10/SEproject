@@ -115,7 +115,7 @@
 	<div class="container">
 		<% if @forum.privacy == "1" and !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
 			<% i = 0 %>
-			<% while i < @ideas.size %>
+			<% while i < @ideas.length %>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="panel panel-default">
