@@ -45,13 +45,14 @@
         </div>
       </div>
     </nav>
-    <div class="jumbotron other-color">
+
+    <!--<div class="jumbotron other-color">
       <h1 class="text-center" style="color: #fff;">Categories</h1>
       <div class="container" style="margin-top: 48px;">
         <div class="row">
           <div class="col-sm-4">
             <!--First category-->
-            <div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
+            <!--<div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
               <div class="flipper">
                 <div class="front">
                   <%= image_tag 'bulb.jpg', class: "img-circle", width: "215", height: "200" %>
@@ -64,7 +65,7 @@
           </div>
             <div class="col-sm-4">
             <!--Second category-->
-            <div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
+            <!--<div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
               <div class="flipper">
                 <div class="front">
                   <%= image_tag 'bulb.jpg', class: "img-circle", width: "215", height: "200" %>
@@ -77,7 +78,7 @@
           </div>
             <div class="col-sm-4">
             <!--Third category-->
-            <div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
+            <!--<div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
               <div class="flipper">
                 <div class="front">
                   <%= image_tag 'bulb.jpg', class: "img-circle", width: "215", height: "200" %>
@@ -92,7 +93,7 @@
         <div class="row" style="margin-top: 100px;">
           <div class="col-sm-4">
             <!--Fourth category-->
-            <div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
+            <!--<div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
               <div class="flipper">
                 <div class="front">
                   <%= image_tag 'bulb.jpg', class: "img-circle", width: "215", height: "200" %>
@@ -105,7 +106,7 @@
           </div>
             <div class="col-sm-4">
             <!--Fifth category-->
-            <div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
+            <!--<div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
               <div class="flipper">
                 <div class="front">
                   <%= image_tag 'bulb.jpg', class: "img-circle", width: "215", height: "200" %>
@@ -118,7 +119,7 @@
           </div>
             <div class="col-sm-4">
             <!--Sixth category-->
-            <div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
+            <!--<div class="flip-container" ontouchstart="this.classList.toggle('hover'); " style="text-align: center;">
               <div class="flipper">
                 <div class="front">
                   <%= image_tag 'bulb.jpg', class: "img-circle", width: "215", height: "200" %>
@@ -129,6 +130,32 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>-->
+    <div class="jumbotron other-color">
+      <div class="container" style="margin-top: 48px;">
+        </br></br></br>
+          <div style="margin-left: 50px; margin-right: 50px;">
+            <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Forums</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% forums = Forum.all %>
+              <% forums.each do |forum| %>
+              <tr>
+                <td><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

@@ -156,6 +156,8 @@ Rails.application.routes.draw do
 
   get 'sessions/blockingMessage' => 'sessions#create', as: 'blocking_message'
 
+  post 'forums/show' => 'forums#show'
+
   
 
   ###########################################################
