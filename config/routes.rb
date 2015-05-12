@@ -164,6 +164,9 @@ Rails.application.routes.draw do
 
   ###########################################################
 
+  get 'user/:id/friends' => 'friendships#index'
+
+  get 'user/:id/requests' => 'friendships#requests'
 
   # get 'sysAdmin' 
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'

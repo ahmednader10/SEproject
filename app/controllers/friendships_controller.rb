@@ -22,6 +22,11 @@ def index
   end
 end
 
+def requests
+  @user = params[:id]
+  @requesters = Friendship.where(friend_id: @user.id)
+end
+
 #This  ethod creates a friendship, a user adds a friend and it's saved in friendships table
 def create
   friend = User.find(params[:id])
