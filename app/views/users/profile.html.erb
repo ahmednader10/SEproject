@@ -15,51 +15,38 @@
 
 	<%= render "/shared/navbarloggedin" %>
 
-		<div class="jumbotron other-color">
-			<div class="container-fluid" style="margin-top: 40px;">
-				<div class="profileImg">
-					<%= image_tag 'bulb.jpg', class: "img-circle", width: "215", height: "200" %>
-				</div>
-				
-				<!-- <div class="col-md-3">
-					<%= image_tag 'bulb.jpg', class: "img-circle", width: "280", height: "265" %>
-				</div>
-				<div class="col-md-3">
-					<% if @current_user.uid == nil %>
-  						<%= @current_user.full_name %>
-					<% else %>
-  						<%= @current_user.name %>
- 					<% end %>
-				</div> -->
-
+		<div class="jumbotron" style="height: 250px; background: #4B5966"; >
+		</div>
+		<div class="container-fluid" style="margin-top: -136px;">
+			<div class="profileImg" style="margin-left: 80px">
+				<%= image_tag 'bulb.jpg', class: "imgcircle", width: "215", height: "200", border: "10" %>
 			</div>
 		</div>
+		<div class="col-sm-4">
+			<h3 style="text-align: center;">
+				My personal info
+				 <i>
+				 	<a href="<%= edit_user_path %>" class="fa fa-pencil-square-o" style="font-size 1em;"></a>
+				 </i>
+			</h3>
 
-			<div class="col-sm-4">
-				<h3 style="text-align: center;">
-					My personal info
-					 <i>
-					 	<a href="<% root_path %>" class="fa fa-pencil-square-o" style="font-size 1em;"></a>
-					 </i>
-				</h3>
-
-         			</br>
-          				<table class="table table-hover">
-							<tr>
-								<td>Name</td>
-								<td><%= current_user.full_name %></td>
-							</tr>
-							<tr>
-								<td>Username</td>
-								<td><%= current_user.username %></td>
-							</tr>
-							<tr>
-								<td>Email</td>
-								<td><%= current_user.email %></td>
-							</tr>
-							
-						</table> 
-			</div>
+     			</br>
+      				<table class="table table-hover">
+						<tr>
+							<td>Name</td>
+							<td><%= current_user.full_name %></td>
+						</tr>
+						<tr>
+							<td>Username</td>
+							<td><%= current_user.username %></td>
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td><%= current_user.email %></td>
+						</tr>
+						
+					</table> 
+		</div>
 
 
 		<div class="col-sm-8">
@@ -251,6 +238,7 @@
       
     		</div>
   		</div>
+  		
 		<!-- <div class="container-fluid" style="margin-top: 50px;">
 			<div class="col-md-3">
 				<div class="tabbable tabs-left" style="margin-left: 100px;">
