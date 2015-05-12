@@ -103,6 +103,22 @@ class UsersController < ApplicationController
       end
     end
   end
+  @user = current_user
+    @requests_forums = []
+    @requests_users = []
+    # check if user is admin
+    admin_forums = Admin.where(user_id: @user.id)
+    if admin_forums != nil
+      admin_forums.each do |admin_forum|
+        requests_ids = Membership.where(forum_id: admin_forum.forum_id , accept: nil)
+        if !requests_ids.empty?
+          requests_ids.each do |r|
+            @requests_forums.concat(Forum.where(id: r.forum_id))
+            @requests_users.concat(User.where(id: r.user_id))
+          end
+        end
+      end
+    end 
  end
 
      
