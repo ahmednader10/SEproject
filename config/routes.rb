@@ -160,6 +160,7 @@ Rails.application.routes.draw do
 
   post 'forums/show' => 'forums#show'
 
+  get 'forums/new' => 'forums#new', as: 'new_forum'
   
 
   ###########################################################
