@@ -3,9 +3,6 @@ before_action :authenticate_user, only: [:create]
 
 #This method displays all the users and friendships in the system
 def show
- @users= User.all
-  #@friend = User.find(params[:id])
-  @friends = Friendship.all
 
 end 
 
@@ -19,9 +16,8 @@ def edit
 
 #This method displays current friends, the friend requests and the requested 
 def index
-  @users= User.all
-
-
+  @user = params[:user_id]
+  @friendships = Friendship.where(user_id: @user.id, friend_id: @user.id)
 end 
 
 #This  ethod creates a friendship, a user adds a friend and it's saved in friendships table
@@ -64,6 +60,7 @@ flash[:notice] = 'Friend sucessfully accepted!'
 accepted = User.find(@friend.user_id)
 Action.create(info: current_user.username + ' has accepted ' + accepted.username + "'s friend request.", user_email: @user.email)
 Notification.create(info: current_user.username + ' has accepted your friend request.', user_id: accepted.id)
+@user.increment!(:friend_count, by = 1)
 redirect_to friendships_path
 else
 redirect_to users_path
