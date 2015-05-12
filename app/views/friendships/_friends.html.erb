@@ -1,54 +1,14 @@
-
-
 <ul>
 
-
-<% @users.each do |user| %>
-
-<% for friendship in user.friendships %>
-
-  <li>
-
-  	
-<% if  friendship.friend_name == current_user.username && friendship.status == true %>
-  	
-<% if friendship.user.bfriends.include?(current_user) %>
-<%= h friendship.user.username %> (<%= link_to "remove", friendship, :method => :delete %>)
-<% else %>
-  	
-    <%= link_to friendship.user.username, user_path(friendship.user.id) %>
-    (<%= link_to "remove", friendship, :method => :delete %>)
-
-
-<% end %> 
-<% end %> 
-
-<% if friendship.user_name == current_user.username && friendship.status == true %>
-
-<% if friendship.friend.bfriends.include?(current_user) %>
-
-<%= h friendship.friend.username %> (<%= link_to "remove", friendship, :method => :delete %>)
-<% else %>
-
-<%= link_to friendship.friend.username, user_path(friendship.friend.id) %>
-    (<%= link_to "remove", friendship, :method => :delete %>)
-
-
-
-<% end %> 
-<% end %> 
-
-
-
-
-
-   
-
-  </li>
-   
- 
-
-<% end %> 
-<% end %> 
+	<% @friendships.each |friendship| do %>
+		<% if friendship.status == true %>
+			<% if friendship.user_id == @user %>
+				<% user = User.find(friendship.friend_id) %>
+			<% elsif friendship.friend_id == @user %>
+				<% user = User.find(friendship.user_id) %>
+			<% end %>
+			<%= link_to user.username, user_path(user) %>
+		<% end %>
+	<% end %>
   
 </ul>

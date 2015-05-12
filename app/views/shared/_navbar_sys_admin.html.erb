@@ -8,8 +8,17 @@
 				<li><input class="form-control" type="text" placeholder="Looking for something?" style="margin-top: 9px; width: 250px;"></a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-    				<li><a data-toggle="modal" data-target="#signUp"><i class="fa fa-user-secret fa-2x"></i> </a></li>
+			<li>
+				<%= link_to 'Merge forums', sysadmins_merge_path %>
+			</li>
+			<li>
+				<%= link_to 'System log', '/syslog' %>
+			</li>
+  			<li>
+	  			<%= link_to 'control forums', forums_sysadmins_path %>
+  			</li>
   			</ul>
+
 		</div>
 	</div>
 </nav>
