@@ -16,8 +16,6 @@ def index
       end
     elsif friendship.status == nil
       if friendship.user_id == @user.id
-        @pending += User.find(friendship.friend_id)
-      else
         @pending += User.find(friendship.user_id)
       end
     end
