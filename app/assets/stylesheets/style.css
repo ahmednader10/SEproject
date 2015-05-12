@@ -49,6 +49,7 @@ hr {
 	margin-bottom: 10px;
 	display: inline-block;
 	vertical-align: middle;
+  border-top: 1px solid #96BADA;
 }
 
 .quarter-rule {
