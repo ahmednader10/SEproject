@@ -15,13 +15,14 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   </head>
 <%= render 'shared/navbar_sys_admin' %>
-<div style="margin:100px;">
-  <%= form_for :forum, url: sysadmins_merge_path do |f| %>
+<div class="modal-content" style="margin: 170px auto; width: 400px; height:300px;">
+              <div class="modal-header" style="height:300px;">
+              <%= form_for :forum, url: sysadmins_merge_path do |f| %>
     <table>
         <tr>
           <td>Select the forums to merge: </td>
-          <td><%= f.collection_select(:forum1_id, Forum.all, :id, :title , class: "input-sm") %></td>
-          <td><%= f.collection_select(:forum2_id, Forum.all, :id, :title, class: 'selectpicker') %></td>
+          <td><%= f.collection_select(:forum1_id, Forum.all, :id, :title , {:prompt=> true }, {:class=>"form-control"} ) %></td>
+          <td><%= f.collection_select(:forum2_id, Forum.all, :id, :title, {:prompt=> true }, {:class=>"form-control"}) %></td>
         </tr>
         <tr>
           <td>New name: </td>
@@ -39,4 +40,5 @@
       <div class="notice"><%= flash[:notice] %></div>
     <% end %>
   <% end %>
+</div>
 </div>
