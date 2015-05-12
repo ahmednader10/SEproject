@@ -1,14 +1,7 @@
 <ul>
 
-	<% @friendships.each |friendship| do %>
-		<% if friendship.status == true %>
-			<% if friendship.user_id == @user %>
-				<% user = User.find(friendship.friend_id) %>
-			<% elsif friendship.friend_id == @user %>
-				<% user = User.find(friendship.user_id) %>
-			<% end %>
-			<%= link_to user.username, user_path(user) %>
-		<% end %>
+	<% @friends.each do |friend| %>
+		<%= link_to friend.username, user_path(friend) %>
 	<% end %>
   
 </ul>
