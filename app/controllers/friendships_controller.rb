@@ -37,13 +37,13 @@ def create
 end
 
 def accept
-  friendship = Friendship.where(friend_id: current_user.id)
+  friendship = Friendship.find(params[:id])
   firendship.update(status: true)
   redirect_to request.original_url
 end
 
 def reject
-  friendship = Friendship.where(friend_id: current_user.id)
+  friendship = Friendship.find(params[:id])
   friendship.update(status: false)
   redirect_to request.original_url
 end
