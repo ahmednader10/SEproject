@@ -1,169 +1,173 @@
-<head><script type="text/javascript">
-
-
-</script></head>
+<head>
+  <script type="text/javascript">
+  </script>
+</head>
 
 <body >
-<div class="headerlist">
-<ul id="menu">
-<li > Logo</li>
+  <div class="headerlist">
+    <ul id="menu">
+      <li > Logo</li>
 
- <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
- <% if current_user != nil %>
- <li><%= link_to "friend requests" , edit_friendship_path %></li>
- <li><%= link_to "Log out", logout_path, method: :delete %></li>
- <% if !Admin.where(user_id: current_user.id).empty? %>
- <li><%= link_to "requests to join my forums", :action => :admin_join_forums_requests %> </li>
- <% end %>
- <li><%= link_to "notifications" ,user_notifications_path %> </li>
- <% end %>
-</ul>  
-</div>
-
-<div class="side" style="position: fixed; left: 23px; top: 181px;">
-
-  <ul>
-  <li>
-    <a class='list-item' href='/forums'>
-      Forums
-    </a>
-  </li>
-  <li>
-    <a class='list-item' href='<%= root_path %>'>
-      Friends
-    </a>
-  </li>
-
-</ul>
-</div>
-
-<div class=" profilepic" >
-	
-
-
-
-<% if @current_user.uid == nil %>
-  <h1> <%= @current_user.full_name %> welcome to your profile</h1>
-<% else %>
-  <h1> <%= @current_user.name %> welcome to your profile</h1>
- <% end %>
-  
+     <li>
+      <img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/>
+     </li>
+      <% if current_user != nil %>
+       <li><%= link_to "friend requests" , edit_friendship_path %></li>
+       <li><%= link_to "Log out", logout_path, method: :delete %></li>
+       <% if !Admin.where(user_id: current_user.id).empty? %>
+        <li><%= link_to "requests to join my forums", :action => :admin_join_forums_requests %> </li>
+       <% end %>
+        <li>
+          <%= link_to "notifications" ,user_notifications_path %> 
+        </li>
+      <% end %>
+    </ul>  
   </div>
 
+  <div class="side" style="position: fixed; left: 23px; top: 181px;">
 
-<div class="friendlist"> 
+        <ul>
+        <li>
+          <a class='list-item' href='/forums'>
+            Forums
+          </a>
+        </li>
+        <li>
+          <a class='list-item' href='<%= root_path %>'>
+            Friends
+          </a>
+        </li>
 
-<table width="158" height="360">
-<tr >	
-<td height="110"> </td>
-<td  height="110"> </td>
-</tr>
-<tr height="110">
-<td height="114"> </td>
-<td> </td>
-</tr>
-<tr height="110">
-<td> </td>
-<td> </td>
-</tr>
-</table>  
-</div>
+      </ul>
+      </div>
 
-<div>
+      <div class=" profilepic" >
+      	
 
-<ul class="tabs">
-    <li>
-        <input type="radio" name="tabs" id="tab1" checked />
-        <label for="tab1">Information</label>
 
-<div id="tab-content1" class="tab-content" >
 
- <%= link_to "edit" , edit_user_path(current_user) %>
-<h2> Information </h2>
-<p>full name : <%= @current_user.full_name %> </p>
-<p>email: <%= @current_user.email %> </p>
-<p>gender : <%= @current_user.gender %> </p>
-</div>
-    <li>
-        <input type="radio" name="tabs" id="tab2" />
-        <label for="tab2"> Your Forums</label>
+      <% if @current_user.uid == nil %>
+        <h1> <%= @current_user.full_name %> welcome to your profile</h1>
+      <% else %>
+        <h1> <%= @current_user.name %> welcome to your profile</h1>
+       <% end %>
+        
+        </div>
 
-<div id="tab-content2" class="tab-content">
-<table width="371" height="51">
-<tr>
-  <th width="110"  id="forumcolum"> Forum</th>
-  <th id="ideatitlecolumn"> Description </th>
-</tr>
 
-<%  x = Admin.where(user_id: @current_user.id) %>
-<% x.each do |admin| %>
-<% y = Forum.find(admin.forum_id) %>
-<tr>
-<td id="forumcolum"><%=  link_to y.title , forum_path(y) %></td>
-<td id="ideatitlecolumn"> <%= y.description %> </td>
-</tr>
-<% end %>
-</table>
-<% if x.size == 0 %>
-<em> forumless </em>
-<% end %>
-</div>    </li>
-<li>
-  <input type="radio" name="tabs" id="tab3" checked />
-        <label for="tab3">memberships</label>
-<div id="tab-content3" class="tab-content">
-<table width="371" height="51">
-<tr>
-  <th  id="forumcolum"> Joined Forum</th>
-  <th id="ideatitlecolumn"> Description </th>
-</tr>
+      <div class="friendlist"> 
 
-<%  x =Membership.where(user_id: @current_user.id) %>
-<% x.each do |membership| %>
-<% y = Forum.find(membership.forum_id) %>
- <% if !Membership.where(user_id: current_user.id , forum_id: y.id, accept: true).empty? %>
-  <tr>
-<td id="forumcolum"><%=  link_to y.title , forum_path(y) %></td>
-<td id="ideatitlecolumn"> <%= y.description %> </td>
-</tr>
-<% end %>
-<%end%>
-</table>
-<% if x.size == 0 %>
-<em> you are not a member in any forums </em>
-<% end %>
-</div>
- 
- </li>
-    
+      <table width="158" height="360">
+      <tr >	
+      <td height="110"> </td>
+      <td  height="110"> </td>
+      </tr>
+      <tr height="110">
+      <td height="114"> </td>
+      <td> </td>
+      </tr>
+      <tr height="110">
+      <td> </td>
+      <td> </td>
+      </tr>
+      </table>  
+      </div>
 
-    <li>  <input type="radio" name="tabs" id="tab4" checked />
-        <label for="tab4">Ideas</label>
-<div id= "tab-content4" class="tab-content" >
-  <table width="371" height="51">
-<tr>
-    <th width="57" id="ideatitlecolumn"> Title</th>
-  <th width="160" id="ideacolumn"> Idea</th>
-  <th width="110" id="forumcolum"> Forum</th>
-</tr>
-<%  x = Idea.where(user: @current_user).order(:text) %>
-<% x.each do |idea| %>
-<tr>
-<td id="ideatitlecolumn"><%= link_to idea.title , forum_idea_path(idea.forum.id, idea.id) %></td>
-<td id="ideacolumn"><%=  idea.text %></td>
-<td id="forumcolum"> <%= link_to idea.forum.title , idea.forum %>  </td>
-</tr>
-<% end %>
-</table>
-<% if x.size == 0 %>
-<em> still Idealess </em>
-<% end %>
-</div>
+      <div>
 
- </li>
-</ul>
+      <ul class="tabs">
+          <li>
+              <input type="radio" name="tabs" id="tab1" checked />
+              <label for="tab1">Information</label>
 
-</div>
+      <div id="tab-content1" class="tab-content" >
+
+       <%= link_to "edit" , edit_user_path(current_user) %>
+      <h2> Information </h2>
+      <p>full name : <%= @current_user.full_name %> </p>
+      <p>email: <%= @current_user.email %> </p>
+      <p>gender : <%= @current_user.gender %> </p>
+      </div>
+          <li>
+              <input type="radio" name="tabs" id="tab2" />
+              <label for="tab2"> Your Forums</label>
+
+      <div id="tab-content2" class="tab-content">
+      <table width="371" height="51">
+      <tr>
+        <th width="110"  id="forumcolum"> Forum</th>
+        <th id="ideatitlecolumn"> Description </th>
+      </tr>
+
+      <%  x = Admin.where(user_id: @current_user.id) %>
+      <% x.each do |admin| %>
+      <% y = Forum.find(admin.forum_id) %>
+      <tr>
+      <td id="forumcolum"><%=  link_to y.title , forum_path(y) %></td>
+      <td id="ideatitlecolumn"> <%= y.description %> </td>
+      </tr>
+      <% end %>
+      </table>
+      <% if x.size == 0 %>
+      <em> forumless </em>
+      <% end %>
+      </div>    </li>
+      <li>
+        <input type="radio" name="tabs" id="tab3" checked />
+              <label for="tab3">memberships</label>
+      <div id="tab-content3" class="tab-content">
+      <table width="371" height="51">
+      <tr>
+        <th  id="forumcolum"> Joined Forum</th>
+        <th id="ideatitlecolumn"> Description </th>
+      </tr>
+
+      <%  x =Membership.where(user_id: @current_user.id) %>
+      <% x.each do |membership| %>
+      <% y = Forum.find(membership.forum_id) %>
+       <% if !Membership.where(user_id: current_user.id , forum_id: y.id, accept: true).empty? %>
+        <tr>
+      <td id="forumcolum"><%=  link_to y.title , forum_path(y) %></td>
+      <td id="ideatitlecolumn"> <%= y.description %> </td>
+      </tr>
+      <% end %>
+      <%end%>
+      </table>
+      <% if x.size == 0 %>
+      <em> you are not a member in any forums </em>
+      <% end %>
+      </div>
+       
+       </li>
+          
+
+          <li>  <input type="radio" name="tabs" id="tab4" checked />
+              <label for="tab4">Ideas</label>
+      <div id= "tab-content4" class="tab-content" >
+        <table width="371" height="51">
+      <tr>
+          <th width="57" id="ideatitlecolumn"> Title</th>
+        <th width="160" id="ideacolumn"> Idea</th>
+        <th width="110" id="forumcolum"> Forum</th>
+      </tr>
+      <%  x = Idea.where(user: @current_user).order(:text) %>
+      <% x.each do |idea| %>
+      <tr>
+      <td id="ideatitlecolumn"><%= link_to idea.title , forum_idea_path(idea.forum.id, idea.id) %></td>
+      <td id="ideacolumn"><%=  idea.text %></td>
+      <td id="forumcolum"> <%= link_to idea.forum.title , idea.forum %>  </td>
+      </tr>
+      <% end %>
+      </table>
+      <% if x.size == 0 %>
+      <em> still Idealess </em>
+      <% end %>
+      </div>
+
+      </li>
+    </ul>
+
+  </div>
 
 
 </body>
