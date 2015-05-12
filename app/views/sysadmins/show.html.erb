@@ -14,41 +14,50 @@
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	</head>
 			<%= render "/shared/navbar_sys_admin"%>
-<div style="margin:50px;">
+<div style="margin:150px;">
 
 
-<div>
+<div style="margin:10px;">
 	<% if flash[:notice] %>
 	<%= flash[:notice] %>
 <% end %>
 <% @user_all = User.all %>
 <%= form_tag(edit_path, method: "get") do %>
-	<%= select_tag "user_all", options_from_collection_for_select(@user_all, "email", "email") %>
-	<%= submit_tag(:delete) %>
+
+	<%= select_tag "user_all", options_from_collection_for_select(@user_all, "email", "email"), :class => 'selectpicker' %>
+	<%= submit_tag(:delete,:class => 'btn btn-primary') %>
 <% end %>
 
-<% @arr_unblocked = [] %>
+</div>
+<div>
+	<% @arr_unblocked = [] %>
 <% @user_all.each do |u| %>
 	<% if !Block.find_by(email: u.email) %>
 		<% @arr_unblocked.push(u) %>
 	<% end %>
 <% end %>
-</div>
 
-</br>
 <% if flash[:danger] %>
 	<%= flash[:danger] %>
 <% end %>
 
-<%= form_tag(blocked_path, method: "get") do %>
-	<%= select_tag "block_user", options_from_collection_for_select(@arr_unblocked, "email", "email") %>
-	<%= submit_tag(:block, :id => "block_btn") %>
+<div style="margin:10px;">
+	<%= form_tag(blocked_path, method: "get") do %>
+	<%= select_tag "block_user", options_from_collection_for_select(@arr_unblocked, "email", "email"), :class => 'selectpicker'%>
+	<%= submit_tag(:block, :class => "btn btn-primary") %>
 <% end %>
 
+</div>
+<div style="margin:10px;">
+	
 <% @unblock_user = Block.all %>
 <%= form_tag(unblocked_path, method: "get") do %>
-	<%= select_tag "unblock_user", options_from_collection_for_select(@unblock_user, "email", "email") %>
-	<%= submit_tag(:unblock) %>
+	<%= select_tag "unblock_user", options_from_collection_for_select(@unblock_user, "email", "email"),:class => 'selectpicker' %>
+	<%= submit_tag(:unblock,:class => 'btn btn-primary') %>
+
+</div>
 <% end %>
+
+</div>
 </div>
 
