@@ -84,7 +84,25 @@ class UsersController < ApplicationController
 
     #opens the profile view of the user
  def profile
-   @user = current_user
+  @user = current_user
+  user = User.find(params[:id])
+  friendships = Friendship.where(user_id: user.id)
+  friendships += Friendship.where(friend_id: user.id)
+  @friends = []
+  @pending = []
+  friendships.each do |friendship|
+    if friendship.status == true
+      if friendship.user_id == user.id
+        @friends += [User.find(friendship.friend_id)]
+      else
+        @friends += [User.find(friendship.user_id)]
+      end
+    elsif friendship.status == nil
+      if friendship.user_id == user.id
+        @pending += [User.find(friendship.user_id)]
+      end
+    end
+  end
  end
 
      

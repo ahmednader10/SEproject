@@ -156,7 +156,7 @@
 			  <li><a data-toggle="tab" href="#forums">Forums <span class="badge"><%= Membership.where(user_id: current_user.id, accept: true).count %></span></a></li>
 			  <li><a data-toggle="tab" href="#ideas">Ideas <span class="badge"><%= Idea.where(user_id: current_user.id).count %></span></a></li>
 			 <% if !Admin.where(user_id: current_user.id).empty? %>
-			    <li><a data-toggle="tab" href="#join_requests">Requests to join my forums</a></li>
+			    <li><a data-toggle="tab" href="#join_requests">Requests to join my forums></a></li>
 		        <!--<li><%= link_to "requests to join my forums", :action => :admin_join_forums_requests %> </li>-->
 		      <% end %>
 			</ul>
@@ -164,13 +164,14 @@
 			  <div id="friends" class="tab-pane fade in active">
 			    <table class="table table-hover">
 				    <tbody>
-						<% users = User.all %>
+						<!--<% users = User.all %>
           				<% users.each do |user| %>
           				<tr>
           					<td><a href="<%= profile_path(user.id) %>"><%= user.full_name %></a></td>
           					<td><%= user.email %></td>
 						</tr>
-          				<% end %>
+          				<% end %>-->
+          				<%= render template: "friendships/index" %>
 				    </tbody>
 				</table> 
 			  </div>

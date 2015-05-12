@@ -164,7 +164,7 @@ Rails.application.routes.draw do
 
   ###########################################################
 
-  get 'user/:id/friends' => 'friendships#index'
+  get 'user/:id/friends' => 'friendships#index', as: 'friends'
 
   get 'user/:id/requests' => 'friendships#requests'
 
