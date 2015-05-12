@@ -10,10 +10,10 @@
 				<!-- <input class="form-control" type="text" placeholder="Looking for something?" style="margin-top: 9px; width: 250px;"> -->
 			<div class="field form-group">
 			<%= form_tag '/search', { class: 'form-class', id: 'form-id', role: 'form', method: 'post' } do %>
-			<%= text_field_tag(:q) %>
-			<%= select_tag(:type, "<option>All</option><option>Users</option><option>Forums</option><option>Ideas</option>".html_safe) %>
+			<%= text_field_tag(:q, value =nil,:placeholder => "Looking for something?", :class => 'form-control' ) %>
+			<%= select_tag(:type, "<option>All</option><option>Users</option><option>Forums</option><option>Ideas</option>".html_safe, :class => 'selectpicker') %>
 			<%= hidden_field_tag(:searchtype, "normal" ) %>
-			<%= submit_tag("Search") %>
+			<%= submit_tag("Search",:class => 'btn btn-primary') %>
 			<%= link_to "Advanced search", "/advancedsearch" , class: 'btn btn-primary' %>
 		<% end %>		
 			</div>
