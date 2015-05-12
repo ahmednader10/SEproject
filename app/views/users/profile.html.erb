@@ -39,7 +39,7 @@
 				<h3 style="text-align: center;">
 					My personal info
 					 <i>
-					 	<a href="<% root_path %>" class="fa fa-pencil-square-o" style="font-size 1em;"></a>
+					 	<a data-toggle="modal" data-target="#edit_info" class="fa fa-pencil-square-o" style="font-size 1em;"></a>
 					 </i>
 				</h3>
 
@@ -60,7 +60,106 @@
 							
 						</table> 
 			</div>
+		<div class="modal fade" id="edit_info" role="dialog">
+    		<div class="modal-dialog">
+    
+      <!-- Modal content-->
+      			<div class="modal-content" style="margin: 170px auto; width: 400px;">
+        			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal">&times;</button>
+          				<div style="position:relative; top:150px;">
+							<%= form_for((current_user) , html: {multipart: true}) do |f| %>
+							    <h1>Edit form</h1>
+							<% if current_user.errors.any? %>
+							      <h3>Errors</h3>
+							      <ul>
+							        <% current_user.errors.full_messages.each do |message| %>
+							          <li><%= message %></li>
+							        <% end %>
+							      </ul>
+							    <% end %>
+							    <div class="side" style="position: fixed; left: 23px; top: 181px;">
+									<ul>
+										 <li style=margin-left:100px>
+										    <a  class='list-item' href='/forums'>
+										      Privacy
+										    </a>
+										 </li>
+										 <li style=margin-left:100px>
+										    <a class='list-item' href='/friendships'>
+										      Pass
+										      word
+										    </a>
+										</li>
+										<li style=margin-left:100px>
+										    <a class='list-item' href='/friendships'>
+										      Info  </a>
+										</li>
 
+									</ul>
+								</div>
+							  	<div style ="style=margin-left:100px style=margin-left:100px">
+							        <div>
+								      <%= f.label :full_name %><br>
+								      <%= f.text_field :full_name %><br>
+								    </div> 
+
+								    <div>
+								      <%= f.label :username %><br>
+								      <%= f.text_field :username %><br>
+								    </div>
+
+								    <div>
+								      <%= f.label :email %><br>
+								      <%= f.email_field :email %><br>
+								    </div>
+
+								    <div>
+								      <%= f.label :password %><br>
+								      <%= f.password_field :password %><br>
+								    </div>
+
+								    <div>
+								      <%= f.label :gender %><br>
+								      <%= f.select :gender, ['Male', 'Female'] %><br>
+								    </div>   
+
+								    <div>
+								      <%= f.label :password_question, "Choose a question (in case you forgot the password)" %><br>
+								      <%= f.select :password_question, ['What is the name of your best friend?', 'What is the name of your pet?', 'Who was your first English teacher?'] %><br>
+								    </div> 
+
+								    <div>
+								      <%= f.label :Your_answer %><br>
+								      <%= f.text_field :answer_for_password_question %><br><br>
+								    </div>
+								    <div>
+									         <p>
+									    <%= f.label :privacy, "Public" %>
+									    <%= f.radio_button :privacy, 1 %><br>
+									    <%= f.label :privacy, "Private" %>
+									    <%= f.radio_button :privacy, 2 %><br>
+									  </p>
+								    </div>
+
+								    <div>
+								       <p>
+								         <%= f.file_field :image %>
+								       </p>
+								    </div>
+
+								    <div class='actions'>
+								      <%= f.submit "Update Information" %>
+								    </div>
+							    </div>
+								<% end %>
+							</div>
+						</div>
+          			</div>
+          		</div>
+          	</div>
+        </div>	
+          			</div></div></div></div>
 
 		<div class="col-sm-8">
 			<ul class="nav nav-tabs">
@@ -98,12 +197,45 @@
 				</table>  
 			  </div>
 			  <div id="forums" class="tab-pane fade">
-			    <h3>Menu 2</h3>
-			    <p>Some content in menu 2.</p>
+			    <table width="371" height="51">
+					<tr>
+					  <th  id="forumcolum"> Joined Forum</th>
+					  <th id="ideatitlecolumn"> Description </th>
+					</tr>
+						<%  x =Membership.where(user_id: @current_user.id) %>
+						<% x.each do |membership| %>
+						<% y = Forum.find(membership.forum_id) %>
+						<% if !Membership.where(user_id: current_user.id , forum_id: y.id, accept: true).empty? %>
+					<tr>
+						<td id="forumcolum"><%=  link_to y.title , forum_path(y) %></td>
+						<td id="ideatitlecolumn"> <%= y.description %> </td>
+					</tr>
+					<% end %>
+					<%end%>
+				</table>
+					<% if x.size == 0 %>
+						<em> you are not a member in any forums </em>
+					<% end %>
 			  </div>
 			  <div id="ideas" class="tab-pane fade">
-			    <h3>Menu 2</h3>
-			    <p>Some content in menu 2.</p>
+			    <table width="371" height="51">
+					<tr>
+					  <th width="57" id="ideatitlecolumn"> Title</th>
+					  <th width="160" id="ideacolumn"> Idea</th>
+					  <th width="110" id="forumcolum"> Forum</th>
+					</tr>
+						<%  x = Idea.where(user: @current_user).order(:text) %>
+						<% x.each do |idea| %>
+					<tr>
+						<td id="ideatitlecolumn"><%= link_to idea.title , forum_idea_path(idea.forum.id, idea.id) %></td>
+						<td id="ideacolumn"><%=  idea.text %></td>
+						<td id="forumcolum"> <%= link_to idea.forum.title , idea.forum %>  </td>
+					</tr>
+					<% end %>
+				</table>
+					<% if x.size == 0 %>
+					<em> still Idealess </em>
+					<% end %>
 			  </div>
 			</div>
 			

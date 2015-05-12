@@ -12,44 +12,8 @@
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body>
-	<nav class="navbar navbar-fixed-top white">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">iDea</a>
-			</div>
-			<div>
-				<ul class="nav navbar-nav">
-					<li>
-						<div class="left-inner-addon">
-							<i class="glyphicon glyphicon-search"></i>
-							<input class="form-control" type="text" placeholder="Looking for something?" style="margin-top: 9px; width: 250px;">
-						</div>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">				
-        			<li><a href="#">Notifications</a></li>
-        			<li class="dropdown">
-  						<a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-  						<% if current_user.uid == nil %>
-  							<%= current_user.full_name %>
-						<% else %>
-  							<%= current_user.name %>
- 						<% end %>
- 						 <span class="caret"></span></a>
-  						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-   							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user"></i> Profile</a></li>
-   							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-cog"></i> Settings</a></li>
-   							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-question"></i> Help</a></li>
-   							<li role="presentation" class="divider"></li>
-   							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
- 						</ul>
-       				</li>
-   				</ul>
-			</div>
-		</div>
-	</nav>
-
-	<div class="jumbotron forum-color" style="height: 730px;">
+	<%= render "/shared/navbarloggedin" %>
+<div class="jumbotron forum-color" style="height: 730px;">
 		<div class="container-fluid" style="margin-top: 80px;">
 			<div class="row">
 				<div class="col-md-4">
