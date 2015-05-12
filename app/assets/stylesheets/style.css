@@ -33,6 +33,12 @@ hr {
   	border-top: 1px solid #eee;
 }
 
+.imgcircle{
+  border-radius: 500px;
+    border: 3px solid #4B5966;
+
+}
+
 .half-rule {
 	width: 620px;
 	margin: 30px auto;
@@ -43,6 +49,7 @@ hr {
 	margin-bottom: 10px;
 	display: inline-block;
 	vertical-align: middle;
+  border-top: 1px solid #96BADA;
 }
 
 .quarter-rule {
@@ -277,7 +284,4 @@ border: 3px solid #ffaca6;
     margin:2px 22px;
     font-size:2em;
     vertical-align:middle;
-}
-.verticalLine {
-    border-left: thick solid #ff0000;
 }

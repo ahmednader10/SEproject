@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9263c51269b84c1d88e5798979f32fe30a14f407
 <% if session[:sysadmin] %>  
 <%= link_to 'Sign out', root_path %>
 <%= link_to 'back', forums_sysadmins_path %>
@@ -97,7 +100,7 @@
                   <%=  idea.title %>
               </li>
               <%end%>
-        <% elsif (@forum.privacy == "1" and (session[:sysadmin] || !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?) %>
+        <% elsif (@forum.privacy == "1" and (session[:sysadmin] || !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?)) %>
                 <% Idea.where(forum_id: params[:id]).each do |idea| %>
         <li>
             <%= link_to idea.title , forum_idea_path(@forum.id, idea.id) %>
@@ -133,6 +136,7 @@
 
   
 
+<<<<<<< HEAD
  
 =======
 <!DOCTYPE html>
@@ -207,3 +211,6 @@
   </body>
 </html>
 >>>>>>> ae259e91e03d8bc103681400c915b297992c0a4a
+=======
+ 
+>>>>>>> 9263c51269b84c1d88e5798979f32fe30a14f407
