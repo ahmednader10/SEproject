@@ -22,33 +22,9 @@
 				<%= image_tag 'bulb.jpg', class: "imgcircle", width: "215", height: "200", border: "10" %>
 			</div>
 		</div>
-		<div class="col-sm-4">
-			<h3 style="text-align: center;">
-				My personal info
-				 <i>
-				 	<a href="<%= edit_user_path %>" class="fa fa-pencil-square-o" style="font-size 1em;"></a>
-				 </i>
-			</h3>
+		
 
-<<<<<<< HEAD
-     			</br>
-      				<table class="table table-hover">
-						<tr>
-							<td>Name</td>
-							<td><%= current_user.full_name %></td>
-						</tr>
-						<tr>
-							<td>Username</td>
-							<td><%= current_user.username %></td>
-						</tr>
-						<tr>
-							<td>Email</td>
-							<td><%= current_user.email %></td>
-						</tr>
-						
-					</table> 
-		</div>
-=======
+
 			<div class="col-sm-4">
 				<h3 style="text-align: center;">
 					My personal info
@@ -161,7 +137,7 @@
 								         <%= f.file_field :image %>
 								       </p>
 								    </div>
->>>>>>> 329cabaafe724d6c58a5ea410c04ddc8e6d6a15d
+
 
 								    <div class='actions'>
 								      <%= f.submit "Update Information" %>
