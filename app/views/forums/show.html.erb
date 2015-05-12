@@ -6,8 +6,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 		<%= stylesheet_link_tag 'style' %>
-		<%= stylesheet_link_tag 'sweetalert' %>
-		<%= javascript_include_tag "sweetalert.min" %>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
@@ -66,17 +64,7 @@
         			<% end %>
 
 					<% end %>
-
-					</br> </br>
-					<div class="btn-group">
-					    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#forum_members">Forum members</button>
-					    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#forum_admins">Forum admins</button>
-				  	</div>
-					</br> </br>
-				  	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#post_idea"><i class="fa fa-lightbulb-o"> &nbsp;  Post an idea  </i></button>
-				  	
-					<!-- <script>
-
+					<script>
 						$(document).ready(function(){
     						$(".load").click(function(){
     						    $(this).button('loading').delay(1000).queue(function(){
@@ -303,71 +291,5 @@
 			<% end %>
 		<% end %>
 	</div>
-	
-	<div class="modal fade" id="forum_members" role="dialog">
-    		<div class="modal-dialog">
-      <!-- Modal content-->
-      			<div class="modal-content" style="margin: 170px auto; width: 400px;">
-        			<div class="modal-header">
-          				<button type="button" class="close" data-dismiss="modal">&times;</button>
-          				<h3 style="text-align: center;">Forum members</h3>
-          				<table class="table table-hover">
-								<% arr = [] %>
-								<% arr.concat(Membership.where(forum_id: params[:id], accept: true)) %>	
-		          				<% arr.each do |member| %>
-		          				<tr>
-		          					<td><a href="<%= profile_path(member.id) %>"><%= User.find_by(id: member.user_id).full_name %></a></td>
-								</tr>
-		          				<% end %>
-						</table>  
-        			</div>
-      			</div>
-    		</div>
-  	</div>
-
-  	
-	<div class="modal fade" id="forum_admins" role="dialog">
-    		<div class="modal-dialog">
-      <!-- Modal content-->
-      			<div class="modal-content" style="margin: 170px auto; width: 400px;">
-        			<div class="modal-header">
-          				<button type="button" class="close" data-dismiss="modal">&times;</button>
-          				<h3 style="text-align: center;">Forum admins</h3>
-          				<table class="table table-hover">
-								<% arr = [] %>
-								<% arr.concat(Admin.where(forum_id: params[:id])) %>	
-		          				<% arr.each do |member| %>
-		          				<tr>
-		          					<td><a href="<%= profile_path(member.id) %>"><%= User.find_by(id: member.user_id).full_name %></a></td>
-								</tr>
-		          				<% end %>
-						</table>  
-        			</div>
-      			</div>
-    		</div>
-  		</div>
-
-
-
-  		<div class="modal fade" id="post_idea" role="dialog">
-    		<div class="modal-dialog">
-      <!-- Modal content-->
-      			<div class="modal-content" style="margin: 170px auto; width: 450px;">
-        			<div class="modal-header">
-          				<button type="button" class="close" data-dismiss="modal">&times;</button>
-        			</div>
-        		</br> </br>
-	        	<form action="<%= root_path %>">
-		        	<div style="width: 400px; margin-left: 30px;">
-		        		<div class="field left-inner-addon">
-		        			<%= form_for(@idea) do |f| %>
-					   			<i class="glyphicon glyphicon-sunglasses"></i>
-					   			<%= f.text_field :full_name, class: 'form-control', placeholder: "Full Name" %><br>
-					   		</div> 
-		        	</br></br>
-	        	</form>
-      			</div>
-    		</div>
-  		</div>
 </body>
 </html>
