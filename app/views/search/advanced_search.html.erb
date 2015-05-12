@@ -18,26 +18,26 @@
 	<div style="position:absolute;top:100px;"><h4> Advanced Search: </h4>
 		<%= form_tag("/search", { class: 'form-class', id: 'form-id', role: 'form', method: 'post' }) do %>
 			<%= text_field_tag(:q, value =nil,:placeholder => "Looking for something?", :class => 'form-control' ) %>
-			<%= label_tag(:type, "Search for a type:", :class => 'form-control' ) %>
-			<%= select_tag(:type, "<option>All</option><option>Users</option><option>Forums</option><option>Ideas</option>".html_safe, :class => 'selectpicker' ) %>
+			<%= label_tag(:type, "Search for a type:" ) %>
+			<%= select_tag(:type, "<option>All</option><option>Users</option><option>Forums</option><option>Ideas</option>".html_safe, {:class => 'form-control'} ) %>
 			<br>
-			<%= label_tag(:sortby, "Sort by:", :class => 'form-control' ) %>
+			<%= label_tag(:sortby, "Sort by:" ) %>
 			<%= select_tag(:sortby, "<option></option><option>Newest</option><option>Oldest</option><option>Most Popular</option>".html_safe, :class => 'selectpicker' ) %>
 			<br>
 			<h5> From: </h5>
-			<%= label_tag(:fromyear, "year:", :class => 'form-control' ) %>
+			<%= label_tag(:fromyear, "year:" ) %>
 			<%= text_field_tag(:fromyear, value =nil,:placeholder => "Looking for something?", :class => 'form-control') %>
-			<%= label_tag(:frommonth, "month:", :class => 'form-control' ) %>
+			<%= label_tag(:frommonth, "month:" ) %>
 			<%= select_tag(:frommonth, "<option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>".html_safe, :class => 'selectpicker' ) %>
 			<%= label_tag(:fromday, "day:", :class => 'form-control' ) %>
 			<%= text_field_tag(:fromday, value =nil,:placeholder => "Looking for something?", :class => 'form-control') %>
 			<br>
 			<h5> To: </h5>
-			<%= label_tag(:toyear, "year:", :class => 'form-control') %>
+			<%= label_tag(:toyear, "year:") %>
 			<%= text_field_tag(:toyear, value =nil,:placeholder => "Looking for something?", :class => 'form-control') %>
-			<%= label_tag(:tomonth, "month:", :class => 'form-control') %>
+			<%= label_tag(:tomonth, "month:") %>
 			<%= select_tag(:tomonth, "<option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>".html_safe, :class => 'selectpicker') %>
-			<%= label_tag(:today, "day:", :class => 'form-control') %>
+			<%= label_tag(:today, "day:") %>
 			<%= text_field_tag(:today, value =nil,:placeholder => "Looking for something?", :class => 'form-control') %>
 			<%= hidden_field_tag(:searchtype, "advanced") %>
 			<%= submit_tag("Search", :class => 'btn btn-primary') %>

@@ -24,13 +24,12 @@
 		</div>
 		
 			<div class="col-sm-3">
-				<h3 style="margin-right:200px; text-align: center;">
+				<h3 style="text-align: center;">
 					My personal info
 					 <i>
 					 	<a data-toggle="modal" data-target="#edit_info" class="fa fa-pencil-square-o" style="font-size 1em;"></a>
 					 </i>
 				</h3>
-
          			</br>
           				<table class="table table-hover">
 							<tr>
@@ -52,12 +51,12 @@
     		<div class="modal-dialog">
     
       <!-- Modal content-->
-      			<div class="modal-content" style="margin: 170px auto; width: 400px;">
+      			<div class="modal-content" style="width: 400px; height: 600px;">
         			<div class="modal-header">
         			<button type="button" class="close" data-dismiss="modal">&times;</button>
-          				<div style="position:relative; top:150px;">
+          				<div style="position:relative;">
 							<%= form_for((current_user) , html: {multipart: true}) do |f| %>
-							    <h1>Edit form</h1>
+							    <h1 style="text-align: center; color: #96BADA;">Edit form</h1>
 							<% if current_user.errors.any? %>
 							      <h3>Errors</h3>
 							      <ul>
@@ -66,7 +65,7 @@
 							        <% end %>
 							      </ul>
 							    <% end %>
-							    <div class="side" style="position: fixed; left: 23px; top: 181px;">
+							    <!--<div class="side" style="position: fixed; left: 23px; top: 181px;">
 									<ul>
 										 <li style=margin-left:100px>
 										    <a  class='list-item' href='/forums'>
@@ -85,7 +84,7 @@
 										</li>
 
 									</ul>
-								</div>
+								</div>-->
 							  	<div style ="style=margin-left:100px style=margin-left:100px">
 							        <div>
 								      <%= f.label :full_name %><br>
@@ -137,7 +136,7 @@
 								    </div>
 
 								    <div class='actions'>
-								      <%= f.submit "Update Information" %>
+								      <input name="commit" type="submit" value="update" class="btn btn-primary">
 								    </div>
 							    </div>
 								<% end %>
@@ -349,7 +348,7 @@
       			<div class="modal-content" style="margin: 170px auto; width: 400px;">
         			<div class="modal-header">
           				<button type="button" class="close" data-dismiss="modal">&times;</button>
-          				<h3 style="text-align: center; margin-right: 100px">My personal info <i><a href="<% edit_user_path(current_user) %>" class="fa fa-pencil-square-o" style="font-size 1em;"></a></i></h3>
+          				<h3 style="text-align: center;">My personal info <i><a href="<% edit_user_path(current_user) %>" class="fa fa-pencil-square-o" style="font-size 1em;"></a></i></h3>
 
          			</br>
           				<table class="table table-hover">
