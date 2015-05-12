@@ -5,15 +5,15 @@
 		</div>
 		<div>
 			<ul class="nav navbar-nav">
-				<li><div class="field form-group">
-			<%= form_tag '/search', { class: 'form-class', id: 'form-id', role: 'form', method: 'post' } do %>
-			<%= text_field_tag(:q, value =nil,:placeholder => "Looking for something?", :class => 'form-control' ) %>
-			<%= select_tag(:type, "<option>All</option><option>Users</option><option>Forums</option><option>Ideas</option>".html_safe, :class => 'selectpicker', :style => 'float:right;') %>
-			<%= hidden_field_tag(:searchtype, "normal" ) %>
-			<% submit_tag("Search", :class => 'btn btn-primary') %>
-			<%= link_to "Advanced search", "/advancedsearch" , class: 'btn btn-xs' %>
-		<% end %>		
-			</div></li>
+				<li>
+						<%= form_tag '/search', { class: 'form-class', id: 'form-id', role: 'form', method: 'post' } do %>
+						<%= text_field_tag(:q, value =nil,:placeholder => "Looking for something?", :class => 'form-control' ) %>
+					<p style="position:absolute; top:0px; left:200px;"><%= select_tag(:type, "<option>All</option><option>Users</option><option>Forums</option><option>Ideas</option>".html_safe, :class => 'selectpicker', :style => 'color:red;') %>
+					<%= hidden_field_tag(:searchtype, "normal" ) %>
+						<% submit_tag("Search", :class => 'btn btn-primary') %>
+						<%= link_to "Advanced search", "/advancedsearch" , class: 'btn btn-xs' %>
+		</p>						<% end %>		
+			</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 			<li>
