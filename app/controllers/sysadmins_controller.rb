@@ -19,6 +19,7 @@ class SysadminsController < ApplicationController
 
     if session[:sysadmin] == "true" or (params[:sysadmin][:username] == 'gus' and params[:sysadmin][:password] == 'lospollos')
       session[:sysadmin] = "true"
+      @actions = Action.all
       render 'show'
     else
       flash[:notice] = "Wrong email/password combination."
