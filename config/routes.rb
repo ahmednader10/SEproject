@@ -162,10 +162,18 @@ Rails.application.routes.draw do
 
   get 'sessions/blockingMessage' => 'sessions#create', as: 'blocking_message'
 
+  post 'forums/show' => 'forums#show'
+
+  get 'forums/new' => 'forums#new', as: 'new_forum'
   
 
   ###########################################################
 
+  get 'user/:id/friends' => 'friendships#index', as: 'friends'
+
+  get 'user/:id/requests' => 'friendships#requests'
+
+  post 'user/:id/add' => 'friendships#create'
 
   # get 'sysAdmin' 
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'

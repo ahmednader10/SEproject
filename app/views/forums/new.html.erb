@@ -1,32 +1,58 @@
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <%= stylesheet_link_tag 'style' %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   </head>
 
 
-  <div class="headerlist">
-<ul id="menu">
-<li> Logo</li>
+  <%= render "/shared/navbarloggedin"%>
+  <div class="jumbotron other-color">
+      <div class="container-fluid">
+            <div class="jumbotron other-color">
+            <h2 style="margin-left: 450px; margin-top: 200px;">Share your ideas by creating a new forum</h2>
+              <div class="container-fluid" style="margin-left: 650px; margin-top: 50px;">
+              <button class="btn btn-success" data-toggle="modal" data-target="#create_forum">Create Forum</button>
+        </div>
+      </div>
+    </div>
+        </div>
+      </div>
+    </div>
 
- <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
- <% if current_user != nil %>
- <li><%= link_to "friend requests" , friendships_path %></li>
- <li> <%= link_to "My Profile" , user_path(current_user.id) %> </li>
- 
- <li><%= link_to "notifications" ,user_notifications_path %> </li> 
- 
- 
 
- <li><%= link_to "Log out", logout_path, method: :delete %></li>
- <% if !Admin.where(user_id: current_user.id).empty? %>
- <li><%= link_to "requests to join my forums",:controller => "users" ,:action => :admin_join_forums_requests %> </li>
- <% end %>
- <% end %>
+    <div class="modal fade" id="create_forum" role="dialog">
+        <div class="modal-dialog">
+    
+      <!-- Modal content-->
+            <div class="modal-content" style="margin: 170px auto; width: 400px;">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 style="text-align: center;">Create forum</h3>
+                </br>
+                  <table class="table table-hover">
+                <thead>
+                  
+                </thead>
+                <tbody>
+                  
 
-</ul>  
-</div>
-<h1>Create New Forum</h1>
 
-<%= form_for :forum, url: forums_path do |f| %>
+
+
+
+
+
+
+
+
+
+    <%= form_for :forum, url: forums_path do |f| %>
 
   <% if @forum.errors.any? %>
     <div id="error_explanation">
@@ -87,9 +113,20 @@
     <%= f.submit "Create Forum" %>
   </p>
 
-  <p>
-    <% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
-    <% end %>
-  </p>
+  
 <% end %>
+                </tbody>
+            </table>  
+                  
+              </div>
+
+              <!-- <div class="modal-body">
+                  <p>Some text in the modal.</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div> -->
+            </div>
+      
+        </div>
+      </div>

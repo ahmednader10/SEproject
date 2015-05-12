@@ -18,8 +18,8 @@
 
 </div>
 <h1>Listing forums</h1>
- 
-<table>
+ <div class="table-responsive">
+<table class="table-striped">
   <tr>
     <th>Title</th>
     <th>Description</th>
@@ -41,7 +41,7 @@
     </tr>
   <% end %>
 </table>
-
+</div>
 <% if @user != nil %>
 <%= link_to "Create new forum", 'forums/new' %>
 <% end %>
