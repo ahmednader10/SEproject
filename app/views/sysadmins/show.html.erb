@@ -1,8 +1,24 @@
-<%= link_to 'Sign out', root_path %>
-<h1>Welcome, System admin!</h1>
 
 
-<% if flash[:notice] %>
+
+<html lang="en">
+	<head>
+	<title>Bootstrap Example</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<%= stylesheet_link_tag 'style' %>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	</head>
+			<%= render "/shared/navbar_sys_admin"%>
+<div style="margin:50px;">
+
+
+<div>
+	<% if flash[:notice] %>
 	<%= flash[:notice] %>
 <% end %>
 <% @user_all = User.all %>
@@ -11,15 +27,13 @@
 	<%= submit_tag(:delete) %>
 <% end %>
 
-<%= link_to 'control forums', forums_sysadmins_path %>
-
-
 <% @arr_unblocked = [] %>
 <% @user_all.each do |u| %>
 	<% if !Block.find_by(email: u.email) %>
 		<% @arr_unblocked.push(u) %>
 	<% end %>
 <% end %>
+</div>
 
 </br>
 <% if flash[:danger] %>
@@ -36,9 +50,5 @@
 	<%= select_tag "unblock_user", options_from_collection_for_select(@unblock_user, "email", "email") %>
 	<%= submit_tag(:unblock) %>
 <% end %>
-
-<%= link_to 'Merge forums', sysadmins_merge_path %>
-
-<%= link_to 'System log', '/syslog' %>
-
+</div>
 

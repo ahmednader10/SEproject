@@ -1,23 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <%= stylesheet_link_tag 'style' %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  </head>
+  <body>
+
+    <%= render "/shared/navbarloggedin" %>
+
+    
 
  
 
-<div class="mainDiv" id="mainDiv">
-<div class="headerlist">
-<ul id="menu">
-<li > Logo</li>
 
- <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
- <% if current_user != nil %>
- <li><%= link_to "friend requests" , friendships_path %></li>
- <li><%= link_to "Log out", logout_path, method: :delete %></li>
-  <li> <%= link_to "My Profile" , :action => :profile %> </li>
- <% if !Admin.where(user_id: current_user.id).empty? %>
- <li><%= link_to "requests to join my forums", :action => :admin_join_forums_requests %> </li>
- <% end %>
- <% end %>
+ 
 
-</ul>  
-</div>
 <div style="position:relative; top:150px;">
 <%= form_for((current_user) , html: {multipart: true}) do |f| %>
     <h1>Edit form</h1>
@@ -106,3 +110,6 @@
      </div>
 <% end %>
 </div>
+</div>
+</body>
+</html>

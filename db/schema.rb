@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150506042515) do
+ActiveRecord::Schema.define(version: 20150512000612) do
 
   create_table "actions", force: true do |t|
     t.string   "info"
@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(version: 20150506042515) do
     t.string   "privacy"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
     t.string   "category"
+    t.integer  "user_count",  default: 0
   end
 
   create_table "friendships", force: true do |t|
@@ -76,13 +76,6 @@ ActiveRecord::Schema.define(version: 20150506042515) do
     t.boolean  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "user_name"
-    t.string   "friend_name"
-    t.boolean  "accepted"
-    t.boolean  "rejected"
-    t.string   "requester"
-    t.string   "requested"
-    t.string   "requests"
   end
 
   create_table "ideas", force: true do |t|
@@ -92,6 +85,7 @@ ActiveRecord::Schema.define(version: 20150506042515) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
+    t.integer  "like_count", default: 0
   end
 
   create_table "likeideas", force: true do |t|
@@ -144,8 +138,6 @@ ActiveRecord::Schema.define(version: 20150506042515) do
   end
 
   create_table "sysadmins", force: true do |t|
-    t.string   "username"
-    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -170,6 +162,7 @@ ActiveRecord::Schema.define(version: 20150506042515) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "friend_count",                 default: 0
   end
 
 end
