@@ -168,6 +168,10 @@ Rails.application.routes.draw do
   resources :users do
     post :block_user
     post :report_user
+    resources :friendships do
+      #put :update
+      put :reject
+    end 
   end
   
   resources :forums do

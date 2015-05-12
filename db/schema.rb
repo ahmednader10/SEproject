@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511230210) do
+ActiveRecord::Schema.define(version: 20150512000612) do
 
   create_table "actions", force: true do |t|
     t.string   "info"
@@ -76,13 +76,6 @@ ActiveRecord::Schema.define(version: 20150511230210) do
     t.boolean  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "user_name"
-    t.string   "friend_name"
-    t.boolean  "accepted"
-    t.boolean  "rejected"
-    t.string   "requester"
-    t.string   "requested"
-    t.string   "requests"
   end
 
   create_table "ideas", force: true do |t|
