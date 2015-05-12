@@ -17,6 +17,11 @@ class ForumsController < ApplicationController
 		
 		sleep 1
 		@forum = Forum.find(params[:id])
+
+		@ideas = []
+		if !Idea.where(forum_id: params[:id]).empty?
+			@ideas.concat(Idea.where(forum_id: params[:id]))
+		end
 	end
 
 	# Renders the page for creating a forum.
@@ -192,15 +197,15 @@ class ForumsController < ApplicationController
 			redirect_to root_url
    		else
 			@membership = @forum.memberships.build(user: @user)
-			if @forum.privacy == '1'
-				Action.create(info: @user.username + ' has joined the forum: (' + @forum.title + ').', user_email: @user.email)
-			else
+			if @forum.privacy != '1'
 				Action.create(info: @user.username + ' has requested to join the forum: (' + @forum.title + ').', user_email: @user.email)
 			end
 			@membership.accept = true if @forum.privacy == '1'
 			if  @membership.save and @membership.accept == true
 			 	flash[:success] = 'Successfully joined forum'
 	   		 	redirect_to :action => "show"
+	   		 	@forum.increment!(:user_count, by = 1)
+ 				Action.create(info: @user.username + ' has joined the forum: (' + @forum.title + ').', user_email: @user.email)
 				Notification.create(info: 'Your request to join forum: (' + @forum.title + ') has been accepted and you have successfully joined.', user_id: @user.id)
 	   		elsif @membership.accept == true  and !@membership.save 
 	   			#need to check in the database first if this record already exists

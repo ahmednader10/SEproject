@@ -2,6 +2,10 @@
 	background: #96BADA;
 }
 
+.forum-color {
+	background: #E1672D;
+}
+
 .white {
 	background: #FFFFFF;
 }
@@ -34,8 +38,15 @@ hr {
 	margin: 30px auto;
 }
 
+.rule {
+	width: 350px;
+	margin-bottom: 10px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
 .quarter-rule {
-	width: 130px;
+	width: 30px;
 	margin: 45px auto;
 	border-top: 1px solid #97BBDA;
 }
@@ -46,6 +57,11 @@ p.info {
 
 .profileImg {
 	width: 215px;
+	margin: 0 auto;
+}
+
+.forumImg {
+	width: 265px;
 	margin: 0 auto;
 }
 
@@ -245,3 +261,23 @@ p.info {
     transform: rotateX(-180deg);
   }
 
+/* Alert message */
+@import url('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
+.isa_error {
+margin: 10px 0px;
+padding:2px;
+border-radius:.5em;
+border: 3px solid #ffaca6;
+}
+.isa_error {
+    color: #D8000C;
+    background-color: #FFBABA;
+}
+.isa_error i {
+    margin:2px 22px;
+    font-size:2em;
+    vertical-align:middle;
+}
+.verticalLine {
+    border-left: thick solid #ff0000;
+}

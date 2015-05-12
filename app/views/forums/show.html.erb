@@ -1,135 +1,197 @@
-<% if session[:sysadmin] %>  
-<%= link_to 'Sign out', root_path %>
-<%= link_to 'back', forums_sysadmins_path %>
-<% end %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Bootstrap Example</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<%= stylesheet_link_tag 'style' %>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body>
+	<nav class="navbar navbar-fixed-top white">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">iDea</a>
+			</div>
+			<div>
+				<ul class="nav navbar-nav">
+					<li>
+						<div class="left-inner-addon">
+							<i class="glyphicon glyphicon-search"></i>
+							<input class="form-control" type="text" placeholder="Looking for something?" style="margin-top: 9px; width: 250px;">
+						</div>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">				
+        			<li><a href="#">Notifications</a></li>
+        			<li class="dropdown">
+  						<a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+  						<% if current_user.uid == nil %>
+  							<%= current_user.full_name %>
+						<% else %>
+  							<%= current_user.name %>
+ 						<% end %>
+ 						 <span class="caret"></span></a>
+  						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+   							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user"></i> Profile</a></li>
+   							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-cog"></i> Settings</a></li>
+   							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-question"></i> Help</a></li>
+   							<li role="presentation" class="divider"></li>
+   							<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
+ 						</ul>
+       				</li>
+   				</ul>
+			</div>
+		</div>
+	</nav>
 
-<div class="headerlist">
-<ul id="menu">
-<li> Logo</li>
+	<div class="jumbotron forum-color" style="height: 730px;">
+		<div class="container-fluid" style="margin-top: 80px;">
+			<div class="row">
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-4 white-font">
+					<div class="forumImg">
+						<%= image_tag 'bulb.jpg', class: "img-circle", width: "265", height: "250", style: "margin-bottom: 14px; border-style: solid; border-width: 1px; border-color: #DCDCDC;" %>
+					</div>
+					<h3 style="font-weight: 400; margin-bottom: 5px;">&ndash;&ndash;&ndash;&ndash;&ndash; <%= @forum.title %> &ndash;&ndash;&ndash;&ndash;&ndash;</h3>
+					<p class="info">“<%= @forum.description %>”</p>
+					<% if @forum.privacy == "1" %>
+						<span class="text-muted" style="font-size: 13px;">Public • <%= @forum.category %></span><br>
+					<% elsif @forum.privacy == "2" %>
+						<span class="text-muted" style="font-size: 13px;">Private • <%= @forum.category %></span><br>
+					<% end %>
+					<% if @forum.privacy == "1" %>
+						<button type="button" class="btn btn-success" data-joined-text="<i class='fa fa-check-circle'></i>&nbsp;&nbsp;Joined" id="join" style="margin-top: 18px;" data-loading-text="<i class='fa fa-spinner fa-spin'></i>&nbsp;&nbsp;Loading" autocomplete="off"><i class="fa fa-plus"></i>&nbsp;&nbsp;Join Forum</button>
+					<% elsif @forum.privacy == "2" %>
+						<button type="button" class="btn btn-success" data-joined-text="Request Sent" style="margin-top: 18px;" autocomplete="off"><i class="fa fa-plus"></i>&nbsp;&nbsp;Request to Join Forum</button>
+					<% end %>
+					<!-- <script>
+						$(document).ready(function(){
+    						$(".btn").click(function(){
+    						    $(this).button('loading').delay(1000).queue(function(){
+         					    	$(this).button('joined');
+       	     						$(this).dequeue();
+       							});
+    						});
+						});
+					</script> -->
+				</div>
+				<div class="col-md-4">
+				</div>
+			</div>
+		</div>
+	</div>
 
- <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
- <% if current_user != nil %>
- <li><%= link_to "friend requests" , friendships_path %></li>
- <li> <%= link_to "My Profile" , user_path(current_user.id) %> </li>
- 
- <li><%= link_to "notifications" ,user_notifications_path %> </li> 
- 
+	<!-- Modal -->
+  		<div class="modal fade" id="comment" role="dialog">
+    		<div class="modal-dialog">
+    
+      		<!-- Modal content-->
+      			<div class="modal-content" style="margin: 170px auto; width: 450px;">
+        			<div class="modal-header" style="height: 330px;">
+          				<button type="button" class="close" data-dismiss="modal">&times;</button>
+          				<!-- <h4 class="modal-title">Modal Header</h4> -->
+          				<h2 style="text-align: center; margin-bottom: 60px;">Post a comment</h2>
+						<form role="form">
+						 	<div class="form-group">
+						    	<label for="postComment">Comment:</label>
+						    	<textarea class="form-control" rows="5" id="postComment"></textarea>
+						  	</div>
+						  	<div class="form-group" style="float: right;">
+						  		<button type="submit" class="btn btn-primary">Post</button>
+						  		<input type="button" value="Cancel" class="btn btn-primary" data-dismiss="modal" />
+						  	</div>
+						</form>
+        			</div>
+      			</div>
+    		</div>
+  		</div>
 
- <li><%= link_to "Log out", logout_path, method: :delete %></li>
- <% if !Admin.where(user_id: current_user.id).empty? %>
- <li><%= link_to "requests to join my forums",:controller => "users" ,:action => :admin_join_forums_requests %> </li>
- <% end %>
- <% end %>
-
-</div>
-
-<p>
-  <strong>Title:</strong>
-  <%= @forum.title %>
-</p>
- 
-<p>
-  <strong>Text:</strong>
-  <%= @forum.description %>
-</p>
-
-<p>
-  <strong>Privacy:</strong>
-  <% if @forum.privacy == "1" %>
-  Public
-  <% elsif @forum.privacy == "2" %>
-  Private
-  <% end %>
-
-  <!-- check if already joined or pending request -->
-  <% y = Forum.where(id: params[:id]) %>
-  <% if session[:sysadmin] or   !Membership.where(user_id: current_user.id , forum_id: y.first.id, accept: nil).empty? %>
-    <div class="alert alert-info">
-      Pending request.
-   </div>
- <% elsif session[:sysadmin] or Membership.where(user_id: current_user.id , forum_id: y.first.id, accept: true).empty? %>
-
-  <% if @forum.privacy == "1" and !session[:sysadmin] %>
-  <%= button_to('Join Forum', join_forum_path(@forum),
-            method: "post",  data: { disable_with: 'Joining...' }) %>
-  <% elsif @forum.privacy == "2" and !session[:sysadmin] %>
-  <%= button_to('Request joining forum', join_forum_path(@forum),
-            method: "post",  data: { disable_with: 'Pending...' }) %>
-  <% end %>
-  <% end %>
-  
-  <% if flash[:success] %>
-    <div class="alert alert-success">
-      <a href='' class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <strong>Success!</strong> Successfully joined Forum.
-    </div>
-  <% end %>
-  <% if flash[:member] %>
-    <div class="alert alert-info">
-      <a href='' class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      You're already member of this Forum 
-    </div>
- <% end %>
-  <% if flash[:requestsent] %>
-    <div class="alert alert-warning">
-     <a href='' class="close" data-dismiss="alert" aria-label="close">&times;</a>
-     You've already sent request to join this Forum.
-    </div>
-  <% end %>
-  <% if flash[:pending] %>
-    <div class="alert alert-info">
-      <a href='' class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      Pending request.
-    </div>
-  <% end %>
-
-    <ul>
-        <% if session[:sysadmin] %>
-            <% Idea.where(forum_id: params[:id]).each do |idea| %>
-        <li>
-            <%= link_to idea.title , forum_idea_path(@forum.id, idea.id) %>
-        </li>
-        <%end%>        
-        <% elsif @forum.privacy == "1" and (session[:sysadmin] || Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?) %>
-              <% Idea.where(forum_id: params[:id]).each do |idea| %>
-              <li>
-                  <%=  idea.title %>
-              </li>
-              <%end%>
-        <% elsif (@forum.privacy == "1" and !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?) %>
-                <% Idea.where(forum_id: params[:id]).each do |idea| %>
-        <li>
-            <%= link_to idea.title , forum_idea_path(@forum.id, idea.id) %>
-        </li>
-        <%end%>
-        <% elsif (@forum.privacy == "2" and (session[:sysadmin] or !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?)) %>
-
-        <% Idea.where(forum_id: params[:id]).each do |idea| %>
-        <li>
-            <%= link_to idea.title , forum_idea_path(@forum.id, idea.id) %>
-        </li>
-        <%end%>
-        <%end%>
-
-    </ul>
-</tr></table>
-<% if !session[:sysadmin] %>
-  <%= link_to 'Post an idea', new_forum_idea_path(@forum) %>
-<% end %>
-<br>
-<% if session[:sysadmin] or Admin.exists?(user_id: current_user.id, forum_id: params[:id]) %>
-  <%= link_to "add new admin", admin_to_be_path %>
-<% end %>
-<br>
-<%= link_to "View Forum Members", list_members_path %>
-
-</p>
-
- 
-   
-
-
-
-  
-
- 
+	<div class="container">
+		<% if @forum.privacy == "1" and !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
+			<% i = 0 %>
+			<% while i < @ideas.length %>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="panel panel-default">
+							<div class="panel-heading" style="height: 40px;">
+								<div style="float: right;">
+									<a href="#"><i class="fa fa-arrow-up fa-rotate-90"></i></a>
+								</div>
+							</div>
+							<div class="panel-content">
+								<div class="container-fluid">
+									<div class="col-md-4" style="margin-left: -15px; margin-top: 15px; margin-bottom: 2px;">
+										<%= image_tag 'bulb.jpg', class: "img-circle", width: "155", height: "140", style: "margin-bottom: 14px; border-style: solid; border-width: 1px; border-color: #DCDCDC;" %>
+									</div>
+									<div class="col-md-8" style="margin-top: 10px; margin-left: 10px;">
+										<h6 class="lead" style="font-size: 14px;">Mohamed Abd El-Azeem</h6>
+										<p>This is an idea. This is a test for an idea. This is intended to be an example for an idea.</p>
+										<hr class="rule" style="margin-left: -10px;">
+										<div style="margin-bottom: 10px;">
+											<a href="#"><i class="fa fa-twitter fa-lg"></i></a>
+											&nbsp;
+											<a href="#"><i class="fa fa-facebook fa-lg"></i></a>
+											&nbsp;
+											<a href="#"><i class="fa fa-google-plus fa-lg"></i></a>
+											<div style="float: right;">
+												<a href="#"><i class="fa fa-heart"></i></a>
+												&nbsp;
+												<a href="<% "/forums/#{@forum.id}/ideas/3" %>" data-toggle="modal" data-target="#comment"><i class="fa fa-comment"></i></a>
+												&nbsp;
+												<a href="#"><i class="fa fa-flag"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>	
+						</div>
+					</div>
+					<% if @ideas[++i] != nil %>
+						<div class="col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-heading" style="height: 40px;">
+									<div style="float: right;">
+										<a href="#"><i class="fa fa-arrow-up fa-rotate-90"></i></a>
+									</div>
+								</div>
+								<div class="panel-content">
+									<div class="container-fluid">
+										<div class="col-md-4" style="margin-left: -15px; margin-top: 15px; margin-bottom: 2px;">
+											<%= image_tag 'bulb.jpg', class: "img-circle", width: "155", height: "140", style: "margin-bottom: 14px; border-style: solid; border-width: 1px; border-color: #DCDCDC;" %>
+										</div>
+										<div class="col-md-8" style="margin-top: 10px; margin-left: 10px;">
+											<h6 class="lead" style="font-size: 14px;">Mohamed Abd El-Azeem</h6>
+											<p>This is another idea. This is another test for an idea. This is intended to be another example for an idea.</p>
+											<hr class="rule" style="margin-left: -10px;">
+											<div style="margin-bottom: 10px;">
+												<a href="#"><i class="fa fa-twitter fa-lg"></i></a>
+												&nbsp;
+												<a href="#"><i class="fa fa-facebook fa-lg"></i></a>
+												&nbsp;
+												<a href="#"><i class="fa fa-google-plus fa-lg"></i></a>
+												<div style="float: right;">
+													<a href="#"><i class="fa fa-heart"></i></a>
+													&nbsp;
+													<a href="#" data-toggle="modal" data-target="#comment"><i class="fa fa-comment"></i></a>
+													&nbsp;
+													<a href="#"><i class="fa fa-flag"></i></a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>	
+							</div>
+						</div>
+					<% end %>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+</body>
+</html>
