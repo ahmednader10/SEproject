@@ -2,6 +2,7 @@ class SearchController < ApplicationController
 	
 	def search
 		# This part is for the normal search
+		if params[:search]
 		if params[:searchtype] == 'normal'
 			if current_user != nil && params[:q] != nil
 				Action.create(info: current_user.username + ' has made the following search query : (' + params[:q] + ') for (type:' + params[:type] + ').', user_email: current_user.email)		

@@ -20,7 +20,7 @@
 		</ul>  
 	</div>
 	<div style="position:absolute;top:100px;"><h4> Advanced Search: </h4>
-		<%= form_tag("/search", method: "get") do %>
+		<%= form_tag("/search", { class: 'form-class', id: 'form-id', role: 'form', method: 'post' }) do %>
 			<%= text_field_tag(:q) %>
 			<%= label_tag(:type, "Search for a type:") %>
 			<%= select_tag(:type, "<option>All</option><option>Users</option><option>Forums</option><option>Ideas</option>".html_safe) %>

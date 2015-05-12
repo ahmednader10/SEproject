@@ -130,19 +130,21 @@ Rails.application.routes.draw do
 
   get 'syslog' => 'actions#index'
 
-  put 'syslog/hide/:id' => 'actions#hide'
+  get 'syslog/hide/:id' => 'actions#hide' , as:'hide1'
 
-  put 'syslog/unhide/:id' => 'actions#unhide'
+  get 'syslog/unhide/:id' => 'actions#unhide'
 
-  put 'syslog/hideall' => 'actions#hideall'
+  get 'syslog/hideall' => 'actions#hideall'
 
-  put 'syslog/unhideall' => 'actions#unhideall'
+  get 'syslog/unhideall' => 'actions#unhideall'
 
   ############################################################################
 
   #get 'users/indentation_error_message' => 'users#indentation_error_message'
 
   get 'search' => 'search#search'
+
+  post 'search' => 'search#search'
 
   get 'advancedsearch' => 'search#advanced_search'
 
