@@ -26,10 +26,10 @@
     				<li><a href="/forums">Forums</a></li>
     				<li class="dropdown">
 						<a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-						<% if @current_user.uid == nil %>
-							<%= @current_user.full_name %>
+						<% if current_user.uid == nil %>
+							<%= current_user.full_name %>
 					<% else %>
-							<%= @current_user.name %>
+							<%= current_user.name %>
 						<% end %>
 						 <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
