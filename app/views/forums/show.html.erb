@@ -11,7 +11,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
-<body>
+<body style="background: #EEE;">
 	<nav class="navbar navbar-fixed-top white">
 		<div class="container">
 			<div class="navbar-header">
@@ -66,11 +66,40 @@
 						<span class="text-muted" style="font-size: 13px;">Private • <%= @forum.category %></span><br>
 					<% end %>
 					<% if @forum.privacy == "1" %>
-						<button type="button" class="btn btn-success" data-joined-text="<i class='fa fa-check-circle'></i>&nbsp;&nbsp;Joined" id="join" style="margin-top: 18px;" data-loading-text="<i class='fa fa-spinner fa-spin'></i>&nbsp;&nbsp;Loading" autocomplete="off"><i class="fa fa-plus"></i>&nbsp;&nbsp;Join Forum</button>
+						
+						<% if !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
+							<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Joined</button>
+						<% else %>
+
+            		<form action="<%= join_forum_path(@forum) %>" method="post">
+            			<div>
+            				<button type="submit" class="btn btn-success" data-joined-text="<i class='fa fa-check-circle'></i>&nbsp;&nbsp;Joined" id="join" style="margin-top: 18px;" data-loading-text="<i class='fa fa-spinner fa-spin'></i>&nbsp;&nbsp;Loading" autocomplete="off"><i class="fa fa-plus"></i>&nbsp;&nbsp;Join Forum</button>
+            				<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
+            			</div>
+            		</form>
+
+            		<% end %>
+
 					<% elsif @forum.privacy == "2" %>
-						<button type="button" class="btn btn-success" data-joined-text="Request Sent" style="margin-top: 18px;" autocomplete="off"><i class="fa fa-plus"></i>&nbsp;&nbsp;Request to Join Forum</button>
+						
+
+						<% if !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
+							<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Joined</button>
+						<% elsif !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: nil).empty? %>
+							<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Request Sent</button>
+						<% else %>
+
+					<form action="<%= join_forum_path(@forum) %>" method="post">
+        				<div>
+        					<button type="submit" class="btn btn-success" data-joined-text="<i class='fa fa-check-circle'></i>&nbsp;&nbsp;Request Sent" id="join" style="margin-top: 18px;" data-loading-text="<i class='fa fa-spinner fa-spin'></i>&nbsp;&nbsp;Loading" autocomplete="off"><i class="fa fa-plus"></i>&nbsp;&nbsp;Request to Join Forum</button>
+        					<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
+        				</div>
+        			</form>
+
+        			<% end %>
+
 					<% end %>
-					<!-- <script>
+					<script>
 						$(document).ready(function(){
     						$(".btn").click(function(){
     						    $(this).button('loading').delay(1000).queue(function(){
@@ -79,7 +108,7 @@
        							});
     						});
 						});
-					</script> -->
+					</script>
 				</div>
 				<div class="col-md-4">
 				</div>
@@ -113,15 +142,15 @@
   		</div>
 
 	<div class="container">
-		<% if @forum.privacy == "1" and !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
+		<% if !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
 			<% i = 0 %>
 			<% while i < @ideas.length %>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="panel panel-default">
-							<div class="panel-heading" style="height: 40px;">
+							<div class="panel-heading" style="height: 40px; background: #96BADA;">
 								<div style="float: right;">
-									<a href="#"><i class="fa fa-arrow-up fa-rotate-90"></i></a>
+									<a href="<%= forum_idea_path(@forum.id, @ideas[i].id) %>"><i class="fa fa-arrow-up fa-rotate-90"></i></a>
 								</div>
 							</div>
 							<div class="panel-content">
@@ -130,8 +159,9 @@
 										<%= image_tag 'bulb.jpg', class: "img-circle", width: "155", height: "140", style: "margin-bottom: 14px; border-style: solid; border-width: 1px; border-color: #DCDCDC;" %>
 									</div>
 									<div class="col-md-8" style="margin-top: 10px; margin-left: 10px;">
-										<h6 class="lead" style="font-size: 14px;">Mohamed Abd El-Azeem</h6>
-										<p>This is an idea. This is a test for an idea. This is intended to be an example for an idea.</p>
+										<% user = User.find_by(id: @ideas[i].user_id) %>
+										<h6 class="lead" style="font-size: 14px;"><%= user.full_name %></h6>
+										<p><%= @ideas[i].title %></p>
 										<hr class="rule" style="margin-left: -10px;">
 										<div style="margin-bottom: 10px;">
 											<a href="#"><i class="fa fa-twitter fa-lg"></i></a>
@@ -152,12 +182,13 @@
 							</div>	
 						</div>
 					</div>
-					<% if @ideas[++i] != nil %>
+					<% i = i+1 %>
+					<% if @ideas[i] != nil %>
 						<div class="col-md-6">
 							<div class="panel panel-default">
-								<div class="panel-heading" style="height: 40px;">
+								<div class="panel-heading" style="height: 40px; background: #96BADA;">
 									<div style="float: right;">
-										<a href="#"><i class="fa fa-arrow-up fa-rotate-90"></i></a>
+										<a href="<%= forum_idea_path(@forum.id, @ideas[i].id) %>"><i class="fa fa-arrow-up fa-rotate-90"></i></a>
 									</div>
 								</div>
 								<div class="panel-content">
@@ -166,8 +197,9 @@
 											<%= image_tag 'bulb.jpg', class: "img-circle", width: "155", height: "140", style: "margin-bottom: 14px; border-style: solid; border-width: 1px; border-color: #DCDCDC;" %>
 										</div>
 										<div class="col-md-8" style="margin-top: 10px; margin-left: 10px;">
-											<h6 class="lead" style="font-size: 14px;">Mohamed Abd El-Azeem</h6>
-											<p>This is another idea. This is another test for an idea. This is intended to be another example for an idea.</p>
+											<% user = User.find_by(id: @ideas[i].user_id) %>
+											<h6 class="lead" style="font-size: 14px;"><%= user.full_name %></h6>
+											<p><%= @ideas[i].title %></p>
 											<hr class="rule" style="margin-left: -10px;">
 											<div style="margin-bottom: 10px;">
 												<a href="#"><i class="fa fa-twitter fa-lg"></i></a>
@@ -188,6 +220,56 @@
 								</div>	
 							</div>
 						</div>
+						<% i = i+1 %>
+					<% end %>
+				</div>
+			<% end %>
+
+		<% elsif @forum.privacy == "1" and Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
+			<% i = 0 %>
+			<% while i < @ideas.length %>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="panel panel-default">
+							<div class="panel-heading" style="height: 40px; background: #96BADA;">
+							</div>
+							<div class="panel-content">
+								<div class="container-fluid">
+									<div class="col-md-4" style="margin-left: -15px; margin-top: 15px; margin-bottom: 2px;">
+										<%= image_tag 'bulb.jpg', class: "img-circle", width: "155", height: "140", style: "margin-bottom: 14px; border-style: solid; border-width: 1px; border-color: #DCDCDC;" %>
+									</div>
+									<div class="col-md-8" style="margin-top: 10px; margin-left: 10px;">
+										<% user = User.find_by(id: @ideas[i].user_id) %>
+										<h6 class="lead" style="font-size: 14px;"><%= user.full_name %></h6>
+										<p><%= @ideas[i].title %></p>
+										<hr class="rule" style="margin-left: -10px;">
+									</div>
+								</div>
+							</div>	
+						</div>
+					</div>
+					<% i = i+1 %>
+					<% if @ideas[i] != nil %>
+						<div class="col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-heading" style="height: 40px; background: #96BADA;">
+								</div>
+								<div class="panel-content">
+									<div class="container-fluid">
+										<div class="col-md-4" style="margin-left: -15px; margin-top: 15px; margin-bottom: 2px;">
+											<%= image_tag 'bulb.jpg', class: "img-circle", width: "155", height: "140", style: "margin-bottom: 14px; border-style: solid; border-width: 1px; border-color: #DCDCDC;" %>
+										</div>
+										<div class="col-md-8" style="margin-top: 10px; margin-left: 10px;">
+											<% user = User.find_by(id: @ideas[i].user_id) %>
+											<h6 class="lead" style="font-size: 14px;"><%= user.full_name %></h6>
+											<p><%= @ideas[i].title %></p>
+											<hr class="rule" style="margin-left: -10px;">
+										</div>
+									</div>
+								</div>	
+							</div>
+						</div>
+						<% i = i+1 %>
 					<% end %>
 				</div>
 			<% end %>
