@@ -1,3 +1,10 @@
+form {
+  margin: 0;
+  padding: 0;
+  display:inline;
+  vertical-align: inherit;
+}
+
 .other-color {
 	background: #96BADA;
 }
@@ -49,6 +56,7 @@ hr {
 	margin-bottom: 10px;
 	display: inline-block;
 	vertical-align: middle;
+  border-top: 1px solid #96BADA;
 }
 
 .quarter-rule {

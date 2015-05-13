@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <% if session[:sysadmin] %>  
 <%= link_to 'Sign out', root_path %>
 <%= link_to 'back', forums_sysadmins_path %>
@@ -97,7 +96,7 @@
                   <%=  idea.title %>
               </li>
               <%end%>
-        <% elsif (@forum.privacy == "1" and (session[:sysadmin] || !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?) %>
+        <% elsif (@forum.privacy == "1" and (session[:sysadmin] || !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?)) %>
                 <% Idea.where(forum_id: params[:id]).each do |idea| %>
         <li>
             <%= link_to idea.title , forum_idea_path(@forum.id, idea.id) %>
@@ -133,8 +132,6 @@
 
   
 
- 
-=======
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -206,4 +203,3 @@
     </div>
   </body>
 </html>
->>>>>>> ae259e91e03d8bc103681400c915b297992c0a4a

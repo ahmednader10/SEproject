@@ -116,6 +116,10 @@ Rails.application.routes.draw do
 
   get 'forums/:id/members' => 'forums#list_members', as:'list_members'
 
+  delete 'forums/:forum_id/ideas/:id' => 'ideas#destroy', as: 'delete_idea'
+
+  post 'forums/:forum_id/ideas/:id/like' => 'ideas#like', as: 'like_idea'
+
   get 'forums/remove_member' => 'forums#remove_member', as:'remove_member'
 
   ############################ Notifications #################################
@@ -158,10 +162,18 @@ Rails.application.routes.draw do
 
   get 'sessions/blockingMessage' => 'sessions#create', as: 'blocking_message'
 
+  post 'forums/show' => 'forums#show'
+
+  get 'forums/new' => 'forums#new', as: 'new_forum'
   
 
   ###########################################################
 
+  get 'user/:id/friends' => 'friendships#index', as: 'friends'
+
+  get 'user/:id/requests' => 'friendships#requests'
+
+  post 'user/:id/add' => 'friendships#create'
 
   # get 'sysAdmin' 
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'

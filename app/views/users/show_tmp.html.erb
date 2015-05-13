@@ -1,0 +1,128 @@
+<head><script type="text/javascript">
+
+</script></head>
+
+
+
+<body>
+<ul class="nav nav-pills" role="tablist">
+              <li role="presentation" class="active"><a href="/forums" >forums</a></li>
+              <li> <%= link_to image_tag(current_user.image.url,:style=>'width:50px ;height:30px;'), user_path(current_user) %></li>
+            </ul>
+<div class="row" style="margin-top:100px;">
+  <div class="col-sm-3">
+    <!-- SideBAR -->
+  </div>
+    <div class="col-sm-5">
+    <!-- MAIN -->
+          <h1> <%= @user.username %>  </h1>
+            <% unless  current_user.rfriends.include?(@user) %>
+              <%= link_to "Report User",user_report_user_path(:user_id => @user.id) ,:method => :post %></h1>
+            <% end %>
+            <% unless  current_user.bfriends.include?(@user) %>
+              <%= link_to "Block User",user_block_user_path(:user_id => @user.id) ,:method => :post %>
+            <% end %>
+            <% unless @user ==current_user ||current_user.friends.include?(@user)  || @user.friends.include?(current_user)  %>
+            <% unless  @user.bfriends.include?(current_user) %>
+
+             <%= link_to "Add Friend", friendships_path(:friend_id => @user.id), :method => :post %> 
+            <% end %>
+            <% else %>
+            <% for friendship in current_user.friendships %>
+            <% if current_user.friends.include?(@user) && friendship.status == nil %>
+            <h2> Friend Request Sent </h2>
+              <% end %>
+            <% end %>
+
+            <% end %>
+            <%= link_to image_tag(@user.image.url,:style=>'width:450px; height:400px;'), asset_path(@user.image.url) %>
+      <div style="height:10px;  margin-top:20px; margin-bottom:20px;" >
+        <!-- SPACE GAP -->
+        <% if current_user != nil && (@user.privacy==2 && !current_user.friends.include?(@user))%> 
+
+        <div><p>Private Account</p></div>
+
+        <%elsif current_user == nil || (@user.privacy==1 ||current_user.friends.include?(@user) )%> 
+
+      </div>
+      <div class="row">
+            <div style="margin:15px;">
+            
+            <div role="tabpanel" style="background-color:#cc99ff;">
+            <!-- Nav tabs -->
+            <ul class="nav nav-pills" role="tablist" style="margin-left:150px;">
+              <li role="presentation" class="active"><a href="#info" aria-controls="home" role="tab" data-toggle="tab">Information</a></li>
+              <li role="presentation"><a href="#foroms" aria-controls="foroms" role="tab" data-toggle="tab">Forums</a></li>
+              <li role="presentation"><a href="#ideas" aria-controls="ideas" role="tab" data-toggle="tab">Ideas</a></li>
+              <li role="presentation"><a href="#memberships" file:///home/miada/SEproject/app/views/users/bootstrapprofilelayout.htmlaria-controls="memberships" role="tab" data-toggle="tab">Memberships</a></li>
+            </ul>
+          </div>
+            <!-- Tab panes -->
+          <div class="tab-content">
+             <div role="tabpanel" class="tab-pane active" id="info"> information tab is here</div>
+             <div role="tabpanel" class="tab-pane" id="foroms">
+                <table width="371" height="51">
+                  <tr>
+                    <th width="110"  id="forumcolum"> Forum </th>
+                    <th id="ideatitlecolumn"> Description </th>
+                  </tr>
+                  <%  x = Forum.where(user_id: @user.id).order(:title) %>
+                  <% x.each do |forum| %>
+                  <tr>
+                  <td id="forumcolum"><%=  link_to forum.title , forum %></td>
+                  <td id="ideatitlecolumn"> <%= y.description %> </td>
+                  </tr>
+                  <% end %>
+                </table>
+                <% if x.size == 0 %>
+                <em> forumless </em>
+                <% end %>
+             </div>
+             <div role="tabpanel" class="tab-pane" id="ideas">
+                 <table width="371" height="51">
+                <tr>
+                    <th width="57" id="ideatitlecolumn"> Title</th>
+                  <th width="160" id="ideacolumn"> Idea</th>
+                  <th width="110" id="forumcolum"> Forum</th>
+                </tr>
+                <%  x = Idea.where(user: @user).order(:text) %>
+                <% x.each do |idea| %>
+                <tr>
+                  <td id="ideatitlecolumn"><%= link_to idea.title , forum_idea_path(idea.forum.id, idea.id)%></td>
+                  <td id="ideacolumn"><%= idea.text %></td>
+                  <td id="forumcolum"> <%= link_to idea.forum.title , idea.forum %>  </td>
+                </tr>
+                <% end %>
+                </table>
+                <% if x.size == 0 %>
+                <em> still Idealess </em>
+                <% end %>
+                 </div>
+             <div role="tabpanel" class="tab-pane" id="memberships">
+                <table width="371" height="51">
+                  <tr>
+                    <th  id="forumcolum"> Joined Forum</th>
+                    <th id="ideatitlecolumn"> Description </th>
+                  </tr>
+
+                  <%  x =Membership.where(user_id: @user.id) %>
+                  <% x.each do |membership| %>
+                  <% y = Forum.find(membership.forum_id) %>
+                  <tr>
+                  <td id="forumcolum"><%=  link_to y.title , forum_path %></td>
+                  <td id="ideatitlecolumn"> <%= y.description %> </td>
+                  </tr>
+
+                  <% end %>
+                </table>
+                <% if x.size == 0 %>
+                <em> not a member in any forums </em>
+                <% end %>
+             </div>
+          </div>
+            </div>
+        </div>    
+      </div>
+  </div>
+<%end%>
+</body>
