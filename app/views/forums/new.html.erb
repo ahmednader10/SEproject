@@ -39,71 +39,57 @@
                 <thead>
 
                 </thead>
-                <tbody>
+                <tbody>                
 
-                  <%= form_for :forum, url: forums_path do |f| %>
+              <%= form_for :forum, url: forums_path do |f| %>
 
-                <% if @forum.errors.any? %>
-                  <div id="error_explanation">
-                    <h2>
-                      <%= pluralize(@forum.errors.count, "error") %> prohibited
-                      this article from being saved:
-                    </h2>
-                    <ul>
-                      <% @forum.errors.full_messages.each do |msg| %>
-                        <li><%= msg %></li>
-                      <% end %>
-                    </ul>
-                  </div>
-                <% end %>
+            <% if @forum.errors.any? %>
+              <div id="error_explanation">
+                <h2>
+                  <%= pluralize(@forum.errors.count, "error") %> prohibited
+                  this article from being saved:
+                </h2>
+                <ul>
+                  <% @forum.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
 
-                <p>
-                  
-                  <%= f.text_field :title, class: 'form-control', placeholder: "Title" %><br>
-                </p>
-               
-                <p>
-                  <%= f.text_area :description, class: 'form-control', placeholder: "Description" %><br>
-                </p>
+            <p>
+              <%= f.label :title %><br>
+              <%= f.text_field :title %><br>
+            </p>
 
-                <p>
-                  <%= f.label :category, "Category" %>
-                  <%= f.collection_select(:category, [Category.new(title: '- Select a category -')] + Category.all + [Category.new(title: 'Other')], :title, :title) %><br>
-                  <label id="catLabel" style="visibility:hidden;">Please specify:</label>
-                  <%= f.text_field :category, :id => 'cat', :name => 'forum[other_category]', :style => 'visibility:hidden;' %>
-                </p>
+            <p>
+              <%= f.label :description %><br>
+              <%= f.text_area :description %><br>
+            </p>
 
-                <script>
-                    $('#forum_category').prepend('<option selected="selected">- Select a category -</option>');
-                    $('#forum_category').append('<option value="Other">Other</option>');
-                    document.getElementById("forum_category").onchange = function() {
-                      var field = document.getElementById("cat");
-                      var label = document.getElementById("catLabel");
-                      if (this.value === "Other") {
-                        field.style.visibility = "visible";
-                        label.style.visibility = "visible";
-                      }
-                      else {
-                        field.style.visibility = "hidden";
-                        label.style.visibility = "hidden";
-                      }
-                    }
-                </script>
+            <p>
+              <%= f.label :category, "Category" %>
+              <%= f.collection_select(:category, Category.all, :title, :title) %><br>
+            </p>
 
-                <p>
-                  <%= f.radio_button :privacy, "1" %>
-                  <%= f.label :privacy, "Public" %> &nbsp &nbsp
-                  <%= f.radio_button :privacy, "2" %>
-                  <%= f.label :privacy, "Private" %><br>
-                </p>
-               
-                <p>
-                  <%= f.submit "Create Forum", class: "btn btn-primary", style: "margin-left: 250px;" %>
-                </p>
+            <script>
+                $('#forum_category').prepend('<option selected="selected">- Select a category -</option>');
+                $('#forum_category').append('<option value="Other">Other</option>');
+            </script>
 
-                
-              <% end %>
+            <p>
+              <%= f.label :privacy, "Public" %>
+              <%= f.radio_button :privacy, "1" %><br>
+              <%= f.label :privacy, "Private" %>
+              <%= f.radio_button :privacy, "2" %><br>
+            </p>
 
+            <p>
+              <%= f.submit "Create Forum", class: "btn btn-primary" %>
+            </p>
+
+
+          <% end %>
                 </tbody>
             </table>
 
