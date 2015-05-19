@@ -28,7 +28,7 @@
 							<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
 						</div>
 					</form>
-				<% elsif !Friendship.where(user_id: User.find(params[:id]), friend_id: current_user.id, status: 'true').empty? || !Friendship.where(user_id: current_user.id, friend_id: User.find(params[:id]), status: 'true').empty? %>
+				<% elsif !Friendship.where(user_id: User.find(params[:id]), friend_id: current_user.id, status: true).empty? || !Friendship.where(user_id: current_user.id, friend_id: User.find(params[:id]), status: true).empty? %>
 					<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Friend</button>
 				<% else %>
 					<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Friend request sent</button>
@@ -160,8 +160,8 @@
 		<div class="col-sm-9">
 			<ul class="nav nav-tabs">
 			  
-			  <li><a data-toggle="tab" href="#forums">Forums <span class="badge"><%= Membership.where(user_id: current_user.id, accept: true).count %></span></a></li>
-			  <li><a data-toggle="tab" href="#ideas">Ideas <span class="badge"><%= Idea.where(user_id: current_user.id).count %></span></a></li>
+			  <li><a data-toggle="tab" href="#forums">Forums <span class="badge"><%= Membership.where(user_id: params[:id], accept: true).count %></span></a></li>
+			  <li><a data-toggle="tab" href="#ideas">Ideas <span class="badge"><%= Idea.where(user_id: params[:id]).count %></span></a></li>
 			</ul>
 			
 			  <!--<div id="join_requests" class="tab-pane fade in active">
@@ -169,28 +169,27 @@
 				   
 				</table> 
 			  </div>-->
-			  <div id="forums" class="tab-pane fade">
-			   <div role="tabpanel" class="tab-pane" id="memberships">
-                <table width="371" height="51">
-                  <tr>
-                    <th  id="forumcolum"> Joined Forum</th>
-                    <th id="ideatitlecolumn"> Description </th>
-                  </tr>
-
-                  <%  x =Membership.where(user_id: @user.id) %>
-                  <% x.each do |membership| %>
-                  <% y = Forum.find(membership.forum_id) %>
-                  <tr>
-                  <td id="forumcolum"><%=  link_to y.title , forum_path %></td>
-                  <td id="ideatitlecolumn"> <%= y.description %> </td>
-                  </tr>
-
-                  <% end %>
-                </table>
-                <% if x.size == 0 %>
-                <em> not a member in any forums </em>
-                <% end %>
-             </div>
+			   <div id="forums" class="tab-pane fade">
+			  	<%  memberships = Membership.where(user_id: params[:id], accept: true) %>
+			    <% if memberships.empty? %>
+						<em> you are not a member in any forums </em>
+				<% else %>
+			    <table width="371" height="51">
+					<tr>
+					  <th  id="forumcolum"> Joined Forum</th>
+					  <th id="ideatitlecolumn"> Description </th>
+					</tr>
+						<% memberships.each do |membership| %>
+						<% forum = Forum.find(membership.forum_id) %>
+						<% if !Membership.where(user_id: params[:id] , forum_id: forum.id, accept: true).empty? %>
+					<tr>
+						<td id="forumcolum"><%=  link_to forum.title , forum_path(forum) %></td>
+						<td id="ideatitlecolumn"> <%= forum.description %> </td>
+					</tr>
+					<% end %>
+					<%end%>
+				</table>
+				<% end %>	
 			  </div>
 			  <div id="ideas" class="tab-pane fade">
 			   <div role="tabpanel" class="tab-pane" id="ideas">
@@ -200,8 +199,8 @@
                   <th width="160" id="ideacolumn"> Idea</th>
                   <th width="110" id="forumcolum"> Forum</th>
                 </tr>
-                <%  x = Idea.where(user: @user).order(:text) %>
-                <% x.each do |idea| %>
+                <%  memberships = Idea.where(user: @user).order(:text) %>
+                <% memberships.each do |idea| %>
                 <tr>
                   <td id="ideatitlecolumn"><%= link_to idea.title , forum_idea_path(idea.forum.id, idea.id)%></td>
                   <td id="ideacolumn"><%= idea.text %></td>
@@ -209,7 +208,7 @@
                 </tr>
                 <% end %>
                 </table>
-                <% if x.size == 0 %>
+                <% if memberships.empty? %>
                 <em> still Idealess </em>
                 <% end %>
                  </div>

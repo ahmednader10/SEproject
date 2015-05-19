@@ -173,7 +173,9 @@ Rails.application.routes.draw do
 
   get 'user/:id/requests' => 'friendships#requests'
 
-  post 'user/:id/add' => 'friendships#create'
+  get 'friendships/:id/accept' => 'friendships#accept'
+
+  get 'friendships/:id/reject' => 'friendships#reject'
 
   # get 'sysAdmin' 
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'

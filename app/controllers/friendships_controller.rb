@@ -40,16 +40,16 @@ end
 
 def accept
   friendship = Friendship.find(params[:id])
-  firendship.update(status: true)
+  friendship.update(status: true)
   User.find(friendship.user_id).increment!(:friend_count, by = 1)
   User.find(friendship.friend_id).increment!(:friend_count, by = 1)
-  redirect_to request.original_url
+  redirect_to '/users/' + current_user.id.to_s
 end
 
 def reject
   friendship = Friendship.find(params[:id])
   friendship.update(status: false)
-  redirect_to request.original_url
+  redirect_to '/users/' + current_user.id.to_s
 end
 
 #this method checks that the user is currently logged in 
