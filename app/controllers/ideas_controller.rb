@@ -79,7 +79,7 @@ class IdeasController < ApplicationController
 		@forum = Forum.find(params[:forum_id])
 		@user = current_user
 		@idea = Idea.find(params[:id])
-		@user= User.find_by(:id => @idea.user_id)
+		#@user= User.find_by(:id => @idea.user_id)
 
 	 	@likeidea = Likeidea.new(:user_id => @user.id , :idea_id => @idea.id)
 	 	@idea.increment!(:like_count, by = 1)
@@ -88,7 +88,7 @@ class IdeasController < ApplicationController
 			Action.create(info: @user.username + ' has liked an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_email: @user.email)
 			if @user.id != @idea.user_id
 				Notification.create(info: @user.username + ' has liked your idea: (' + @idea.title + ') on forum: (' + @forum.title + ').', user_id: @idea.user_id)
-	   		end
+	   	end
 	   		flash[:notice] = "Idea Liked!"
 		end
 
