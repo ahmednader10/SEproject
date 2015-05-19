@@ -297,7 +297,6 @@
 		<% end %>
 	</div>
 
-	
 	<div class="modal fade" id="forum_members" role="dialog">
     		<div class="modal-dialog">
       <!-- Modal content-->
@@ -351,16 +350,32 @@
           				<button type="button" class="close" data-dismiss="modal">&times;</button>
         			</div>
         		</br> </br>
+<<<<<<< HEAD
+	        	<form action="<%=  %>">
+		        	<div style="width: 400px; margin-left: 30px;">
+		        		<div class="field left-inner-addon">
+		        			<%= form_tag("/forums/:forum_id/ideas", method: "post") do %>
+								<%= text_field_tag(:title, value =nil,:placeholder => "Title", :class => 'form-control' ) %>
+								<%= text_field_tag(:text, value =nil,:placeholder => "Text", :class => 'form-control' ) %>
+								<%= hidden_field_tag(:forum_id, params[:forum_id]) %>
+								<%= submit_tag("Post", :class => 'btn btn-primary') %>
+							<% end %>
+					   	</div> 
+=======
 	        	<form action="<%= root_path %>">
 		        	<div style="width: 400px; margin-left: 30px;">
 		        		<div class="field left-inner-addon">
 		        			
 					   		</div> 
+>>>>>>> a9413d4489acf56ffa6fd40cf998c7b9acb385c1
 		        	</br></br>
 	        	</form>
       			</div>
     		</div>
   		</div>
+<<<<<<< HEAD
+=======
 
+>>>>>>> a9413d4489acf56ffa6fd40cf998c7b9acb385c1
 </body>
 </html>
