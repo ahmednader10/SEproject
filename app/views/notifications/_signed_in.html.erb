@@ -13,9 +13,8 @@
 <body>
 
 	<%= render "/shared/navbarloggedin" %>
-
-	<div style="position:absolute;top:50px; width:100%;">
-		<div class="jumbotron">
+	<div class="jumbotron" style=" width:100%; margin: 100px 0 0 0; top:30%; text-align:center; background:#7A297A; height:500px;">
+		<div style="color:#aaa;">
 			<% seenNotifications = [] %>
 		<% @notifications.reverse_each do |notification| %>
 			<% if !notification.seen %>
@@ -36,6 +35,32 @@
 			<%end%>
 		<%end%>
 		</div>
-	</div>
+	</div> 
+<!-- 	<div class="table-responsive" style="width:50%; margin: 100px 0 0 500px; top:30%; left: 60%;text-align:center;">	
+		<table class="table-striped">
+			<tr>
+				<% seenNotifications = [] %>
+			<% @notifications.reverse_each do |notification| %>
+			<% if !notification.seen %>
+			<p><i  class="glyphicon glyphicon-star"> </i><%= notification.info %> <%= link_to 'delete', ('notifications/' + notification.id.to_s), method: :delete %></p>
+			<% notification.update(seen: true) %>
+				<% seenNotifications += [notification] %>
+			<%end%>
+			<%end%>
+			</tr>
+			<tr>
+				<% @notifications.reverse_each do |notification| %>
+			<% if notification.seen and !seenNotifications.include? notification %>
+				<p>
+					<i  class="glyphicon glyphicon-star-empty"> </i><%= notification.info %> <%= link_to 'delete', ('notifications/' + notification.id.to_s), method: :delete %>
+				</p>
+				<% notification.update(seen: true) %>
+				<% seenNotifications += [notification] %>
+			<%end%>
+			<%end%>
+			</tr>
+		</table>
+	</div> -->
+
 	
 </body>
