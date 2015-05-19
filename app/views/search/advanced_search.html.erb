@@ -13,8 +13,11 @@
 	</head>
 	<body>
 
-	<%= render "/shared/navbarloggedin" %>
-
+	<% if current_user != nil%>
+		<%= render "/shared/navbarloggedin" %>
+	<% elsif session[:sysadmin] == "true" %>
+		<%= render "/shared/navbar_sys_admin" %>
+	<% end %>
 	<div style="position:absolute;top:100px;"><h4> Advanced Search: </h4>
 		<%= form_tag("/search", { class: 'form-class', id: 'form-id', role: 'form', method: 'post' }) do %>
 			<%= text_field_tag(:q, value =nil,:placeholder => "Looking for something?", :class => 'form-control' ) %>

@@ -71,10 +71,6 @@ class IdeasController < ApplicationController
 		end
 	end
 
-	def createidea
-		Idea.create(user_id: current_user.id, title: params[:title], forum_id: params[:forum], text: params[:text])
-	end
-
 	#def not_joined_forum
 	#end
 
@@ -98,6 +94,18 @@ class IdeasController < ApplicationController
 
       	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
 	end
+
+	def unlike
+		@forum = Forum.find(params[:forum_id])
+		@user = current_user
+		@idea = Idea.find(params[:id])
+		if !Likeidea.where(user_id: @user.id, idea_id: @idea, forum_id: @forum).empty?
+			@likeidea = Likeidea.where(user_id: @user.id, idea_id: @idea, forum_id: @forum)
+			@Likeidea.destroy
+			flash[:notice] = "idea unliked!"
+		end
+		redirect_to forum_idea_path(@forum, @idea)
+	end
 	# allows user to report an idea
 	def report
 		@forum = Forum.find(params[:forum_id])
@@ -119,6 +127,17 @@ class IdeasController < ApplicationController
       	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
 	end
 
+	def unreport
+		@forum = Forum.find(params[:forum_id])
+		@user = current_user
+		@idea = Idea.find(params[:id])
+		if !Reportidea.where(user_id: @user.id, idea_id: @idea, forum_id: @forum).empty?
+			@reportidea = Reportidea.where(user_id: @user.id, idea_id: @idea, forum_id: @forum)
+			@reportidea.destroy
+			flash[:notice] = "idea unreported!"
+		end
+		redirect_to forum_idea_path(@forum, @idea)
+	end
  # used to allow the user to enter the information needed from him and nothing more inorder not to be able to change the model
   protected
 	def idea_params
