@@ -39,70 +39,57 @@
                 <thead>
 
                 </thead>
-                <tbody>
+                <tbody>                
+
+              <%= form_for :forum, url: forums_path do |f| %>
+
+            <% if @forum.errors.any? %>
+              <div id="error_explanation">
+                <h2>
+                  <%= pluralize(@forum.errors.count, "error") %> prohibited
+                  this article from being saved:
+                </h2>
+                <ul>
+                  <% @forum.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <p>
+              <%= f.label :title %><br>
+              <%= f.text_field :title %><br>
+            </p>
+
+            <p>
+              <%= f.label :description %><br>
+              <%= f.text_area :description %><br>
+            </p>
+
+            <p>
+              <%= f.label :category, "Category" %>
+              <%= f.collection_select(:category, Category.all, :title, :title) %><br>
+            </p>
+
+            <script>
+                $('#forum_category').prepend('<option selected="selected">- Select a category -</option>');
+                $('#forum_category').append('<option value="Other">Other</option>');
+            </script>
+
+            <p>
+              <%= f.label :privacy, "Public" %>
+              <%= f.radio_button :privacy, "1" %><br>
+              <%= f.label :privacy, "Private" %>
+              <%= f.radio_button :privacy, "2" %><br>
+            </p>
+
+            <p>
+              <%= f.submit "Create Forum", class: "btn btn-primary" %>
+            </p>
 
 
-
-
-
-
-
-
-
-
-
-
-    <%= form_for :forum, url: forums_path do |f| %>
-
-  <% if @forum.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@forum.errors.count, "error") %> prohibited
-        this article from being saved:
-      </h2>
-      <ul>
-        <% @forum.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %><br>
-  </p>
-
-  <p>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %><br>
-  </p>
-
-  <p>
-    <%= f.label :category, "Category" %>
-    <%= f.collection_select(:category, Category.all, :title, :title) %><br>
-    <label id="catLabel" style="visibility:hidden;">Please specify:</label>
-    <%= f.text_field :category, :id => 'cat', :name => 'forum[other_category]', :style => 'visibility:hidden;' %>
-  </p>
-
-  <script>
-      $('#forum_category').prepend('<option selected="selected">- Select a category -</option>');
-      $('#forum_category').append('<option value="Other">Other</option>');
-  </script>
-
-  <p>
-    <%= f.label :privacy, "Public" %>
-    <%= f.radio_button :privacy, "1" %><br>
-    <%= f.label :privacy, "Private" %>
-    <%= f.radio_button :privacy, "2" %><br>
-  </p>
-
-  <p>
-    <%= f.submit "Create Forum" %>
-  </p>
-
-
-<% end %>
+          <% end %>
                 </tbody>
             </table>
 

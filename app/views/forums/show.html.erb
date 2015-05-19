@@ -79,6 +79,11 @@
 				</div>
 			</div>
 		</div>
+	</br>
+			<div class="btn-group" style="margin-left: 675px;">
+			    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#forum_members">Members</button>
+			    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#forum_admins">Admin(s)</button>
+		  </div>
 	</div>
 
 	<div class="container">
@@ -314,6 +319,31 @@
 	</div>
 
 
+
+  		<div class="modal fade" id="post_idea" role="dialog">
+    		<div class="modal-dialog">
+      <!-- Modal content-->
+      			<div class="modal-content" style="margin: 170px auto; width: 450px;">
+        			<div class="modal-header">
+          				<button type="button" class="close" data-dismiss="modal">&times;</button>
+        			</div>
+        		</br> </br>
+	        	<form action="<%=  %>">
+		        	<div style="width: 400px; margin-left: 30px;">
+		        		<div class="field left-inner-addon">
+		        			<%= form_tag("/forums/:forum_id/ideas", method: "post") do %>
+								<%= text_field_tag(:title, value =nil,:placeholder => "Title", :class => 'form-control' ) %>
+								<%= text_field_tag(:text, value =nil,:placeholder => "Text", :class => 'form-control' ) %>
+								<%= hidden_field_tag(:forum_id, params[:forum_id]) %>
+								<%= submit_tag("Post", :class => 'btn btn-primary') %>
+							<% end %>
+					   	</div> 
+		        	</br></br>
+	        	</form>
+      			</div>
+    		</div>
+  		</div>
+
 	<div class="modal fade" id="forum_admins" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
@@ -334,6 +364,7 @@
 			</div>
 		</div>
 	</div>
+
 
 </body>
 </html>
