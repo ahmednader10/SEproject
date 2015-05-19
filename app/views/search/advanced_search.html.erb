@@ -13,12 +13,15 @@
 	</head>
 	<body>
 
-	<%= render "/shared/navbarloggedin" %>
 
-		<div style="margin-left:500px;">
-			<div style="position:absolute;top:100px;"><h4> Advanced Search: </h4>
-	
-			<%= form_tag("/search", { class: 'form-class', id: 'form-id', role: 'form', method: 'post' }) do %>
+
+	<% if current_user != nil%>
+		<%= render "/shared/navbarloggedin" %>
+	<% elsif session[:sysadmin] == "true" %>
+		<%= render "/shared/navbar_sys_admin" %>
+	<% end %>
+	<div style="position:absolute;top:100px;"><h4> Advanced Search: </h4>
+		<%= form_tag("/search", { class: 'form-class', id: 'form-id', role: 'form', method: 'post' }) do %>
 			<%= text_field_tag(:q, value =nil,:placeholder => "Looking for something?", :class => 'form-control' ) %>
 			<%= label_tag(:type, "Search for a type:" ) %>
 			<%= select_tag(:type, "<option>All</option><option>Users</option><option>Forums</option><option>Ideas</option>".html_safe, {:class => 'form-control'} ) %>
