@@ -304,13 +304,16 @@
           				<button type="button" class="close" data-dismiss="modal">&times;</button>
         			</div>
         		</br> </br>
-	        	<form action="<%= root_path %>">
+	        	<form action="<%=  %>">
 		        	<div style="width: 400px; margin-left: 30px;">
 		        		<div class="field left-inner-addon">
-		        			<%= form_for(@idea) do |f| %>
-					   			<i class="glyphicon glyphicon-sunglasses"></i>
-					   			<%= f.text_field :full_name, class: 'form-control', placeholder: "Full Name" %><br>
-					   		</div> 
+		        			<%= form_tag("/forums/:forum_id/ideas", method: "post") do %>
+								<%= text_field_tag(:title, value =nil,:placeholder => "Title", :class => 'form-control' ) %>
+								<%= text_field_tag(:text, value =nil,:placeholder => "Text", :class => 'form-control' ) %>
+								<%= hidden_field_tag(:forum_id, params[:forum_id]) %>
+								<%= submit_tag("Post", :class => 'btn btn-primary') %>
+							<% end %>
+					   	</div> 
 		        	</br></br>
 	        	</form>
       			</div>
