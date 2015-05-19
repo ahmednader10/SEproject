@@ -3,7 +3,7 @@ class SearchController < ApplicationController
 	def search
 		# This part is for the normal search
 		if params[:searchtype] == 'normal'
-			if current_user != nil && params[:q] != nil
+			if (current_user != nil || session[:sysadmin] == "true") && params[:q] != nil
 				Action.create(info: current_user.username + ' has made the following search query : (' + params[:q] + ') for (type:' + params[:type] + ').', user_email: current_user.email)		
 				if params[:type] == 'All'
 					@results = User.where("UPPER(username) LIKE ('%' || UPPER(:q) || '%') OR UPPER(full_name) LIKE ('%' || UPPER(:q) || '%')", q: params[:q])
@@ -19,7 +19,7 @@ class SearchController < ApplicationController
 			end
 		# This part is for the advanced search
 		elsif params[:searchtype] == 'advanced'
-			if current_user != nil && params[:q] != nil
+			if (current_user != nil || session[:sysadmin] == "true") && params[:q] != nil
 				Action.create(info: current_user.username + ' has made the following advanced search query : (' + params[:q] + ') for (type:' + params[:type] + ').', user_email: current_user.email)
 				if params[:fromyear] == ''
 					fromYear = Time.new(0).year
