@@ -17,6 +17,12 @@ class ForumsController < ApplicationController
 		
 		sleep 1
 		@forum = Forum.find(params[:id])
+
+		@ideas = []
+		if !Idea.where(forum_id: params[:id]).empty?
+			@ideas.concat(Idea.where(forum_id: params[:id]))
+		end
+		@comment = Comment.new
 	end
 
 	# Renders the page for creating a forum.

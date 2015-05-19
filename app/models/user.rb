@@ -1,39 +1,44 @@
 
 class User < ActiveRecord::Base
 
-	validates :email, :username, :presence => true
-	validates :password, :presence => true
-	validates :password, :confirmation => true
-	validates :email, :username, :uniqueness => true
-	validates :password, :length => { :minimum => 8 }
-	validates :answer_for_password_question, :presence => true
+	validates :email, :username, presence: true
+	validates :password, confirmation: true
+	validates :password, presence: true
+	validates :email, :username, uniqueness: true
+	validates :password, length: { minimum: 8 }
+	validates :answer_for_password_question, presence: true
 
 
 	validates :privacy, inclusion: { in: [1,2] }
 	
-	has_many :memberships, :dependent => :destroy
+	has_many :memberships, dependent: :delete_all
 	has_many :membershipForums, class_name: 'Forum', through: :memberships, source: :forum
 
-  	has_many :friends, :through => :friendships 
-	has_many :requested_friends, :through => :friendships, :source => :friend
-	has_many :pending_friends, :through => :friendships, :source => :friend
-	has_many :friendships, :dependent => :destroy
-    has_many :blockers, :dependent => :destroy, foreign_key: :blocker_id 
-    has_many :bfriends , :through => :blockers , source: :friend
-    has_many :report_users , :dependent => :destroy, foreign_key: :reporter_id
-    has_many :rfriends , :through => :report_users , source: :friend
+  	has_many :friends, through: :friendships 
+	has_many :requested_friends, through: :friendships, :source => :friend
+	has_many :pending_friends, through: :friendships, :source => :friend
+	has_many :friendships, dependent: :delete_all
+    has_many :blockers, dependent: :delete_all
+    has_many :bfriends, through: :blockers , source: :friend
+    has_many :report_users, dependent: :delete_all
+    has_many :rfriends, through: :report_users , source: :friend
 
 
 
-	has_many :admins, :dependent => :destroy
+	has_many :admins, dependent: :delete_all
 	has_many :adminForums, class_name: 'Forum', through: :admins, source: :forum
 
-	has_many :ideas, :dependent => :destroy
+	has_many :ideas
 	has_many :ideaForums, class_name: 'Forum', through: :ideas, source: :forum
 
-	has_many :comments, :dependent => :destroy
+	has_many :comments, dependent: :delete_all
 	has_many :ideas, through: :comments
 
+	has_many :likeideas, dependent: :delete_all
+	has_many :ideas, through: :likeideas
+
+	has_many :actions
+	has_many :notifications, dependent: :delete_all
 
 	has_attached_file :image ,:default_url => "missing.png",
 							 :styles =>{

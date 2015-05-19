@@ -5,18 +5,30 @@
 		</div>
 		<div>
 			<ul class="nav navbar-nav">
-				<li><input class="form-control" type="text" placeholder="Looking for something?" style="margin-top: 9px; width: 250px;"></a></li>
-        <li><button class=""></li>
+				<li>
+			
+				<!-- <input class="form-control" type="text" placeholder="Looking for something?" style="margin-top: 9px; width: 250px;"> -->
+			<div class="field form-group">
+			<%= form_tag '/search', { class: 'form-class', id: 'form-id', role: 'form', method: 'post' } do %>
+			<%= text_field_tag(:q, value =nil,:placeholder => "Looking for something?", :class => 'form-control' ) %>
+			<p style="position:absolute; top:0px; left:200px;"><%= select_tag(:type, "<option>All</option><option>Users</option><option>Forums</option><option>Ideas</option>".html_safe, :class => 'selectpicker') %>
+					<%= hidden_field_tag(:searchtype, "normal" ) %>
+						<% submit_tag("Search", :class => 'btn btn-primary') %>
+						<%= link_to "Advanced search", "/advancedsearch" , class: 'btn btn-xs' %>
+		</p>		<% end %>		
+			</div>
+				</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				
     				<li><a href="#">Notifications</a></li>
+    				<li><a href="/forums">Forums</a></li>
     				<li class="dropdown">
 						<a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-						<% if @current_user.uid == nil %>
-							<%= @current_user.full_name %>
+						<% if current_user.uid == nil %>
+							<%= current_user.full_name %>
 					<% else %>
-							<%= @current_user.name %>
+							<%= current_user.name %>
 						<% end %>
 						 <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">

@@ -1,3 +1,137 @@
+<% if session[:sysadmin] %>  
+<%= link_to 'Sign out', root_path %>
+<%= link_to 'back', forums_sysadmins_path %>
+<% end %>
+
+<div class="headerlist">
+<ul id="menu">
+<li> Logo</li>
+
+ <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
+ <% if current_user != nil %>
+ <li><%= link_to "friend requests" , friendships_path %></li>
+ <li> <%= link_to "My Profile" , user_path(current_user.id) %> </li>
+ 
+ <li><%= link_to "notifications" ,user_notifications_path %> </li> 
+ 
+
+ <li><%= link_to "Log out", logout_path, method: :delete %></li>
+ <% if !Admin.where(user_id: current_user.id).empty? %>
+ <li><%= link_to "requests to join my forums",:controller => "users" ,:action => :admin_join_forums_requests %> </li>
+ <% end %>
+ <% end %>
+
+</div>
+
+<p>
+  <strong>Title:</strong>
+  <%= @forum.title %>
+</p>
+ 
+<p>
+  <strong>Text:</strong>
+  <%= @forum.description %>
+</p>
+
+<p>
+  <strong>Privacy:</strong>
+  <% if @forum.privacy == "1" %>
+  Public
+  <% elsif @forum.privacy == "2" %>
+  Private
+  <% end %>
+
+  <!-- check if already joined or pending request -->
+  <% y = Forum.where(id: params[:id]) %>
+  <% if !Membership.where(user_id: current_user.id , forum_id: y.first.id, accept: nil).empty? %>
+    <div class="alert alert-info">
+      Pending request.
+   </div>
+ <% elsif session[:sysadmin] or Membership.where(user_id: current_user.id , forum_id: y.first.id, accept: true).empty? %>
+
+  <% if @forum.privacy == "1" and !session[:sysadmin] %>
+  <%= button_to('Join Forum', join_forum_path(@forum),
+            method: "post",  data: { disable_with: 'Joining...' }) %>
+  <% elsif @forum.privacy == "2" and !session[:sysadmin] %>
+  <%= button_to('Request joining forum', join_forum_path(@forum),
+            method: "post",  data: { disable_with: 'Pending...' }) %>
+  <% end %>
+  <% end %>
+  
+  <% if flash[:success] %>
+    <div class="alert alert-success">
+      <a href='' class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Success!</strong> Successfully joined Forum.
+    </div>
+  <% end %>
+  <% if flash[:member] %>
+    <div class="alert alert-info">
+      <a href='' class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      You're already member of this Forum
+    </div>
+ <% end %>
+  <% if flash[:requestsent] %>
+    <div class="alert alert-warning">
+     <a href='' class="close" data-dismiss="alert" aria-label="close">&times;</a>
+     You've already sent request to join this Forum.
+    </div>
+  <% end %>
+  <% if flash[:pending] %>
+    <div class="alert alert-info">
+      <a href='' class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      Pending request.
+    </div>
+  <% end %>
+
+    <ul>
+        <% if session[:sysadmin] %>
+            <% Idea.where(forum_id: params[:id]).each do |idea| %>
+        <li>
+            <%= link_to idea.title , forum_idea_path(@forum.id, idea.id) %>
+        </li>
+        <%end%>        
+        <% elsif @forum.privacy == "1" and Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
+              <% Idea.where(forum_id: params[:id]).each do |idea| %>
+              <li>
+                  <%=  idea.title %>
+              </li>
+              <%end%>
+        <% elsif (@forum.privacy == "1" and (session[:sysadmin] || !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?)) %>
+                <% Idea.where(forum_id: params[:id]).each do |idea| %>
+        <li>
+            <%= link_to idea.title , forum_idea_path(@forum.id, idea.id) %>
+        </li>
+        <%end%>
+        <% elsif (@forum.privacy == "2" and (session[:sysadmin] or !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?)) %>
+
+        <% Idea.where(forum_id: params[:id]).each do |idea| %>
+        <li>
+            <%= link_to idea.title , forum_idea_path(@forum.id, idea.id) %>
+        </li>
+        <%end%>
+        <%end%>
+
+    </ul>
+</tr></table>
+<% if !session[:sysadmin] %>
+  <%= link_to 'Post an idea', new_forum_idea_path(@forum) %>
+<% end %>
+<br>
+<% if session[:sysadmin] or Admin.exists?(user_id: current_user.id, forum_id: params[:id]) %>
+  <%= link_to "add new admin", admin_to_be_path %>
+<% end %>
+<br>
+<%= link_to "View Forum Members", list_members_path %>
+
+</p>
+
+ 
+   
+
+
+
+  
+
 <!DOCTYPE html>
 <html lang="en">
   <head>

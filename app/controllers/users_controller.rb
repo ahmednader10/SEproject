@@ -84,7 +84,41 @@ class UsersController < ApplicationController
 
     #opens the profile view of the user
  def profile
-   @user = current_user
+  @user = current_user
+  user = User.find(params[:id])
+  friendships = Friendship.where(user_id: user.id)
+  friendships += Friendship.where(friend_id: user.id)
+  @friends = []
+  @pending = []
+  friendships.each do |friendship|
+    if friendship.status == true
+      if friendship.user_id == user.id
+        @friends += [User.find(friendship.friend_id)]
+      else
+        @friends += [User.find(friendship.user_id)]
+      end
+    elsif friendship.status == nil
+      if friendship.user_id == user.id
+        @pending += [User.find(friendship.user_id)]
+      end
+    end
+  end
+  @user = current_user
+    @requests_forums = []
+    @requests_users = []
+    # check if user is admin
+    admin_forums = Admin.where(user_id: @user.id)
+    if admin_forums != nil
+      admin_forums.each do |admin_forum|
+        requests_ids = Membership.where(forum_id: admin_forum.forum_id , accept: nil)
+        if !requests_ids.empty?
+          requests_ids.each do |r|
+            @requests_forums.concat(Forum.where(id: r.forum_id))
+            @requests_users.concat(User.where(id: r.user_id))
+          end
+        end
+      end
+    end 
  end
 
      
@@ -110,6 +144,7 @@ class UsersController < ApplicationController
     @membership1.first.save
     Action.create(info: current_user.username + ' has accepted ' + @user.username + "'s join request to forum: (" + @forum.title + ').', user_email: current_user.email)
     redirect_to(:action => "admin_join_forums_requests")
+
   end
 
   # reject_join_request method gets parameters of the user and the forum from the url and 

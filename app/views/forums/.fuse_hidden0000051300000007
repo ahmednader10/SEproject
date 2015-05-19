@@ -1,0 +1,92 @@
+  <div class="headerlist">
+<ul id="menu">
+<li> Logo</li>
+
+ <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
+ <% if current_user != nil %>
+ <li><%= link_to "friend requests" , friendships_path %></li>
+ <li> <%= link_to "My Profile" , user_path(current_user.id) %> </li>
+ 
+ <li><%= link_to "notifications" ,user_notifications_path %> </li> 
+ 
+ 
+
+ <li><%= link_to "Log out", logout_path, method: :delete %></li>
+ <% if !Admin.where(user_id: current_user.id).empty? %>
+ <li><%= link_to "requests to join my forums",:controller => "users" ,:action => :admin_join_forums_requests %> </li>
+ <% end %>
+ <% end %>
+
+</ul>  
+</div>
+<h1>Create New Forum</h1>
+
+<%= form_for :forum, url: forums_path do |f| %>
+
+  <% if @forum.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@forum.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @forum.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %><br>
+  </p>
+ 
+  <p>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %><br>
+  </p>
+
+  <p>
+    <%= f.label :category, "Category" %>
+    <%= f.collection_select(:category, [Category.new(title: '- Select a category -')] + Category.all + [Category.new(title: 'Other')], :title, :title) %><br>
+    <label id="catLabel" style="visibility:hidden;">Please specify:</label>
+    <%= f.text_field :category, :id => 'cat', :name => 'forum[other_category]', :style => 'visibility:hidden;' %>
+  </p>
+
+  <script>
+    $(document).ready(function() {
+      // $('#forum_category').prepend('<option selected="selected">- Select a category -</option>');
+      // $('#forum_category').append('<option value="Other">Other</option>');
+      document.getElementById("forum_category").onchange = function() {
+        var field = document.getElementById("cat");
+        var label = document.getElementById("catLabel");
+        if (this.value === "Other") {
+          field.style.visibility = "visible";
+          label.style.visibility = "visible";
+        }
+        else {
+          field.style.visibility = "hidden";
+          label.style.visibility = "hidden";
+        }
+      }  
+    })
+  </script>
+
+  <p>
+    <%= f.label :privacy, "Public" %>
+    <%= f.radio_button :privacy, "1" %><br>
+    <%= f.label :privacy, "Private" %>
+    <%= f.radio_button :privacy, "2" %><br>
+  </p>
+ 
+  <p>
+    <%= f.submit "Create Forum" %>
+  </p>
+
+  <p>
+    <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
+  </p>
+<% end %>

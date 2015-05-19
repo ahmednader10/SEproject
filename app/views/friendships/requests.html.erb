@@ -1,0 +1,5 @@
+<ul>
+	<% @requesters.each do |requester| %>
+		<%= link_to requester.username, user_path(requester) %>
+	<% end %>
+</ul>
