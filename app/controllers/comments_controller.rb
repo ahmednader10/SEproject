@@ -34,7 +34,7 @@ class CommentsController < ApplicationController
 	end
 # used to allow user to report a certain comment
 	def reportcomment
-	@forum = Forum.find(params[:forum_id])
+		@forum = Forum.find(params[:forum_id])
 		@user = current_user
 		@idea = Idea.find(params[:idea_id])
 		@comment = Comment.find(params[:id])
@@ -50,6 +50,18 @@ class CommentsController < ApplicationController
       	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
 	end
 
+	def unreportcomment 
+		@user = current_user
+		@forum = Forum.find(params[:forum_id])
+		@idea = Idea.find(params[:idea_id])
+		@comment = Comment.find(params[:id])
+		if !Reportcomment.where(user_id: @user.id, idea_id: @idea, comment_id: @comment).empty?
+			@reportcomment = Reportcomment.where(user_id: @user.id, idea_id: @idea, comment_id: @comment)
+			@reportcomment.destroy
+			flash[:notice] = "Comment has been unreported!"
+		end	
+		redirect_to forum_idea_path(@forum, @idea)
+	end 
 # used to allow user to delete his comments
 	def destroy
 		@forum = Forum.find(params[:forum_id])
