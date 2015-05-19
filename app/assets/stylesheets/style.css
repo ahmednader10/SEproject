@@ -292,3 +292,17 @@ border: 3px solid #ffaca6;
     font-size:2em;
     vertical-align:middle;
 }
+
+p{
+  font-size: 14px;
+  margin: 30px;
+  white-space:nowrap;
+  overflow: hidden;
+  width: 30em;
+  animation: type 5s steps(50, end) 1;  
+}
+
+/* let's animate, it's super easy */
+@keyframes type{
+  from{ font-size: 0;}
+}

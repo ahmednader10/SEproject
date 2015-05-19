@@ -35,8 +35,15 @@
           				<button type="button" class="close" data-dismiss="modal">&times;</button>
           				<h3 style="text-align: center;">Requests to join my forums</h3>
           			</br>
-          			<table>
-  
+          			<table >
+  						<thead>
+  							<tr>
+  								<td>Forum</td>
+  								<td> &nbsp; &nbsp; &nbsp; &nbsp; User</td>
+  								
+  							</tr>
+  						</thead>
+  						
 							  <% if @requests_forums.empty? %>
 							  <p> No new requests </p>
 							  <% else %>
@@ -49,19 +56,20 @@
 							      		<%= link_to @requests_forums[i].title, forum_path(@requests_forums[i].id) %>
 							      </td>
 							      <td>
-							        
+							        	&nbsp; &nbsp; &nbsp; &nbsp;
 							          <%= link_to @requests_users[i].full_name,"#{@requests_users[i].id}" %>
 							          
 							      </td>
 
           					
 							     
-							      <td><a href="/users/accept_join_request?forum= <%= @requests_forums[i].id %>&user= <%= @requests_users[i].id %>" style="color: green;"><i class="glyphicon glyphicon-ok"></i></a></td>
+							      <td><a href="/users/accept_join_request?forum= <%= @requests_forums[i].id %>&user= <%= @requests_users[i].id %>" style="color: green;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+							      	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<i class="glyphicon glyphicon-ok"></i></a></td>
 							         <!--  <%= link_to "[Accept]", "/users/accept_join_request?forum=#{@requests_forums[i].id}&user=#{@requests_users[i].id}" %> |-->
 							      </td>
 							      <td>
 							            <!--<%= link_to "[Reject]", "/users/reject_join_request?forum=#{@requests_forums[i].id}&user=#{@requests_users[i].id}" %> -->
-							            <td><a href="/users/reject_join_request?forum=<%= @requests_forums[i].id %>&user=<%= @requests_forums[i].id %>" style="color: red;"><i class="glyphicon glyphicon-remove"></i></a></td>
+							            <td> &nbsp; <a href="/users/reject_join_request?forum=<%= @requests_forums[i].id %>&user=<%= @requests_forums[i].id %>" style="color: red;"><i class="glyphicon glyphicon-remove"></i></a></td>
 							      </td>
 							            <% end %>
 
@@ -219,10 +227,7 @@
 			  <li><a data-toggle="tab" href="#requests">Requests <span class="badge"><%= Friendship.where(friend_id: User.find(params[:id])).count %></span></a></li>
 			  <li><a data-toggle="tab" href="#forums">Forums <span class="badge"><%= Membership.where(user_id: current_user.id, accept: true).count %></span></a></li>
 			  <li><a data-toggle="tab" href="#ideas">Ideas <span class="badge"><%= Idea.where(user_id: current_user.id).count %></span></a></li>
-			 <% if !Admin.where(user_id: current_user.id).empty? %>
-			    <li><a data-toggle="tab" href="#join_requests">Requests to join my forums></a></li>
-		        <!--<li><%= link_to "requests to join my forums", :action => :admin_join_forums_requests %> </li>-->
-		      <% end %>
+			 
 			</ul>
 			<div class="tab-content">
 			  <div id="friends" class="tab-pane fade in active">
