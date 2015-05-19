@@ -60,6 +60,7 @@ class ForumsController < ApplicationController
 
   				membership.accept = true
   				membership.save
+  				@forum.increment!(:user_count, by = 1)
 
   				Action.create(info: (@user.username + ' has created a new forum: (' + @forum.title + ').'), user_email: @user.email)
 
@@ -200,6 +201,7 @@ class ForumsController < ApplicationController
 			@membership = @forum.memberships.build(user: @user)
 			if @forum.privacy == '1'
 				Action.create(info: @user.username + ' has joined the forum: (' + @forum.title + ').', user_email: @user.email)
+				@forum.increment!(:user_count, by = 1)
 			else
 				Action.create(info: @user.username + ' has requested to join the forum: (' + @forum.title + ').', user_email: @user.email)
 			end
