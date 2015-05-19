@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-	<div style="background: #F6F9FB">
-
-	<head>
+		<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -22,6 +20,9 @@
 			<div class="profileImg" style="margin-top: -136px; margin-left: 80px">
 				<%= image_tag 'bulb.jpg', class: "imgcircle", width: "215", height: "200", border: "10" %>
 			</div>
+
+		</div>
+
 		
 			<div class="col-sm-4 info" style="border: thin solid rgb(75, 89, 109); border-radius: 50px; margin-top: 30px">
 				<h3 style="text-align: center;">
@@ -44,14 +45,13 @@
 						</table> 
 			</div>
 
-
 		<div class="col-sm-8 info" style= "margin-top: -90px; background: #F6F9FB">
 			<% if Admin.find_by(user_id: current_user.id) != nil %>
 					<button data-toggle="modal" data-target="#admin_requests" class="btn btn-primary" style="margin-left: 625px;">Requests to join my forums</button>
 				<% end %>
 			<ul class="nav nav-tabs">
 			  <li class="active"><a data-toggle="tab" href="#friends">Friends <span class="badge"><%= User.find(params[:id]).friend_count %></span></a></li>
-			  <li><a data-toggle="tab" href="#requests">Requests <span class="badge"><%= Friendship.where(friend_id: User.find(params[:id])).count %></span></a></li>
+			  <li><a data-toggle="tab" href="#requests">Requests <span class="badge"><%= Friendship.where(friend_id: User.find(params[:id]), status: nil).count %></span></a></li>
 			  <li><a data-toggle="tab" href="#forums">Forums <span class="badge"><%= Membership.where(user_id: current_user.id, accept: true).count %></span></a></li>
 			  <li><a data-toggle="tab" href="#ideas">Ideas <span class="badge"><%= Idea.where(user_id: current_user.id).count %></span></a></li>
 			</ul>
@@ -59,31 +59,41 @@
 			  <div id="friends" class="tab-pane fade in active">
 			    <table class="table table-hover">
 				    <tbody>
+						
           				<%= render template: "friendships/index" %>
 				    </tbody>
 				</table> 
 			  </div>
+			  
 			  <div id="requests" class="tab-pane fade">
 			    <table class="table table-hover">
 				    <tbody>
-						<% users = User.all %>
+						<% requests = Friendship.where(friend_id: params[:id], status: nil) %>
+						<% users = [] %>
+						<% requests.each do |request| %>
+							<% users += [User.find(request.user_id)] %>
+						<% end %>
           				<% users.each do |user| %>
           				<tr>
+          					<% friendship = Friendship.where(friend_id: params[:id], user_id: user.id).first %>
           					<td><a href="<%= profile_path(user.id) %>"><%= user.full_name %></a></td>
-          					<td><a href="#" style="color: green;"><i class="glyphicon glyphicon-ok"></i></a></td>
-          					<td><a href="#" style="color: red;"><i class="glyphicon glyphicon-remove"></i></a></td>
+          					<td><a href="<%= '/friendships/' + friendship.id.to_s + '/accept' %>" style="color: green;"><i class="glyphicon glyphicon-ok"></i></a></td>
+          					<td><a href="<%= '/friendships/' + friendship.id.to_s + '/reject' %>" style="color: red;"><i class="glyphicon glyphicon-remove"></i></a></td>
 						</tr>
           				<% end %>
 				    </tbody>
 				</table>  
 			  </div>
 			  <div id="forums" class="tab-pane fade">
+			  	<%  x =Membership.where(user_id: @current_user.id) %>
+			    <% if x.size == 0 %>
+						<em> you are not a member in any forums </em>
+				<% else %>
 			    <table width="371" height="51">
 					<tr>
 					  <th  id="forumcolum"> Joined Forum</th>
 					  <th id="ideatitlecolumn"> Description </th>
 					</tr>
-						<%  x =Membership.where(user_id: @current_user.id) %>
 						<% x.each do |membership| %>
 						<% y = Forum.find(membership.forum_id) %>
 						<% if !Membership.where(user_id: current_user.id , forum_id: y.id, accept: true).empty? %>
@@ -94,18 +104,19 @@
 					<% end %>
 					<%end%>
 				</table>
-					<% if x.size == 0 %>
-						<em> you are not a member in any forums </em>
-					<% end %>
+				<% end %>	
 			  </div>
 			  <div id="ideas" class="tab-pane fade">
+			  	<%  x = Idea.where(user: @current_user).order(:text) %>
+			    <% if x.size == 0 %>
+					<em> still Idealess </em>
+				<% else %>
 			    <table width="371" height="51">
 					<tr>
 					  <th width="57" id="ideatitlecolumn"> Title</th>
 					  <th width="160" id="ideacolumn"> Idea</th>
 					  <th width="110" id="forumcolum"> Forum</th>
 					</tr>
-						<%  x = Idea.where(user: @current_user).order(:text) %>
 						<% x.each do |idea| %>
 					<tr>
 						<td id="ideatitlecolumn"><%= link_to idea.title , forum_idea_path(idea.forum.id, idea.id) %></td>
@@ -114,10 +125,8 @@
 					</tr>
 					<% end %>
 				</table>
-					<% if x.size == 0 %>
-					<em> still Idealess </em>
-					<% end %>
-			  </div>
+				<% end %>
+				</div>
 			</div>
 			
 			<div style="margin-top:80px">
@@ -130,6 +139,9 @@
 				    </li>
 				    <li><a href="#">1</a></li>
 				    <li><a href="#">2</a></li>
+				    <li><a href="#">3</a></li>
+				    <li><a href="#">4</a></li>
+				    <li><a href="#">5</a></li>
 				    <li>
 				      <a href="#" aria-label="Next">
 				        <span aria-hidden="true">&raquo;</span>
@@ -385,5 +397,5 @@
 		<!-- End of modal-->
 
 	</body>
-</div>
+
 </html>
