@@ -31,7 +31,7 @@
     				Notifications
     				<span class="badge"><%= Notification.where(user_id: current_user.id, seen:false).count %></span>
     				 <span class="caret"></span></a>
-						<div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width:100px;">
+						<div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width:500px; position:absolute; text-align:center; left:-170px; border-radius:15px 15px 15px 15px;">
 							<div >
 								<% seenNotifications = [] %>
 								<% Notification.where(user_id: current_user.id).reverse_each do |notification| %>
@@ -42,8 +42,21 @@
 								<%end%>
 								<%end%>
 							</div>
-							<div style="border-top:black;">
-								<a href="/notifications"> see all notifications</a>
+							<div >
+
+								<%Notification.where(user_id: current_user.id).reverse_each do |notification| %>
+								<% if notification.seen and !seenNotifications.include? notification %>
+
+								<p>
+									<i  class="glyphicon glyphicon-star-empty"> </i><%= notification.info %> <%= link_to 'delete', ('notifications/' + notification.id.to_s), method: :delete %>
+								</p>
+								<% notification.update(seen: true) %>
+								<% seenNotifications += [notification] %>
+							<%end%>
+							<%end%>
+							</div>
+							<div style="border-top:1pt solid #aaa;">
+							<a href="/notifications"> see all notifications</a>
 							</div>
 						</div>
 					</li>
