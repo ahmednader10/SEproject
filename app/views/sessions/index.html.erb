@@ -10,12 +10,31 @@
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<style>
+			.animatedText { 
+			    white-space: nowrap;
+			    overflow: hidden;
+			    width: 100%;
+				-webkit-animation-name: type;
+				-webkit-animation-duration: 1.5s;
+				-webkit-animation-timing-function: steps(60, end);
+				animation-name: type;
+				animation-duration: 1.5s;
+				animation-timing-function: steps(60, end);
+			}
+
+			@-webkit-keyframes type {
+				from { width: 0; }
+			}
+
+			@keyframes type {
+				from { width: 0; }
+			}
+		</style>
 	</head>
 	<body style="background: #EEE;">
 		<%= render "/shared/navbar" %>
-
 		<br><br>
-
 		<div class="jumbotron other-color">
 			<div class="container-fluid">
 				<div class="row">
@@ -25,7 +44,7 @@
 					<div class="col-md-9 white-font">
 						<h1 class="lead" >iDea</h1>
 						<hr class="half-rule">
-						<p class="lead" style="font-size: 19px;">Share your ideas with the world.</p>
+						<p class="lead animatedText" style="width: 278px; margin-left: 326px;">Share your ideas with the world.</p>
 						<a data-toggle="modal" data-target="#signUp" class="btn btn-success btn-lg started-btn">Get Started</a>
 					</div>
 				</div>
