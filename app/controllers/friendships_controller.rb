@@ -40,6 +40,8 @@ end
 def accept
   friendship = Friendship.find(params[:id])
   firendship.update(status: true)
+  User.find(friendship.user_id).increment!(:friend_count, by = 1)
+  User.find(friendship.friend_id).increment!(:friend_count, by = 1)
   redirect_to request.original_url
 end
 

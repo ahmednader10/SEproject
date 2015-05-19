@@ -36,19 +36,17 @@
           				<h3 style="text-align: center;">Requests to join my forums</h3>
           			</br>
           			<table >
-  						<thead>
-  							<tr>
-  								<td>Forum</td>
-  								<td> &nbsp; &nbsp; &nbsp; &nbsp; User</td>
-  								
-  							</tr>
-  						</thead>
-  						
+
 							  <% if @requests_forums.empty? %>
 							  <p> No new requests </p>
 							  <% else %>
-							  
-							  <% for i in 0...@requests_forums.length %>
+							    	<thead>
+  										<tr>
+  											<td>Forum</td>
+  											<td> &nbsp; &nbsp; &nbsp; &nbsp; User</td>
+  										</tr>
+  									</thead>
+  								<% for i in 0...@requests_forums.length %>
 							    <tr>
 							      <% if  @requests_users[i] != nil %>
 							      <td>
@@ -264,12 +262,15 @@
 				</table>  
 			  </div>
 			  <div id="forums" class="tab-pane fade">
+			  	<%  x =Membership.where(user_id: @current_user.id) %>
+			    <% if x.size == 0 %>
+						<em> you are not a member in any forums </em>
+				<% else %>
 			    <table width="371" height="51">
 					<tr>
 					  <th  id="forumcolum"> Joined Forum</th>
 					  <th id="ideatitlecolumn"> Description </th>
 					</tr>
-						<%  x =Membership.where(user_id: @current_user.id) %>
 						<% x.each do |membership| %>
 						<% y = Forum.find(membership.forum_id) %>
 						<% if !Membership.where(user_id: current_user.id , forum_id: y.id, accept: true).empty? %>
@@ -280,18 +281,19 @@
 					<% end %>
 					<%end%>
 				</table>
-					<% if x.size == 0 %>
-						<em> you are not a member in any forums </em>
-					<% end %>
+				<% end %>	
 			  </div>
 			  <div id="ideas" class="tab-pane fade">
+			  	<%  x = Idea.where(user: @current_user).order(:text) %>
+			    <% if x.size == 0 %>
+					<em> still Idealess </em>
+				<% else %>
 			    <table width="371" height="51">
 					<tr>
 					  <th width="57" id="ideatitlecolumn"> Title</th>
 					  <th width="160" id="ideacolumn"> Idea</th>
 					  <th width="110" id="forumcolum"> Forum</th>
 					</tr>
-						<%  x = Idea.where(user: @current_user).order(:text) %>
 						<% x.each do |idea| %>
 					<tr>
 						<td id="ideatitlecolumn"><%= link_to idea.title , forum_idea_path(idea.forum.id, idea.id) %></td>
@@ -300,10 +302,8 @@
 					</tr>
 					<% end %>
 				</table>
-					<% if x.size == 0 %>
-					<em> still Idealess </em>
-					<% end %>
-			  </div>
+				<% end %>
+				</div>
 			</div>
 			
 			<div style="margin-top:80px">
