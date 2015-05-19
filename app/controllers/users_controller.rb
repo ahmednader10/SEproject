@@ -142,7 +142,7 @@ class UsersController < ApplicationController
     @membership1 = Membership.where(user_id: user , forum_id: forum)
     @membership1.first.accept = true
     @membership1.first.save
-    forum.increment!(:user_count, by = 1)
+    @forum.increment!(:user_count, by = 1)
     Action.create(info: current_user.username + ' has accepted ' + @user.username + "'s join request to forum: (" + @forum.title + ').', user_email: current_user.email)
     redirect_to(:action => "admin_join_forums_requests")
 
