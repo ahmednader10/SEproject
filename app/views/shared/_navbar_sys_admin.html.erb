@@ -4,7 +4,7 @@
 			<a class="navbar-brand" href="">iDea</a>
 		</div>
 		<div>
-			<ul class="nav navbar-nav" style="position:absolute; top:5px; left:420px;">
+			<ul class="nav navbar-nav" style="position:absolute; top:5px; left:180px;">
 				<li id="search">
 					<%= form_tag '/search', { class: 'form-class', id: 'form-id', role: 'form', method: 'post' } do %>
 			<%= text_field_tag(:q, value =nil,:placeholder => "Looking for something?", :class => 'form-control' ) %>
@@ -28,14 +28,22 @@
 			<li>
 				<%= link_to 'System log', '/syslog' %>
 			</li>
-  			<li>
-	  			<%= link_to 'control forums', forums_sysadmins_path %>
+			<li class="dropdown">
+					
+			<a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+						Control
+						 <span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+				<li role="presentation"><a role="menuitem" tabindex="-1" href="<%= sysadmins_show_path %>"><i class="fa fa-user"></i> Users</a></li>
+				<li role="presentation"><a role="menuitem" tabindex="-1" href="<%= forums_sysadmins_path %>"><i class="fa fa-folder-open"></i> Forums</a></li>
+			</ul>
+  			
   			</li>
   			<li>
   				<%= link_to 'logout', root_path %>
   			</li>
   			</ul>
-
+  			
 		</div>
 	</div>
 </nav>
