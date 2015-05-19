@@ -253,7 +253,7 @@
 						<% requests = Friendship.where(friend_id: params[:id], status: nil) %>
 						<% users = [] %>
 						<% requests.each do |request| %>
-							<% users += User.find(requests.friend_id) %>
+							<% users += [User.find(request.friend_id)] %>
 						<% end %>
           				<% users.each do |user| %>
           				<tr>
