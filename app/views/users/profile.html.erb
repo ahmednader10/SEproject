@@ -35,7 +35,45 @@
           				<button type="button" class="close" data-dismiss="modal">&times;</button>
           				<h3 style="text-align: center;">Requests to join my forums</h3>
           			</br>
-          				 
+          			<table>
+  
+							  <% if @requests_forums.empty? %>
+							  <p> No new requests </p>
+							  <% else %>
+							  
+							  <% for i in 0...@requests_forums.length %>
+							    <tr>
+							      <% if  @requests_users[i] != nil %>
+							      <td>
+							        
+							      		<%= link_to @requests_forums[i].title, forum_path(@requests_forums[i].id) %>
+							      </td>
+							      <td>
+							        
+							          <%= link_to @requests_users[i].full_name,"#{@requests_users[i].id}" %>
+							          
+							      </td>
+
+          					
+							     
+							      <td><a href="/users/accept_join_request?forum= <%= @requests_forums[i].id %>&user= <%= @requests_users[i].id %>" style="color: green;"><i class="glyphicon glyphicon-ok"></i></a></td>
+							         <!--  <%= link_to "[Accept]", "/users/accept_join_request?forum=#{@requests_forums[i].id}&user=#{@requests_users[i].id}" %> |-->
+							      </td>
+							      <td>
+							            <!--<%= link_to "[Reject]", "/users/reject_join_request?forum=#{@requests_forums[i].id}&user=#{@requests_users[i].id}" %> -->
+							            <td><a href="/users/reject_join_request?forum=<%= @requests_forums[i].id %>&user=<%= @requests_forums[i].id %>" style="color: red;"><i class="glyphicon glyphicon-remove"></i></a></td>
+							      </td>
+							            <% end %>
+
+							      </tr>
+
+
+							      
+							      <% end %>
+							    
+							  <% end %>
+							  </table>
+							          				 
           				
         			</div>
 
@@ -178,24 +216,31 @@
 		<div class="col-sm-9">
 			<ul class="nav nav-tabs">
 			  <li class="active"><a data-toggle="tab" href="#friends">Friends <span class="badge"><%= User.find(params[:id]).friend_count %></span></a></li>
-			  <li><a data-toggle="tab" href="#requests">Requests <span class="badge">4</span></a></li>
+			  <li><a data-toggle="tab" href="#requests">Requests <span class="badge"><%= Friendship.where(friend_id: User.find(params[:id])).count %></span></a></li>
 			  <li><a data-toggle="tab" href="#forums">Forums <span class="badge"><%= Membership.where(user_id: current_user.id, accept: true).count %></span></a></li>
 			  <li><a data-toggle="tab" href="#ideas">Ideas <span class="badge"><%= Idea.where(user_id: current_user.id).count %></span></a></li>
+			 
 			</ul>
 			<div class="tab-content">
 			  <div id="friends" class="tab-pane fade in active">
 			    <table class="table table-hover">
 				    <tbody>
-						<% users = User.all %>
+						<!--<% users = User.all %>
           				<% users.each do |user| %>
           				<tr>
           					<td><a href="<%= profile_path(user.id) %>"><%= user.full_name %></a></td>
           					<td><%= user.email %></td>
 						</tr>
-          				<% end %>
+          				<% end %>-->
+          				<%= render template: "friendships/index" %>
 				    </tbody>
 				</table> 
 			  </div>
+			  <!--<div id="join_requests" class="tab-pane fade in active">
+			    <table class="table table-hover">
+				   
+				</table> 
+			  </div>-->
 			  <div id="requests" class="tab-pane fade">
 			    <table class="table table-hover">
 				    <tbody>
