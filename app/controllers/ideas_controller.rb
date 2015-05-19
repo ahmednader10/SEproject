@@ -71,10 +71,6 @@ class IdeasController < ApplicationController
 		end
 	end
 
-	def createidea
-		Idea.create(user_id: current_user.id, title: params[:title], forum_id: params[:forum], text: params[:text])
-	end
-
 	#def not_joined_forum
 	#end
 
