@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
 	<title>Bootstrap Example</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-		<%= stylesheet_link_tag 'style' %>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<%= stylesheet_link_tag 'style' %>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 
 <body style="background: #EEE;">
 	<%= render "/shared/navbarloggedin" %>
-<div class="jumbotron forum-color" style="height: 730px;">
+	<div class="jumbotron forum-color" style="height: 730px;">
 		<div class="container-fluid" style="margin-top: 80px;">
 			<div class="row">
 				<div class="col-md-4">
@@ -26,314 +26,301 @@
 					<h3 style="font-weight: 400; margin-bottom: 5px;">&ndash;&ndash;&ndash;&ndash;&ndash; <%= @forum.title %> &ndash;&ndash;&ndash;&ndash;&ndash;</h3>
 					<p class="info">“<%= @forum.description %>”</p>
 					<% if @forum.privacy == "1" %>
-						<span class="text-muted" style="font-size: 13px;">Public • <%= @forum.category %></span><br>
+					<span class="text-muted" style="font-size: 13px;">Public • <%= @forum.category %></span><br>
 					<% elsif @forum.privacy == "2" %>
-						<span class="text-muted" style="font-size: 13px;">Private • <%= @forum.category %></span><br>
+					<span class="text-muted" style="font-size: 13px;">Private • <%= @forum.category %></span><br>
 					<% end %>
 					<% if @forum.privacy == "1" %>
-						
-						<% if !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
-							<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Joined</button>
-						<% else %>
 
-            		<form action="<%= join_forum_path(@forum) %>" method="post">
-            			<div>
-            				<button type="submit" class="btn btn-success load" data-joined-text="<i class='fa fa-check-circle'></i>&nbsp;&nbsp;Joined" id="join" style="margin-top: 18px;" data-loading-text="<i class='fa fa-spinner fa-spin'></i>&nbsp;&nbsp;Loading" autocomplete="off"><i class="fa fa-plus"></i>&nbsp;&nbsp;Join Forum</button>
-            				<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
-            			</div>
-            		</form>
-
-            		<% end %>
-
-					<% elsif @forum.privacy == "2" %>
-						
-
-						<% if !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
-							<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Joined</button>
-						<% elsif !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: nil).empty? %>
-							<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Request Sent</button>
-						<% else %>
+					<% if !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
+					<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Joined</button>
+					<% else %>
 
 					<form action="<%= join_forum_path(@forum) %>" method="post">
-        				<div>
-        					<button type="submit" class="btn btn-success load" data-joined-text="<i class='fa fa-check-circle'></i>&nbsp;&nbsp;Request Sent" id="join" style="margin-top: 18px;" data-loading-text="<i class='fa fa-spinner fa-spin'></i>&nbsp;&nbsp;Loading" autocomplete="off"><i class="fa fa-plus"></i>&nbsp;&nbsp;Request to Join Forum</button>
-        					<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
-        				</div>
-        			</form>
-
-        			<% end %>
+						<div>
+							<button type="submit" class="btn btn-success load" data-joined-text="<i class='fa fa-check-circle'></i>&nbsp;&nbsp;Joined" id="join" style="margin-top: 18px;" data-loading-text="<i class='fa fa-spinner fa-spin'></i>&nbsp;&nbsp;Loading" autocomplete="off"><i class="fa fa-plus"></i>&nbsp;&nbsp;Join Forum</button>
+							<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
+						</div>
+					</form>
 
 					<% end %>
+
+					<% elsif @forum.privacy == "2" %>
+
+
+					<% if !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
+					<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Joined</button>
+					<% elsif !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: nil).empty? %>
+					<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Request Sent</button>
+					<% else %>
+
+					<form action="<%= join_forum_path(@forum) %>" method="post">
+						<div>
+							<button type="submit" class="btn btn-success load" data-joined-text="<i class='fa fa-check-circle'></i>&nbsp;&nbsp;Request Sent" id="join" style="margin-top: 18px;" data-loading-text="<i class='fa fa-spinner fa-spin'></i>&nbsp;&nbsp;Loading" autocomplete="off"><i class="fa fa-plus"></i>&nbsp;&nbsp;Request to Join Forum</button>
+							<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
+						</div>
+					</form>
+
+					<% end %>
+
+					<% end %>
+
+					<br><br>
+
+					<div class="btn-group" style="margin-top: 10px">
+					    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#forum_members">Members</button>
+					    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#forum_admins">Admin(s)</button>
+				  </div>
+
 					<script>
-						$(document).ready(function(){
-    						$(".load").click(function(){
-    						    $(this).button('loading').delay(1000).queue(function(){
-         					    	$(this).button('joined');
-       	     						$(this).dequeue();
-       							});
-    						});
+					$(document).ready(function(){
+						$(".load").click(function(){
+							$(this).button('loading').delay(1000).queue(function(){
+								$(this).button('joined');
+								$(this).dequeue();
+							});
 						});
+					});
 					</script>
 				</div>
 				<div class="col-md-4">
 				</div>
 			</div>
 		</div>
+	</br>
 	</div>
 
 	<div class="container">
 		<% if !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
-			<% i = 0 %>
-			<% while i < @ideas.length %>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="panel panel-default">
-							<div class="panel-heading" style="height: 40px; background: #96BADA;">
-								<% if current_user.id == @ideas[i].user_id %>
-									<form id="myform1" action="<%= delete_idea_path(@forum.id, @ideas[i].id) %>" method="post">
-				        				<a href="#" onclick="document.getElementById('myform1').submit()"><i class="fa fa-trash-o fa-lg"></i></a>
-				        				<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
-				        			</form>
-				        		<% end %>
-								<div style="float: right;">
-									&nbsp;
-									<a href="<%= forum_idea_path(@forum.id, @ideas[i].id) %>"><i class="fa fa-arrow-up fa-rotate-90"></i></a>
-								</div>
-							</div>
-							<div class="panel-content">
-								<div class="container-fluid">
-									<div class="col-md-4" style="margin-left: -15px; margin-top: 15px; margin-bottom: 2px;">
-										<%= image_tag 'bulb.jpg', class: "img-circle", width: "155", height: "140", style: "margin-bottom: 14px; border-style: solid; border-width: 1px; border-color: #DCDCDC;" %>
-									</div>
-									<div class="col-md-8" style="margin-top: 10px; margin-left: 10px;">
-										<% user = User.find_by(id: @ideas[i].user_id) %>
-										<h6 class="lead" style="font-size: 14px;"><%= user.full_name %></h6>
-										<p><%= @ideas[i].title %></p>
-										<hr class="rule" style="margin-left: -10px;">
-										<div style="margin-bottom: 10px;">
-											<a href="#"><i class="fa fa-twitter fa-lg"></i></a>
-											&nbsp;
-											<a href="#"><i class="fa fa-facebook fa-lg"></i></a>
-											&nbsp;
-											<a href="#"><i class="fa fa-google-plus fa-lg"></i></a>
-											<div style="float: right;">
-
-
-												<form id="like1" action="<%= like_idea_path(@forum.id, @ideas[i].id) %>" method="post">
-							        				<a href="#" onclick="alert('You liked the idea!'); document.getElementById('like1').submit();"><i class="fa fa-heart"></i></a>
-							        				<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
-							        			</form>
-
-
-												&nbsp;
-												<a href="#" data-toggle="modal" data-target="#comment1"><i class="fa fa-comment"></i></a>
-												<!-- Modal -->
-										  		<div class="modal fade" id="comment1" role="dialog">
-										    		<div class="modal-dialog">
-										    
-										      		<!-- Modal content-->
-										      			<div class="modal-content" style="margin: 170px auto; width: 450px;">
-										        			<div class="modal-header" style="height: 250px;">
-										          				<button type="button" class="close" data-dismiss="modal">&times;</button>
-										          				<!-- <h4 class="modal-title">Modal Header</h4> -->
-										          				<h2 style="text-align: center; margin-bottom: 60px;">Post a comment</h2>
-														 		<%= form_for [@forum, @ideas[i], @comment] do |f| %>
-															       <div>
-															        <%= f.text_area :text, class: 'form-control' %><br>
-															        </div>
-															 
-															        <div style="float: right;">
-															         <%= f.submit "Post", class: 'btn btn-primary' %>
-															         <input type="button" value="Cancel" class="btn btn-primary" data-dismiss="modal" />
-															        </div>
-															      <%end%>
-										        			</div>
-										      			</div>
-										    		</div>
-										  		</div>
-												&nbsp;
-												<a href="#"><i class="fa fa-flag"></i></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>	
+		<% i = 0 %>
+		<% while i < @ideas.length %>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading" style="height: 40px; background: #96BADA;">
+						<% if current_user.id == @ideas[i].user_id %>
+						<form id="myform1" action="<%= delete_idea_path(@forum.id, @ideas[i].id) %>" method="post">
+							<a href="#" onclick="document.getElementById('myform1').submit()"><i class="fa fa-trash-o fa-lg"></i></a>
+							<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
+						</form>
+						<% end %>
+						<div style="float: right;">
+							&nbsp;
+							<a href="<%= forum_idea_path(@forum.id, @ideas[i].id) %>"><i class="fa fa-arrow-up fa-rotate-90"></i></a>
 						</div>
 					</div>
-					<% i = i+1 %>
-					<% if @ideas[i] != nil %>
-						<div class="col-md-6">
-							<div class="panel panel-default">
-								<div class="panel-heading" style="height: 40px; background: #96BADA;">
-									<% if current_user.id == @ideas[i].user_id %>
-										<form id="myform2" action="<%= delete_idea_path(@forum.id, @ideas[i].id) %>" method="post">
-					        				<a href="#" onclick="document.getElementById('myform2').submit()"><i class="fa fa-trash-o fa-lg"></i></a>
-					        				<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
-					        			</form>
-					        		<% end %>
+					<div class="panel-content">
+						<div class="container-fluid">
+							<div class="col-md-4" style="margin-left: -15px; margin-top: 15px; margin-bottom: 2px;">
+								<%= image_tag 'bulb.jpg', class: "img-circle", width: "155", height: "140", style: "margin-bottom: 14px; border-style: solid; border-width: 1px; border-color: #DCDCDC;" %>
+							</div>
+							<div class="col-md-8" style="margin-top: 10px; margin-left: 10px;">
+								<% user = User.find_by(id: @ideas[i].user_id) %>
+								<h6 class="lead" style="font-size: 14px;"><%= user.full_name %></h6>
+								<p><%= @ideas[i].title %></p>
+								<hr class="rule" style="margin-left: -10px;">
+								<div style="margin-bottom: 10px;">
+									<a href="#"><i class="fa fa-twitter fa-lg"></i></a>
+									&nbsp;
+									<a href="#"><i class="fa fa-facebook fa-lg"></i></a>
+									&nbsp;
+									<a href="#"><i class="fa fa-google-plus fa-lg"></i></a>
 									<div style="float: right;">
+
+
+										<form id="like1" action="<%= like_idea_path(@forum.id, @ideas[i].id) %>" method="post">
+											<a href="#" onclick="alert('You liked the idea!'); document.getElementById('like1').submit();"><i class="fa fa-heart"></i></a>
+											<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
+										</form>
+
+
 										&nbsp;
-										<a href="<%= forum_idea_path(@forum.id, @ideas[i].id) %>"><i class="fa fa-arrow-up fa-rotate-90"></i></a>
-									</div>
-								</div>
-								<div class="panel-content">
-									<div class="container-fluid">
-										<div class="col-md-4" style="margin-left: -15px; margin-top: 15px; margin-bottom: 2px;">
-											<%= image_tag 'bulb.jpg', class: "img-circle", width: "155", height: "140", style: "margin-bottom: 14px; border-style: solid; border-width: 1px; border-color: #DCDCDC;" %>
-										</div>
-										<div class="col-md-8" style="margin-top: 10px; margin-left: 10px;">
-											<% user = User.find_by(id: @ideas[i].user_id) %>
-											<h6 class="lead" style="font-size: 14px;"><%= user.full_name %></h6>
-											<p><%= @ideas[i].title %></p>
-											<hr class="rule" style="margin-left: -10px;">
-											<div style="margin-bottom: 10px;">
-												<a href="#"><i class="fa fa-twitter fa-lg"></i></a>
-												&nbsp;
-												<a href="#"><i class="fa fa-facebook fa-lg"></i></a>
-												&nbsp;
-												<a href="#"><i class="fa fa-google-plus fa-lg"></i></a>
-												<div style="float: right;">
+										<a href="#" data-toggle="modal" data-target="#comment1"><i class="fa fa-comment"></i></a>
+										<!-- Modal -->
+										<div class="modal fade" id="comment1" role="dialog">
+											<div class="modal-dialog">
 
+												<!-- Modal content-->
+												<div class="modal-content" style="margin: 170px auto; width: 450px;">
+													<div class="modal-header" style="height: 250px;">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<!-- <h4 class="modal-title">Modal Header</h4> -->
+														<h2 style="text-align: center; margin-bottom: 60px;">Post a comment</h2>
+														<%= form_for [@forum, @ideas[i], @comment] do |f| %>
+														<div>
+															<%= f.text_area :text, class: 'form-control' %><br>
+														</div>
 
-													<form id="like2" action="<%= like_idea_path(@forum.id, @ideas[i].id) %>" method="post">
-								        				<a href="#" onclick="alert('You liked the idea!'); document.getElementById('like2').submit()"><i class="fa fa-heart"></i></a>
-								        				<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
-								        			</form>
-
-
-													&nbsp;
-													<a href="#" data-toggle="modal" data-target="#comment2"><i class="fa fa-comment"></i></a>
-													<!-- Modal -->
-											  		<div class="modal fade" id="comment2" role="dialog">
-											    		<div class="modal-dialog">
-											    
-											      		<!-- Modal content-->
-											      			<div class="modal-content" style="margin: 170px auto; width: 450px;">
-											        			<div class="modal-header" style="height: 250px;">
-											          				<button type="button" class="close" data-dismiss="modal">&times;</button>
-											          				<!-- <h4 class="modal-title">Modal Header</h4> -->
-											          				<h2 style="text-align: center; margin-bottom: 60px;">Post a comment</h2>
-															 		<%= form_for [@forum, @ideas[i], @comment] do |f| %>
-																       <div>
-																        <%= f.text_area :text, class: 'form-control' %><br>
-																        </div>
-																 
-																        <div style="float: right;">
-																         <%= f.submit "Post", class: 'btn btn-primary' %>
-																         <input type="button" value="Cancel" class="btn btn-primary" data-dismiss="modal" />
-																        </div>
-																      <%end%>
-											        			</div>
-											      			</div>
-											    		</div>
-											  		</div>
-													&nbsp;
-													<a href="#"><i class="fa fa-flag"></i></a>
+														<div style="float: right;">
+															<%= f.submit "Post", class: 'btn btn-primary' %>
+															<input type="button" value="Cancel" class="btn btn-primary" data-dismiss="modal" />
+														</div>
+														<%end%>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-								</div>	
-							</div>
-						</div>
-						<% i = i+1 %>
-					<% end %>
-				</div>
-			<% end %>
-
-		<% elsif @forum.privacy == "1" and Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
-			<% i = 0 %>
-			<% while i < @ideas.length %>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="panel panel-default">
-							<div class="panel-heading" style="height: 40px; background: #96BADA;">
-							</div>
-							<div class="panel-content">
-								<div class="container-fluid">
-									<div class="col-md-4" style="margin-left: -15px; margin-top: 15px; margin-bottom: 2px;">
-										<%= image_tag 'bulb.jpg', class: "img-circle", width: "155", height: "140", style: "margin-bottom: 14px; border-style: solid; border-width: 1px; border-color: #DCDCDC;" %>
-									</div>
-									<div class="col-md-8" style="margin-top: 10px; margin-left: 10px;">
-										<% user = User.find_by(id: @ideas[i].user_id) %>
-										<h6 class="lead" style="font-size: 14px;"><%= user.full_name %></h6>
-										<p><%= @ideas[i].title %></p>
-										<hr class="rule" style="margin-left: -10px;">
+										&nbsp;
+										<a href="#"><i class="fa fa-flag"></i></a>
 									</div>
 								</div>
-							</div>	
+							</div>
 						</div>
 					</div>
-					<% i = i+1 %>
-					<% if @ideas[i] != nil %>
-						<div class="col-md-6">
-							<div class="panel panel-default">
-								<div class="panel-heading" style="height: 40px; background: #96BADA;">
-								</div>
-								<div class="panel-content">
-									<div class="container-fluid">
-										<div class="col-md-4" style="margin-left: -15px; margin-top: 15px; margin-bottom: 2px;">
-											<%= image_tag 'bulb.jpg', class: "img-circle", width: "155", height: "140", style: "margin-bottom: 14px; border-style: solid; border-width: 1px; border-color: #DCDCDC;" %>
+				</div>
+			</div>
+			<% i = i+1 %>
+			<% if @ideas[i] != nil %>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading" style="height: 40px; background: #96BADA;">
+						<% if current_user.id == @ideas[i].user_id %>
+						<form id="myform2" action="<%= delete_idea_path(@forum.id, @ideas[i].id) %>" method="post">
+							<a href="#" onclick="document.getElementById('myform2').submit()"><i class="fa fa-trash-o fa-lg"></i></a>
+							<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
+						</form>
+						<% end %>
+						<div style="float: right;">
+							&nbsp;
+							<a href="<%= forum_idea_path(@forum.id, @ideas[i].id) %>"><i class="fa fa-arrow-up fa-rotate-90"></i></a>
+						</div>
+					</div>
+					<div class="panel-content">
+						<div class="container-fluid">
+							<div class="col-md-4" style="margin-left: -15px; margin-top: 15px; margin-bottom: 2px;">
+								<%= image_tag 'bulb.jpg', class: "img-circle", width: "155", height: "140", style: "margin-bottom: 14px; border-style: solid; border-width: 1px; border-color: #DCDCDC;" %>
+							</div>
+							<div class="col-md-8" style="margin-top: 10px; margin-left: 10px;">
+								<% user = User.find_by(id: @ideas[i].user_id) %>
+								<h6 class="lead" style="font-size: 14px;"><%= user.full_name %></h6>
+								<p><%= @ideas[i].title %></p>
+								<hr class="rule" style="margin-left: -10px;">
+								<div style="margin-bottom: 10px;">
+									<a href="#"><i class="fa fa-twitter fa-lg"></i></a>
+									&nbsp;
+									<a href="#"><i class="fa fa-facebook fa-lg"></i></a>
+									&nbsp;
+									<a href="#"><i class="fa fa-google-plus fa-lg"></i></a>
+									<div style="float: right;">
+
+
+										<form id="like2" action="<%= like_idea_path(@forum.id, @ideas[i].id) %>" method="post">
+											<a href="#" onclick="alert('You liked the idea!'); document.getElementById('like2').submit()"><i class="fa fa-heart"></i></a>
+											<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
+										</form>
+
+
+										&nbsp;
+										<a href="#" data-toggle="modal" data-target="#comment2"><i class="fa fa-comment"></i></a>
+										<!-- Modal -->
+										<div class="modal fade" id="comment2" role="dialog">
+											<div class="modal-dialog">
+
+												<!-- Modal content-->
+												<div class="modal-content" style="margin: 170px auto; width: 450px;">
+													<div class="modal-header" style="height: 250px;">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<!-- <h4 class="modal-title">Modal Header</h4> -->
+														<h2 style="text-align: center; margin-bottom: 60px;">Post a comment</h2>
+														<%= form_for [@forum, @ideas[i], @comment] do |f| %>
+														<div>
+															<%= f.text_area :text, class: 'form-control' %><br>
+														</div>
+
+														<div style="float: right;">
+															<%= f.submit "Post", class: 'btn btn-primary' %>
+															<input type="button" value="Cancel" class="btn btn-primary" data-dismiss="modal" />
+														</div>
+														<%end%>
+													</div>
+												</div>
+											</div>
 										</div>
-										<div class="col-md-8" style="margin-top: 10px; margin-left: 10px;">
-											<% user = User.find_by(id: @ideas[i].user_id) %>
-											<h6 class="lead" style="font-size: 14px;"><%= user.full_name %></h6>
-											<p><%= @ideas[i].title %></p>
-											<hr class="rule" style="margin-left: -10px;">
-										</div>
+										&nbsp;
+										<a href="#"><i class="fa fa-flag"></i></a>
 									</div>
-								</div>	
+								</div>
 							</div>
 						</div>
-						<% i = i+1 %>
-					<% end %>
+					</div>
 				</div>
+			</div>
+			<% i = i+1 %>
 			<% end %>
+		</div>
+		<% end %>
+
+		<% elsif @forum.privacy == "1" and Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
+		<% i = 0 %>
+		<% while i < @ideas.length %>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading" style="height: 40px; background: #96BADA;">
+					</div>
+					<div class="panel-content">
+						<div class="container-fluid">
+							<div class="col-md-4" style="margin-left: -15px; margin-top: 15px; margin-bottom: 2px;">
+								<%= image_tag 'bulb.jpg', class: "img-circle", width: "155", height: "140", style: "margin-bottom: 14px; border-style: solid; border-width: 1px; border-color: #DCDCDC;" %>
+							</div>
+							<div class="col-md-8" style="margin-top: 10px; margin-left: 10px;">
+								<% user = User.find_by(id: @ideas[i].user_id) %>
+								<h6 class="lead" style="font-size: 14px;"><%= user.full_name %></h6>
+								<p><%= @ideas[i].title %></p>
+								<hr class="rule" style="margin-left: -10px;">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% i = i+1 %>
+			<% if @ideas[i] != nil %>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading" style="height: 40px; background: #96BADA;">
+					</div>
+					<div class="panel-content">
+						<div class="container-fluid">
+							<div class="col-md-4" style="margin-left: -15px; margin-top: 15px; margin-bottom: 2px;">
+								<%= image_tag 'bulb.jpg', class: "img-circle", width: "155", height: "140", style: "margin-bottom: 14px; border-style: solid; border-width: 1px; border-color: #DCDCDC;" %>
+							</div>
+							<div class="col-md-8" style="margin-top: 10px; margin-left: 10px;">
+								<% user = User.find_by(id: @ideas[i].user_id) %>
+								<h6 class="lead" style="font-size: 14px;"><%= user.full_name %></h6>
+								<p><%= @ideas[i].title %></p>
+								<hr class="rule" style="margin-left: -10px;">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% i = i+1 %>
+			<% end %>
+		</div>
+		<% end %>
 		<% end %>
 	</div>
 
 	<div class="modal fade" id="forum_members" role="dialog">
-    		<div class="modal-dialog">
-      <!-- Modal content-->
-      			<div class="modal-content" style="margin: 170px auto; width: 400px;">
-        			<div class="modal-header">
-          				<button type="button" class="close" data-dismiss="modal">&times;</button>
-          				<h3 style="text-align: center;">Forum members</h3>
-          				<table class="table table-hover">
-								<% arr = [] %>
-								<% arr.concat(Membership.where(forum_id: params[:id], accept: true)) %>	
-		          				<% arr.each do |member| %>
-		          				<tr>
-		          					<td><a href="<%= profile_path(member.id) %>"><%= User.find_by(id: member.user_id).full_name %></a></td>
-								</tr>
-		          				<% end %>
-						</table>  
-        			</div>
-      			</div>
-    		</div>
-  	</div>
-
-  	
-	<div class="modal fade" id="forum_admins" role="dialog">
-    		<div class="modal-dialog">
-      <!-- Modal content-->
-      			<div class="modal-content" style="margin: 170px auto; width: 400px;">
-        			<div class="modal-header">
-          				<button type="button" class="close" data-dismiss="modal">&times;</button>
-          				<h3 style="text-align: center;">Forum admins</h3>
-          				<table class="table table-hover">
-								<% arr = [] %>
-								<% arr.concat(Admin.where(forum_id: params[:id])) %>	
-		          				<% arr.each do |member| %>
-		          				<tr>
-		          					<td><a href="<%= profile_path(member.id) %>"><%= User.find_by(id: member.user_id).full_name %></a></td>
-								</tr>
-		          				<% end %>
-						</table>  
-        			</div>
-      			</div>
-    		</div>
-  		</div>
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content" style="margin: 170px auto; width: 400px;">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3 style="text-align: center;">Forum members</h3>
+					<table class="table table-hover">
+						<% arr = [] %>
+						<% arr.concat(Membership.where(forum_id: params[:id], accept: true)) %>
+						<% arr.each do |member| %>
+						<tr>
+							<td><a href="<%= profile_path(member.id) %>"><%= User.find_by(id: member.user_id).full_name %></a></td>
+						</tr>
+						<% end %>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
@@ -345,7 +332,6 @@
           				<button type="button" class="close" data-dismiss="modal">&times;</button>
         			</div>
         		</br> </br>
-<<<<<<< HEAD
 	        	<form action="<%=  %>">
 		        	<div style="width: 400px; margin-left: 30px;">
 		        		<div class="field left-inner-addon">
@@ -355,22 +341,34 @@
 								<%= hidden_field_tag(:forum_id, params[:forum_id]) %>
 								<%= submit_tag("Post", :class => 'btn btn-primary') %>
 							<% end %>
-					   	</div> 
-=======
-	        	<form action="<%= root_path %>">
-		        	<div style="width: 400px; margin-left: 30px;">
-		        		<div class="field left-inner-addon">
-		        			
-					   		</div> 
->>>>>>> a9413d4489acf56ffa6fd40cf998c7b9acb385c1
+					   	</div>
 		        	</br></br>
 	        	</form>
       			</div>
     		</div>
   		</div>
-<<<<<<< HEAD
-=======
 
->>>>>>> a9413d4489acf56ffa6fd40cf998c7b9acb385c1
+	<div class="modal fade" id="forum_admins" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content" style="margin: 170px auto; width: 400px;">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3 style="text-align: center;">Forum admins</h3>
+					<table class="table table-hover">
+						<% arr = [] %>
+						<% arr.concat(Admin.where(forum_id: params[:id])) %>
+						<% arr.each do |member| %>
+						<tr>
+							<td><a href="<%= profile_path(member.id) %>"><%= User.find_by(id: member.user_id).full_name %></a></td>
+						</tr>
+						<% end %>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 </body>
 </html>

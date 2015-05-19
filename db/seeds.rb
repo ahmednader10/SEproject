@@ -8,8 +8,10 @@
 
 Category.create(title: "Sports")
 Category.create(title: "Politics")
-Category.create(title: "Entertainment")
+Category.create(title: "Gaming")
 Category.create(title: "Music")
+Category.create(title: "Movies")
+Category.create(title: "Academics")
 
-Ideas.create(title: "i1", text: "i1 text1", forum_id: 1, user_id: 1 )
-Ideas.create(title: "i1", text: "i1 text1", forum_id: 1, user_id: 8 )
+#Ideas.create(title: "i1", text: "i1 text1", forum_id: 1, user_id: 1 )
+#Ideas.create(title: "i1", text: "i1 text1", forum_id: 1, user_id: 8 )
