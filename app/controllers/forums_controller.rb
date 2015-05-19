@@ -1,5 +1,5 @@
 class ForumsController < ApplicationController
-	
+
 	# Views all forums showing their title and description.
 	def index
 		@forums = Forum.all
@@ -13,8 +13,8 @@ class ForumsController < ApplicationController
 	# Views a specific forum. Users can post ideas here.
 	def show
 
-		#check if memeber then enable editing 
-		
+		#check if memeber then enable editing
+
 		sleep 1
 		@forum = Forum.find(params[:id])
 
@@ -117,12 +117,12 @@ class ForumsController < ApplicationController
 		@user = current_user
 		if session[:sysadmin]
 			Action.create(info: 'A system administrator has deleted the forum: (' + @forum.title + ').', user_email: 'SystemAdmin')
-			
+
 			admins = Admin.where(forum_id: @forum.id)
 			admins.each do |a|
 				Notification.create(info: 'A system administrator has deleted your forum: (' + @forum.title + ').', user_id: a.user_id)
 			end
-			
+
 			@forum.destroy
 			redirect_to forums_sysadmins_path and return
 		end
@@ -130,7 +130,7 @@ class ForumsController < ApplicationController
 			redirect_to root_url
 		else
 			admin = Admin.where({ forum_id: @forum.id, user_id: @user.id })
-			if !admin.empty? 
+			if !admin.empty?
 				# confirm then delete
 				Action.create(info: @user.username + ' has deleted the forum: (' + @forum.title + ').', user_email: @user.email)
 
@@ -140,7 +140,7 @@ class ForumsController < ApplicationController
 						Notification.create(info: @user.username + ' has deleted your forum: (' + @forum.title + ').', user_id: a.user_id)
 					end
 				end
-				
+
 				@forum.destroy
 				# admin.destroy
 				redirect_to forums_path
@@ -162,8 +162,8 @@ class ForumsController < ApplicationController
 		user = params[:user]
     	forum = params[:forum]
 		@membership1 = Membership.where(user_id: user , forum_id: forum)
-		
-        @membership1.first.destroy 
+
+        @membership1.first.destroy
     	Action.create(info: current_user.username + ' has removed a member: (' + user.username + ') from the forum: (' + forum.title + ').', user_email: current_user.email)
     	Notification.create(info: 'You have been removed from forum: (' + forum.title + ').', user_id: user.id)
     	# redirect_to 'list_members'
@@ -174,7 +174,7 @@ class ForumsController < ApplicationController
 	def list_members
 		# @forum = Forum.find(params[:id])
 		# @users = @forum.accepted_users
-		
+
 		@users = []
 		@forum = Forum.find(params[:id])
 		forums_ids = Membership.where(forum_id: @forum.id , accept: true)
@@ -187,9 +187,9 @@ class ForumsController < ApplicationController
     	end
 	end
 
-	# join action enables logged in user to join public forums through clicking on the button 
-	# "join Forum" and also enables logged in user to send request to join private forums and it checks 
-	# if the user has already joined the forum before 
+	# join action enables logged in user to join public forums through clicking on the button
+	# "join Forum" and also enables logged in user to send request to join private forums and it checks
+	# if the user has already joined the forum before
 	def join_forum
 		@user = current_user
 		@forum = Forum.find(params[:id])
@@ -208,11 +208,11 @@ class ForumsController < ApplicationController
 			 	flash[:success] = 'Successfully joined forum'
 	   		 	redirect_to :action => "show"
 				Notification.create(info: 'Your request to join forum: (' + @forum.title + ') has been accepted and you have successfully joined.', user_id: @user.id)
-	   		elsif @membership.accept == true  and !@membership.save 
+	   		elsif @membership.accept == true  and !@membership.save
 	   			#need to check in the database first if this record already exists
 	   			flash[:member] = 'already member of this forum'
 	   			redirect_to :action => "show"
-			elsif @membership.accept == nil and !@membership.save  
+			elsif @membership.accept == nil and !@membership.save
 				flash[:requestsent] = 'already sent request to join this forum'
 	   			redirect_to :action => "show"
 			elsif @membership.accept == nil
@@ -222,7 +222,7 @@ class ForumsController < ApplicationController
 		end
   		#send notification joined successfully
 	end
- 
+
  	# Strong parameters
 	  private
 	  def forum_params
@@ -230,4 +230,3 @@ class ForumsController < ApplicationController
 	  end
 
 end
-

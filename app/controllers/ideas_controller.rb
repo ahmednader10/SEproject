@@ -6,7 +6,7 @@ class IdeasController < ApplicationController
 	def index
 		@ideas = Idea.where(forum_id: params[:forum_id])
 	end
-	
+
 	#show method shows the title and text of a chosen idea.
 	def show
 		@forum = Forum.find(params[:forum_id])
@@ -55,7 +55,7 @@ class IdeasController < ApplicationController
 
 			# This block of code sends a notification to the admins of the forum being posted on
 			# =================================================================
-			admins = Admin.where(forum_id: @forum)	
+			admins = Admin.where(forum_id: @forum)
 			admins.each do |admin|
 				if @idea.user_id != admin.user_id
 					Notification.create(info: (current_user.username + " has posted an idea (" + @idea.title + ") on a forum that you administrate (" + @forum.title + ")."), seen: false, user_id: admin.user_id)
@@ -71,10 +71,6 @@ class IdeasController < ApplicationController
 		end
 	end
 
-	def createidea
-		Idea.create(user_id: current_user.id, title: params[:title], forum_id: params[:forum], text: params[:text])
-	end
-
 	#def not_joined_forum
 	#end
 
@@ -87,10 +83,10 @@ class IdeasController < ApplicationController
 
 	 	@likeidea = Likeidea.new(:user_id => @user.id , :idea_id => @idea.id)
 	 	@idea.increment!(:like_count, by = 1)
-		
+
 		if @likeidea.save
 			Action.create(info: @user.username + ' has liked an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_email: @user.email)
-			if @user.id != @idea.user_id	
+			if @user.id != @idea.user_id
 				Notification.create(info: @user.username + ' has liked your idea: (' + @idea.title + ') on forum: (' + @forum.title + ').', user_id: @idea.user_id)
 	   		end
 	   		flash[:notice] = "Idea Liked!"
