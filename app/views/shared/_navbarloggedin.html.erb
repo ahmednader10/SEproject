@@ -6,19 +6,22 @@
 			<a class="navbar-brand" href="<%= user_path(current_user.id) %>">iDea</a>
 		</div>
 		<div>
-			<ul class="nav navbar-nav">
-				<li>
-			
-				<!-- <input class="form-control" type="text" placeholder="Looking for something?" style="margin-top: 9px; width: 250px;"> -->
-			<div class="field form-group">
-			<%= form_tag '/search', { class: 'form-class', id: 'form-id', role: 'form', method: 'post' } do %>
+			<ul class="nav navbar-nav" style="position:absolute; top:5px; left:420px;">
+				<li id="search">
+					<%= form_tag '/search', { class: 'form-class', id: 'form-id', role: 'form', method: 'post' } do %>
 			<%= text_field_tag(:q, value =nil,:placeholder => "Looking for something?", :class => 'form-control' ) %>
-			<p style="position:absolute; top:0px; width:60px; left:200px;"><%= select_tag(:type, "<option>All</option><option>Users</option><option>Forums</option><option>Ideas</option>".html_safe, options={:class => 'form-control'}) %>
+			
+				</li>
+				<li  id="search" style="width:70px;">
+					<%= select_tag(:type, "<option>All</option><option>Users</option><option>Forums</option><option>Ideas</option>".html_safe, options={:class => 'form-control'}) %>
 					<%= hidden_field_tag(:searchtype, "normal" ) %>
-						<% submit_tag("Search", :class => 'btn btn-primary') %>
-			</p>		
-			<p  style="position:absolute; top:5px; left:250px;"> <%= link_to "Advanced search", "/advancedsearch" , class: 'btn btn-s' %></p><% end %>		
-			</div>
+						<% submit_tag("Search", :class => 'btn btn-primary') %>	
+			
+				</li>
+				<li id="search">
+					 <%= link_to "Advanced search", "/advancedsearch" , class: 'btn btn-s' %><% end %>		
+					
+				</li>
 				</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
