@@ -205,7 +205,7 @@
 		<div class="col-sm-8">
 			<ul class="nav nav-tabs">
 			  <li class="active"><a data-toggle="tab" href="#friends">Friends <span class="badge"><%= User.find(params[:id]).friend_count %></span></a></li>
-			  <li><a data-toggle="tab" href="#requests">Requests <span class="badge"><%= Friendship.where(friend_id: User.find(params[:id])).count %></span></a></li>
+			  <li><a data-toggle="tab" href="#requests">Requests <span class="badge"><%= Friendship.where(friend_id: User.find(params[:id]), status: nil).count %></span></a></li>
 			  <li><a data-toggle="tab" href="#forums">Forums <span class="badge"><%= Membership.where(user_id: current_user.id, accept: true).count %></span></a></li>
 			  <li><a data-toggle="tab" href="#ideas">Ideas <span class="badge"><%= Idea.where(user_id: current_user.id).count %></span></a></li>
 			 
@@ -221,7 +221,11 @@
 			  <div id="requests" class="tab-pane fade">
 			    <table class="table table-hover">
 				    <tbody>
-						<% users = User.all %>
+						<% requests = Friendship.where(friend_id: params[:id], status: nil) %>
+						<% users = [] %>
+						<% requests.each do |request| %>
+							<% users += [User.find(request.friend_id)] %>
+						<% end %>
           				<% users.each do |user| %>
           				<tr>
           					<td><a href="<%= profile_path(user.id) %>"><%= user.full_name %></a></td>
