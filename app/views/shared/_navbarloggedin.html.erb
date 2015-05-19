@@ -12,13 +12,13 @@
 			<%= text_field_tag(:q, value =nil,:placeholder => "Looking for something?", :class => 'form-control' ) %>
 			
 				</li>
-				<li  id="search" style="width:70px;">
+				<li  id="search" style="width:70px; ">
 					<%= select_tag(:type, "<option>All</option><option>Users</option><option>Forums</option><option>Ideas</option>".html_safe, options={:class => 'form-control'}) %>
 					<%= hidden_field_tag(:searchtype, "normal" ) %>
 						<% submit_tag("Search", :class => 'btn btn-primary') %>	
 			
 				</li>
-				<li id="search">
+				<li id="search" style="position:absolute; top:-6px; left:267px;">
 					 <%= link_to "Advanced search", "/advancedsearch" , class: 'btn btn-s' %><% end %>		
 					
 				</li>
