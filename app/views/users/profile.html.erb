@@ -251,24 +251,28 @@
 			    <table class="table table-hover">
 				    <tbody>
 						<% requests = Friendship.where(friend_id: params[:id], status: nil) %>
-						<% users = [] %>
-						<% requests.each do |request| %>
-							<% users += [User.find(request.user_id)] %>
-						<% end %>
-          				<% users.each do |user| %>
-          				<tr>
-          					<% friendship = Friendship.where(friend_id: params[:id], user_id: user.id).first %>
-          					<td><a href="<%= profile_path(user.id) %>"><%= user.full_name %></a></td>
-          					<td><a href="<%= '/friendships/' + friendship.id.to_s + '/accept' %>" style="color: green;"><i class="glyphicon glyphicon-ok"></i></a></td>
-          					<td><a href="<%= '/friendships/' + friendship.id.to_s + '/reject' %>" style="color: red;"><i class="glyphicon glyphicon-remove"></i></a></td>
-						</tr>
-          				<% end %>
+						<% if requests.empty? %>
+							<%= 'No new requests' %>
+						<% else %>
+							<% users = [] %>
+							<% requests.each do |request| %>
+								<% users += [User.find(request.user_id)] %>
+							<% end %>
+	          				<% users.each do |user| %>
+	          				<tr>
+	          					<% friendship = Friendship.where(friend_id: params[:id], user_id: user.id).first %>
+	          					<td><a href="<%= profile_path(user.id) %>"><%= user.full_name %></a></td>
+	          					<td><a href="<%= '/friendships/' + friendship.id.to_s + '/accept' %>" style="color: green;"><i class="glyphicon glyphicon-ok"></i></a></td>
+	          					<td><a href="<%= '/friendships/' + friendship.id.to_s + '/reject' %>" style="color: red;"><i class="glyphicon glyphicon-remove"></i></a></td>
+							</tr>
+	          				<% end %>
+	          			<% end %>
 				    </tbody>
 				</table>  
-			  </div>
-			  <div id="forums" class="tab-pane fade">
-			  	<%  x =Membership.where(user_id: @current_user.id) %>
-			    <% if x.size == 0 %>
+			  	</div>
+				<div id="forums" class="tab-pane fade">
+			  	<%  memberships = Membership.where(user_id: params[:id], accept: true) %>
+			    <% if memberships.empty? %>
 						<em> you are not a member in any forums </em>
 				<% else %>
 			    <table width="371" height="51">
@@ -276,12 +280,12 @@
 					  <th  id="forumcolum"> Joined Forum</th>
 					  <th id="ideatitlecolumn"> Description </th>
 					</tr>
-						<% x.each do |membership| %>
-						<% y = Forum.find(membership.forum_id) %>
-						<% if !Membership.where(user_id: current_user.id , forum_id: y.id, accept: true).empty? %>
+						<% memberships.each do |membership| %>
+						<% forum = Forum.find(membership.forum_id) %>
+						<% if !Membership.where(user_id: params[:id] , forum_id: forum.id, accept: true).empty? %>
 					<tr>
-						<td id="forumcolum"><%=  link_to y.title , forum_path(y) %></td>
-						<td id="ideatitlecolumn"> <%= y.description %> </td>
+						<td id="forumcolum"><%=  link_to forum.title , forum_path(forum) %></td>
+						<td id="ideatitlecolumn"> <%= forum.description %> </td>
 					</tr>
 					<% end %>
 					<%end%>
