@@ -198,12 +198,15 @@ Rails.application.routes.draw do
     resources :ideas do
       member do
         post :like
+        post :unlike
         post :report
+        post :unreport
         post :destroy
       end
       resources :comments do
       member do
         post :reportcomment
+        post :unreportcomment
        end
      end
    end
