@@ -20,7 +20,7 @@
 	<% elsif session[:sysadmin] == "true" %>
 		<%= render "/shared/navbar_sys_admin" %>
 	<% end %>
-	<div class="modal-content" style="position:absolute;top:100px; margin: -100px 0 0 -200px; top:30%; left: 50%; padding:10px;"><h4> Advanced Search: </h4>
+	<div class="modal-content" style="position:absolute; margin: -100px 0 0 -200px; top:30%; left: 45%; height:500px; padding:10px; width:400px;"><h4> Advanced Search: </h4>
 		<%= form_tag("/search", { class: 'form-class', id: 'form-id', role: 'form', method: 'post' }) do %>
 			<%= text_field_tag(:q, value =nil,:placeholder => "Looking for something?", :class => 'form-control' ) %>
 			<%= label_tag(:type, "Search for a type:" ) %>
@@ -31,25 +31,25 @@
 			<br>
 			<h5> From: </h5>
 				<p>
-					<%= text_field_tag(:fromyear, value =nil,:placeholder => "Enter year here !", :class => 'form-control') %>
+					<%= text_field_tag(:fromyear, value =nil,:placeholder => "Enter year here", :class => 'form-control') %>
 				</p>
 				<p style="float:left;">
 					<%= select_tag(:frommonth, "<option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>".html_safe, options={:class => 'form-control'} ) %>
 				</p>
 				<p style="float:left;">
-					<%= text_field_tag(:fromday, value =nil,:placeholder => "Enter day here !", :class => 'form-control') %>
+					<%= text_field_tag(:fromday, value =nil,:placeholder => "Enter day here", :class => 'form-control') %>
 				</p>
 			<br>
-			<h5> To: </h5>
+			<h5 > To: </h5>
 			<p>
-				<%= text_field_tag(:toyear, value =nil,:placeholder => "Looking for something?", :class => 'form-control') %>	
+				<%= text_field_tag(:toyear, value =nil,:placeholder => "Enter year here", :class => 'form-control') %>	
 			</p>
 			<p style="float:left;">
 				<%= select_tag(:tomonth, "<option></option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>".html_safe,options={:class => 'form-control'}) %>
 			
 			</p>
 			<p style="float:left;">
-				<%= text_field_tag(:today, value =nil,:placeholder => "Enter month here !", :class => 'form-control') %>	
+				<%= text_field_tag(:today, value =nil,:placeholder => "Enter month here", :class => 'form-control') %>	
 			</p>
 			<p>	
 			<%= hidden_field_tag(:searchtype, "advanced") %>

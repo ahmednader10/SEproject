@@ -16,6 +16,7 @@
 	<%= render "/shared/navbarloggedin" %>
 
 		<div class="jumbotron" style="height: 250px; background: #4B5966"; >
+			<h1 style="margin: 120px 0 0 350px; top:30%; left: 50%;"><%= current_user.full_name %></h1>
 		</div>
 		<div class="container-fluid" style="margin-top: -136px;">
 			<div class="profileImg" style="margin-left: 80px">
@@ -36,17 +37,19 @@
           				<h3 style="text-align: center;">Requests to join my forums</h3>
           			</br>
           			<table >
-
+  						<thead>
+  							<tr>
+  								<td>Forum</td>
+  								<td> &nbsp; &nbsp; &nbsp; &nbsp; User</td>
+  								
+  							</tr>
+  						</thead>
+  						
 							  <% if @requests_forums.empty? %>
 							  <p> No new requests </p>
 							  <% else %>
-							    	<thead>
-  										<tr>
-  											<td>Forum</td>
-  											<td> &nbsp; &nbsp; &nbsp; &nbsp; User</td>
-  										</tr>
-  									</thead>
-  								<% for i in 0...@requests_forums.length %>
+							  
+							  <% for i in 0...@requests_forums.length %>
 							    <tr>
 							      <% if  @requests_users[i] != nil %>
 							      <td>
@@ -122,96 +125,76 @@
     		<div class="modal-dialog">
     
       <!-- Modal content-->
-      			<div class="modal-content" style="width: 400px; height: 600px;">
-        			<div class="modal-header">
-        			<button type="button" class="close" data-dismiss="modal">&times;</button>
-          				<div style="position:relative;">
-							<%= form_for((current_user) , html: {multipart: true}) do |f| %>
-							    <h1 style="text-align: center; color: #96BADA;">Edit form</h1>
-							<% if current_user.errors.any? %>
-							      <h3>Errors</h3>
-							      <ul>
-							        <% current_user.errors.full_messages.each do |message| %>
-							          <li><%= message %></li>
-							        <% end %>
-							      </ul>
-							    <% end %>
-							    <!--<div class="side" style="position: fixed; left: 23px; top: 181px;">
-									<ul>
-										 <li style=margin-left:100px>
-										    <a  class='list-item' href='/forums'>
-										      Privacy
-										    </a>
-										 </li>
-										 <li style=margin-left:100px>
-										    <a class='list-item' href='/friendships'>
-										      Pass
-										      word
-										    </a>
-										</li>
-										<li style=margin-left:100px>
-										    <a class='list-item' href='/friendships'>
-										      Info  </a>
-										</li>
+	      			<div class="modal-content" style="width: 400px; height: 600px;">
+	        			<div class="modal-header">
+	        			<button type="button" class="close" data-dismiss="modal">&times;</button>
+	          				<div style="position:relative;">
+								<%= form_for((current_user) , html: {multipart: true}) do |f| %>
+								    <h1 style="text-align: center; color: #96BADA;">Edit form</h1>
+								<% if current_user.errors.any? %>
+								      <h3>Errors</h3>
+								      <ul>
+								        <% current_user.errors.full_messages.each do |message| %>
+								          <li><%= message %></li>
+								        <% end %>
+								      </ul>
+								    <% end %>
+								  	<div style ="style=margin-left:100px style=margin-left:100px">
+								        <div>
+									      <%= f.label :full_name %><br>
+									      <%= f.text_field :full_name %><br>
+									    </div> 
 
-									</ul>
-								</div>-->
-							  	<div style ="style=margin-left:100px style=margin-left:100px">
-							        <div>
-								      <%= f.label :full_name %><br>
-								      <%= f.text_field :full_name %><br>
-								    </div> 
+									    <div>
+									      <%= f.label :username %><br>
+									      <%= f.text_field :username %><br>
+									    </div>
 
-								    <div>
-								      <%= f.label :username %><br>
-								      <%= f.text_field :username %><br>
+									    <div>
+									      <%= f.label :email %><br>
+									      <%= f.email_field :email %><br>
+									    </div>
+
+									    <div>
+									      <%= f.label :password %><br>
+									      <%= f.password_field :password %><br>
+									    </div>
+
+									    <div>
+									      <%= f.label :gender %><br>
+									      <%= f.select :gender, ['Male', 'Female'] %><br>
+									    </div>   
+
+									    <div>
+									      <%= f.label :password_question, "Choose a question (in case you forgot the password)" %><br>
+									      <%= f.select :password_question, ['What is the name of your best friend?', 'What is the name of your pet?', 'Who was your first English teacher?'] %><br>
+									    </div> 
+
+									    <div>
+									      <%= f.label :Your_answer %><br>
+									      <%= f.text_field :answer_for_password_question %><br><br>
+									    </div>
+									    <div>
+										         <p>
+										    <%= f.label :privacy, "Public" %>
+										    <%= f.radio_button :privacy, 1 %><br>
+										    <%= f.label :privacy, "Private" %>
+										    <%= f.radio_button :privacy, 2 %><br>
+										  </p>
+									    </div>
+
+									    <div>
+									       <p>
+									         <%= f.file_field :image %>
+									       </p>
+									    </div>
+
+									    <div class='actions'>
+									      <input name="commit" type="submit" value="update" class="btn btn-primary">
+									    </div>
 								    </div>
-
-								    <div>
-								      <%= f.label :email %><br>
-								      <%= f.email_field :email %><br>
-								    </div>
-
-								    <div>
-								      <%= f.label :password %><br>
-								      <%= f.password_field :password %><br>
-								    </div>
-
-								    <div>
-								      <%= f.label :gender %><br>
-								      <%= f.select :gender, ['Male', 'Female'] %><br>
-								    </div>   
-
-								    <div>
-								      <%= f.label :password_question, "Choose a question (in case you forgot the password)" %><br>
-								      <%= f.select :password_question, ['What is the name of your best friend?', 'What is the name of your pet?', 'Who was your first English teacher?'] %><br>
-								    </div> 
-
-								    <div>
-								      <%= f.label :Your_answer %><br>
-								      <%= f.text_field :answer_for_password_question %><br><br>
-								    </div>
-								    <div>
-									         <p>
-									    <%= f.label :privacy, "Public" %>
-									    <%= f.radio_button :privacy, 1 %><br>
-									    <%= f.label :privacy, "Private" %>
-									    <%= f.radio_button :privacy, 2 %><br>
-									  </p>
-								    </div>
-
-								    <div>
-								       <p>
-								         <%= f.file_field :image %>
-								       </p>
-								    </div>
-
-								    <div class='actions'>
-								      <input name="commit" type="submit" value="update" class="btn btn-primary">
-								    </div>
-							    </div>
-								<% end %>
-							</div>
+									<% end %>
+								</div>
 						</div>
           			</div>
           		</div>
@@ -231,22 +214,10 @@
 			  <div id="friends" class="tab-pane fade in active">
 			    <table class="table table-hover">
 				    <tbody>
-						<!--<% users = User.all %>
-          				<% users.each do |user| %>
-          				<tr>
-          					<td><a href="<%= profile_path(user.id) %>"><%= user.full_name %></a></td>
-          					<td><%= user.email %></td>
-						</tr>
-          				<% end %>-->
           				<%= render template: "friendships/index" %>
 				    </tbody>
 				</table> 
 			  </div>
-			  <!--<div id="join_requests" class="tab-pane fade in active">
-			    <table class="table table-hover">
-				   
-				</table> 
-			  </div>-->
 			  <div id="requests" class="tab-pane fade">
 			    <table class="table table-hover">
 				    <tbody>
@@ -266,15 +237,12 @@
 				</table>  
 			  </div>
 			  <div id="forums" class="tab-pane fade">
-			  	<%  x =Membership.where(user_id: @current_user.id) %>
-			    <% if x.size == 0 %>
-						<em> you are not a member in any forums </em>
-				<% else %>
 			    <table width="371" height="51">
 					<tr>
 					  <th  id="forumcolum"> Joined Forum</th>
 					  <th id="ideatitlecolumn"> Description </th>
 					</tr>
+						<%  x =Membership.where(user_id: @current_user.id) %>
 						<% x.each do |membership| %>
 						<% y = Forum.find(membership.forum_id) %>
 						<% if !Membership.where(user_id: current_user.id , forum_id: y.id, accept: true).empty? %>
@@ -285,19 +253,18 @@
 					<% end %>
 					<%end%>
 				</table>
-				<% end %>	
+					<% if x.size == 0 %>
+						<em> you are not a member in any forums </em>
+					<% end %>
 			  </div>
 			  <div id="ideas" class="tab-pane fade">
-			  	<%  x = Idea.where(user: @current_user).order(:text) %>
-			    <% if x.size == 0 %>
-					<em> still Idealess </em>
-				<% else %>
 			    <table width="371" height="51">
 					<tr>
 					  <th width="57" id="ideatitlecolumn"> Title</th>
 					  <th width="160" id="ideacolumn"> Idea</th>
 					  <th width="110" id="forumcolum"> Forum</th>
 					</tr>
+						<%  x = Idea.where(user: @current_user).order(:text) %>
 						<% x.each do |idea| %>
 					<tr>
 						<td id="ideatitlecolumn"><%= link_to idea.title , forum_idea_path(idea.forum.id, idea.id) %></td>
@@ -306,8 +273,10 @@
 					</tr>
 					<% end %>
 				</table>
-				<% end %>
-				</div>
+					<% if x.size == 0 %>
+					<em> still Idealess </em>
+					<% end %>
+			  </div>
 			</div>
 			
 			<div style="margin-top:80px">
@@ -320,9 +289,6 @@
 				    </li>
 				    <li><a href="#">1</a></li>
 				    <li><a href="#">2</a></li>
-				    <li><a href="#">3</a></li>
-				    <li><a href="#">4</a></li>
-				    <li><a href="#">5</a></li>
 				    <li>
 				      <a href="#" aria-label="Next">
 				        <span aria-hidden="true">&raquo;</span>
