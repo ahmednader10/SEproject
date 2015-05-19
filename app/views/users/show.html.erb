@@ -28,7 +28,7 @@
 							<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
 						</div>
 					</form>
-				<% elsif !Friendship.where(user_id: User.find(params[:id]), friend_id: current_user.id, status: 'true').empty? || !Friendship.where(user_id: current_user.id, friend_id: User.find(params[:id]), status: 'true').empty? %>
+				<% elsif !Friendship.where(user_id: User.find(params[:id]), friend_id: current_user.id, status: true).empty? || !Friendship.where(user_id: current_user.id, friend_id: User.find(params[:id]), status: true).empty? %>
 					<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Friend</button>
 				<% else %>
 					<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Friend request sent</button>
