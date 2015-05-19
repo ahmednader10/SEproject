@@ -40,7 +40,7 @@
   						<thead>
   							<tr>
   								<td>Forum</td>
-  								<td> &nbsp; &nbsp; &nbsp; &nbsp; User</td>
+  								<td> &nbsp; &nbsp;User</td>
   								
   							</tr>
   						</thead>
@@ -57,19 +57,19 @@
 							      		<%= link_to @requests_forums[i].title, forum_path(@requests_forums[i].id) %>
 							      </td>
 							      <td>
-							        	&nbsp; &nbsp; &nbsp; &nbsp;
+							        	&nbsp; &nbsp;
 							          <%= link_to @requests_users[i].full_name,"#{@requests_users[i].id}" %>
 							          
 							      </td>
 
           					
 							     
-							      <td><a href="/users/accept_join_request?forum= <%= @requests_forums[i].id %>&user= <%= @requests_users[i].id %>" style="color: green;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-							      	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<i class="glyphicon glyphicon-ok"></i></a></td>
-							         <!--  <%= link_to "[Accept]", "/users/accept_join_request?forum=#{@requests_forums[i].id}&user=#{@requests_users[i].id}" %> |-->
+							      <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+							      	&nbsp;<a href="/users/accept_join_request?forum= <%= @requests_forums[i].id %>&user= <%= @requests_users[i].id %>" style="color: green;"><i class="glyphicon glyphicon-ok"></i></a></td>
+							         
 							      </td>
 							      <td>
-							            <!--<%= link_to "[Reject]", "/users/reject_join_request?forum=#{@requests_forums[i].id}&user=#{@requests_users[i].id}" %> -->
+							            
 							            <td> &nbsp; <a href="/users/reject_join_request?forum=<%= @requests_forums[i].id %>&user=<%= @requests_forums[i].id %>" style="color: red;"><i class="glyphicon glyphicon-remove"></i></a></td>
 							      </td>
 							            <% end %>
