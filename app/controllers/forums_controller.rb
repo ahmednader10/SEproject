@@ -48,10 +48,7 @@ class ForumsController < ApplicationController
    		else
    			admin = @forum.admins.build(user: @user)
 
-   			if @forum.category == "Other"
-   				@forum.category = params[:forum][:other_category]
-   				Category.create(title: @forum.category)
-   			elsif @forum.category == "- Select a category -"
+   			if @forum.category == "- Select a category -"
    				@forum.category = nil
    			end
 
@@ -77,11 +74,7 @@ class ForumsController < ApplicationController
 		@forum = Forum.find(params[:id])
 		@user = current_user
 
-		if params[:forum][:category] == "Other"
-   			#@forum.category = params[:forum][:other_category]
-   			params[:forum][:category] = params[:forum][:other_category]
-   			Category.create(title: params[:forum][:other_category])
-   		elsif params[:forum][:category] == "- Select a category -"
+   		if params[:forum][:category] == "- Select a category -"
    			#@forum.category = nil
    			params[:forum][:category] = nil
    		end

@@ -81,8 +81,6 @@
   <p>
     <%= f.label :category, "Category" %>
     <%= f.collection_select(:category, Category.all, :title, :title) %><br>
-    <label id="catLabel" style="visibility:hidden;">Please specify:</label>
-    <%= f.text_field :category, :id => 'cat', :name => 'forum[other_category]', :style => 'visibility:hidden;' %>
   </p>
 
   <script>
