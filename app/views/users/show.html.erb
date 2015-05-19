@@ -17,19 +17,7 @@
 	<%= render "/shared/navbarloggedin" %>
 
 		<div class="jumbotron" style="height: 250px; background: #4B5966"; >
-		<% unless @user ==current_user ||current_user.friends.include?(@user)  || @user.friends.include?(current_user)  %>
-            <% unless  @user.bfriends.include?(current_user) %>
-
-
-             <%= link_to "Add Friend", "user/:id/add", :method => :post %> 
-            <% end %>
-            <% else %>
-            <% for friendship in current_user.friendships %>
-            <% if current_user.friends.include?(@user) && friendship.status == nil %>
-            <h2> Friend Request Sent </h2>
-              <% end %>
-            <% end %>
-            <% end %>
+		
 		</div>
 		<div class="container-fluid" style="margin-top: -136px;">
 			<div class="profileImg" style="margin-left: 80px">
