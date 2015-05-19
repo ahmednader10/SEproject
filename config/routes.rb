@@ -175,8 +175,6 @@ Rails.application.routes.draw do
 
   post 'user/:id/add' => 'friendships#create'
 
-  post 'forums/:forum_id/ideas' => 'forums#createidea'
-
   # get 'sysAdmin' 
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
