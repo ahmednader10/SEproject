@@ -1,36 +1,12 @@
 
 
-<head>
-	<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-		<!-- <link rel="stylesheet" href="style.css"> -->
-		<%= stylesheet_link_tag 'style' %>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<style type="text/css">
-	#search{
-		float: left;
-	}
-	#searchdiv{
-
-		    list-style-type: none;
-	}
-	</style>
-</head>
 <nav class="navbar navbar-fixed-top white">
 	<div class="container">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="<%= user_path(current_user.id) %>">iDea</a>
 		</div>
 		<div>
-			<ul class="nav navbar-nav">
-				<li style="top:0px;">
-			
-				<!-- <input class="form-control" type="text" placeholder="Looking for something?" style="margin-top: 9px; width: 250px;"> -->
-			<div class="field form-group">
-			<ul id="searchdiv" >
+			<ul class="nav navbar-nav" style="position:absolute; top:5px; left:420px;">
 				<li id="search">
 					<%= form_tag '/search', { class: 'form-class', id: 'form-id', role: 'form', method: 'post' } do %>
 			<%= text_field_tag(:q, value =nil,:placeholder => "Looking for something?", :class => 'form-control' ) %>
@@ -46,8 +22,6 @@
 					 <%= link_to "Advanced search", "/advancedsearch" , class: 'btn btn-s' %><% end %>		
 					
 				</li>
-			</ul>
-			</div>
 				</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
