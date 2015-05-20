@@ -6,7 +6,10 @@ form {
 }
 
 .info {
-  background: #fff;
+          border-radius: 15px 50px;
+          border: 1px solid #D2D2D2;
+           
+    background: #fff;
 }
 
 .other-color {

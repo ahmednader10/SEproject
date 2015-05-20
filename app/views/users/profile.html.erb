@@ -17,60 +17,40 @@
 		<div class="jumbotron" style="height: 250px; background: #4B5966"; >
 		</div>
 		
-			<div class="profileImg" style="margin-top: -136px; margin-left: 80px">
+			<div class="profileImg" style="margin-top: -136px; margin-left: 130px">
 				<%= image_tag 'bulb.jpg', class: "imgcircle", width: "215", height: "200", border: "10" %>
 			</div>
 
 		</div>
+			
 
-		
-			<div class="col-sm-4 info" style="border: thin solid rgb(75, 89, 109); border-radius: 50px; margin-top: 30px">
-				<h3 style="text-align: center;">
-					<%= current_user.full_name %>					 <i>
-					 	<a data-toggle="modal" data-target="#edit_info" class="fa fa-pencil-square-o" style="font-size 1em;"></a>
-					 </i>
-				</h3>
-         			</br>
-          				<table class="table table-hover">
-							
-							<tr>
-								<td>Username</td>
-								<td><%= current_user.username %></td>
-							</tr>
-							<tr>
-								<td>Email</td>
-								<td><%= current_user.email %></td>
-							</tr>
-							
-						</table> 
-			</div>
-
-		<div class="col-sm-8 info" style= "margin-top: -90px; background: #F6F9FB">
-			<% if Admin.find_by(user_id: current_user.id) != nil %>
-					<button data-toggle="modal" data-target="#admin_requests" class="btn btn-primary" style="margin-left: 625px;">Requests to join my forums</button>
-				<% end %>
-			<ul class="nav nav-tabs">
-			  <li class="active"><a data-toggle="tab" href="#friends">Friends <span class="badge"><%= User.find(params[:id]).friend_count %></span></a></li>
-			  <li><a data-toggle="tab" href="#requests">Requests <span class="badge"><%= Friendship.where(friend_id: User.find(params[:id]), status: nil).count %></span></a></li>
-			  <li><a data-toggle="tab" href="#forums">Forums <span class="badge"><%= Membership.where(user_id: current_user.id, accept: true).count %></span></a></li>
-			  <li><a data-toggle="tab" href="#ideas">Ideas <span class="badge"><%= Idea.where(user_id: current_user.id).count %></span></a></li>
-			</ul>
+		<div class="col-lg-3 " style= "margin-top: 20px; background: #F6F9FB">
+				<div class="btn-group-vertical" role="group">
+					<button type="button" class="btn btn-default btn-lg"><a data-toggle="tab" href="#forums">Forums <span class="badge"><%= Membership.where(user_id: current_user.id, accept: true).count %></span></a></button>
+  					<button type="button" class="btn btn-default btn-lg"><a data-toggle="tab" href="#friends">Friends <span class="badge"><%= User.find(params[:id]).friend_count %></span></a></button>
+			  		<button type="button" class="btn btn-default btn-lg"><a data-toggle="tab" href="#requests">Requests <span class="badge"><%= Friendship.where(friend_id: User.find(params[:id]), status: nil).count %></span></a></button>
+			  		<button type="button" class="btn btn-default btn-lg"><a data-toggle="tab" href="#ideas">Ideas <span class="badge"><%= Idea.where(user_id: current_user.id).count %></span></a></button>
+				</div>
+		</div>
+		<div class="col-lg-9 info " style= "margin-top: 20px;">	
 			<div class="tab-content">
-			  <div id="friends" class="tab-pane fade in active">
+			  <div id="friends" class="tab-pane fade ">
+			  	<br>
 			    <table class="table table-hover">
 				    <tbody>
 						
           				<%= render template: "friendships/index" %>
 				    </tbody>
-				</table> 
-			  </div>
+				</table> <br>
+			</div>
 			  
 			  <div id="requests" class="tab-pane fade">
+			  	<br>
 			    <table class="table table-hover">
 				    <tbody>
 						<% requests = Friendship.where(friend_id: params[:id], status: nil) %>
 						<% if requests.empty? %>
-							<%= 'No new requests' %>
+							<em> 'No new requests' </em>
 						<% else %>
 							<% users = [] %>
 							<% requests.each do |request| %>
@@ -82,13 +62,16 @@
 	          					<td><a href="<%= profile_path(user.id) %>"><%= user.full_name %></a></td>
 	          					<td><a href="<%= '/friendships/' + friendship.id.to_s + '/accept' %>" style="color: green;"><i class="glyphicon glyphicon-ok"></i></a></td>
 	          					<td><a href="<%= '/friendships/' + friendship.id.to_s + '/reject' %>" style="color: red;"><i class="glyphicon glyphicon-remove"></i></a></td>
-							</tr>
+							</tr><br>
 	          				<% end %>
 	          			<% end %>
 				    </tbody>
-				</table>  
+				</table><br>  
 			  	</div>
-				<div id="forums" class="tab-pane fade">
+				<div id="forums" class="tab-pane fade in active">
+					<% if Admin.find_by(user_id: current_user.id) != nil %>
+					<button data-toggle="modal" data-target="#admin_requests" class="btn btn-primary" style="margin-left: 625px;">Requests to join my forums</button>
+					<% end %>
 			  	<%  memberships = Membership.where(user_id: params[:id], accept: true) %>
 			    <% if memberships.empty? %>
 						<em> you are not a member in any forums </em>
@@ -107,13 +90,15 @@
 					</tr>
 					<% end %>
 					<%end%>
-				</table>
+				</table><br>
 				<% end %>	
 			  </div>
 			  <div id="ideas" class="tab-pane fade">
+			  	<br>
 			  	<%  x = Idea.where(user: @current_user).order(:text) %>
 			    <% if x.size == 0 %>
-					<em> still Idealess </em>
+					=<em> still Idealess </em>
+					<br>
 				<% else %>
 			    <table width="371" height="51">
 					<tr>
@@ -129,31 +114,13 @@
 					</tr>
 					<% end %>
 				</table>
+
 				<% end %>
+				<br>
 				</div>
 			</div>
 			
-			<div style="margin-top:80px">
-				<nav> 
-				  <ul class="pagination">
-				    <li>
-				      <a href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-				    </li>
-				    <li><a href="#">1</a></li>
-				    <li><a href="#">2</a></li>
-				    <li><a href="#">3</a></li>
-				    <li><a href="#">4</a></li>
-				    <li><a href="#">5</a></li>
-				    <li>
-				      <a href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
-				  </ul>
-				</nav>
-			</div>
+			
 		</div>
 		</div>
 
