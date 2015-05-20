@@ -15,7 +15,7 @@
   <body>
     <%= render "/shared/navbarloggedin" %>
 
-    <div class="jumbotron" style="height: 750px; background: #80A2C0";>
+    <div class="jumbotron" style="height: 750px; background: #80A2C0;" id="main">
       <div align="middle" style="margin-top: 50px">
       <%= image_tag 'categoriesname.png', width: "350", height: "50" %>
       </div>
@@ -117,6 +117,7 @@
           </div>
         </div>
       </div>
+      <a href="#C7"><h4 style="margin-left: 1300px; color: white;">Other categories >></h4></a>
     </div>
     
     <div class="jumbotron">
@@ -132,18 +133,18 @@
             <table class="table table-hover">
             <thead>
               <tr>
-                <th>Movies</th>
-                <th></th>
-                <th></th>
+                <th><a href="#main" style="color: black;">Movies</a></th>
+                <th style="text-align: center;">Members</th>
+                <th style="text-align: center;">Ideas</th>
               </tr>
             </thead>
             <tbody>
               <% forums = Forum.where(category: "Movies") %>
               <% forums.each do |forum| %>
               <tr>
-                <td><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
-                <td></td>
-                <td></td>
+                <td width="800"><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
+                <td style="text-align: center; width: 80px;"><%= forum.user_count %></td>
+                <td style="text-align: center; width: 80px;"><%= forum.idea_count %></td>
               </tr>
               <% end %>
             </tbody>
@@ -156,18 +157,18 @@
             <table class="table table-hover">
             <thead>
               <tr>
-                <th>Music</th>
-                <th></th>
-                <th></th>
+                <th><a href="#main" style="color: black;">Music</a></th>
+                <th style="text-align: center;">Members</th>
+                <th style="text-align: center;">Ideas</th>
               </tr>
             </thead>
             <tbody>
               <% forums = Forum.where(category: "Music") %>
               <% forums.each do |forum| %>
               <tr>
-                <td><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
-                <td></td>
-                <td></td>
+                <td width="800"><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
+                <td style="text-align: center; width: 80px;"><%= forum.user_count %></td>
+                <td style="text-align: center; width: 80px;"><%= forum.idea_count %></td>
               </tr>
               <% end %>
             </tbody>
@@ -180,18 +181,18 @@
             <table class="table table-hover">
             <thead>
               <tr>
-                <th>Politics</th>
-                <th></th>
-                <th></th>
+                <th><a href="#main" style="color: black;">Politics</a></th>
+                <th style="text-align: center;">Members</th>
+                <th style="text-align: center;">Ideas</th>
               </tr>
             </thead>
             <tbody>
               <% forums = Forum.where(category: "Politics") %>
               <% forums.each do |forum| %>
               <tr>
-                <td><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
-                <td></td>
-                <td></td>
+                <td width="800"><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
+                <td style="text-align: center; width: 80px;"><%= forum.user_count %></td>
+                <td style="text-align: center; width: 80px;"><%= forum.idea_count %></td>
               </tr>
               <% end %>
             </tbody>
@@ -204,18 +205,18 @@
             <table class="table table-hover">
             <thead>
               <tr>
-                <th>Sports</th>
-                <th></th>
-                <th></th>
+                <th><a href="#main" style="color: black;">Sports</a></th>
+                <th style="text-align: center;">Members</th>
+                <th style="text-align: center;">Ideas</th>
               </tr>
             </thead>
             <tbody>
               <% forums = Forum.where(category: "Sports") %>
               <% forums.each do |forum| %>
               <tr>
-                <td><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
-                <td></td>
-                <td></td>
+                <td width="800"><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
+                <td style="text-align: center; width: 80px;"><%= forum.user_count %></td>
+                <td style="text-align: center; width: 80px;"><%= forum.idea_count %></td>
               </tr>
               <% end %>
             </tbody>
@@ -228,18 +229,18 @@
             <table class="table table-hover">
             <thead>
               <tr>
-                <th>Academics</th>
-                <th></th>
-                <th></th>
+                <th><a href="#main" style="color: black;">Academics</a></th>
+                <th style="text-align: center;">Members</th>
+                <th style="text-align: center;">Ideas</th>
               </tr>
             </thead>
             <tbody>
               <% forums = Forum.where(category: "Academics") %>
               <% forums.each do |forum| %>
               <tr>
-                <td><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
-                <td></td>
-                <td></td>
+                <td width="800"><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
+                <td style="text-align: center; width: 80px;"><%= forum.user_count %></td>
+                <td style="text-align: center; width: 80px;"><%= forum.idea_count %></td>
               </tr>
               <% end %>
             </tbody>
@@ -252,18 +253,18 @@
             <table class="table table-hover">
             <thead>
               <tr>
-                <th>Gaming</th>
-                <th></th>
-                <th></th>
+                <th><a href="#main" style="color: black;">Gaming</a></th>
+                <th style="text-align: center;">Members</th>
+                <th style="text-align: center;">Ideas</th>
               </tr>
             </thead>
             <tbody>
               <% forums = Forum.where(category: "Gaming") %>
               <% forums.each do |forum| %>
               <tr>
-                <td><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
-                <td></td>
-                <td></td>
+                <td width="800"><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
+                <td style="text-align: center; width: 80px;"><%= forum.user_count %></td>
+                <td style="text-align: center; width: 80px;"><%= forum.idea_count %></td>
               </tr>
               <% end %>
             </tbody>
@@ -276,18 +277,18 @@
             <table class="table table-hover">
             <thead>
               <tr>
-                <th>Other</th>
-                <th></th>
-                <th></th>
+                <th><a href="#main" style="color: black;">Other</a></th>
+                <th style="text-align: center;">Members</th>
+                <th style="text-align: center;">Ideas</th>
               </tr>
             </thead>
             <tbody>
               <% forums = Forum.where(category: "Other") %>
               <% forums.each do |forum| %>
               <tr>
-                <td><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
-                <td></td>
-                <td></td>
+                <td width="800"><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
+                <td style="text-align: center; width: 80px;"><%= forum.user_count %></td>
+                <td style="text-align: center; width: 80px;"><%= forum.idea_count %></td>
               </tr>
               <% end %>
             </tbody>

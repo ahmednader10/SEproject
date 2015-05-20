@@ -18,7 +18,7 @@
 	
 		<div style="position:absolute; top:30%; left: 15%;">	
 			<% if session[:sysadmin] == "true" %>
-			<div class="btn-group" role="group" aria-label="..." style="left:30px;">
+			<div class="btn-group" role="group" aria-label="..."  style="position absolute; left:0%; top:3%;">
    			  	<%= link_to 'show unhidden only', '/syslog', class: 'btn btn-primary'%>
 				<%= link_to 'hide all', 'syslog/hideall', method: :put, class: 'btn btn-primary'%>
 				<%= link_to 'unhide all', 'syslog/unhideall', method: :put, class: 'btn btn-primary' %>

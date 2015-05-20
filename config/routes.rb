@@ -45,41 +45,41 @@ Rails.application.routes.draw do
   get 'admins/delete'
 
   #################### Login #################################
-  
+
   #Session Routes
   get    'login'   => 'sessions#new'
 
   post   'login'   => 'sessions#create'
-  
+
   delete 'logout'  => 'sessions#destroy', as: 'logout'
-  
+
   get 'help' => 'sessions#help', as: 'help'
-  
+
   get 'tempguest' => 'sessions#tempguest'
-  
+
   get 'about' => 'sessions#about'
-  
+
   get 'contactus' => 'sessions#contactus'
-  
+
   get 'jobs' => 'sessions#jobs'
-  
+
   get 'forgot' => 'sessions#forgot'
 
   get 'forgotpw/new' => 'forgotpw#new'
 
   post 'forgotpw/sendx' => 'forgotpw#sendx'
-  
+
   ######################Facebook and Twitter Login###############################
   match 'auth/:provider/callback', to: 'sessions#createF', :via => [:get, :post]
   match 'auth/failure', to: redirect('/'), :via => [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', :via => [:get, :post]
- 
+
 
   ####################### Social share button ##################################
   resources :homes, only: [:show]
   get 'share' => 'homes#show'
-  
-  
+
+
   #When logged in normally or facebook redirects to this page
   #Change later
 
@@ -120,9 +120,15 @@ Rails.application.routes.draw do
 
   post 'forums/:forum_id/ideas/:id/like' => 'ideas#like', as: 'like_idea'
 
+  post 'forums/:forum_id/ideas/:id/unlike' => 'ideas#unlike', as: 'unlike_idea'
+
+  #post '/forums/:forum_id/ideas/:id/unreport' => 'ideas#unreport', as: 'unreport_idea'
+
   get 'forums/leaveforum' => 'forums#leaveforum', as: 'leave_forum'
 
   get 'forums/remove_member' => 'forums#remove_member', as:'remove_member'
+
+  get 'forums/:forum_id/admins/:id' => 'admins#create', as: 'add_admin'
 
   ############################ Notifications #################################
 
@@ -164,14 +170,14 @@ Rails.application.routes.draw do
 
   get 'admins/wrong_email' => 'admins#wrong_email', as: 'wrong_email'
 
-  get 'admins/added_admin' => 'admins#added_admin', as: 'added_admin' 
+  get 'admins/added_admin' => 'admins#added_admin', as: 'added_admin'
 
   get 'sessions/blockingMessage' => 'sessions#create', as: 'blocking_message'
 
   post 'forums/show' => 'forums#show'
 
   get 'forums/new' => 'forums#new', as: 'new_forum'
-  
+
 
   ###########################################################
 
@@ -183,7 +189,7 @@ Rails.application.routes.draw do
 
   get 'friendships/:id/reject' => 'friendships#reject'
 
-  # get 'sysAdmin' 
+  # get 'sysAdmin'
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'
   # post 'forums/:id/ideas/new' => 'ideas#create'
 
@@ -193,9 +199,9 @@ Rails.application.routes.draw do
     resources :friendships do
       #put :update
       put :reject
-    end 
+    end
   end
-  
+
   resources :forums do
     resources :admins
   end
@@ -223,7 +229,7 @@ delete 'forums/:forum_id/ideas/:idea_id/comments/:id' => 'comments#destroy', as:
   resources :friendships do
     #put :update
     put :reject
-  end 
+  end
 
 
   # The priority is based upon order of creation: first created -> highest priority.
