@@ -68,7 +68,7 @@ class UsersController < ApplicationController
           Action.create(info: @user.username + ' has updated his personal information.', user_email: @user.email)
           redirect_to(user_path)
       else
-        render 'edit'
+        redirect_to(user_path)
       end
     end
   end
