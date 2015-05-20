@@ -30,8 +30,6 @@
 				<p>
 					<a href="<%= notification.link %>" class="glyphicon glyphicon-star-empty"> </a><%= notification.info %> <%= link_to 'delete', ('notifications/' + notification.id.to_s), method: :get %>
 				</p>
-				<% notification.update(seen: true) %>
-				<% seenNotifications += [notification] %>
 			<%end%>
 		<%end%>
 		</div>
