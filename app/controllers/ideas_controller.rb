@@ -58,7 +58,7 @@ class IdeasController < ApplicationController
 			admins = Admin.where(forum_id: @forum)
 			admins.each do |admin|
 				if @idea.user_id != admin.user_id
-					Notification.create(info: (current_user.username + " has posted an idea (" + @idea.title + ") on a forum that you administrate (" + @forum.title + ")."), seen: false, user_id: admin.user_id)
+					Notification.create(info: (current_user.username + " has posted an idea (" + @idea.title + ") on a forum that you administrate (" + @forum.title + ")."), seen: false, user_id: admin.user_id, link: 'forums/' + @forum.id.to_s + 'ideas/' + @idea.id.to_s)
 				end
 			end
 			# =================================================================
@@ -87,7 +87,7 @@ class IdeasController < ApplicationController
 		if @likeidea.save
 			Action.create(info: @user.username + ' has liked an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_email: @user.email)
 			if @user.id != @idea.user_id
-				Notification.create(info: @user.username + ' has liked your idea: (' + @idea.title + ') on forum: (' + @forum.title + ').', user_id: @idea.user_id)
+				Notification.create(info: @user.username + ' has liked your idea: (' + @idea.title + ') on forum: (' + @forum.title + ').', user_id: @idea.user_id, link: 'forums/' + @forum.id.to_s + 'ideas/' + @idea.id.to_s)
 	   	end
 	   		flash[:notice] = "Idea Liked!"
 		end
@@ -118,7 +118,7 @@ class IdeasController < ApplicationController
 	 	flash[:notice] = "Cannot report your own idea!"
 		elsif @reportidea.save
 			Action.create(info: @user.username + ' has reported an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_email: @user.email)
-	   		Notification.create(info: 'Your idea: (' + @idea.title + ' on forum: (' + @forum.title + ') has been reported.', user_id: @idea.user_id)
+	   		Notification.create(info: 'Your idea: (' + @idea.title + ' on forum: (' + @forum.title + ') has been reported.', user_id: @idea.user_id, link: 'forums/' + @forum.id.to_s + 'ideas/' + @idea.id.to_s)
 	   		flash[:notice] = "Idea has been reported!"
 		else
 			flash[:notice] = "You've already reported this idea!"
