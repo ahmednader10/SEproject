@@ -20,7 +20,8 @@
 		</div>
 		<div class="container-fluid" style="margin-top: -136px;">
 			<div class="profileImg" style="margin-left: 80px">
-				<%= image_tag 'bulb.jpg', class: "imgcircle", width: "215", height: "200", border: "10" %>
+				<%= link_to image_tag(@user.image.url , :class => "imgcircle", :width => "215", :height => "200", :border =>"10"), asset_path(@user.image.url) %>
+			
 				<% if Friendship.where(user_id: User.find(params[:id]), friend_id: current_user.id).empty? && Friendship.where(user_id: current_user.id, friend_id: User.find(params[:id])).empty? %>
 					<form action="<%= '/users/' + params[:id] + '/friendships' %>" method="post">
 						<div>
