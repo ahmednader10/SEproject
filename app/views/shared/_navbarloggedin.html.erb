@@ -6,7 +6,7 @@
 			<a class="navbar-brand" href="<%= user_path(current_user.id) %>">iDea</a>
 		</div>
 		<div>
-			<ul class="nav navbar-nav" style="position:absolute; top:5px; left:420px;">
+			<ul class="nav navbar-nav" style="position:absolute;  margin: 6px 0 0 45px; left: 20%; ">
 				<li id="search">
 					<%= form_tag '/search', { class: 'form-class', id: 'form-id', role: 'form', method: 'post' } do %>
 			<%= text_field_tag(:q, value =nil,:placeholder => "Looking for something?", :class => 'form-control' ) %>
