@@ -33,17 +33,17 @@
     				 <span class="caret"></span></a>
 						<div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width:500px; position:absolute; text-align:center; left:-170px; border-radius:15px 15px 15px 15px;">
 							<div >
-								<% seenNotifications = [] %>
 								<% Notification.where(user_id: current_user.id).reverse_each do |notification| %>
 								<% if !notification.seen %>
-								<p><i  class="glyphicon glyphicon-star"> </i><%= notification.info %></p>
-								<% notification.update(seen: true) %>
-									<% seenNotifications += [notification] %>
+								<p><a href="<%= notification.link %>" class="glyphicon glyphicon-star"> </a><%= notification.info %>
+								<a href="<%='/notifications/' + notification.id.to_s + '/seen'%>">Mark as seen</a></p>
 								<%end%>
 								<%end%>
 							</div>
 							<div style="border-top:1pt solid #aaa;">
-							<a href="/notifications"> see all notifications</a>
+							<a href="/notifications/seenall">Mark all as seen</a>
+							<br>
+							<a href="/notifications">See all notifications</a>
 							</div>
 						</div>
 					</li>
