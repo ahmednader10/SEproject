@@ -10,22 +10,28 @@
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	
+	
 	</head>
 
 	<body style="background: #EEE;">
 	
 		<%= render "/shared/navbar_sys_admin"%>
-	
-		<div style="margin-top:80px">	
+		
+		<%= render "/actions/stats" %>
+
+		<div style="position:absolute;  top:30%; left:15% ">	
 			<% if session[:sysadmin] == "true" %>
-			<div class="btn-group" role="group" aria-label="..." style="left:30px;">
+			<div class="btn-group" role="group" aria-label="..." style="position absolute; left:23%; top:3%;">
    			  	<%= link_to 'show hidden', '/syslogall', class: 'btn btn-primary'%>
 				<%= link_to 'hide all', 'syslog/hideall', method: :put, class: 'btn btn-primary'%>
 				<%= link_to 'unhide all', 'syslog/unhideall', method: :put, class: 'btn btn-primary' %>
-				</div>
+			</div>
+			<div style="position:absolute;  top:50%; left:15%; margin:20px; ">
 				<%= render 'sysadmin' %>
 				<% else %>
 				<%= render 'not_sysadmin' %>
+			</div>
 			<% end %>
 		</div>
 	</body>

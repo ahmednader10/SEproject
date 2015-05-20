@@ -10,28 +10,31 @@
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		
 	</head>
 	<body style="background: #EEE;">
 			<%= render "/shared/navbar_sys_admin"%>
-		<div style="margin-top:5px">
 
-			<div class="table-responsive" style="position:absolute; left:355px; top:140px;">
+			
+		<div style="margin-top:5px; ">
+			
+			<div class="table-responsive" style="position: absolute;">
 			
 			
-				<table class="table-striped">
+				<table class="table-striped" style="width:1000px;">
 				<% @actions.reverse_each do |action| %>
 					<tr>
-						<td style="text-align:center; width:50px;">
+						<td style="text-align:center; width:20%;">
 							<% if action.hidden == false %> 
 							<%= link_to 'hide', 'syslog/hide/' + action.id.to_s, method: :put %>
 							<% else %> 
 							<%= link_to 'unhide', 'syslog/unhide/' + action.id.to_s, method: :put %>
 							<% end %> 
 						</td>
-						<td style="text-align:center; width:900px;">
+						<td style="text-align:center; width:60%;">
 							<%= action.info + ' (' + action.created_at.to_s + ')' %> 
 						</td>
-						<td style="width:150px;">
+						<td style="text-align:center;width:20%;">
 							<% user = User.where(email: action.user_email).first %>
 							<% if user != nil %>
 							<%= link_to ' ' + User.where(email: action.user_email).first.username, 'users/' + User.where(email: action.user_email).first.id.to_s %>

@@ -34,7 +34,7 @@ def create
   friendship = Friendship.new(user_id: current_user.id, friend_id: friend.id)
   friendship.save
   Action.create(info: current_user.username + ' has sent a friend request to ' + friend.username, user_email: current_user.email) 
-  Notification.create(info: current_user.username + ' has sent you a friend request.', user_id: friend.id)
+  Notification.create(info: current_user.username + ' has sent you a friend request.', user_id: friend.id, link: 'users/' + current_user.id.to_s)
   redirect_to '/users/' + params[:user_id]
 end
 

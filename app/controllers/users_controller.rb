@@ -146,6 +146,7 @@ class UsersController < ApplicationController
     @membership1.first.save
     @forum.increment!(:user_count, by = 1)
     Action.create(info: current_user.username + ' has accepted ' + @user.username + "'s join request to forum: (" + @forum.title + ').', user_email: current_user.email)
+    Notification.create(info: 'Your request to join forum: (' + @forum.title + ') has been accepted and you have successfully joined.', user_id: @user.id, link: 'forums/' + @forum.id.to_s)
     redirect_to(:action => "admin_join_forums_requests")
 
   end

@@ -34,7 +34,7 @@ class ActionsController < ApplicationController
 		Action.all.each do |action|
 			action.update(hidden: false)
 		end
-		redirect_to('/syslogall')
+		redirect_to('/syslog')
 	end
 
 	def destroy
