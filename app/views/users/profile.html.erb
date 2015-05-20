@@ -19,7 +19,7 @@
 		</div>
 		<div class="container-fluid" style="margin-top: -136px;">
 			<div class="profileImg" style="margin-left: 80px">
-				<%= image_tag 'bulb.jpg', class: "imgcircle", width: "215", height: "200", border: "10" %>
+			 <%= link_to image_tag(current_user.image.url , :class => "imgcircle", :width => "215", :height => "200", :border =>"10"), asset_path(current_user.image.url) %>
 				<% if Admin.find_by(user_id: current_user.id) != nil %>
 					<button data-toggle="modal" data-target="#admin_requests" class="btn btn-primary" style="margin-left: 1100px;">Requests to join my forums</button>
 				<% end %>
