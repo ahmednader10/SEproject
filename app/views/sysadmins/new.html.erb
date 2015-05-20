@@ -22,7 +22,7 @@
           				<h2 style="text-align: center; margin-bottom: 60px;">Log in</h2>
           				<a data-toggle="modal" data-target="#show" style="width:20px; height:20px; position:absolute; top:40px; left:250px;"><i class="fa fa-user-secret fa-2x" ></i> </a>
 
-          				<%= form_for(:sysadmin, url: 'show')  do |f| %>
+          				<%= form_for(:sysadmin, url: sysadmins_show_path)  do |f| %>
   	 					    <div class="left-inner-addon">
   	 					    	<i class="glyphicon glyphicon-user"></i>
   	 					    	<%= f.text_field :username, class: 'form-control', placeholder: "Identify self" %><br>
@@ -34,7 +34,7 @@
       						</div>
 
 							<div style="position:absolute; left:155px">
-								<%= f.submit "Login",class: 'btn btn-primary' %>
+								<%= f.submit "Login", class: 'btn btn-primary' %>
 							</div>
       					<% end %>
         			</div>

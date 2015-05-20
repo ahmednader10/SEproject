@@ -195,6 +195,7 @@ class ForumsController < ApplicationController
      	@user = current_user
 		@forum = Forum.find(params[:id])
 		@membership1 = Membership.where(user_id: @user , forum_id: @forum , accept: nil)
+		@membership1 = Membership.where(user_id: @user.id , forum_id: @forum.id)
 		@membership1.first.destroy
     	redirect_to :action => "show"
   	end
