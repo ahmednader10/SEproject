@@ -13,8 +13,10 @@
 	<body style="background: #EEE;">
 	
 		<%= render "/shared/navbar_sys_admin"%>
+
+		<%= render "/actions/stats" %>
 	
-		<div style="margin-top:80px;  margin: 100px 0 0 200px; top:30%; left: 45%;">	
+		<div style="position:absolute; top:30%; left: 15%;">	
 			<% if session[:sysadmin] == "true" %>
 			<div class="btn-group" role="group" aria-label="..." style="left:30px;">
    			  	<%= link_to 'show unhidden only', '/syslog', class: 'btn btn-primary'%>
