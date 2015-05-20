@@ -79,7 +79,9 @@ class UsersController < ApplicationController
       if @user == current_user
         redirect_to(:action => 'profile')
       end
-   end
+  end
+
+  
 
 
     #opens the profile view of the user
