@@ -181,6 +181,14 @@ class ForumsController < ApplicationController
     	end
 	end
 
+	def leave_forum
+     	@user = current_user
+		@forum = Forum.find(params[:id])
+		@membership1 = Membership.where(user_id: user , forum_id: forum)
+		@membership1.first.destroy
+    	redirect_to :action => "show"
+  	end
+
 	# join action enables logged in user to join public forums through clicking on the button
 	# "join Forum" and also enables logged in user to send request to join private forums and it checks
 	# if the user has already joined the forum before

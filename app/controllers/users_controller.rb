@@ -68,7 +68,7 @@ class UsersController < ApplicationController
           Action.create(info: @user.username + ' has updated his personal information.', user_email: @user.email)
           redirect_to(user_path)
       else
-        render 'edit'
+        redirect_to(user_path)
       end
     end
   end
@@ -79,7 +79,9 @@ class UsersController < ApplicationController
       if @user == current_user
         redirect_to(:action => 'profile')
       end
-   end
+  end
+
+  
 
 
     #opens the profile view of the user
