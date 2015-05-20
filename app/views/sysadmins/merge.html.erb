@@ -13,10 +13,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   </head>
+
+ 
+
+
+ <body style="background:#eee;">
+
 <%= render 'shared/navbar_sys_admin' %>
-<div class="modal-content" style="width: 600px; height:200px; margin: 100px 0 0 -200px; top:30%; left: 45%;">
+<div class="modal-content" style=" position:absolute; width: 600px; height:200px; top:10%; left:30%;">
               <div class="modal-header" style="height:200px;">
-              <%= form_for :forum, url: sysadmins_show_path do |f| %>
+              <%= form_for :forum, url: sysadmins_merge_path do |f| %>
     <table>
         <tr>
           <td>Select the forums to merge: </td>
@@ -41,3 +47,4 @@
   <% end %>
 </div>
 </div>
+</body>
