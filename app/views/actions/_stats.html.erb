@@ -19,7 +19,7 @@
 			float: left;
 			margin-right: 30px;
 		}
-		i{
+		#icons{
 			width:155px;
 			height: 155px;
 			border-radius: 50%;
@@ -37,12 +37,12 @@
 		</style>
 	</head>
 	<body>
-		<div style=" position: absolute; top:10%; left:20%;">	
+		<div style=" position: absolute; top:10%; left:25%;">	
 			<ul>
-				<li><i class="glyphicon glyphicon-folder-open"></i><p style="position:absolute; top:100px; left:65px;"> <%= Forum.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> created today</p></li>
-				<li><i class="glyphicon glyphicon-user"></i><p style="position:absolute; top:100px; left:247px;"><%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> signed up today</p ></li>
-				<li><i class="glyphicon glyphicon-ok"></i><p style="position:absolute; top:95px; left:424px;"><%= Membership.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> new Memberships <br> today</p></li>
-				<li><i class="glyphicon glyphicon-heart"></i><p style="position:absolute; top:95px; left:608px;"><%= Idea.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> Ideas were posted <br> today</p></li>
+				<li><i id="icons" class="glyphicon glyphicon-folder-open"></i><p style="position:absolute; top:100px; left:65px;"> <%= Forum.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> created today</p></li>
+				<li><i id="icons" class="glyphicon glyphicon-user"></i><p style="position:absolute; top:100px; left:247px;"><%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> signed up today</p ></li>
+				<li><i id="icons" class="glyphicon glyphicon-ok"></i><p style="position:absolute; top:95px; left:424px;"><%= Membership.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> new Memberships <br> today</p></li>
+				<li><i id="icons" class="glyphicon glyphicon-heart"></i><p style="position:absolute; top:95px; left:608px;"><%= Idea.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> Ideas were posted <br> today</p></li>
 			</ul>
 		</div>
 	</body>
