@@ -124,7 +124,9 @@ Rails.application.routes.draw do
 
   #post '/forums/:forum_id/ideas/:id/unreport' => 'ideas#unreport', as: 'unreport_idea'
 
-  get 'forums/leaveforum' => 'forums#leaveforum', as: 'leave_forum'
+  get 'forums/leaveforum' => 'forums#leave_forum', as: 'leave_forum'
+
+  get 'forums/canceljoinrequest' => 'forums#cancel_join_request', as: 'cancel_join_request'
 
   get 'forums/remove_member' => 'forums#remove_member', as:'remove_member'
 

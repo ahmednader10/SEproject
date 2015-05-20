@@ -186,7 +186,15 @@ class ForumsController < ApplicationController
 	def leave_forum
      	@user = current_user
 		@forum = Forum.find(params[:id])
-		@membership1 = Membership.where(user_id: user , forum_id: forum)
+		@membership1 = Membership.where(user_id: @user , forum_id: @forum)
+		@membership1.first.destroy
+    	redirect_to :action => "show"
+  	end
+
+  	def cancel_join_request
+     	@user = current_user
+		@forum = Forum.find(params[:id])
+		@membership1 = Membership.where(user_id: @user , forum_id: @forum , accept: nil)
 		@membership1.first.destroy
     	redirect_to :action => "show"
   	end
