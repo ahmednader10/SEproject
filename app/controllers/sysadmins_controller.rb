@@ -166,7 +166,7 @@ class SysadminsController < ApplicationController
         new_forum.first.destroy
 
         # For now
-        redirect_to('/sysadmins/index')
+        redirect_to '/sysadmins/forums'
       else
         flash[:notice] = "Can only merge forums of the same privacy setting!"
         render 'merge'
