@@ -1,29 +1,53 @@
 
 
-<nav class="navbar navbar-fixed-top white">
+<nav class="navbar navbar-fixed-top white" >
 	<div class="container">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="<%= user_path(current_user.id) %>">iDea</a>
 		</div>
 		<div>
-			<ul class="nav navbar-nav">
-				<li>
-			
-				<!-- <input class="form-control" type="text" placeholder="Looking for something?" style="margin-top: 9px; width: 250px;"> -->
-			<div class="field form-group">
-			<%= form_tag '/search', { class: 'form-class', id: 'form-id', role: 'form', method: 'post' } do %>
+			<ul class="nav navbar-nav" style="position:absolute;  margin: 6px 0 0 45px; left: 20%; ">
+				<li id="search">
+					<%= form_tag '/search', { class: 'form-class', id: 'form-id', role: 'form', method: 'post' } do %>
 			<%= text_field_tag(:q, value =nil,:placeholder => "Looking for something?", :class => 'form-control' ) %>
-			<p style="position:absolute; top:0px; width:60px; left:200px;"><%= select_tag(:type, "<option>All</option><option>Users</option><option>Forums</option><option>Ideas</option>".html_safe, options={:class => 'form-control'}) %>
+			
+				</li>
+				<li  id="search" style="width:70px; ">
+					<%= select_tag(:type, "<option>All</option><option>Users</option><option>Forums</option><option>Ideas</option>".html_safe, options={:class => 'form-control'}) %>
 					<%= hidden_field_tag(:searchtype, "normal" ) %>
-						<% submit_tag("Search", :class => 'btn btn-primary') %>
-			</p>		
-			<p  style="position:absolute; top:5px; left:250px;"> <%= link_to "Advanced search", "/advancedsearch" , class: 'btn btn-s' %></p><% end %>		
-			</div>
+						<% submit_tag("Search", :class => 'btn btn-primary') %>	
+			
+				</li>
+				<li id="search" style="position:absolute; top:-6px; left:267px;">
+					 <%= link_to "Advanced search", "/advancedsearch" , class: 'btn btn-s' %><% end %>		
+					
+				</li>
 				</a></li>
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				
-    				<li><a href="#">Notifications</a></li>
+			<ul class="nav navbar-nav navbar-right" >
+					
+    				<li  class="dropdown">
+    				<a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+    				Notifications
+    				<span class="badge"><%= Notification.where(user_id: current_user.id, seen: false).count %></span>
+    				 <span class="caret"></span></a>
+						<div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width:500px; position:absolute; text-align:center; left:-170px; border-radius:15px 15px 15px 15px;">
+							<div >
+								<% Notification.where(user_id: current_user.id).reverse_each do |notification| %>
+								<% if !notification.seen %>
+								<p><a href="<%= notification.link %>" class="glyphicon glyphicon-star"> </a><%= notification.info %>
+								<a href="<%='/notifications/' + notification.id.to_s + '/seen'%>">Mark as seen</a></p>
+								<%end%>
+								<%end%>
+							</div>
+							<div style="border-top:1pt solid #aaa;">
+							<a href="/notifications/seenall">Mark all as seen</a>
+							<br>
+							<a href="/notifications">See all notifications</a>
+							</div>
+						</div>
+					</li>
+
     				<li><a href="/forums">Forums</a></li>
     				<li class="dropdown">
 						<a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">

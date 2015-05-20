@@ -17,23 +17,23 @@
 	<%= render "/shared/navbarloggedin" %>
 
 		<div class="jumbotron" style="height: 250px; background: #4B5966"; >
-		<% unless @user ==current_user ||current_user.friends.include?(@user)  || @user.friends.include?(current_user)  %>
-            <% unless  @user.bfriends.include?(current_user) %>
-
-
-             <%= link_to "Add Friend", "user/:id/add", :method => :post %> 
-            <% end %>
-            <% else %>
-            <% for friendship in current_user.friendships %>
-            <% if current_user.friends.include?(@user) && friendship.status == nil %>
-            <h2> Friend Request Sent </h2>
-              <% end %>
-            <% end %>
-            <% end %>
 		</div>
 		<div class="container-fluid" style="margin-top: -136px;">
 			<div class="profileImg" style="margin-left: 80px">
-				<%= image_tag 'bulb.jpg', class: "imgcircle", width: "215", height: "200", border: "10" %>
+				<%= link_to image_tag(@user.image.url , :class => "imgcircle", :width => "215", :height => "200", :border =>"10"), asset_path(@user.image.url) %>
+			
+				<% if Friendship.where(user_id: User.find(params[:id]), friend_id: current_user.id).empty? && Friendship.where(user_id: current_user.id, friend_id: User.find(params[:id])).empty? %>
+					<form action="<%= '/users/' + params[:id] + '/friendships' %>" method="post">
+						<div>
+							<button type="submit" class="btn btn-success load" data-joined-text="<i class='fa fa-check-circle'></i>&nbsp;&nbsp;Friend" id="join" style="margin-top: 18px;" data-loading-text="<i class='fa fa-spinner fa-spin'></i>&nbsp;&nbsp;Loading" autocomplete="off"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Friend</button>
+							<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
+						</div>
+					</form>
+				<% elsif !Friendship.where(user_id: User.find(params[:id]), friend_id: current_user.id, status: true).empty? || !Friendship.where(user_id: current_user.id, friend_id: User.find(params[:id]), status: true).empty? %>
+					<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Friend</button>
+				<% else %>
+					<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Friend request sent</button>
+				<% end %>
 			</div>
 		</div>
 		
@@ -161,8 +161,8 @@
 		<div class="col-sm-9">
 			<ul class="nav nav-tabs">
 			  
-			  <li><a data-toggle="tab" href="#forums">Forums <span class="badge"><%= Membership.where(user_id: current_user.id, accept: true).count %></span></a></li>
-			  <li><a data-toggle="tab" href="#ideas">Ideas <span class="badge"><%= Idea.where(user_id: current_user.id).count %></span></a></li>
+			  <li><a data-toggle="tab" href="#forums">Forums <span class="badge"><%= Membership.where(user_id: params[:id], accept: true).count %></span></a></li>
+			  <li><a data-toggle="tab" href="#ideas">Ideas <span class="badge"><%= Idea.where(user_id: params[:id]).count %></span></a></li>
 			</ul>
 			
 			  <!--<div id="join_requests" class="tab-pane fade in active">
@@ -170,28 +170,27 @@
 				   
 				</table> 
 			  </div>-->
-			  <div id="forums" class="tab-pane fade">
-			   <div role="tabpanel" class="tab-pane" id="memberships">
-                <table width="371" height="51">
-                  <tr>
-                    <th  id="forumcolum"> Joined Forum</th>
-                    <th id="ideatitlecolumn"> Description </th>
-                  </tr>
-
-                  <%  x =Membership.where(user_id: @user.id) %>
-                  <% x.each do |membership| %>
-                  <% y = Forum.find(membership.forum_id) %>
-                  <tr>
-                  <td id="forumcolum"><%=  link_to y.title , forum_path %></td>
-                  <td id="ideatitlecolumn"> <%= y.description %> </td>
-                  </tr>
-
-                  <% end %>
-                </table>
-                <% if x.size == 0 %>
-                <em> not a member in any forums </em>
-                <% end %>
-             </div>
+			   <div id="forums" class="tab-pane fade">
+			  	<%  memberships = Membership.where(user_id: params[:id], accept: true) %>
+			    <% if memberships.empty? %>
+						<em> you are not a member in any forums </em>
+				<% else %>
+			    <table width="371" height="51">
+					<tr>
+					  <th  id="forumcolum"> Joined Forum</th>
+					  <th id="ideatitlecolumn"> Description </th>
+					</tr>
+						<% memberships.each do |membership| %>
+						<% forum = Forum.find(membership.forum_id) %>
+						<% if !Membership.where(user_id: params[:id] , forum_id: forum.id, accept: true).empty? %>
+					<tr>
+						<td id="forumcolum"><%=  link_to forum.title , forum_path(forum) %></td>
+						<td id="ideatitlecolumn"> <%= forum.description %> </td>
+					</tr>
+					<% end %>
+					<%end%>
+				</table>
+				<% end %>	
 			  </div>
 			  <div id="ideas" class="tab-pane fade">
 			   <div role="tabpanel" class="tab-pane" id="ideas">
@@ -201,8 +200,8 @@
                   <th width="160" id="ideacolumn"> Idea</th>
                   <th width="110" id="forumcolum"> Forum</th>
                 </tr>
-                <%  x = Idea.where(user: @user).order(:text) %>
-                <% x.each do |idea| %>
+                <%  memberships = Idea.where(user: @user).order(:text) %>
+                <% memberships.each do |idea| %>
                 <tr>
                   <td id="ideatitlecolumn"><%= link_to idea.title , forum_idea_path(idea.forum.id, idea.id)%></td>
                   <td id="ideacolumn"><%= idea.text %></td>
@@ -210,7 +209,7 @@
                 </tr>
                 <% end %>
                 </table>
-                <% if x.size == 0 %>
+                <% if memberships.empty? %>
                 <em> still Idealess </em>
                 <% end %>
                  </div>

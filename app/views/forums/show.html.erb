@@ -79,6 +79,8 @@
 
 					<button class="btn btn-primary" style="margin-top: 10px;" data-toggle="modal" data-target="#postIdea"><i class="fa fa-lightbulb-o"></i>&nbsp;&nbsp;Post an Idea</button>
 
+				  <br><br>
+					
 					<script>
 					$(document).ready(function(){
 						$(".load").click(function(){
@@ -387,6 +389,7 @@
 					<label>Description:</label>
 					<%= f.text_area :text, class: 'form-control' %><br>
 				</div>
+
 
 				<div style="float: right;">
 					<%= f.submit "Post", class: 'btn btn-primary' %>

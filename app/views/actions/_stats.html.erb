@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Bootstrap Example</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<%= stylesheet_link_tag 'style' %>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	
+	<style type="text/css">
+		ul{
+			list-style: none;
+		}
+		li{
+			float: left;
+			margin-right: 30px;
+		}
+		#icons{
+			width:155px;
+			height: 155px;
+			border-radius: 50%;
+			border: 2px solid #005CE6;
+			font-size: 3.5em;
+			text-align: center;
+			padding: 15px;
+			color: #005CE6;
+		}
+
+		p{
+			text-align: center;
+			color: #005CE6;n
+		}
+		</style>
+	</head>
+	<body>
+		<div style=" position: absolute; top:10%; left:25%;">	
+			<ul>
+				<li><i id="icons" class="glyphicon glyphicon-folder-open"></i><p style="position:absolute; top:100px; left:65px;"> <%= Forum.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> created today</p></li>
+				<li><i id="icons" class="glyphicon glyphicon-user"></i><p style="position:absolute; top:100px; left:247px;"><%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> signed up today</p ></li>
+				<li><i id="icons" class="glyphicon glyphicon-ok"></i><p style="position:absolute; top:95px; left:424px;"><%= Membership.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> new Memberships <br> today</p></li>
+				<li><i id="icons" class="glyphicon glyphicon-heart"></i><p style="position:absolute; top:95px; left:608px;"><%= Idea.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> Ideas were posted <br> today</p></li>
+			</ul>
+		</div>
+	</body>

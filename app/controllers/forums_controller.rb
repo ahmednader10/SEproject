@@ -183,6 +183,14 @@ class ForumsController < ApplicationController
 		end
 	end
 
+	def leave_forum
+     	@user = current_user
+		@forum = Forum.find(params[:id])
+		@membership1 = Membership.where(user_id: user , forum_id: forum)
+		@membership1.first.destroy
+    	redirect_to :action => "show"
+  	end
+
 	# join action enables logged in user to join public forums through clicking on the button
 	# "join Forum" and also enables logged in user to send request to join private forums and it checks
 	# if the user has already joined the forum before
@@ -202,6 +210,7 @@ class ForumsController < ApplicationController
 			end
 			@membership.accept = true if @forum.privacy == '1'
 			if  @membership.save and @membership.accept == true
+
 				flash[:success] = 'Successfully joined forum'
 				redirect_to :action => "show"
 				Notification.create(info: 'Your request to join forum: (' + @forum.title + ') has been accepted and you have successfully joined.', user_id: @user.id)
@@ -209,6 +218,7 @@ class ForumsController < ApplicationController
 				#need to check in the database first if this record already exists
 				flash[:member] = 'already member of this forum'
 				redirect_to :action => "show"
+
 			elsif @membership.accept == nil and !@membership.save
 				flash[:requestsent] = 'already sent request to join this forum'
 				redirect_to :action => "show"

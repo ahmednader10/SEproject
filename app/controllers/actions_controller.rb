@@ -15,31 +15,31 @@ class ActionsController < ApplicationController
 
 	def hide
 		Action.find(params[:id]).update(hidden: true)
-		redirect_to('/syslog') 
+		redirect_to :back
 	end
 
 	def unhide
 		Action.find(params[:id]).update(hidden: false)
-		redirect_to('/syslogall')
+		redirect_to :back
 	end
 
 	def hideall
 		Action.all.each do |action|
 			action.update(hidden: true)
 		end
-		redirect_to('/syslog')
+		redirect_to :back
 	end
 
 	def unhideall
 		Action.all.each do |action|
 			action.update(hidden: false)
 		end
-		redirect_to('/syslogall')
+		redirect_to :back
 	end
 
 	def destroy
 		Action.delete(params[:id])
-		redirect_to('/syslog')
+		redirect_to :back
 	end
 
 protected

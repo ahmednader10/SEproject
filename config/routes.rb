@@ -124,6 +124,8 @@ Rails.application.routes.draw do
 
   #post '/forums/:forum_id/ideas/:id/unreport' => 'ideas#unreport', as: 'unreport_idea'
 
+  get 'forums/leaveforum' => 'forums#leaveforum', as: 'leave_forum'
+
   get 'forums/remove_member' => 'forums#remove_member', as:'remove_member'
 
   get 'forums/:forum_id/admins/:id' => 'admins#create', as: 'add_admin'
@@ -132,7 +134,11 @@ Rails.application.routes.draw do
 
   get 'notifications' => 'notifications#index', as: 'user_notifications'
 
-  delete 'notifications/:id' => 'notifications#destroy'
+  get 'notifications/:id/delete' => 'notifications#destroy'
+
+  get 'notifications/:id/seen' => 'notifications#markSeen'
+
+  get 'notifications/seenall' => 'notifications#markAllSeen'
 
   ############################### System log #################################
 
@@ -179,7 +185,9 @@ Rails.application.routes.draw do
 
   get 'user/:id/requests' => 'friendships#requests'
 
-  post 'user/:id/add' => 'friendships#create'
+  get 'friendships/:id/accept' => 'friendships#accept'
+
+  get 'friendships/:id/reject' => 'friendships#reject'
 
   # get 'sysAdmin'
   # get 'forums/:id/ideas/new' => 'ideas#new', as: 'new_idea'

@@ -30,25 +30,26 @@ end
 
 #This  ethod creates a friendship, a user adds a friend and it's saved in friendships table
 def create
-  friend = User.find(params[:id])
+  friend = User.find(params[:user_id])
   friendship = Friendship.new(user_id: current_user.id, friend_id: friend.id)
   friendship.save
   Action.create(info: current_user.username + ' has sent a friend request to ' + friend.username, user_email: current_user.email) 
-  Notification.create(info: current_user.username + ' has sent you a friend request.', user_id: friend.id)
+  Notification.create(info: current_user.username + ' has sent you a friend request.', user_id: friend.id, link: 'users/' + current_user.id.to_s)
+  redirect_to '/users/' + params[:user_id]
 end
 
 def accept
   friendship = Friendship.find(params[:id])
-  firendship.update(status: true)
+  friendship.update(status: true)
   User.find(friendship.user_id).increment!(:friend_count, by = 1)
   User.find(friendship.friend_id).increment!(:friend_count, by = 1)
-  redirect_to request.original_url
+  redirect_to '/users/' + current_user.id.to_s
 end
 
 def reject
   friendship = Friendship.find(params[:id])
   friendship.update(status: false)
-  redirect_to request.original_url
+  redirect_to '/users/' + current_user.id.to_s
 end
 
 #this method checks that the user is currently logged in 
