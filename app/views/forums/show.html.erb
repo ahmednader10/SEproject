@@ -33,7 +33,12 @@
 					<% if @forum.privacy == "1" %>
 
 					<% if !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
-					<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Joined</button>
+					<form action="<%= leave_forum_path(@forum) %>" method="post">
+						<div>
+							<button type="submit" class="btn btn-success load" data-joined-text="<i class='fa fa-plus'></i>&nbsp;&nbsp;Join Forum" data-loading-text="<i class='fa fa-spinner fa-spin'></i>&nbsp;&nbsp;Loading" autocomplete="off" style="margin-top: 18px;"><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Joined</button>
+							<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
+						</div>
+					</form>
 					<% else %>
 
 					<form action="<%= join_forum_path(@forum) %>" method="post">
@@ -49,7 +54,12 @@
 
 
 					<% if !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
-					<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Joined</button>
+					<form action="<%= leave_forum_path(@forum) %>" method="post">
+						<div>
+							<button type="submit" class="btn btn-success load" data-joined-text="<i class='fa fa-plus'></i>&nbsp;&nbsp;Join Forum" data-loading-text="<i class='fa fa-spinner fa-spin'></i>&nbsp;&nbsp;Loading" autocomplete="off" style="margin-top: 18px;"><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Joined</button>
+							<input name="authenticity_token" type="hidden" value="dW9Jg5hMVM6z57MGrm+peNzuU9ZaqNW+AxLfINVW5Qw=">
+						</div>
+					</form>
 					<% elsif !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: nil).empty? %>
 					<button class="btn btn-success" style="margin-top: 18px;" disabled><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Request Sent</button>
 					<% else %>
@@ -76,8 +86,9 @@
 					</div>
 
 					<br><br>
-
-					<button class="btn btn-primary" style="margin-top: 10px;" data-toggle="modal" data-target="#postIdea"><i class="fa fa-lightbulb-o"></i>&nbsp;&nbsp;Post an Idea</button>
+					<% if !Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty? %>
+						<button class="btn btn-primary" style="margin-top: 10px;" data-toggle="modal" data-target="#postIdea"><i class="fa fa-lightbulb-o"></i>&nbsp;&nbsp;Post an Idea</button>
+					<% end %>
 
 				  <br><br>
 

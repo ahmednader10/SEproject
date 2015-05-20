@@ -16,6 +16,12 @@
 	<%= render "/shared/navbarloggedin" %>
 
 		<div class="jumbotron" style="height: 250px; background: #4B5966"; >
+			<h1  style="position:absolute; left:18%; top:18%; font-size: 50px; font-family:Arial Rounded MT Bold; color:white; " > <%= current_user.full_name %>  </h1>
+			<h2 style="position:absolute; left:25%; top:20% ">
+			<i>
+				<a data-toggle="modal" data-target="#edit_info" class="fa fa-pencil-square-o" style="font-size 1em;"></a>
+			</i>
+			</h2>
 		</div>
 		<div class="container-fluid" style="margin-top: -136px;">
 			<div class="profileImg" style="margin-left: 80px">
@@ -33,7 +39,7 @@
       			<div class="modal-content" style="margin: 170px auto; width: 400px;">
         			<div class="modal-header">
           				<button type="button" class="close" data-dismiss="modal">&times;</button>
-          				<h3 style="text-align: center;">Requests to join my forums</h3>
+          				<h3 style="text-align: center; ">Requests to join my forums</h3>
           			</br>
           			<table >
 
@@ -94,7 +100,7 @@
     		</div>
   		</div>
 
-			<div class="col-sm-4" style="border: thin solid rgb(85, 100, 113); border-radius: 50px;">
+		<!--	<div class="col-sm-4" style="border: thin solid rgb(85, 100, 113); border-radius: 50px;">
 				<h3 style="text-align: center;">
 					My personal info
 					 <i>
@@ -117,7 +123,7 @@
 							</tr>
 							
 						</table> 
-			</div>
+			</div> -->
 		<div class="modal fade" id="edit_info" role="dialog">
     		<div class="modal-dialog">
     
