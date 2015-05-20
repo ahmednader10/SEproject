@@ -26,10 +26,12 @@
 			font-size: 3.5em;
 			text-align: center;
 			padding: 15px;
+			color: #005CE6;
 		}
 
 		p{
 			text-align: center;
+			color: #005CE6;
 		}
 		</style>
 	</head>
@@ -38,11 +40,10 @@
 		<div style="margin-top:5px; ">
 			<div style=" position:absolute; top:130px; left:500px;">	
 				<ul>
-					<li><a><i class="glyphicon glyphicon-folder-open"></i><p style="position:absolute; top:100px; left:65px;"> <%= Forum.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> created today</p></a></li>
-					<li><a><i class="glyphicon glyphicon-user"></i><p style="position:absolute; top:100px; left:247px;"><%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> signed up today</p ></a></li>
-					<li><a><i class="glyphicon glyphicon-ok"></i><p style="position:absolute; top:95px; left:424px;"><%= Membership.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> new Memberships <br> today</p></a></li>
-					<li><a><i class="glyphicon glyphicon-heart"></i><p style="position:absolute; top:95px; left:608px;"><%= Idea.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> Ideas were posted <br> today</p></a>
-					</li>
+					<li><i class="glyphicon glyphicon-folder-open"></i><p style="position:absolute; top:100px; left:65px;"> <%= Forum.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> created today</p></li>
+					<li><i class="glyphicon glyphicon-user"></i><p style="position:absolute; top:100px; left:247px;"><%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> signed up today</p ></li>
+					<li><i class="glyphicon glyphicon-ok"></i><p style="position:absolute; top:95px; left:424px;"><%= Membership.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> new Memberships <br> today</p></li>
+					<li><i class="glyphicon glyphicon-heart"></i><p style="position:absolute; top:95px; left:608px;"><%= Idea.where("created_at >= ?", Time.zone.now.beginning_of_day).count %> Ideas were posted <br> today</p></li>
 				</ul>
 			</div>
 			<div class="table-responsive" style=" margin: 200px 0 0 200px; top:30%; left: 50%;;">
