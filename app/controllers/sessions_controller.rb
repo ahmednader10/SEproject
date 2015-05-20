@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   # Redirects to Logged in
   def index
     @user = User.new
+    session[:sysadmin] = nil
   end
 
   def new

@@ -128,7 +128,7 @@ Rails.application.routes.draw do
 
   get 'forums/remove_member' => 'forums#remove_member', as:'remove_member'
 
-  get 'forums/:forum_id/admins/:id' => 'admins#create', as: 'add_admin'
+  get 'forums/:forum_id/admins/:id' => 'admins#createAdmin', as: 'add_admin'
 
   ############################ Notifications #################################
 
