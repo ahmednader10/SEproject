@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
 	has_many :actions
 	has_many :notifications, dependent: :delete_all
 
-	has_attached_file :image ,:default_url => "missing.png",
+	has_attached_file :image ,:default_url => "bulb.jpg",
 							 :styles =>{
 							 	:thumb => "50x50#",
 							 	:med => "450x400"

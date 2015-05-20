@@ -15,7 +15,7 @@
   <body>
     <%= render "/shared/navbarloggedin" %>
 
-    <div class="jumbotron" style="height: 750px; background: #80A2C0";>
+    <div class="jumbotron" style="height: 750px; background: #80A2C0;" id="main">
       <div align="middle" style="margin-top: 50px">
       <%= image_tag 'categoriesname.png', width: "350", height: "50" %>
       </div>
@@ -30,7 +30,10 @@
                   <%= image_tag '8-bitMovies.png', class: "img-circle", width: "215", height: "200" %>
                 </div>
                 <div class="back" style="border-radius: 100px; color: #96BADA; background-color: #18163A;">
+
+                  <a href="#C1">  
                   <%= image_tag 'MoviesTitle.png', class: "img-circle", width: "215", height: "200" %>
+                </a>
                 </div>
               </div>
             </div>
@@ -43,7 +46,9 @@
                   <%= image_tag '8-bitMusic.png', class: "img-circle", width: "215", height: "200" %>
                 </div>
                 <div class="back" style="border-radius: 100px; color: #96BADA; background-color: #532366;">
+                  <a href="#C2">
                   <%= image_tag 'MusicTitle.png', class: "img-circle", width: "215", height: "200" %>
+                  </a>
                 </div>
               </div>
             </div>
@@ -56,7 +61,9 @@
                   <%= image_tag '8-bitPolitics.png', class: "img-circle", width: "215", height: "200" %>
                 </div>
                 <div class="back" style="border-radius: 100px; color: #96BADA; background-color: #FDD425;">
+                  <a href="#C3">
                   <%= image_tag 'PoliticsTitle.png', class: "img-circle", width: "215", height: "200" %>
+                </a>
                 </div>
               </div>
             </div>
@@ -71,7 +78,9 @@
                   <%= image_tag '8-bitSport.png', class: "img-circle", width: "215", height: "200" %>
                 </div>
                 <div class="back" style="border-radius: 100px; color: #96BADA; background-color: #74B532;">
+                  <a href="#C4">
                   <%= image_tag 'SportsTitle.png', class: "img-circle", width: "215", height: "200" %>
+                </a>
                 </div>
               </div>
             </div>
@@ -84,7 +93,9 @@
                   <%= image_tag 'Academics.png', class: "img-circle", width: "215", height: "200" %>
                 </div>
                 <div class="back" style="border-radius: 100px; color: #96BADA; background-color: #2F8DC2;">
+                  <a href="#C5">
                   <%= image_tag 'AcademicsTitle.png', class: "img-circle", width: "215", height: "200" %>
+                </a>
                 </div>
               </div>
             </div>
@@ -97,39 +108,187 @@
                   <%= image_tag '8-bitEntertainment.png', class: "img-circle", width: "215", height: "200" %>
                 </div>
                 <div class="back" style="border-radius: 100px; color: #96BADA; background-color: #781344;">
+                  <a href="#C6">
                   <%= image_tag 'GamingTitle.png', class: "img-circle", width: "215", height: "200" %>
+                </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <a href="#C7"><h4 style="margin-left: 1300px; color: white;">Other categories >></h4></a>
     </div>
     
     <div class="jumbotron">
       <div class="container">
-        </br></br></br>
+        </br>
         <div style="margin-left: 1000px;">
-          <form action="<%= new_forum_path %>">
-        <button class="btn btn-primary"%>Create forum</button>
-      </form>
+          <button data-toggle="modal" data-target="#create_forum" class="btn btn-primary">Create forum</button>
       </div>
+          <div id="C1">
+            <br><br><br>
+          </div>
           <div style="margin-left: 50px; margin-right: 50px;">
             <table class="table table-hover">
             <thead>
               <tr>
-                <th>Forums</th>
-                <th></th>
-                <th></th>
+                <th><a href="#main" style="color: black;">Movies</a></th>
+                <th style="text-align: center;">Members</th>
+                <th style="text-align: center;">Ideas</th>
               </tr>
             </thead>
             <tbody>
-              <% forums = Forum.all %>
+              <% forums = Forum.where(category: "Movies") %>
               <% forums.each do |forum| %>
               <tr>
-                <td><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
-                <td></td>
-                <td></td>
+                <td width="800"><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
+                <td style="text-align: center; width: 80px;"><%= forum.user_count %></td>
+                <td style="text-align: center; width: 80px;"><%= forum.idea_count %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div id="C2">
+            <br><br><br>
+          </div>
+        <div style="margin-left: 50px; margin-right: 50px;">
+            <table class="table table-hover">
+            <thead>
+              <tr>
+                <th><a href="#main" style="color: black;">Music</a></th>
+                <th style="text-align: center;">Members</th>
+                <th style="text-align: center;">Ideas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% forums = Forum.where(category: "Music") %>
+              <% forums.each do |forum| %>
+              <tr>
+                <td width="800"><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
+                <td style="text-align: center; width: 80px;"><%= forum.user_count %></td>
+                <td style="text-align: center; width: 80px;"><%= forum.idea_count %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div id="C3">
+            <br><br><br>
+          </div>
+        <div style="margin-left: 50px; margin-right: 50px;">
+            <table class="table table-hover">
+            <thead>
+              <tr>
+                <th><a href="#main" style="color: black;">Politics</a></th>
+                <th style="text-align: center;">Members</th>
+                <th style="text-align: center;">Ideas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% forums = Forum.where(category: "Politics") %>
+              <% forums.each do |forum| %>
+              <tr>
+                <td width="800"><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
+                <td style="text-align: center; width: 80px;"><%= forum.user_count %></td>
+                <td style="text-align: center; width: 80px;"><%= forum.idea_count %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div id="C4">
+            <br><br><br>
+          </div>
+        <div style="margin-left: 50px; margin-right: 50px;">
+            <table class="table table-hover">
+            <thead>
+              <tr>
+                <th><a href="#main" style="color: black;">Sports</a></th>
+                <th style="text-align: center;">Members</th>
+                <th style="text-align: center;">Ideas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% forums = Forum.where(category: "Sports") %>
+              <% forums.each do |forum| %>
+              <tr>
+                <td width="800"><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
+                <td style="text-align: center; width: 80px;"><%= forum.user_count %></td>
+                <td style="text-align: center; width: 80px;"><%= forum.idea_count %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div id="C5">
+            <br><br><br>
+          </div>
+        <div style="margin-left: 50px; margin-right: 50px;">
+            <table class="table table-hover">
+            <thead>
+              <tr>
+                <th><a href="#main" style="color: black;">Academics</a></th>
+                <th style="text-align: center;">Members</th>
+                <th style="text-align: center;">Ideas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% forums = Forum.where(category: "Academics") %>
+              <% forums.each do |forum| %>
+              <tr>
+                <td width="800"><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
+                <td style="text-align: center; width: 80px;"><%= forum.user_count %></td>
+                <td style="text-align: center; width: 80px;"><%= forum.idea_count %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div id="C6">
+            <br><br><br>
+          </div>
+        <div style="margin-left: 50px; margin-right: 50px;">
+            <table class="table table-hover">
+            <thead>
+              <tr>
+                <th><a href="#main" style="color: black;">Gaming</a></th>
+                <th style="text-align: center;">Members</th>
+                <th style="text-align: center;">Ideas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% forums = Forum.where(category: "Gaming") %>
+              <% forums.each do |forum| %>
+              <tr>
+                <td width="800"><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
+                <td style="text-align: center; width: 80px;"><%= forum.user_count %></td>
+                <td style="text-align: center; width: 80px;"><%= forum.idea_count %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div id="C7">
+            <br><br><br>
+          </div>
+        <div style="margin-left: 50px; margin-right: 50px;">
+            <table class="table table-hover">
+            <thead>
+              <tr>
+                <th><a href="#main" style="color: black;">Other</a></th>
+                <th style="text-align: center;">Members</th>
+                <th style="text-align: center;">Ideas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% forums = Forum.where(category: "Other") %>
+              <% forums.each do |forum| %>
+              <tr>
+                <td width="800"><a href="<%= forum_path(forum) %>"><%= forum.title %></a></td>
+                <td style="text-align: center; width: 80px;"><%= forum.user_count %></td>
+                <td style="text-align: center; width: 80px;"><%= forum.idea_count %></td>
               </tr>
               <% end %>
             </tbody>
@@ -137,6 +296,75 @@
         </div>
       </div>
     </div>
+
+
+<div class="modal fade" id="create_forum" role="dialog">
+        <div class="modal-dialog">
+
+      <!-- Modal content-->
+            <div class="modal-content" style="margin: 170px auto; width: 400px;">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 style="text-align: center;"><b>Create forum</b></h3>
+                </br>
+                  <table class="table table-hover">
+                <thead>
+
+                </thead>
+                <tbody>                
+
+              <%= form_for :forum, url: forums_path do |f| %>
+
+            
+
+            <p>
+              <%= f.text_field :title, class: "form-control", placeholder: "Title" %><br>
+            </p>
+
+            <p>
+              <%= f.text_area :description, class: "form-control", placeholder: "Description" %><br>
+            </p>
+
+            <p>
+              <%= f.collection_select(:category, Category.all, :title, :title) %><br>
+            </p>
+
+            <script>
+                $('#forum_category').prepend('<option selected="selected">- Select a category -</option>');
+                $('#forum_category').append('<option value="Other">Other</option>');
+            </script>
+
+            <br>
+            <p>
+              <i class="fa fa-users"></i>
+              <%= f.label :privacy, "Public" %>
+              <%= f.radio_button :privacy, "1" %><br>
+              <i class="fa fa-lock"></i>
+              <%= f.label :privacy, "Private" %>
+              <%= f.radio_button :privacy, "2" %><br>
+            </p>
+            <br>
+            <p>
+              <%= f.submit "Create Forum", class: "btn btn-primary", style: "margin-left: 250px;" %>
+            </p>
+
+
+          <% end %>
+                </tbody>
+            </table>
+
+              </div>
+
+              <!-- <div class="modal-body">
+                  <p>Some text in the modal.</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div> -->
+            </div>
+
+        </div>
+      </div>
 
   </body>
 </html>

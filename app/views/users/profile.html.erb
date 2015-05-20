@@ -15,11 +15,24 @@
 	<%= render "/shared/navbarloggedin" %>
 	<div style="background: #F6F9FB">
 		<div class="jumbotron" style="height: 250px; background: #4B5966"; >
+			<!--
+			<h1  style="position:absolute; left:18%; top:18%; font-size: 50px; font-family:Arial Rounded MT Bold; color:white; " > <%= current_user.full_name %>  </h1>
+			<h2 style="position:absolute; left:25%; top:20% "> -->
+			<i>
+				<a data-toggle="modal" data-target="#edit_info" class="fa fa-pencil-square-o" style="font-size 1em;"></a>
+			</i>
+			</h2>
+		</div>
+
+		<div class="container-fluid" style="margin-top: -136px;">
+			<div class="profileImg" style="margin-left: 80px">
+			 <%= link_to image_tag(current_user.image.url , :class => "imgcircle", :width => "215", :height => "200", :border =>"10"), asset_path(current_user.image.url) %>
+				
+
+			</div>
 		</div>
 		
-			<div class="profileImg" style="margin-top: -136px; margin-left: 130px">
-				<%= image_tag 'bulb.jpg', class: "imgcircle", width: "215", height: "200", border: "10" %>
-			</div>
+			
 
 		</div>
 			
@@ -50,7 +63,7 @@
 				    <tbody>
 						<% requests = Friendship.where(friend_id: params[:id], status: nil) %>
 						<% if requests.empty? %>
-							<em> 'No new requests' </em>
+							<em> No new requests </em>
 						<% else %>
 							<% users = [] %>
 							<% requests.each do |request| %>
@@ -62,19 +75,19 @@
 	          					<td><a href="<%= profile_path(user.id) %>"><%= user.full_name %></a></td>
 	          					<td><a href="<%= '/friendships/' + friendship.id.to_s + '/accept' %>" style="color: green;"><i class="glyphicon glyphicon-ok"></i></a></td>
 	          					<td><a href="<%= '/friendships/' + friendship.id.to_s + '/reject' %>" style="color: red;"><i class="glyphicon glyphicon-remove"></i></a></td>
-							</tr><br>
+							</tr>
 	          				<% end %>
 	          			<% end %>
 				    </tbody>
-				</table><br>  
+				</table> 
 			  	</div>
-				<div id="forums" class="tab-pane fade in active">
+				<div id="forums" class="tab-pane fade in active"><br>
 					<% if Admin.find_by(user_id: current_user.id) != nil %>
 					<button data-toggle="modal" data-target="#admin_requests" class="btn btn-primary" style="margin-left: 625px;">Requests to join my forums</button>
 					<% end %>
 			  	<%  memberships = Membership.where(user_id: params[:id], accept: true) %>
 			    <% if memberships.empty? %>
-						<em> you are not a member in any forums </em>
+						<em> you are not a member in any forums </em><br>
 				<% else %>
 			    <table width="371" height="51">
 					<tr>
@@ -97,7 +110,7 @@
 			  	<br>
 			  	<%  x = Idea.where(user: @current_user).order(:text) %>
 			    <% if x.size == 0 %>
-					=<em> still Idealess </em>
+					<em> still Idealess </em>
 					<br>
 				<% else %>
 			    <table width="371" height="51">

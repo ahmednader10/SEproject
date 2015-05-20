@@ -1,42 +1,64 @@
-  <div class="headerlist">
-<ul id="menu">
-<li> Logo</li>
+  <head>
+	<title>Bootstrap Example</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<%= stylesheet_link_tag 'style' %>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
- <li><img src="http://www.capgemini.com/sites/default/files/styles/cap_image_165x112/public/ideas_icon_blue_4.png?itok=ymV_q58q" width="41" height="40" style=" left: 105px; width: 35px; height: 32px;"/></li>
+	</head>
+<body>
 
-<% if current_user != nil %>
- <li><%= link_to "friend requests" , friendships_path %></li>
- <li> <%= link_to "My Profile" , user_path(current_user.id) %> </li>
- <li><%= link_to "Log out", logout_path, method: :delete %></li>
- <li><%= link_to "notifications" ,user_notifications_path %> </li> 
-
- <% if !Admin.where(user_id: current_user.id).empty? %>
- <li><%= link_to "requests to join my forums",:controller => "users" ,:action => :admin_join_forums_requests %> </li>
- <% end %>
- <% end %>
-
-
-</ul>  
-</div>
-<div style="position:absolute;top:50px;"><h1><%=User.find(current_user.id).username%>'s Notifications:</h1>
-		<ul>
-		<h4> New Notifications:</h4>
-		<% seenNotifications = [] %>
+	<%= render "/shared/navbarloggedin" %>
+	<div  style="margin: 100px 0 0 0; top:30%; height:500px;">
+		<div >
+			<% seenNotifications = [] %>
 		<% @notifications.reverse_each do |notification| %>
 			<% if !notification.seen %>
-				<li>
-					<%= notification.info %> <%= link_to 'delete', ('notifications/' + notification.id.to_s), method: :delete %>
-				</li>
-				<% notification.update(seen: true) %>
+			<p><a href="<%= notification.link %>" class="glyphicon glyphicon-star"> </a><%= notification.info %> <%= link_to 'delete', ('notifications/' + notification.id.to_s), method: :get %></p>
+			<% notification.update(seen: true) %>
 				<% seenNotifications += [notification] %>
 			<%end%>
 		<%end%>
-		<h4> Seen Notifications:</h4>
-		<% @notifications.reverse_each do |notification| %>
+		</div>
+		<div style="" >
+			<% @notifications.reverse_each do |notification| %>
 			<% if notification.seen and !seenNotifications.include? notification %>
-				<li>
-					<%= notification.info %> <%= link_to 'delete', ('notifications/' + notification.id.to_s), method: :delete %>
-				</li>
+				<p>
+					<a href="<%= notification.link %>" class="glyphicon glyphicon-star-empty"> </a><%= notification.info %> <%= link_to 'delete', ('notifications/' + notification.id.to_s + '/delete'), method: :get %>
+				</p>
 			<%end%>
 		<%end%>
-		</ul></div>
+		</div>
+	</div> 
+<!-- 	<div class="table-responsive" style="width:50%; margin: 100px 0 0 500px; top:30%; left: 60%;text-align:center;">	
+		<table class="table-striped">
+			<tr>
+				<% seenNotifications = [] %>
+			<% @notifications.reverse_each do |notification| %>
+			<% if !notification.seen %>
+			<p><i  class="glyphicon glyphicon-star"> </i><%= notification.info %> <%= link_to 'delete', ('notifications/' + notification.id.to_s), method: :delete %></p>
+			<% notification.update(seen: true) %>
+				<% seenNotifications += [notification] %>
+			<%end%>
+			<%end%>
+			</tr>
+			<tr>
+				<% @notifications.reverse_each do |notification| %>
+			<% if notification.seen and !seenNotifications.include? notification %>
+				<p>
+					<i  class="glyphicon glyphicon-star-empty"> </i><%= notification.info %> <%= link_to 'delete', ('notifications/' + notification.id.to_s), method: :delete %>
+				</p>
+				<% notification.update(seen: true) %>
+				<% seenNotifications += [notification] %>
+			<%end%>
+			<%end%>
+			</tr>
+		</table>
+	</div> -->
+
+	
+</body>

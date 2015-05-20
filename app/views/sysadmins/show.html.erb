@@ -13,9 +13,10 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	</head>
+	<body style="background:#eee;">
 			<%= render "/shared/navbar_sys_admin"%>
 <div >
-<div  class="modal-content" style="margin: 100px 0 0 -200px; top:50%; left: 45%; height:200px; padding:10px; width:400px;">
+<div  class="modal-content" style="position:absolute; top:20%; left:35%; height:200px; padding:10px; width:400px;">
 
 <div style="margin:10px;">
 	<% if flash[:notice] %>
@@ -60,4 +61,4 @@
 </div>
 </div>
 </div>
-
+</body>

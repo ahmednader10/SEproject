@@ -15,8 +15,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap.min
+//= require social-share-button
 //= require_tree .
-
-#= require social-share-button
-
-default 

@@ -10,8 +10,8 @@ class IdeasController < ApplicationController
 	#show method shows the title and text of a chosen idea.
 	def show
 		@forum = Forum.find(params[:forum_id])
-		 @idea = Idea.find(params[:id])
-		 @comment = Comment.new
+		@idea = Idea.find(params[:id])
+		@comment = Comment.new
 	end
 
 	def new
@@ -36,12 +36,12 @@ class IdeasController < ApplicationController
 			Action.create(info: 'A system admin has deleted an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_email: 'SystemAdmin')
 			Notification.create(info: 'Your idea: (' + @idea.title + ') on forum:(' + @forum.title + ') has been deleted.', user_id: @idea.user_id)
 		end
-			@idea.destroy
-			redirect_to forum_path(@forum)
+		@idea.destroy
+		redirect_to forum_path(@forum)
 	end
 
 
-   #enables the user to create an idea by adding a title and text.
+	#enables the user to create an idea by adding a title and text.
 	def create
 
 		# @idea = Idea.new(idea_params)
@@ -58,7 +58,7 @@ class IdeasController < ApplicationController
 			admins = Admin.where(forum_id: @forum)
 			admins.each do |admin|
 				if @idea.user_id != admin.user_id
-					Notification.create(info: (current_user.username + " has posted an idea (" + @idea.title + ") on a forum that you administrate (" + @forum.title + ")."), seen: false, user_id: admin.user_id)
+					Notification.create(info: (current_user.username + " has posted an idea (" + @idea.title + ") on a forum that you administrate (" + @forum.title + ")."), seen: false, user_id: admin.user_id, link: 'forums/' + @forum.id.to_s + 'ideas/' + @idea.id.to_s)
 				end
 			end
 			# =================================================================
@@ -81,87 +81,90 @@ class IdeasController < ApplicationController
 		@idea = Idea.find(params[:id])
 		#@user= User.find_by(:id => @idea.user_id)
 
-	 	@likeidea = Likeidea.new(:user_id => @user.id , :idea_id => @idea.id)
-	 	@idea.increment!(:like_count, by = 1)
+		@likeidea = Likeidea.new(:user_id => @user.id , :idea_id => @idea.id)
+		@idea.increment!(:like_count, by = 1)
 
 		if @likeidea.save
 			Action.create(info: @user.username + ' has liked an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_email: @user.email)
 			if @user.id != @idea.user_id
 				Notification.create(info: @user.username + ' has liked your idea: (' + @idea.title + ') on forum: (' + @forum.title + ').', user_id: @idea.user_id)
-	   	end
-	   		flash[:notice] = "Idea Liked!"
+			end
+			flash[:notice] = "Idea Liked!"
+			Notification.create(info: @user.username + ' has liked your idea: (' + @idea.title + ') on forum: (' + @forum.title + ').', user_id: @idea.user_id, link: 'forums/' + @forum.id.to_s + 'ideas/' + @idea.id.to_s)
 		end
-
-      	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
+		flash[:notice] = "Idea Liked!"
 	end
 
-	def unlike
-		@forum = Forum.find(params[:forum_id])
-		@user = current_user
-		@idea = Idea.find(params[:id])
-		if !Likeidea.where(user_id: @user.id, idea_id: @idea, forum_id: @forum).empty?
-			@likeidea = Likeidea.where(user_id: @user.id, idea_id: @idea, forum_id: @forum)
-			@Likeidea.destroy
-			flash[:notice] = "idea unliked!"
-		end
-		redirect_to forum_idea_path(@forum, @idea)
-	end
-	# allows user to report an idea
-	def report
-		@forum = Forum.find(params[:forum_id])
-		@user = current_user
-		@idea = Idea.find(params[:id])
+	redirect_to :back
+end
 
-	 	@reportidea = Reportidea.new(:user_id => @user.id , :idea_id => @idea.id)
+def unlike
+	@forum = Forum.find(params[:forum_id])
+	@user = current_user
+	@idea = Idea.find(params[:id])
+	if !Likeidea.where(user_id: @user.id, idea_id: @idea.id).empty?
+		@likeidea = Likeidea.where(user_id: @user.id, idea_id: @idea.id)
+		@likeidea.first.destroy
+		flash[:notice] = "idea unliked!"
+	end
+	redirect_to :back
+end
+# allows user to report an idea
+def report
+	@forum = Forum.find(params[:forum_id])
+	@user = current_user
+	@idea = Idea.find(params[:id])
 
-        if @idea.user_id == @user.id
-	 	flash[:notice] = "Cannot report your own idea!"
-		elsif @reportidea.save
-			Action.create(info: @user.username + ' has reported an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_email: @user.email)
-	   		Notification.create(info: 'Your idea: (' + @idea.title + ' on forum: (' + @forum.title + ') has been reported.', user_id: @idea.user_id)
-	   		flash[:notice] = "Idea has been reported!"
-		else
-			flash[:notice] = "You've already reported this idea!"
-		end
+	@reportidea = Reportidea.new(:user_id => @user.id , :idea_id => @idea.id)
 
-      	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
+	if @idea.user_id == @user.id
+		flash[:notice] = "Cannot report your own idea!"
+	elsif @reportidea.save
+		Action.create(info: @user.username + ' has reported an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_email: @user.email)
+		Notification.create(info: 'Your idea: (' + @idea.title + ' on forum: (' + @forum.title + ') has been reported.', user_id: @idea.user_id)
+
+	else
+		flash[:notice] = "You've already reported this idea!"
 	end
 
-	def unreport
-		@forum = Forum.find(params[:forum_id])
-		@user = current_user
-		@idea = Idea.find(params[:id])
-		if !Reportidea.where(user_id: @user.id, idea_id: @idea, forum_id: @forum).empty?
-			@reportidea = Reportidea.where(user_id: @user.id, idea_id: @idea, forum_id: @forum)
-			@reportidea.destroy
-			flash[:notice] = "idea unreported!"
-		end
-		redirect_to forum_idea_path(@forum, @idea)
+	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
+end
+
+def unreport
+	@forum = Forum.find(params[:forum_id])
+	@user = current_user
+	@idea = Idea.find(params[:id])
+	if !Reportidea.where(user_id: @user.id, idea_id: @idea).empty?
+		@reportidea = Reportidea.where(user_id: @user.id, idea_id: @idea)
+		@reportidea.first.destroy
+		flash[:notice] = "idea unreported!"
 	end
- # used to allow the user to enter the information needed from him and nothing more inorder not to be able to change the model
-  protected
-	def idea_params
-		params.require(:idea).permit(:title, :text)
-	end
+	redirect_to forum_idea_path(@forum, @idea)
+end
+# used to allow the user to enter the information needed from him and nothing more inorder not to be able to change the model
+protected
+def idea_params
+	params.require(:idea).permit(:title, :text)
+end
 # used to check that there's a current user to be able to use the above actions
-	def authenticate_user
-		@forum = Forum.find(params[:forum_id])
-		if current_user == nil
-			redirect_to @forum
-		else
+def authenticate_user
+	@forum = Forum.find(params[:forum_id])
+	if current_user == nil
+		redirect_to @forum
+	else
 
-			if Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?
+		if Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?
 
 			render action: :not_joined_forum
 		end
-		end
 	end
+end
 
-	def check_forum_not_joined
-		@forum = Forum.find(params[:forum_id])
-			if current_user != nil and Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?
-				render action: :not_joined_forum
+def check_forum_not_joined
+	@forum = Forum.find(params[:forum_id])
+	if current_user != nil and Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?
+		render action: :not_joined_forum
 
-		end
 	end
+end
 end

@@ -68,7 +68,8 @@ class UsersController < ApplicationController
           Action.create(info: @user.username + ' has updated his personal information.', user_email: @user.email)
           redirect_to(user_path)
       else
-        render 'edit'
+        redirect_to(user_path)
+        
       end
     end
   end
@@ -79,7 +80,9 @@ class UsersController < ApplicationController
       if @user == current_user
         redirect_to(:action => 'profile')
       end
-   end
+  end
+
+  
 
 
     #opens the profile view of the user
@@ -142,8 +145,9 @@ class UsersController < ApplicationController
     @membership1 = Membership.where(user_id: user , forum_id: forum)
     @membership1.first.accept = true
     @membership1.first.save
-    forum.user_count.increment!(:user_count, by = 1)
+    @forum.increment!(:user_count, by = 1)
     Action.create(info: current_user.username + ' has accepted ' + @user.username + "'s join request to forum: (" + @forum.title + ').', user_email: current_user.email)
+    Notification.create(info: 'Your request to join forum: (' + @forum.title + ') has been accepted and you have successfully joined.', user_id: @user.id, link: 'forums/' + @forum.id.to_s)
     redirect_to(:action => "admin_join_forums_requests")
 
   end
