@@ -66,9 +66,9 @@ class SearchController < ApplicationController
 						results2 = results2.order(created_at: :asc)
 						results3 = results3.order(created_at: :asc)
 					elsif params[:sortby] == 'Most Popular'
-						results1 = results1.sort_by{|result| result.friend_count}
-						results2 = results2.sort_by{|result| result.user_count}
-						results3 = results3.sort_by{|result| result.like_count}
+						results1 = results1.order(friend_count: :desc)
+						results2 = results2.order(user_count: :desc)
+						results3 = results3.order(like_count: :desc)
 					end
 					@results = results1 + results2 + results3
 				elsif params[:type] == 'Users'
@@ -78,7 +78,7 @@ class SearchController < ApplicationController
 					elsif params[:sortby] == 'Oldest'
 						@results = @results.order(created_at: :asc)
 					elsif params[:sortby] == 'Most Popular'
-						@results = @results.sort_by{|result| result.friend_count}
+						@results = @results.order(friend_count: :desc)
 					end
 				elsif params[:type] == 'Forums'
 					@results = Forum.where("(UPPER(title) LIKE ('%' || UPPER(:q) || '%')) AND created_at BETWEEN :from AND :to", q: params[:q], from: from, to: to)
@@ -87,7 +87,7 @@ class SearchController < ApplicationController
 					elsif params[:sortby] == 'Oldest'
 						@results = @results.order(created_at: :asc)
 					elsif params[:sortby] == 'Most Popular'
-						@results = @results.sort_by{|result| Membership.where(forum_id: result2.id).count}
+						@results = @results.order(user_count: :desc)
 					end
 				elsif params[:type] == 'Ideas'
 					@results = Idea.where("UPPER(title) LIKE ('%' || UPPER(:q) || '%') AND created_at BETWEEN :from AND :to", q: params[:q], from: from, to: to)
@@ -96,7 +96,7 @@ class SearchController < ApplicationController
 					elsif params[:sortby] == 'Oldest'
 						@results = @results.order(created_at: :asc)
 					elsif params[:sortby] == 'Most Popular'
-						@results = @results.sort_by{|result| Likeidea.where(idea_id: result2.id).count}
+						@results = @results.order(like_count: :desc)
 					end
 				end
 			end

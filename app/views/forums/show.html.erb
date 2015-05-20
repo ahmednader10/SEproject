@@ -313,7 +313,7 @@
 						<% arr.concat(Membership.where(forum_id: params[:id], accept: true)) %>
 						<% arr.each do |member| %>
 						<tr>
-							<td><a href="<%= profile_path(member.id) %>"><%= User.find_by(id: member.user_id).full_name %></a></td>
+							<td><a href="<%= user_path(member.user_id) %>"><%= User.find_by(id: member.user_id).full_name %></a></td>
 						</tr>
 						<% end %>
 					</table>
@@ -322,6 +322,26 @@
 		</div>
 	</div>
 
+	<div class="modal fade" id="forum_admins" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content" style="margin: 170px auto; width: 400px;">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3 style="text-align: center;">Forum admins</h3>
+					<table class="table table-hover">
+						<% arr = [] %>
+						<% arr.concat(Admin.where(forum_id: params[:id])) %>
+						<% arr.each do |member| %>
+						<tr>
+							<td><a href="<%= user_path(member.user_id) %>"><%= User.find_by(id: member.user_id).full_name %></a></td>
+						</tr>
+						<% end %>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
   		<div class="modal fade" id="post_idea" role="dialog">
@@ -348,26 +368,7 @@
     		</div>
   		</div>
 
-	<div class="modal fade" id="forum_admins" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content" style="margin: 170px auto; width: 400px;">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3 style="text-align: center;">Forum admins</h3>
-					<table class="table table-hover">
-						<% arr = [] %>
-						<% arr.concat(Admin.where(forum_id: params[:id])) %>
-						<% arr.each do |member| %>
-						<tr>
-							<td><a href="<%= profile_path(member.id) %>"><%= User.find_by(id: member.user_id).full_name %></a></td>
-						</tr>
-						<% end %>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 
 </body>
