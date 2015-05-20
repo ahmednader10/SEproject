@@ -120,6 +120,8 @@ Rails.application.routes.draw do
 
   post 'forums/:forum_id/ideas/:id/like' => 'ideas#like', as: 'like_idea'
 
+  get 'forums/leaveforum' => 'forums#leaveforum', as: 'leave_forum'
+
   get 'forums/remove_member' => 'forums#remove_member', as:'remove_member'
 
   ############################ Notifications #################################
