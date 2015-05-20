@@ -126,7 +126,7 @@ Rails.application.routes.draw do
 
   get 'notifications' => 'notifications#index', as: 'user_notifications'
 
-  delete 'notifications/:id' => 'notifications#destroy'
+  get 'notifications/:id' => 'notifications#destroy'
 
   ############################### System log #################################
 
