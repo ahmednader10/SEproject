@@ -31,7 +31,22 @@ class NotificationsController < ApplicationController
 			Action.create(info: 'A system has deleted this notification: (' + @notification.info + ') belonging to ' + User.find(@notification.user_id).username + '.', user_email: 'SystemAdmin')
 		end
 		@notification.destroy
-		redirect_to('/notifications')
+		redirect_to :back
+	end
+
+	def markSeen
+		notification = Notification.find(params[:id])
+		notification.update(seen: true)
+		redirect_to :back
+	end
+
+	def markAllSeen
+		Notification.where(user_id: current_user.id).each do |notification|
+			if !notification.seen
+				notification.update(seen: true)
+			end
+		end
+		redirect_to :back
 	end
 
 protected

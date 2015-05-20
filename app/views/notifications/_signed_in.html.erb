@@ -28,7 +28,7 @@
 			<% @notifications.reverse_each do |notification| %>
 			<% if notification.seen and !seenNotifications.include? notification %>
 				<p>
-					<a href="<%= notification.link %>" class="glyphicon glyphicon-star-empty"> </a><%= notification.info %> <%= link_to 'delete', ('notifications/' + notification.id.to_s), method: :get %>
+					<a href="<%= notification.link %>" class="glyphicon glyphicon-star-empty"> </a><%= notification.info %> <%= link_to 'delete', ('notifications/' + notification.id.to_s + '/delete'), method: :get %>
 				</p>
 			<%end%>
 		<%end%>
