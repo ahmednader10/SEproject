@@ -5,19 +5,12 @@ form {
   vertical-align: inherit;
 }
 
-.info {
-    border-radius: 15px 50px;
-    border: 1px solid #D2D2D2;       
-    background: #fff;
-}
-
-
 .other-color {
 	background: #96BADA;
 }
 
 .forum-color {
-	background: #E1672D;
+	background: #BDC8DE;
 }
 
 .white {
