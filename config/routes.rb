@@ -128,6 +128,8 @@ Rails.application.routes.draw do
 
   post 'forums/:id/leaveforum' => 'forums#leave_forum', as: 'leave_forum'
 
+
+
   get 'forums/remove_member' => 'forums#remove_member', as:'remove_member'
 
   get 'forums/:forum_id/admins/:id' => 'admins#createAdmin', as: 'add_admin'
