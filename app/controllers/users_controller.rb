@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   # index.html.erb view ro view this data.
   def index
     @users = User.all
+
   end
 
   # new action calls the new.html.erb view which contains the sign up form in order for
@@ -80,6 +81,25 @@ class UsersController < ApplicationController
       if @user == current_user
         redirect_to(:action => 'profile')
       end
+      
+  user = User.find(params[:id])
+  friendships = Friendship.where(user_id: user.id)
+  friendships += Friendship.where(friend_id: user.id)
+  @friends = []
+  @pending = []
+  friendships.each do |friendship|
+    if friendship.status == true
+      if friendship.user_id == user.id
+        @friends += [User.find(friendship.friend_id)]
+      else
+        @friends += [User.find(friendship.user_id)]
+      end
+    elsif friendship.status == nil
+      if friendship.user_id == user.id
+        @pending += [User.find(friendship.user_id)]
+      end
+    end
+  end
   end
 
   

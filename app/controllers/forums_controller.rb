@@ -97,7 +97,7 @@ class ForumsController < ApplicationController
 
 				admins = Admin.where(forum_id: @forum_id)
 				admins.each do |a|
-					Notification.create(info: @user.username + ' has updated your forum: (' + @forum.title + ').', user_id: a.user_id)
+					Notification.create(info: @user.username + ' has updated your forum: (' + @forum.title + ').', user_id: a.user_id, link: '/forums/' + @forum.id.to_s)
 				end
 
 				redirect_to(forums_path)
@@ -195,7 +195,6 @@ class ForumsController < ApplicationController
      	@user = current_user
 		@forum = Forum.find(params[:id])
 		@membership1 = Membership.where(user_id: @user , forum_id: @forum , accept: nil)
-		@membership1 = Membership.where(user_id: @user.id , forum_id: @forum.id)
 		@membership1.first.destroy
     	redirect_to :action => "show"
   	end
@@ -222,7 +221,7 @@ class ForumsController < ApplicationController
 
 				flash[:success] = 'Successfully joined forum'
 				redirect_to :action => "show"
-				Notification.create(info: 'Your request to join forum: (' + @forum.title + ') has been accepted and you have successfully joined.', user_id: @user.id)
+				Notification.create(info: 'Your request to join forum: (' + @forum.title + ') has been accepted and you have successfully joined.', user_id: @user.id, link: '/forums/' + @forum.id.to_s)
 			elsif @membership.accept == true  and !@membership.save
 				#need to check in the database first if this record already exists
 				flash[:member] = 'already member of this forum'
