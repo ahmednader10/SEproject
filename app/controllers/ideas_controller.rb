@@ -93,7 +93,7 @@ class IdeasController < ApplicationController
 			Notification.create(info: @user.username + ' has liked your idea: (' + @idea.title + ') on forum: (' + @forum.title + ').', user_id: @idea.user_id, link: 'forums/' + @forum.id.to_s + 'ideas/' + @idea.id.to_s)
 		end
 		flash[:notice] = "Idea Liked!"
-	end
+
 
 	redirect_to :back
 end
