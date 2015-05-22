@@ -51,8 +51,8 @@ class SearchController < ApplicationController
 				else
 					toDay = params[:today]
 				end
-				from = Time.new(fromYear, fromMonth, fromDay)
-				to = Time.new(toYear.to_i, toMonth.to_i, toDay, 23, 59, 59)
+				from = Time.new(fromYear.to_i, fromMonth.to_i, fromDay.to_i)
+				to = Time.new(toYear.to_i, toMonth.to_i, toDay.to_i, 23, 59, 59)
 				if params[:type] == 'All'
 					results1 = User.where("(UPPER(username) LIKE ('%' || UPPER(:q) || '%') OR UPPER(full_name) LIKE ('%' || UPPER(:q) || '%')) AND created_at BETWEEN :from AND :to", q: params[:q], from: from, to: to)
 					results2 = Forum.where("(UPPER(title) LIKE ('%' || UPPER(:q) || '%')) AND created_at BETWEEN :from AND :to", q: params[:q], from: from, to: to)
@@ -72,7 +72,7 @@ class SearchController < ApplicationController
 					end
 					@results = results1 + results2 + results3
 				elsif params[:type] == 'Users'
-					@results = User.where("(UPPER(username) LIKE ('%' || UPPER(:q) || '%') OR UPPER(full_name) LIKE ('%' || UPPER(:q) || '%')) AND created_at BETWEEN :from AND :to", q: params[:q])
+					@results = User.where("(UPPER(username) LIKE ('%' || UPPER(:q) || '%') OR UPPER(full_name) LIKE ('%' || UPPER(:q) || '%')) AND created_at BETWEEN :from AND :to", q: params[:q], from: from, to: to)
 					if params[:sortby] == 'Newest'
 						@results = @results.order(created_at: :desc)
 					elsif params[:sortby] == 'Oldest'

@@ -58,7 +58,7 @@ class IdeasController < ApplicationController
 			admins = Admin.where(forum_id: @forum)
 			admins.each do |admin|
 				if @idea.user_id != admin.user_id
-					Notification.create(info: (current_user.username + " has posted an idea (" + @idea.title + ") on a forum that you administrate (" + @forum.title + ")."), seen: false, user_id: admin.user_id, link: 'forums/' + @forum.id.to_s + 'ideas/' + @idea.id.to_s)
+					Notification.create(info: (current_user.username + " has posted an idea (" + @idea.title + ") on a forum that you administrate (" + @forum.title + ")."), seen: false, user_id: admin.user_id, link: '/forums/' + @forum.id.to_s + 'ideas/' + @idea.id.to_s)
 				end
 			end
 			# =================================================================
@@ -89,6 +89,7 @@ class IdeasController < ApplicationController
 			if @user.id != @idea.user_id
 			Notification.create(info: @user.username + ' has liked your idea: (' + @idea.title + ') on forum: (' + @forum.title + ').', user_id: @idea.user_id, link: 'forums/' + @forum.id.to_s + 'ideas/' + @idea.id.to_s)
 			end
+
 		end
 		flash[:notice] = "Idea Liked!"
 
