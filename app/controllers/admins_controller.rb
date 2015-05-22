@@ -38,10 +38,10 @@ class AdminsController < ApplicationController
       flash[:notice] = "The specified admin has been added to this forum."
       if current_user != nil
         Action.create(info: current_user.username + ' has added ' + @user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_email: current_user.email)
-        Notification.create(info: current_user.username + ' has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: @user.id, link: 'forums/' + forum_id.to_s)
+        Notification.create(info: current_user.username + ' has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: @user.id, link: '/forums/' + forum_id.to_s)
       else
         Action.create(info: 'A system administrator has added ' + @user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_email: 'SystemAdmin')
-        Notification.create(info: 'A system administrator has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: @user.id, link: 'forums/' + forum_id.to_s)
+        Notification.create(info: 'A system administrator has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: @user.id, link: '/forums/' + forum_id.to_s)
       end
 
       redirect_to forum_path(params[:forum_id])
