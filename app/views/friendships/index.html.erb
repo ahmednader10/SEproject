@@ -1,11 +1,11 @@
-<% if @friends.empty? %>
+<% if @friends.empty? %><br>
 	<em> You have no friends  </em>
 <% else %>
-<ul>
+<table>
 	<% @friends.each do |friend| %>
-		<li>
+		<tr>
 		<%= link_to friend.username, user_path(friend) %>
-		</li>
+		</tr><br>
 	<% end %>
-</ul>
+</table><br>
 <% end %>
