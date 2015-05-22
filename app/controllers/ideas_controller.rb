@@ -89,6 +89,7 @@ class IdeasController < ApplicationController
 			if @user.id != @idea.user_id
 			Notification.create(info: @user.username + ' has liked your idea: (' + @idea.title + ') on forum: (' + @forum.title + ').', user_id: @idea.user_id, link: 'forums/' + @forum.id.to_s + 'ideas/' + @idea.id.to_s)
 		end
+		end
 		flash[:notice] = "Idea Liked!"
 
 
