@@ -15,9 +15,9 @@
 	<%= render "/shared/navbarloggedin" %>
 	<div style="background: #F6F9FB">
 		<div class="jumbotron" style="height: 250px; background: #4B5966"; >
-
+			<!--
 			<h1  style="position:absolute; left:18%; top:18%; font-size: 50px; font-family:Arial Rounded MT Bold; color:white; " > <%= current_user.full_name %>  </h1>
-			<h2 style="position:absolute; left:25%; top:20% ">
+			<h2 style="position:absolute; left:25%; top:20% "> -->
 			<i>
 				<a data-toggle="modal" data-target="#edit_info" class="fa fa-pencil-square-o" style="font-size 1em;"></a>
 			</i>
@@ -45,6 +45,7 @@
 			  		<button type="button" class="btn btn-default btn-lg"><a data-toggle="tab" href="#ideas">Ideas <span class="badge"><%= Idea.where(user_id: current_user.id).count %></span></a></button>
 				</div>
 		</div>
+
 		<div class="col-lg-9 Profileinfo " style= "margin-top: 20px;">
 			<div class="tab-content">
 			  <div id="friends" class="tab-pane fade ">
