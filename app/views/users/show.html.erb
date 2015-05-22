@@ -12,11 +12,17 @@
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	</head>
-	<body>
+	<body style="background: #F6F9FB;">
 
 	<%= render "/shared/navbarloggedin" %>
 
 		<div class="jumbotron" style="height: 250px; background: #4B5966"; >
+			<% if @current_user.uid == nil %>
+	        <p style="position:absolute; left:20%; top:20%; font-family:Helvetica Neue; font-size:2.5em; color:white;  text-shadow: 1px 1px 1px #000;"> <%= @user.full_name %> </p>
+	      	<% else %>
+	        <p style="position:absolute; left:20%; top:20%; font-family:Helvetica Neue; font-size:2.5em; color:white;  text-shadow: 1px 1px 1px #000;"> <%= @user.name %> </p>
+	       <% end %>
+			
 		</div>
 		<div class="container-fluid" style="margin-top: -136px;">
 			<div class="profileImg" style="margin-left: 80px">
@@ -37,143 +43,26 @@
 			</div>
 		</div>
 		
-			<div class="col-sm-3">
-				
-
-         			</br>
-          				<table class="table table-hover">
-							<tr>
-								<td>Name</td>
-								<td><%= @user.username %></td>
-							</tr>
-							<tr>
-								<td>Username</td>
-								<td><%= @user.username %></td>
-							</tr>
-							<tr>
-								<td>Email</td>
-								<td><%= @user.email %></td>
-							</tr>
-							
-						</table> 
-			</div>
-		<div class="modal fade" id="edit_info" role="dialog">
-    		<div class="modal-dialog">
-    
-      <!-- Modal content-->
-      			<div class="modal-content" style="margin: 170px auto; width: 400px;">
-        			<div class="modal-header">
-        			<button type="button" class="close" data-dismiss="modal">&times;</button>
-          				<div style="position:relative; top:150px;">
-							<%= form_for((current_user) , html: {multipart: true}) do |f| %>
-							    <h1>Edit form</h1>
-							<% if current_user.errors.any? %>
-							      <h3>Errors</h3>
-							      <ul>
-							        <% current_user.errors.full_messages.each do |message| %>
-							          <li><%= message %></li>
-							        <% end %>
-							      </ul>
-							    <% end %>
-							    <div class="side" style="position: fixed; left: 23px; top: 181px;">
-									<ul>
-										 <li style=margin-left:100px>
-										    <a  class='list-item' href='/forums'>
-										      Privacy
-										    </a>
-										 </li>
-										 <li style=margin-left:100px>
-										    <a class='list-item' href='/friendships'>
-										      Pass
-										      word
-										    </a>
-										</li>
-										<li style=margin-left:100px>
-										    <a class='list-item' href='/friendships'>
-										      Info  </a>
-										</li>
-
-									</ul>
-								</div>
-							  	<div style ="style=margin-left:100px style=margin-left:100px">
-							        <div>
-								      <%= f.label :full_name %><br>
-								      <%= f.text_field :full_name %><br>
-								    </div> 
-
-								    <div>
-								      <%= f.label :username %><br>
-								      <%= f.text_field :username %><br>
-								    </div>
-
-								    <div>
-								      <%= f.label :email %><br>
-								      <%= f.email_field :email %><br>
-								    </div>
-
-								    <div>
-								      <%= f.label :password %><br>
-								      <%= f.password_field :password %><br>
-								    </div>
-
-								    <div>
-								      <%= f.label :gender %><br>
-								      <%= f.select :gender, ['Male', 'Female'] %><br>
-								    </div>   
-
-								    <div>
-								      <%= f.label :password_question, "Choose a question (in case you forgot the password)" %><br>
-								      <%= f.select :password_question, ['What is the name of your best friend?', 'What is the name of your pet?', 'Who was your first English teacher?'] %><br>
-								    </div> 
-
-								    <div>
-								      <%= f.label :Your_answer %><br>
-								      <%= f.text_field :answer_for_password_question %><br><br>
-								    </div>
-								    <div>
-									         <p>
-									    <%= f.label :privacy, "Public" %>
-									    <%= f.radio_button :privacy, 1 %><br>
-									    <%= f.label :privacy, "Private" %>
-									    <%= f.radio_button :privacy, 2 %><br>
-									  </p>
-								    </div>
-
-								    <div>
-								       <p>
-								         <%= f.file_field :image %>
-								       </p>
-								    </div>
-
-								    <div class='actions'>
-								      <%= f.submit "Update Information" %>
-								    </div>
-							    </div>
-								<% end %>
-							</div>
-						</div>
-          			</div>
-          		</div>
-          	</div>
-        </div>	
-          			</div></div></div></div>
-
-		<div class="col-sm-9">
-			<ul class="nav nav-tabs">
-			  
-			  <li><a data-toggle="tab" href="#forums">Forums <span class="badge"><%= Membership.where(user_id: params[:id], accept: true).count %></span></a></li>
-			  <li><a data-toggle="tab" href="#ideas">Ideas <span class="badge"><%= Idea.where(user_id: params[:id]).count %></span></a></li>
-			</ul>
 			
-			  <!--<div id="join_requests" class="tab-pane fade in active">
-			    <table class="table table-hover">
-				   
-				</table> 
-			  </div>-->
-			   <div id="forums" class="tab-pane fade">
+		
+      	<div class="col-lg-3 " style= "margin-top: 20px; background: #F6F9FB">
+				<div class="btn-group-vertical" role="group">
+					<button type="button" class="btn btn-default btn-lg"><a data-toggle="tab" href="#forums">Forums <span class="badge"><%= Membership.where(user_id: User.find(params[:id]), accept: true).count %></span></a></button>
+  					<button type="button" class="btn btn-default btn-lg"><a data-toggle="tab" href="#friends">Friends <span class="badge"><%= User.find(params[:id]).friend_count %></span></a></button>
+			  		
+			  		<button type="button" class="btn btn-default btn-lg"><a data-toggle="tab" href="#ideas">Ideas <span class="badge"><%= Idea.where(user_id: User.find(params[:id])).count %></span></a></button>
+				</div>
+		</div>
+
+
+		<div class="col-lg-9 info " style= "margin-top: 20px;">	
+			<div class="tab-content">
+			  
+			 
+			  <div id="forums" class="tab-pane fade in active"><br>
 			  	<%  memberships = Membership.where(user_id: params[:id], accept: true) %>
 			    <% if memberships.empty? %>
-						<em> you are not a member in any forums </em>
+						<em> you are not a member in any forums </em><br><br>
 				<% else %>
 			    <table width="371" height="51">
 					<tr>
@@ -189,18 +78,33 @@
 					</tr>
 					<% end %>
 					<%end%>
-				</table>
+				</table><br>
 				<% end %>	
 			  </div>
-			  <div id="ideas" class="tab-pane fade">
+
+			   <div id="friends" class="tab-pane fade ">
+			  	
+			    <table class="table table-hover">
+				    <tbody>
+						
+          				<%= render template: "friendships/index" %>
+				    </tbody>
+				</table> 
+			</div>
+			  
+			   <div id="ideas" class="tab-pane fade">
 			   <div role="tabpanel" class="tab-pane" id="ideas">
+			   <%  memberships = Idea.where(user: @user).order(:text) %>
+			   <% if memberships.empty? %><br>
+                <em> still Idealess </em><br><br>
+                <% else %>
                  <table width="371" height="51">
                 <tr>
                     <th width="57" id="ideatitlecolumn"> Title</th>
                   <th width="160" id="ideacolumn"> Idea</th>
                   <th width="110" id="forumcolum"> Forum</th>
                 </tr>
-                <%  memberships = Idea.where(user: @user).order(:text) %>
+                
                 <% memberships.each do |idea| %>
                 <tr>
                   <td id="ideatitlecolumn"><%= link_to idea.title , forum_idea_path(idea.forum.id, idea.id)%></td>
@@ -209,8 +113,6 @@
                 </tr>
                 <% end %>
                 </table>
-                <% if memberships.empty? %>
-                <em> still Idealess </em>
                 <% end %>
                  </div>
 			  </div>
@@ -221,156 +123,9 @@
 
 		
 		
-		<!-- Start of modal -->
-		<div class="modal fade" id="my_friends" role="dialog">
-    		<div class="modal-dialog">
-    
-      <!-- Modal content-->
-      			<div class="modal-content" style="margin: 170px auto; width: 400px;">
-        			<div class="modal-header">
-          				<button type="button" class="close" data-dismiss="modal">&times;</button>
-          				<h3 style="text-align: center;">My friends</h3>
-          			</br>
-          				<table class="table table-hover">
-						    <thead>
-						      <tr >
-						        <td >Name</td>
-						        <td>Email</td>
-						      </tr>
-						    </thead>
-						    <tbody>
-								<% users = User.all %>
-		          				<% users.each do |user| %>
-		          				<tr>
-		          					<td><a href="<%= profile_path(user.id) %>"><%= user.full_name %></a></td>
-		          					<td><%= user.email %></td>
-								</tr>
-		          				<% end %>
-						    </tbody>
-						</table>  
-          				
-        			</div>
-
-        			<!-- <div class="modal-body">
-          				<p>Some text in the modal.</p>
-        			</div>
-        			<div class="modal-footer">
-          				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        			</div> -->
-      			</div>
-      
-    		</div>
-  		</div>
 		
-  		</br>
-
 		
-		<div class="modal fade" id="requests" role="dialog">
-    		<div class="modal-dialog">
-    
-      <!-- Modal content-->
-      			<div class="modal-content" style="margin: 170px auto; width: 400px;">
-        			<div class="modal-header">
-          				<button type="button" class="close" data-dismiss="modal">&times;</button>
-          				<h3 style="text-align: center;">Friend requests</h3>
-          			</br>
-          				<table class="table table-hover">
-						    <tbody>
-								<% users = User.all %>
-		          				<% users.each do |user| %>
-		          				<tr>
-		          					<td><a href="<%= profile_path(user.id) %>"><%= user.full_name %></a></td>
-		          					<td><a href="#" style="color: green;"><i class="glyphicon glyphicon-ok"></i></a></td>
-		          					<td><a href="#" style="color: red;"><i class="glyphicon glyphicon-remove"></i></a></td>
-								</tr>
-		          				<% end %>
-						    </tbody>
-						</table>  
-          				
-        			</div>
-
-        			<!-- <div class="modal-body">
-          				<p>Some text in the modal.</p>
-        			</div>
-        			<div class="modal-footer">
-          				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        			</div> -->
-      			</div>
-      
-    		</div>
-  		</div>
-  		</br>
   		
-  		<div class="modal fade" id="info" role="dialog">
-    		<div class="modal-dialog">
-    
-      <!-- Modal content-->
-      			<div class="modal-content" style="margin: 170px auto; width: 400px;">
-        			<div class="modal-header">
-          				<button type="button" class="close" data-dismiss="modal">&times;</button>
-          				<h3 style="text-align: center; margin-right: 100px">My personal info <i><a href="<% edit_user_path(current_user) %>" class="fa fa-pencil-square-o" style="font-size 1em;"></a></i></h3>
-
-         			</br>
-          				<table class="table table-hover">
-							<tr>
-								<td>Name</td>
-								<td><%= current_user.full_name %></td>
-							</tr>
-							<tr>
-								<td>Username</td>
-								<td><%= current_user.username %></td>
-							</tr>
-							<tr>
-								<td>Email</td>
-								<td><%= current_user.email %></td>
-							</tr>
-							
-						</table>  
-          				
-        			</div>
-
-
-        			<!-- <div class="modal-body">
-          				<p>Some text in the modal.</p>
-        			</div>
-        			<div class="modal-footer">
-          				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        			</div> -->
-      			</div>
-      
-    		</div>
-  		</div>
   		
-		<!-- <div class="container-fluid" style="margin-top: 50px;">
-			<div class="col-md-3">
-				<div class="tabbable tabs-left" style="margin-left: 100px;">
-					<ul class="nav nav-tabs">
- 		 				<li class="active"><a data-toggle="pill" href="#home">Forums</a></li>
-  						<li><a data-toggle="pill" href="#menu1">Ideas</a></li>
-  						<li><a data-toggle="pill" href="#menu2">Friends</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-md-9">
-				<div class="tab-content">
-  					<div id="home" class="tab-pane fade in active">
-   						<h3>Forums</h3>
-   						<p>Some content.</p>
-  					</div>
-  					<div id="menu1" class="tab-pane fade">
-    					<h3>Ideas</h3>
-    					<p>Some content in menu 1.</p>
-  					</div>
-  					<div id="menu2" class="tab-pane fade" style="margin-top: -45px;">
-    					<!- <h3>Friends</h3>
-    					<p>Some content in menu 2.</p> ->
-    					<ul class="nav nav-tabs">
- 	 						<li class="active"><a data-toggle="pill" href="#hom">My Friends</a></li>
-  							<li><a data-toggle="pill" href="#menu">Requests</a></li>
-						</ul>
-  					</div>
-				</div>	
-			</div>
-		</div> -->
 	</body>
 </html>

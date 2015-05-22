@@ -16,7 +16,7 @@ class SysadminsController < ApplicationController
     if current_user
       redirect_to logged_in_path and return
     end
-
+    
     if session[:sysadmin] == "true" or (params[:sysadmin][:username] == 'gus' and params[:sysadmin][:password] == 'lospollos')
       session[:sysadmin] = "true"
       @actions = Action.all

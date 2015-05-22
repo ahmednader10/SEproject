@@ -22,7 +22,7 @@ class AdminsController < ApplicationController
   # and adds an admin to the specified forum but after checking some conditions
   # First, checks if the email is written correctly, if not the user will be notified
   # Second, it checks if the user adding the new admin is already an admin to the current forum.
-  def create
+  def createAdmin
     forum_id = params[:forum_id]
     #user_email = params[:admin][:user]
     @user = User.find_by(id: params[:id])
@@ -38,13 +38,13 @@ class AdminsController < ApplicationController
       flash[:notice] = "The specified admin has been added to this forum."
       if current_user != nil
         Action.create(info: current_user.username + ' has added ' + @user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_email: current_user.email)
-        Notification.create(info: current_user.username + ' has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: @user.id, link: 'forums/' + forum_id.to_s)
+        Notification.create(info: current_user.username + ' has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: @user.id, link: '/forums/' + forum_id.to_s)
       else
         Action.create(info: 'A system administrator has added ' + @user.username + ' as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_email: 'SystemAdmin')
-        Notification.create(info: 'A system administrator has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: @user.id, link: 'forums/' + forum_id.to_s)
+        Notification.create(info: 'A system administrator has added you as an admin to the forum: (' + Forum.find(forum_id).title + ').', user_id: @user.id, link: '/forums/' + forum_id.to_s)
       end
 
-      redirect_to admin_to_be_path(params[:forum_id])
+      redirect_to forum_path(params[:forum_id])
     else
        redirect_to(action: 'unauthorized_action')   #unauthorized
     end

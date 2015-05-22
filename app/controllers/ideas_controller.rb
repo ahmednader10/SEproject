@@ -58,7 +58,7 @@ class IdeasController < ApplicationController
 			admins = Admin.where(forum_id: @forum)
 			admins.each do |admin|
 				if @idea.user_id != admin.user_id
-					Notification.create(info: (current_user.username + " has posted an idea (" + @idea.title + ") on a forum that you administrate (" + @forum.title + ")."), seen: false, user_id: admin.user_id, link: 'forums/' + @forum.id.to_s + 'ideas/' + @idea.id.to_s)
+					Notification.create(info: (current_user.username + " has posted an idea (" + @idea.title + ") on a forum that you administrate (" + @forum.title + ")."), seen: false, user_id: admin.user_id, link: '/forums/' + @forum.id.to_s + 'ideas/' + @idea.id.to_s)
 				end
 			end
 			# =================================================================
@@ -87,87 +87,84 @@ class IdeasController < ApplicationController
 		if @likeidea.save
 			Action.create(info: @user.username + ' has liked an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_email: @user.email)
 			if @user.id != @idea.user_id
-				<<<<<<< HEAD
-				Notification.create(info: @user.username + ' has liked your idea: (' + @idea.title + ') on forum: (' + @forum.title + ').', user_id: @idea.user_id)
-			end
-			flash[:notice] = "Idea Liked!"
-			=======
 			Notification.create(info: @user.username + ' has liked your idea: (' + @idea.title + ') on forum: (' + @forum.title + ').', user_id: @idea.user_id, link: 'forums/' + @forum.id.to_s + 'ideas/' + @idea.id.to_s)
+			
+
+		end
 		end
 		flash[:notice] = "Idea Liked!"
-		>>>>>>> 3f4a2e470ff80b7a46d222dba14720f96cbc1e35
+
+
+		redirect_to :back
 	end
 
-	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
-end
-
-def unlike
-	@forum = Forum.find(params[:forum_id])
-	@user = current_user
-	@idea = Idea.find(params[:id])
-	if !Likeidea.where(user_id: @user.id, idea_id: @idea.id).empty?
-		@likeidea = Likeidea.where(user_id: @user.id, idea_id: @idea.id)
-		@likeidea.first.destroy
-		flash[:notice] = "idea unliked!"
+	def unlike
+		@forum = Forum.find(params[:forum_id])
+		@user = current_user
+		@idea = Idea.find(params[:id])
+		if !Likeidea.where(user_id: @user.id, idea_id: @idea.id).empty?
+			@likeidea = Likeidea.where(user_id: @user.id, idea_id: @idea.id)
+			@likeidea.first.destroy
+			flash[:notice] = "idea unliked!"
+		end
+		redirect_to :back
 	end
-	redirect_to forum_idea_path(@forum, @idea)
-end
-# allows user to report an idea
-def report
-	@forum = Forum.find(params[:forum_id])
-	@user = current_user
-	@idea = Idea.find(params[:id])
+	# allows user to report an idea
+	def report
+		@forum = Forum.find(params[:forum_id])
+		@user = current_user
+		@idea = Idea.find(params[:id])
 
-	@reportidea = Reportidea.new(:user_id => @user.id , :idea_id => @idea.id)
+		@reportidea = Reportidea.new(:user_id => @user.id , :idea_id => @idea.id)
 
-	if @idea.user_id == @user.id
-		flash[:notice] = "Cannot report your own idea!"
-	elsif @reportidea.save
-		Action.create(info: @user.username + ' has reported an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_email: @user.email)
-		Notification.create(info: 'Your idea: (' + @idea.title + ' on forum: (' + @forum.title + ') has been reported.', user_id: @idea.user_id)
+		if @idea.user_id == @user.id
+			flash[:notice] = "Cannot report your own idea!"
+		elsif @reportidea.save
+			Action.create(info: @user.username + ' has reported an idea: (' + @idea.title + ') belonging to user: (' + User.find(@idea.user_id).username + ') located in forum: (' + @forum.title + ').', user_email: @user.email)
+			Notification.create(info: 'Your idea: (' + @idea.title + ' on forum: (' + @forum.title + ') has been reported.', user_id: @idea.user_id)
 
-	else
-		flash[:notice] = "You've already reported this idea!"
+		else
+			flash[:notice] = "You've already reported this idea!"
+		end
+
+		redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
 	end
 
-	redirect_to forum_idea_path(@forum, @idea) # [@forum, @idea]
-end
-
-def unreport
-	@forum = Forum.find(params[:forum_id])
-	@user = current_user
-	@idea = Idea.find(params[:id])
-	if !Reportidea.where(user_id: @user.id, idea_id: @idea).empty?
-		@reportidea = Reportidea.where(user_id: @user.id, idea_id: @idea)
-		@reportidea.first.destroy
-		flash[:notice] = "idea unreported!"
+	def unreport
+		@forum = Forum.find(params[:forum_id])
+		@user = current_user
+		@idea = Idea.find(params[:id])
+		if !Reportidea.where(user_id: @user.id, idea_id: @idea).empty?
+			@reportidea = Reportidea.where(user_id: @user.id, idea_id: @idea)
+			@reportidea.first.destroy
+			flash[:notice] = "idea unreported!"
+		end
+		redirect_to forum_idea_path(@forum, @idea)
 	end
-	redirect_to forum_idea_path(@forum, @idea)
-end
-# used to allow the user to enter the information needed from him and nothing more inorder not to be able to change the model
-protected
-def idea_params
-	params.require(:idea).permit(:title, :text)
-end
-# used to check that there's a current user to be able to use the above actions
-def authenticate_user
-	@forum = Forum.find(params[:forum_id])
-	if current_user == nil
-		redirect_to @forum
-	else
+	# used to allow the user to enter the information needed from him and nothing more inorder not to be able to change the model
+	protected
+	def idea_params
+		params.require(:idea).permit(:title, :text)
+	end
+	# used to check that there's a current user to be able to use the above actions
+	def authenticate_user
+		@forum = Forum.find(params[:forum_id])
+		if current_user == nil
+			redirect_to @forum
+		else
 
-		if Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?
+			if Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?
 
-			render action: :not_joined_forum
+				render action: :not_joined_forum
+			end
 		end
 	end
-end
 
-def check_forum_not_joined
-	@forum = Forum.find(params[:forum_id])
-	if current_user != nil and Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?
-		render action: :not_joined_forum
+	def check_forum_not_joined
+		@forum = Forum.find(params[:forum_id])
+		if current_user != nil and Membership.where(user_id: current_user.id , forum_id: @forum.id, accept: true).empty?
+			render action: :not_joined_forum
 
+		end
 	end
-end
 end
