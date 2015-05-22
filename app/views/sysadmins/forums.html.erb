@@ -13,38 +13,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   </head>
+     
+  <body style="background:#eee;">
       <%= render "/shared/navbar_sys_admin"%>
-      <body style="background:#eee;">
- <div  style="margin:50px;">
-    
- <div class="table-responsive" style="position:absolute; left:30%; top:10%;">
-<table class="table-striped">
-  <tr>
-    <th style="text-align:center; width:200px;">Title</th>
-    <th style="text-align:center; width:200px;">Description</th>
-    <th style="text-align:center; width:200px;">Privacy</th>
-
-  </tr>
- 
-  <% @forums.each do |forum| %>
-    <tr >
-      <td  style="text-align:center; width:200px;"><%= link_to "#{forum.title}", forum_path(forum) %></td>
-      <td  style="text-align:center; width:200px;"><%= forum.description %></td>
-      <% if forum.privacy == "1" %>
-      <td  style="text-align:center; width:200px;">Public</td>
-      <% elsif forum.privacy == "2" %>
-      <td  style="text-align:center; width:200px;">Private</td>
-      <% end %>
-      <td style="text-align:center; width:20px;"><%= link_to 'Edit', edit_forum_path(forum) %></td>
-      <td  style="text-align:center; width:20px; margin-left:20px;"><%= link_to 'Delete', forum_path(forum), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-</table>
-</div>
-<% if @user != nil %>
-<%= link_to "Create new forum", 'forums/new' %>
-<% end %>
-
-
- </div>
- </body>
+      <div  style="margin:50px;">
+        <div class="table-responsive" style="position:absolute; left:30%; top:10%;">
+          <table class="table-striped">
+            <tr>
+              <th style="text-align:center; width:200px;">Title</th>
+              <th style="text-align:center; width:200px;">Description</th>
+              <th style="text-align:center; width:200px;">Privacy</th>
+            </tr>
+            <% @forums.each do |forum| %>
+            <tr >
+              <td  style="text-align:center; width:200px;"><%= link_to "#{forum.title}", forum_path(forum) %></td>
+              <td  style="text-align:center; width:200px;"><%= forum.description %></td>
+                <% if forum.privacy == "1" %>
+                  <td  style="text-align:center; width:200px;">Public</td>
+                <% elsif forum.privacy == "2" %>
+                  <td  style="text-align:center; width:200px;">Private</td>
+                <% end %>
+              <td style="text-align:center; width:20px;"><%= link_to 'Edit', edit_forum_path(forum) %></td>
+              <td  style="text-align:center; width:20px; margin-left:20px;"><%= link_to 'Delete', forum_path(forum), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+            <% end %>
+          </table>
+        </div>
+        <% if @user != nil %>
+        <%= link_to "Create new forum", 'forums/new' %>
+        <% end %>
+      </div>
+   </body>

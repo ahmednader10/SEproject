@@ -17,34 +17,34 @@
  
 
 
- <body style="background:#eee;">
+  <body style="background:#eee;">
 
-<%= render 'shared/navbar_sys_admin' %>
-<div class="modal-content" style=" position:absolute; width: 600px; height:200px; top:10%; left:30%;">
-              <div class="modal-header" style="height:200px;">
-              <%= form_for :forum, url: sysadmins_merge_path do |f| %>
-    <table>
-        <tr>
-          <td>Select the forums to merge: </td>
-          <td style="width:200px;"><%= f.collection_select(:forum1_id, Forum.all, :id, :title , {:prompt=> true }, {:class=>"form-control"} ) %></td>
-          <td style="width:200px;"><%= f.collection_select(:forum2_id, Forum.all, :id, :title, {:prompt=> true }, {:class=>"form-control"}) %></td>
-        </tr>
-        <tr>
-          <td>New name: </td>
-          <td><%= f.text_field :name , class: 'form-control', placeholder: "New name" %></td>
-        </tr>
-        <tr>
-          <td>New description: </td>
-          <td><%= f.text_field :description, class: 'form-control', placeholder: "New description" %></td>
-        </tr>
-        <tr>
-          <td><%= f.submit "Merge", class: 'btn btn-primary' %></td>
-        </tr>
-    </table>
-    <% if flash[:notice] %>
-      <div class="notice"><%= flash[:notice] %></div>
-    <% end %>
-  <% end %>
-</div>
-</div>
-</body>
+      <%= render 'shared/navbar_sys_admin' %>
+        <div class="modal-content" style=" position:absolute; width: 600px; height:200px; top:10%; left:30%;">
+          <div class="modal-header" style="height:200px;">
+            <%= form_for :forum, url: sysadmins_merge_path do |f| %>
+            <table>
+              <tr>
+                <td>Select the forums to merge: </td>
+                <td style="width:200px;"><%= f.collection_select(:forum1_id, Forum.all, :id, :title , {:prompt=> true }, {:class=>"form-control"} ) %></td>
+                <td style="width:200px;"><%= f.collection_select(:forum2_id, Forum.all, :id, :title, {:prompt=> true }, {:class=>"form-control"}) %></td>
+              </tr>
+              <tr>
+                <td>New name: </td>
+                <td><%= f.text_field :name , class: 'form-control', placeholder: "New name" %></td>
+              </tr>
+              <tr>
+                <td>New description: </td>
+                <td><%= f.text_field :description, class: 'form-control', placeholder: "New description" %></td>
+              </tr>
+              <tr>
+                <td><%= f.submit "Merge", class: 'btn btn-primary' %></td>
+              </tr>
+            </table>
+              <% if flash[:notice] %>
+                <div class="notice"><%= flash[:notice] %></div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+  </body>
